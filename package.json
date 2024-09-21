@@ -1,5 +1,5 @@
 {
-  "name": "MOIZA_FRONTEND",
+  "name": "moiza-frontend",
   "private": true,
   "scripts": {
     "build": "turbo build",

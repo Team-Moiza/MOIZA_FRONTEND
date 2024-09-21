@@ -1,0 +1,11 @@
+{
+  "name": "@repo/types-config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./index.ts"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*"
+  }
+}
