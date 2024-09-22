@@ -47,6 +47,96 @@ const config: Omit<Config, 'content'> = {
 
         background: '#FAFAFA',
       },
+      fontSize: {
+        D1: [
+          '72px',
+          { lineHeight: '130%', fontWeight: 'bold', letterSpacing: '-1.5px' },
+        ],
+        D2: [
+          '60px',
+          { lineHeight: '130%', fontWeight: 'bold', letterSpacing: '-0.5px' },
+        ],
+        D3: [
+          '48px',
+          { lineHeight: '130%', fontWeight: 'bold', letterSpacing: '0' },
+        ],
+        H1: [
+          '36px',
+          { lineHeight: '140%', fontWeight: 'bold', letterSpacing: '0.25px' },
+        ],
+        H2: [
+          '28px',
+          { lineHeight: '140%', fontWeight: 'bold', letterSpacing: '0' },
+        ],
+        H3: [
+          '24px',
+          {
+            lineHeight: '140%',
+            fontWeight: 'semibold',
+            letterSpacing: '0.15px',
+          },
+        ],
+        H4: [
+          '20px',
+          {
+            lineHeight: '140%',
+            fontWeight: 'semibold',
+            letterSpacing: '0.15px',
+          },
+        ],
+        H5: [
+          '18px',
+          {
+            lineHeight: '140%',
+            fontWeight: 'semibold',
+            letterSpacing: '0.15px',
+          },
+        ],
+        p1: [
+          '18px',
+          {
+            lineHeight: '160%',
+            fontWeight: 'normal',
+            letterSpacing: '-0.15px',
+          },
+        ],
+        p2: [
+          '16px',
+          {
+            lineHeight: '160%',
+            fontWeight: 'normal',
+            letterSpacing: '-0.15px',
+          },
+        ],
+        p3: [
+          '14px',
+          { lineHeight: '160%', fontWeight: 'normal', letterSpacing: '-0.1px' },
+        ],
+        context: [
+          '16px',
+          { lineHeight: '130%', fontWeight: 'medium', letterSpacing: '0' },
+        ],
+        caption: [
+          '12px',
+          { lineHeight: '140%', fontWeight: 'normal', letterSpacing: '0' },
+        ],
+        code: [
+          '16px',
+          { lineHeight: '130%', fontWeight: 'normal', letterSpacing: '0' },
+        ],
+        btn1: [
+          '18px',
+          { lineHeight: '130%', fontWeight: 'semibold', letterSpacing: '0' },
+        ],
+        btn2: [
+          '16px',
+          { lineHeight: '130%', fontWeight: 'medium', letterSpacing: '0' },
+        ],
+        btn3: [
+          '14px',
+          { lineHeight: '130%', fontWeight: 'medium', letterSpacing: '0' },
+        ],
+      },
     },
   },
   plugins: [],
