@@ -18,9 +18,10 @@ interface TextProps {
     | 'btn2'
     | 'btn3';
   children: string;
+  color?: string;
 }
 
-const Text = ({ variant, children }: TextProps) => {
+export const Text = ({ variant, children, color = 'black' }: TextProps) => {
   const variants = {
     D1: 'text-[72px] font-bold leading-[130%] tracking-[-1.5px]',
     D2: 'text-[60px] font-bold leading-[130%] tracking-[-0.5px]',
@@ -41,7 +42,7 @@ const Text = ({ variant, children }: TextProps) => {
     btn3: 'text-[14px] font-medium leading-[130%] tracking-[0]',
   };
 
-  return <div className={variants[variant]}>{children}</div>;
+  return (
+    <div className={`${variants[variant]}  text-${color}`}>{children}</div>
+  );
 };
-
-export default Text;
