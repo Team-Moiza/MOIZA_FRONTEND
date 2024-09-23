@@ -41,7 +41,8 @@ const config: Omit<Config, 'content'> = {
 
         text: '#121212',
 
-        subText: '#737373',
+        subText1: '#737373',
+        subText2: '#8C95A0',
 
         accent: '#EEF2F5',
 
