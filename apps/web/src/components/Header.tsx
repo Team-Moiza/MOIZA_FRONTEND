@@ -5,12 +5,12 @@ import Search from "../../public/svg/Search";
 
 const Header = () => {
   return (
-    <header className="bg-white h-[80px] shadow-[0px_4px_8px_0px_rgba(0,0,0,0.02)]">
-      <div className="container mx-auto px-4 h-full flex justify-between items-center">
+    <header className="justify-center bg-white h-[80px] shadow-[0px_4px_8px_0px_rgba(0,0,0,0.02)]">
+      <div className="mx-[252px] h-full flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <Logo />
         </div>
-        <nav className="space-x-8">
+        <nav className="space-x-12">
           <a href="#" className="text-secondary-400 hover:text-primary-400">
             커뮤니티
           </a>
