@@ -1,13 +1,16 @@
+import Bell from "../../public/svg/Bell";
 import Logo from "../../public/svg/Logo";
+import Profile from "../../public/svg/Profile";
+import Search from "../../public/svg/Search";
 
 const Header = () => {
   return (
-    <header className="bg-white shadow-md">
-      <div className="container mx-auto px-4 py-2 flex justify-between items-center">
+    <header className="bg-white h-[80px] shadow-[0px_4px_8px_0px_rgba(0,0,0,0.02)]">
+      <div className="container mx-auto px-4 h-full flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <Logo />
         </div>
-        <nav className="hidden md:flex space-x-8">
+        <nav className="space-x-8">
           <a href="#" className="text-secondary-400 hover:text-primary-400">
             커뮤니티
           </a>
@@ -18,15 +21,17 @@ const Header = () => {
             학교탐방
           </a>
         </nav>
-
-        <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-5">
+        <div className="bg-accent border border-none rounded-[8px] flex items-center py-[10px] px-[16px] w-full max-w-xs">
+          <Search />
           <input
             type="text"
             placeholder="검색"
-            className="bg-background px-4 py-2 border border-secondary-200 rounded-[8px] focus:outline-none focus:ring-2 focus:ring-primary-400 flex items-center"
+            className="bg-transparent text-text placeholder-subText focus:outline-none ml-2 w-full"
           />
-
-          <div className="w-8 h-8 rounded-full bg-secondary-100"></div>
+        </div>
+          <Bell />
+          <Profile />
         </div>
       </div>
     </header>
