@@ -1,7 +1,14 @@
+import Link from "next/link";
 import Bell from "../../public/svg/Bell";
 import Logo from "../../public/svg/Logo";
 import Profile from "../../public/svg/Profile";
 import Search from "../../public/svg/Search";
+
+const navItems = [
+  { name: "커뮤니티", link: "#" },
+  { name: "팀원모집", link: "#" },
+  { name: "학교탐방", link: "#" },
+];
 
 const Header = () => {
   return (
@@ -11,25 +18,21 @@ const Header = () => {
           <Logo />
         </div>
         <nav className="space-x-12">
-          <a href="#" className="text-secondary-400 hover:text-primary-400">
-            커뮤니티
-          </a>
-          <a href="#" className="text-secondary-400 hover:text-primary-400">
-            팀원모집
-          </a>
-          <a href="#" className="text-secondary-400 hover:text-primary-400">
-            학교탐방
-          </a>
+          {navItems.map((item, index) => (
+            <Link key={index} href={item.link} className="text-secondary-400 hover:text-primary-400">
+              {item.name}
+            </Link>
+          ))}
         </nav>
-          <div className="flex items-center gap-5">
-        <div className="bg-accent border border-none rounded-[8px] flex items-center py-[10px] px-[16px] w-full max-w-xs">
-          <Search />
-          <input
-            type="text"
-            placeholder="검색"
-            className="bg-transparent text-text placeholder-subText focus:outline-none ml-2 w-full"
-          />
-        </div>
+        <div className="flex items-center gap-5">
+          <div className="bg-accent border border-none rounded-[8px] flex items-center py-[10px] px-[16px] w-full max-w-xs">
+            <Search />
+            <input
+              type="text"
+              placeholder="검색"
+              className="bg-transparent text-text placeholder-subText focus:outline-none ml-2 w-full"
+            />
+          </div>
           <Bell />
           <Profile />
         </div>
