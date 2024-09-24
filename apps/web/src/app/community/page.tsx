@@ -43,7 +43,7 @@ export default function Community() {
           <div
             key={filterItem}
             onClick={() => setSelected(filterItem)}
-            className={`px-[20px] py-[9px] rounded-[8px] cursor-pointer ${selected === filterItem ? 'bg-primary-400' : 'bg-[#EDEDED]'} flex justify-center items-center text-btn2 text-white`}>
+            className={`px-[20px] py-[9px] rounded-[8px] cursor-pointer ${selected === filterItem ? 'bg-primary-400' : 'bg-[#EDEDED]'} flex justify-center items-center text-btn2 ${selected === filterItem ? 'text-white' : 'text-black'}`}>
             {filterItem}
           </div>
         ))}
