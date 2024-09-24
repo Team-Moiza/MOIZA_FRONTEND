@@ -73,7 +73,7 @@ const config: Omit<Config, 'content'> = {
           '24px',
           {
             lineHeight: '140%',
-            fontWeight: 'semibold',
+            fontWeight: '600',
             letterSpacing: '0.15px',
           },
         ],
@@ -81,7 +81,7 @@ const config: Omit<Config, 'content'> = {
           '20px',
           {
             lineHeight: '140%',
-            fontWeight: 'semibold',
+            fontWeight: '600',
             letterSpacing: '0.15px',
           },
         ],
@@ -89,7 +89,7 @@ const config: Omit<Config, 'content'> = {
           '18px',
           {
             lineHeight: '140%',
-            fontWeight: 'semibold',
+            fontWeight: '600',
             letterSpacing: '0.15px',
           },
         ],
@@ -115,7 +115,7 @@ const config: Omit<Config, 'content'> = {
         ],
         context: [
           '16px',
-          { lineHeight: '130%', fontWeight: 'medium', letterSpacing: '0' },
+          { lineHeight: '130%', fontWeight: '500', letterSpacing: '0' },
         ],
         caption: [
           '12px',
@@ -127,15 +127,15 @@ const config: Omit<Config, 'content'> = {
         ],
         btn1: [
           '18px',
-          { lineHeight: '130%', fontWeight: 'semibold', letterSpacing: '0' },
+          { lineHeight: '130%', fontWeight: '600', letterSpacing: '0' },
         ],
         btn2: [
           '16px',
-          { lineHeight: '130%', fontWeight: 'medium', letterSpacing: '0' },
+          { lineHeight: '130%', fontWeight: '500', letterSpacing: '0' },
         ],
         btn3: [
           '14px',
-          { lineHeight: '130%', fontWeight: 'medium', letterSpacing: '0' },
+          { lineHeight: '130%', fontWeight: '500', letterSpacing: '0' },
         ],
       },
     },
