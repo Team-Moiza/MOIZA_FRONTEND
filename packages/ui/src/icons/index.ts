@@ -8,4 +8,6 @@ import { Search } from './search';
 import { Heart } from './heart';
 import { HeartFill } from './heartFill';
 
-export { Logo, BellOn, BellOff, Search, Heart, HeartFill };
+import { Chat } from './chat';
+
+export { Logo, BellOn, BellOff, Search, Heart, HeartFill, Chat };
