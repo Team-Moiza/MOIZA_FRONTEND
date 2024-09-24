@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Icon } from "@repo/ui/src";
 import SearchBar from "./SearchBar";
 
-
 const navItems = [
   { name: "커뮤니티", link: "#" },
   { name: "팀원모집", link: "#" },
@@ -25,8 +24,9 @@ const Header = () => {
         </nav>
         <div className="flex items-center gap-5">
           <SearchBar/>
-          </div>
           <Icon.BellOn/>
+          <div className="rounded-full bg-gray-400 w-[44px] h-[44px] flex-shrink-0"></div>
+          </div>
         </div>
     </header>
   );
