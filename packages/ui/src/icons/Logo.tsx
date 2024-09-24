@@ -1,8 +1,10 @@
-const Logo = () => {
+import { Icon } from '@repo/types-config';
+
+export const Logo = ({ size = 80 }: Icon.IconPropsType) => {
   return (
     <svg
-      width="80"
-      height="24"
+      width={size}
+      height={size / 3.33}
       viewBox="0 0 80 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -42,5 +44,3 @@ const Logo = () => {
     </svg>
   );
 };
-
-export default Logo;
