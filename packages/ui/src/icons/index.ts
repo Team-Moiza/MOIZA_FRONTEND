@@ -1,5 +1,7 @@
 import { Logo } from './Logo';
 
+import { Google } from './google';
+
 import { BellOn } from './bellOn';
 import { BellOff } from './bellOff';
 
@@ -10,4 +12,5 @@ import { HeartFill } from './heartFill';
 
 import { Chat } from './chat';
 
-export { Logo, BellOn, BellOff, Search, Heart, HeartFill, Chat };
+
+export { Logo, Google, BellOn, BellOff, Search, Heart, HeartFill, Chat };
