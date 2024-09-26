@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { Icon } from "@repo/ui/src";
-import Header from "../../components/Header";
 
 type FilterType = "최신순" | "좋아요순" | "팔로우";
 
@@ -39,7 +38,6 @@ export default function Community() {
 
   return (
     <>
-      <Header />
       <div className="bg-background h-[calc(100vh_-_80px)] flex flex-col gap-[20px] pt-[142px] items-center">
         <div className="flex gap-[12px] w-[936px]">
           {filter.map((filterItem) => (
