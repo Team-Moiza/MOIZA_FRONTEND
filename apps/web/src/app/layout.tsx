@@ -1,8 +1,8 @@
-"use client";
-import "./globals.css";
-import localFont from "next/font/local";
-import Header from "../components/Header";
-import { usePathname } from "next/navigation";
+"use client"
+import './globals.css';
+import localFont from 'next/font/local';
+import Header from '../components/Header';
+import { usePathname } from 'next/navigation';
 
 const pretendard = localFont({
   src: "../../public/PretendardVariable.woff2",
@@ -10,6 +10,7 @@ const pretendard = localFont({
   weight: "45 920",
   variable: "--font-pretendard",
 });
+
 
 export default function RootLayout({
   children,
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="kr" className={`${pretendard.variable}`}>
       <body className={pretendard.className}>
+        {isHeaderVisible && <Header />}
         {isHeaderVisible && <Header />}
         {children}
       </body>
