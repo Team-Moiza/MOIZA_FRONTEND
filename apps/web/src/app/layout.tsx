@@ -24,7 +24,6 @@ export default function RootLayout({
     <html lang="kr" className={`${pretendard.variable}`}>
       <body className={pretendard.className}>
         {isHeaderVisible && <Header />}
-        {isHeaderVisible && <Header />}
         {children}
       </body>
     </html>
