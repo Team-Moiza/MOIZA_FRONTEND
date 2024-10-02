@@ -61,7 +61,15 @@ export default function Community() {
                 </div>
               </div>
             </div>
-            <div></div>
+            <div className="w-[100%] flex flex-col gap-[24px] px-[36px] py-[28px]">
+              <div className="text-H4">유데미 개발 챌린지 같이 해 볼 사람?</div>
+              <div className="text-p1">
+                클론코딩 나가보려고 하는데 같이 해요. 다른 학교 상관없음
+                <br />
+                🙌 유데미 개발 챌린지로 클론코딩 완성할 사람 찾습니다 <br />
+                (프론트엔드 / 백엔드 / 게임개발)
+              </div>
+            </div>
           </div>
         </div>
       )}
