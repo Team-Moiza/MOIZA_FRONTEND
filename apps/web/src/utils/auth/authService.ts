@@ -1,13 +1,13 @@
 import { customAxios } from "../customAxios";
 
-export const fetchUserData = async () => {
-  try {
-    const { data } = await customAxios.get("/user");
-    return data;
-  } catch (error) {
-    return error;
-  }
-};
+// export const fetchUserData = async () => {
+//   try {
+//     const { data } = await customAxios.get("/user");
+//     return data;
+//   } catch (error) {
+//     return error;
+//   }
+// };
 
 export const authorizeAccess = async (accessToken: String) => {
   try {
@@ -31,8 +31,8 @@ export const authorizeAccess = async (accessToken: String) => {
     }
 
     if (localStorage.getItem("accessToken") && localStorage.getItem("refreshToken")) {
-      const userData = await fetchUserData();
-      console.log(userData)
+      // const userData = await fetchUserData();
+      // console.log(userData)
       window.location.replace("/")
     }
 
