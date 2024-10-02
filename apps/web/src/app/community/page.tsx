@@ -41,7 +41,7 @@ export default function Community() {
     <>
       {postId && (
         <div className="absolute bg-[rgba(18,18,18,0.5)] w-[100vw] h-[100vh] z-[2] flex justify-center align-middle">
-          <div className="w-[788px] rounded-[12px] mt-[80px] overflow-hidden bg-white">
+          <div className="w-[788px] rounded-[12px] mt-[80px] overflow-hidden bg-white flex-none h-max">
             <div className="w-[100%] h-[100px] bg-[#EEF2F5] py-[20px] px-[30px]">
               <div className="flex flex-col gap-[8px]">
                 <div className="flex gap-[12px] items-center">
@@ -61,13 +61,29 @@ export default function Community() {
                 </div>
               </div>
             </div>
-            <div className="w-[100%] flex flex-col gap-[24px] px-[36px] py-[28px]">
+            <div className="w-[100%] flex flex-col gap-[24px] px-[36px] pt-[28px] pb-[124px]">
               <div className="text-H4">유데미 개발 챌린지 같이 해 볼 사람?</div>
               <div className="text-p1">
                 클론코딩 나가보려고 하는데 같이 해요. 다른 학교 상관없음
                 <br />
                 🙌 유데미 개발 챌린지로 클론코딩 완성할 사람 찾습니다 <br />
                 (프론트엔드 / 백엔드 / 게임개발)
+              </div>
+            </div>
+            <div className="w-[100%] flex justify-center">
+              <div className="w-[132px] h-[52px] rounded-[12px] bg-accent flex gap-[4px] justify-center items-center">
+                <Icon.Heart />
+                <div className="text-btn2">52개</div>
+              </div>
+            </div>
+            <div className="w-[100%] mt-[84px] flex justify-center gap-[12px] pb-[40px]">
+              <div className="w-[40px] h-[40px] rounded-[50%] bg-gray-400"></div>
+              <input
+                type="text"
+                className="w-[626px] h-[44px] bg-accent rounded-[8px]"
+              />
+              <div className="w-[68px] h-[44px] rounded-[8px] bg-accent text-btn2 text-subText1 flex justify-center items-center">
+                추가
               </div>
             </div>
           </div>
