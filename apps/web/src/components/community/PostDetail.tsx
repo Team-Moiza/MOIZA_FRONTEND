@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Icon } from '@repo/ui/src';
 import { PostType } from '../../utils/types/Post';
 
@@ -14,6 +14,8 @@ export const PostDetail: React.FC<PostDetailProps> = ({
   setPostId,
 }) => {
   const post = postId ? posts[Number(postId)] : null;
+
+  const [comment, setComment] = useState('');
 
   if (!post) return null;
 
@@ -33,42 +35,45 @@ export const PostDetail: React.FC<PostDetailProps> = ({
             <div className="flex gap-[12px] items-center">
               <div className="flex gap-[8px] items-center">
                 <div className="w-[32px] h-[32px] rounded-[50%] bg-[#D9D9D9]"></div>
-                <div className="text-text text-p3">gimsua672</div>
+                <div className="text-text text-p3">{post.writer}</div>
               </div>
               <div className="text-primary-400">팔로우</div>
             </div>
             <div className="flex gap-[20px]">
-              <div className="btn-3 text-subText2">2024 - 09 - 16</div>
+              <div className="btn-3 text-subText2">{post.date}</div>
               <div className="btn-3 text-subText2 flex gap-[8px]">
-                <span>#유데미</span>
-                <span>#대회</span>
-                <span>#클론코딩</span>
+                {post.hashtags.map((hashtag, index) => (
+                  <span key={index}>{hashtag}</span>
+                ))}
               </div>
             </div>
           </div>
         </div>
         <div className="w-[100%] flex flex-col gap-[24px] px-[36px] pt-[28px] pb-[124px]">
-          <div className="text-H4">유데미 개발 챌린지 같이 해 볼 사람?</div>
-          <div className="text-p1">
-            클론코딩 나가보려고 하는데 같이 해요. 다른 학교 상관없음
-            <br />
-            🙌 유데미 개발 챌린지로 클론코딩 완성할 사람 찾습니다 <br />
-            (프론트엔드 / 백엔드 / 게임개발)
-          </div>
+          <div className="text-H4">{post.title}</div>
+          <div className="text-p1">{post.content}</div>
         </div>
         <div className="w-[100%] flex justify-center">
-          <div className="w-[132px] h-[52px] rounded-[12px] bg-accent flex gap-[4px] justify-center items-center">
+          <div className="w-[132px] h-[52px] rounded-[12px] bg-accent flex gap-[4px] justify-center items-center cursor-pointer">
             <Icon.Heart />
-            <div className="text-btn2">52개</div>
+            <div className="text-btn2">{post.likeCount}개</div>
           </div>
         </div>
         <div className="w-[100%] mt-[84px] flex justify-center gap-[12px] pb-[40px]">
           <div className="w-[40px] h-[40px] rounded-[50%] bg-gray-400"></div>
           <input
             type="text"
-            className="w-[626px] h-[44px] bg-accent rounded-[8px]"
+            className="w-[626px] h-[44px] bg-accent rounded-[8px] pl-[16px] placeholder-subText2 text-black text-btn3"
+            placeholder="add a comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
           />
-          <div className="w-[68px] h-[44px] rounded-[8px] bg-accent text-btn2 text-subText1 flex justify-center items-center">
+          <div
+            className={`w-[68px] h-[44px] rounded-[8px] flex justify-center items-center ${
+              comment
+                ? 'text-primary-400 cursor-pointer'
+                : 'text-subText2 cursor-not-allowed'
+            } text-btn2 bg-accent`}>
             추가
           </div>
         </div>
