@@ -63,7 +63,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({
           <div className="w-[40px] h-[40px] rounded-[50%] bg-gray-400"></div>
           <input
             type="text"
-            className="w-[626px] h-[44px] bg-accent rounded-[8px] pl-[16px] placeholder-subText2 text-black text-btn3"
+            className="w-[626px] h-[44px] bg-accent rounded-[8px] pl-[16px] placeholder-subText2 text-black text-btn3 focus:outline-none"
             placeholder="add a comment"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
