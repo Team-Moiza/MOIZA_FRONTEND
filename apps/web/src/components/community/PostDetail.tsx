@@ -31,15 +31,21 @@ export const PostDetail = ({ posts, postId, setPostId }: PostDetailProps) => {
             <div className="flex gap-[12px] items-center">
               <div className="flex gap-[8px] items-center">
                 <div className="w-[32px] h-[32px] rounded-[50%] bg-[#D9D9D9]"></div>
-                <div className="text-text text-p3">{post.writer}</div>
+                <div className="text-text text-[16px] font-semibold">
+                  {post.writer}
+                </div>
               </div>
-              <div className="text-primary-400">팔로우</div>
+              <div className="text-primary-400 text-[14px] font-medium cursor-pointer">
+                팔로우
+              </div>
             </div>
             <div className="flex gap-[20px]">
               <div className="btn-3 text-subText2">{post.date}</div>
-              <div className="btn-3 text-subText2 flex gap-[8px]">
+              <div className="flex gap-[8px]">
                 {post.hashtags.map((hashtag, index) => (
-                  <span key={index}>{hashtag}</span>
+                  <span key={index} className="btn-3 text-subText2">
+                    {hashtag}
+                  </span>
                 ))}
               </div>
             </div>
