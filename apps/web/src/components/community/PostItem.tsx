@@ -8,11 +8,7 @@ type PostListProps = {
   index: number;
 };
 
-export const PostItem: React.FC<PostListProps> = ({
-  post,
-  setPostId,
-  index,
-}) => {
+export const PostItem = ({ post, setPostId, index }: PostListProps) => {
   return (
     <article
       className="w-[936px] h-[356px] pt-[28px] px-[36px] flex flex-col gap-[16px] align-middle rounded-[12px] bg-white shadow-[0px_2px_12px_0px_rgba(171,190,209,0.25)]"

@@ -8,11 +8,7 @@ type PostDetailProps = {
   setPostId: (id: string | null) => void;
 };
 
-export const PostDetail: React.FC<PostDetailProps> = ({
-  posts,
-  postId,
-  setPostId,
-}) => {
+export const PostDetail = ({ posts, postId, setPostId }: PostDetailProps) => {
   const post = postId ? posts[Number(postId)] : null;
 
   const [comment, setComment] = useState('');
