@@ -1,12 +1,13 @@
 'use client';
 import React, { useState } from 'react';
-import { Icon } from '@repo/ui/src';
+import { Filter } from '../../components/community/Filter';
+import { PostDetail } from '../../components/community/PostDetail';
+import { PostType } from '../../utils/types/Post';
+import { PostItem } from '../../components/community/PostItem';
 
 type FilterType = '최신순' | '좋아요순' | '팔로우';
 
-const filter: FilterType[] = ['최신순', '좋아요순', '팔로우'];
-
-const dummyPost = [
+const dummyPost: PostType[] = [
   {
     title: '유데미 개발 챌린지 같이 해 볼 사람?',
     content: `
@@ -35,119 +36,17 @@ const dummyPost = [
 
 export default function Community() {
   const [selected, setSelected] = useState<FilterType>('최신순');
-  const [postId, setPostId] = useState<string | null>('1');
+  const [postId, setPostId] = useState<string | null>(null);
 
   return (
     <>
       {postId && (
-        <div className="absolute bg-[rgba(18,18,18,0.5)] w-[100vw] h-[100vh] z-[2] flex justify-center align-middle">
-          <div className="w-[788px] rounded-[12px] mt-[80px] overflow-hidden bg-white flex-none h-max">
-            <div className="w-[100%] h-[100px] bg-[#EEF2F5] py-[20px] px-[30px]">
-              <div className="flex flex-col gap-[8px]">
-                <div className="flex gap-[12px] items-center">
-                  <div className="flex gap-[8px] items-center">
-                    <div className="w-[32px] h-[32px] rounded-[50%] bg-[#D9D9D9]"></div>
-                    <div className="text-text text-p3">gimsua672</div>
-                  </div>
-                  <div className="text-primary-400">팔로우</div>
-                </div>
-                <div className="flex gap-[20px]">
-                  <div className="btn-3 text-subText2">2024 - 09 - 16</div>
-                  <div className="btn-3 text-subText2 flex gap-[8px]">
-                    <span>#유데미</span>
-                    <span>#대회</span>
-                    <span>#클론코딩</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="w-[100%] flex flex-col gap-[24px] px-[36px] pt-[28px] pb-[124px]">
-              <div className="text-H4">유데미 개발 챌린지 같이 해 볼 사람?</div>
-              <div className="text-p1">
-                클론코딩 나가보려고 하는데 같이 해요. 다른 학교 상관없음
-                <br />
-                🙌 유데미 개발 챌린지로 클론코딩 완성할 사람 찾습니다 <br />
-                (프론트엔드 / 백엔드 / 게임개발)
-              </div>
-            </div>
-            <div className="w-[100%] flex justify-center">
-              <div className="w-[132px] h-[52px] rounded-[12px] bg-accent flex gap-[4px] justify-center items-center">
-                <Icon.Heart />
-                <div className="text-btn2">52개</div>
-              </div>
-            </div>
-            <div className="w-[100%] mt-[84px] flex justify-center gap-[12px] pb-[40px]">
-              <div className="w-[40px] h-[40px] rounded-[50%] bg-gray-400"></div>
-              <input
-                type="text"
-                className="w-[626px] h-[44px] bg-accent rounded-[8px]"
-              />
-              <div className="w-[68px] h-[44px] rounded-[8px] bg-accent text-btn2 text-subText1 flex justify-center items-center">
-                추가
-              </div>
-            </div>
-          </div>
-        </div>
+        <PostDetail posts={dummyPost} postId={postId} setPostId={setPostId} />
       )}
       <div className="bg-background h-[calc(100vh_-_80px)] flex flex-col gap-[20px] pt-[142px] items-center">
-        <div className="flex gap-[12px] w-[936px]">
-          {filter.map((filterItem) => (
-            <div
-              key={filterItem}
-              onClick={() => setSelected(filterItem)}
-              className={`px-[20px] py-[9px] rounded-[8px] cursor-pointer ${selected === filterItem ? 'bg-primary-400' : 'bg-[#EDEDED]'} flex justify-center items-center text-btn2 ${selected === filterItem ? 'text-white' : 'text-black'}`}>
-              {filterItem}
-            </div>
-          ))}
-        </div>
+        <Filter selected={selected} setSelected={setSelected} />
         {dummyPost.map((post, index) => (
-          <article
-            className="w-[936px] h-[356px] pt-[28px] px-[36px] flex flex-col gap-[16px] align-middle rounded-[12px] bg-white shadow-[0px_2px_12px_0px_rgba(171,190,209,0.25)]"
-            key={index}
-            onClick={() => {
-              setPostId(index.toString());
-            }}>
-            <div className="relative w-[100%] h-[264px]">
-              <div className="w-[100%] h-[264px] flex flex-col gap-[24px]">
-                <h4 className="text-H4 text-text">{post.title}</h4>
-                <div className="text-p1 overflow-hidden text-text">
-                  {post.content}
-                </div>
-              </div>
-              <div className="absolute z-[1] bottom-0 w-[100%] h-[120px] bg-gradient-to-t from-white to-transparent [background:linear-gradient(0deg,#FFF 0%,rgba(255,255,255,0.64) 51.13%,rgba(255,255,255,0.32) 75.88%,rgba(255,255,255,0) 100%)]"></div>
-            </div>
-            <div className="w-[100%] flex justify-between">
-              <div className="flex gap-[12px] items-center">
-                <div className="flex gap-[4px] text-p3">
-                  <Icon.HeartFill />
-                  {post.likeCount}개
-                </div>
-                <div className="flex gap-[4px] text-p3 text-text">
-                  <Icon.Chat />
-                  {post.commentCount}개
-                </div>
-              </div>
-              <div className="flex gap-[28px] items-center">
-                <div className="flex gap-[12px]">
-                  {post.hashtags.map((hashtag, hashtagIndex) => {
-                    if (hashtagIndex <= 1)
-                      return (
-                        <div
-                          key={hashtagIndex}
-                          className="text-[#68687A] text-p3">
-                          {hashtag}
-                        </div>
-                      );
-                  })}
-                </div>
-                <div className="text-subText1 text-p3">{post.date}</div>
-                <div className="text-text text-btn3 flex gap-[8px] items-center">
-                  <div className="rounded-full bg-gray-400 w-[32px] h-[32px] flex-shrink-0"></div>
-                  {post.writer}
-                </div>
-              </div>
-            </div>
-          </article>
+          <PostItem post={post} index={index} setPostId={setPostId} />
         ))}
       </div>
     </>
