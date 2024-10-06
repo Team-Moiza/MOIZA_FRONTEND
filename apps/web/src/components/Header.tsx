@@ -6,8 +6,6 @@ import { customAxios } from "../utils/customAxios";
 
 type User = {
   profile?: string;
-  name?: string;
-  school?: string;
 };
 
 const navItems = [
@@ -51,15 +49,10 @@ const Header = () => {
         <div className="flex items-center gap-5">
           <SearchBar />
           <Icon.BellOn />
-          {user ? (
             <img
-              src={user.profile}
-              alt="프로필 사진"
-              className="rounded-full w-[44px] h-[44px] flex-shrink-0"
+              src={user?.profile}
+              className="rounded-full w-[42px] h-[42px] flex-shrink-0"
             />
-          ) : (
-            <div className="rounded-full bg-gray-400 w-[44px] h-[44px] flex-shrink-0"></div>
-          )}
         </div>
       </div>
     </header>
