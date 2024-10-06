@@ -1,16 +1,16 @@
 import { Icon } from "@repo/ui/src";
-import axios from "axios";
 import { customAxios } from "../utils/customAxios";
 
 export const LoginButton = () => {
-  const onAuthClick = async() => {
+
+  const onAuthClick = async () => {
     try {
-      const res = await customAxios.get("/auth")
-      window.location.href=res.data
-    } catch(error) {
-      console.log(error)
+      const res = await customAxios.get("/auth");
+      window.location.href = res.data;
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
   return (
     <button
       className="flex bg-white rounded-lg justify-center items-center px-[50px] py-[14px] gap-[20px]"
@@ -19,10 +19,8 @@ export const LoginButton = () => {
       }}
       onClick={onAuthClick}
     >
-        <Icon.Google />
-      <div className="text-center text-p2">
-        Google 계정으로 로그인
-      </div>
+      <Icon.Google />
+      <div className="text-center text-p2">Google 계정으로 로그인</div>
     </button>
   );
 };

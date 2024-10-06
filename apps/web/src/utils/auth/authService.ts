@@ -1,24 +1,25 @@
 import { customAxios } from "../customAxios";
 
-// export const fetchUserData = async () => {
-//   try {
-//     const { data } = await customAxios.get("/user");
-//     return data;
-//   } catch (error) {
-//     return error;
-//   }
-// };
+export const fetchUserData = async () => {
+  try {
+    const { data } = await customAxios.get("/user");
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
 
 export const authorizeAccess = async (accessToken: String) => {
+  console.log(accessToken)
   try {
     const response = await customAxios.post(
       "/auth",
       {
-        accessToken,
+        "token" : accessToken,
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type" : "application/json",
         },
       },
     );
@@ -31,13 +32,12 @@ export const authorizeAccess = async (accessToken: String) => {
     }
 
     if (localStorage.getItem("accessToken") && localStorage.getItem("refreshToken")) {
-      // const userData = await fetchUserData();
-      // console.log(userData)
-      window.location.replace("/")
+      const userData = await fetchUserData();
+      console.log(userData)
+      window.location.replace("/community")
     }
-
     return true;
   } catch (error) {
-    return error;
+    console.log(error);
   }
 };
