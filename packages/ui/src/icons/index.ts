@@ -12,5 +12,28 @@ import { HeartFill } from './heartFill';
 
 import { Chat } from './chat';
 
+import { Bold } from './editor/Bold';
+import { Code } from './editor/Code';
+import { Highlight } from './editor/Highlight';
+import { Italic } from './editor/Italic';
+import { LineThrough } from './editor/LineThrough';
+import { Link } from './editor/Link';
+import { Quotes } from './editor/Quotes';
 
-export { Logo, Google, BellOn, BellOff, Search, Heart, HeartFill, Chat };
+export {
+  Logo,
+  Google,
+  BellOn,
+  BellOff,
+  Search,
+  Heart,
+  HeartFill,
+  Chat,
+  Bold,
+  Code,
+  Highlight,
+  Italic,
+  LineThrough,
+  Link,
+  Quotes,
+};
