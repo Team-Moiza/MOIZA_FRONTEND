@@ -22,7 +22,7 @@ export default function CommunityWrite() {
   };
 
   return (
-    <div className="bg-background h-[calc(100vh_-_80px)] flex flex-col gap-[20px] pt-[142px] items-center">
+    <div className="bg-background min-h-[100vh] h-fit flex flex-col gap-[20px] pt-[142px] items-center">
       <div className="w-[936px] flex flex-col gap-[12px]">
         <div className="flex gap-[20px] w-[100%] px-[8px]">
           <label className="flex gap-[8px] items-center text-btn3">
