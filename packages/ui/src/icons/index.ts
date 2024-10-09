@@ -19,6 +19,7 @@ import { Italic } from './editor/Italic';
 import { LineThrough } from './editor/LineThrough';
 import { Link } from './editor/Link';
 import { Quotes } from './editor/Quotes';
+import { AddImage } from './editor/AddImage';
 
 export {
   Logo,
@@ -36,4 +37,5 @@ export {
   LineThrough,
   Link,
   Quotes,
+  AddImage,
 };

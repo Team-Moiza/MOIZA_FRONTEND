@@ -83,6 +83,10 @@ export default function CommunityWrite() {
           <textarea
             placeholder="내용을 입력해주세요"
             className="outline-none w-[100%] min-h-[232px] resize-none p-[20px] placeholder-subText2 text-text text-p1"></textarea>
+          <div className="absolute right-[20px] bottom-[24px] flex gap-[8px] justify-center text-subText1 border-[1px] border-accent rounded-[8px] px-[12px] py-[10px] cursor-pointer">
+            <Icon.AddImage />
+            파일 추가
+          </div>
         </div>
         {postType === 'survey' && (
           <div className="p-[32px] w-[100%] border-[1px] border-accent bg-white flex flex-col gap-[24px]">
