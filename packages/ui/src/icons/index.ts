@@ -20,6 +20,7 @@ import { LineThrough } from './editor/LineThrough';
 import { Link } from './editor/Link';
 import { Quotes } from './editor/Quotes';
 import { AddImage } from './editor/AddImage';
+import { CrossLine } from './editor/CrossLine';
 
 export {
   Logo,
@@ -38,4 +39,5 @@ export {
   Link,
   Quotes,
   AddImage,
+  CrossLine,
 };

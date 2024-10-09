@@ -96,16 +96,26 @@ export default function CommunityWrite() {
               placeholder="제목을 입력해주세요"
             />
             <div className="flex flex-col gap-[12px]">
-              <input
-                type="text"
-                className="w-[100%] h-[52px] px-[20px] rounded-[4px] outline-none border-accent border-[1px] text-text placeholder-subText2 text-p1"
-                placeholder="예"
-              />
-              <input
-                type="text"
-                className="w-[100%] h-[52px] px-[20px] rounded-[4px] outline-none border-accent border-[1px] text-text placeholder-subText2 text-p1"
-                placeholder="아니요"
-              />
+              <div className="relative">
+                <input
+                  type="text"
+                  className="w-[100%] h-[52px] px-[20px] rounded-[4px] outline-none border-accent border-[1px] text-text placeholder-subText2 text-p1"
+                  placeholder="예"
+                />
+                <div className="absolute bottom-[20px] right-[20px]">
+                  <Icon.CrossLine />
+                </div>
+              </div>
+              <div className="relative">
+                <input
+                  type="text"
+                  className="w-[100%] h-[52px] px-[20px] rounded-[4px] outline-none border-accent border-[1px] text-text placeholder-subText2 text-p1"
+                  placeholder="이니요"
+                />
+                <div className="absolute bottom-[20px] right-[20px]">
+                  <Icon.CrossLine />
+                </div>
+              </div>
               <div className="w-[100%] h-[52px] px-[20px] rounded-[4px] outline-none border-accent border-[1px] border-dashed text-p1 text-subText2 flex items-center">
                 다른 항목 추가
               </div>
