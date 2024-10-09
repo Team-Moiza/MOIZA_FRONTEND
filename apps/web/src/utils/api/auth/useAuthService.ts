@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { authorizeAccess } from "../api/auth/authService"; 
+import { authorizeAccess } from "./authService";
 
 export const useAuthService = () => {
   useEffect(() => {

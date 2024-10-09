@@ -3,7 +3,7 @@ import './globals.css';
 import localFont from 'next/font/local';
 import Header from '../components/Header';
 import { usePathname } from 'next/navigation';
-import { useAuthService } from '../utils/auth/useAuthService';
+import { useAuthService } from '../utils/api/auth/useAuthService';
 
 const pretendard = localFont({
   src: "../../public/PretendardVariable.woff2",

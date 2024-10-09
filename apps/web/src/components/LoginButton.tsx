@@ -1,8 +1,7 @@
 import { Icon } from "@repo/ui/src";
-import { customAxios } from "../utils/customAxios";
+import { customAxios } from "../utils/api/customAxios";
 
 export const LoginButton = () => {
-
   const onAuthClick = async () => {
     try {
       const res = await customAxios.get("/auth");

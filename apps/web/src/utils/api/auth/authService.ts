@@ -32,7 +32,8 @@ export const authorizeAccess = async (accessToken: String) => {
     alert(
       "dsm.hs.kr, gsm.hs.kr, dgws.hs.kr, bssm.hs.kr 이메일만 로그인 할 수 있습니다. 다시 시도 해주세요."
     );
-    window.location.replace("/login");
     console.error("액세스 인증 실패", error);
+    window.location.replace("/login");
+    return false;
   }
 };
