@@ -15,10 +15,10 @@ const EditedArray = [
 ];
 
 export default function CommunityWrite() {
-  const [selectedOption, setSelectedOption] = useState<PostType>('post');
+  const [postType, setPostType] = useState<PostType>('post');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedOption(event.target.value as PostType);
+    setPostType(event.target.value as PostType);
   };
 
   return (
@@ -29,14 +29,14 @@ export default function CommunityWrite() {
             <input
               type="radio"
               value="post"
-              checked={selectedOption === 'post'}
+              checked={postType === 'post'}
               onChange={handleChange}
               className="hidden"
             />
             <div
-              className={`w-[16px] h-[16px] rounded-[50%] border-[1px] ${selectedOption === 'post' ? 'border-primary-400' : 'border-subText2'} bg-background flex justify-center items-center`}>
+              className={`w-[16px] h-[16px] rounded-[50%] border-[1px] ${postType === 'post' ? 'border-primary-400' : 'border-subText2'} bg-background flex justify-center items-center`}>
               <div
-                className={`w-[8px] h-[8px] rounded-[50%] bg-primary-400 ${selectedOption === 'post' ? 'block' : 'hidden'}`}></div>
+                className={`w-[8px] h-[8px] rounded-[50%] bg-primary-400 ${postType === 'post' ? 'block' : 'hidden'}`}></div>
             </div>
             게시물
           </label>
@@ -44,14 +44,14 @@ export default function CommunityWrite() {
             <input
               type="radio"
               value="survey"
-              checked={selectedOption === 'survey'}
+              checked={postType === 'survey'}
               onChange={handleChange}
               className="hidden"
             />
             <div
-              className={`w-[16px] h-[16px] rounded-[50%] border-[1px] ${selectedOption === 'survey' ? 'border-primary-400' : 'border-subText2'} bg-background flex justify-center items-center`}>
+              className={`w-[16px] h-[16px] rounded-[50%] border-[1px] ${postType === 'survey' ? 'border-primary-400' : 'border-subText2'} bg-background flex justify-center items-center`}>
               <div
-                className={`w-[8px] h-[8px] rounded-[50%] bg-primary-400 ${selectedOption === 'survey' ? 'block' : 'hidden'}`}></div>
+                className={`w-[8px] h-[8px] rounded-[50%] bg-primary-400 ${postType === 'survey' ? 'block' : 'hidden'}`}></div>
             </div>
             설문
           </label>
@@ -67,7 +67,7 @@ export default function CommunityWrite() {
             placeholder="#태그 입력"
           />
         </div>
-        <div className="w-[100%] mt-[2px] border-[1px] border-accent min-h-[272px] rounded-[4px] bg-white relative">
+        <div className="w-[100%] mt-[2px] border-[1px] border-accent min-h-[272px] h-fit rounded-[4px] bg-white relative">
           <div className="w-[100%] h-[40px] border-b-[1px] border-accent flex items-center gap-[8px] px-[12px]">
             {EditedArray.map((icon, index) => {
               return (
@@ -82,8 +82,32 @@ export default function CommunityWrite() {
           </div>
           <textarea
             placeholder="내용을 입력해주세요"
-            className="outline-none w-[100%] min-h-[100%] resize-none p-[20px] placeholder-subText2 text-text text-p1"></textarea>
+            className="outline-none w-[100%] min-h-[232px] resize-none p-[20px] placeholder-subText2 text-text text-p1"></textarea>
         </div>
+        {postType === 'survey' && (
+          <div className="p-[32px] w-[100%] border-[1px] border-accent bg-white flex flex-col gap-[24px]">
+            <input
+              type="text"
+              className="w-[100%] h-[52px] px-[20px] rounded-[4px] outline-none border-accent border-[1px] text-text placeholder-subText2 text-p1"
+              placeholder="제목을 입력해주세요"
+            />
+            <div className="flex flex-col gap-[12px]">
+              <input
+                type="text"
+                className="w-[100%] h-[52px] px-[20px] rounded-[4px] outline-none border-accent border-[1px] text-text placeholder-subText2 text-p1"
+                placeholder="예"
+              />
+              <input
+                type="text"
+                className="w-[100%] h-[52px] px-[20px] rounded-[4px] outline-none border-accent border-[1px] text-text placeholder-subText2 text-p1"
+                placeholder="아니요"
+              />
+              <div className="w-[100%] h-[52px] px-[20px] rounded-[4px] outline-none border-accent border-[1px] border-dashed text-p1 text-subText2 flex items-center">
+                다른 항목 추가
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
