@@ -110,7 +110,7 @@ export default function CommunityWrite() {
                 <input
                   type="text"
                   className="w-[100%] h-[52px] px-[20px] rounded-[4px] outline-none border-accent border-[1px] text-text placeholder-subText2 text-p1"
-                  placeholder="이니요"
+                  placeholder="아니요"
                 />
                 <div className="absolute bottom-[20px] right-[20px]">
                   <Icon.CrossLine />
