@@ -9,19 +9,19 @@ const SchoolTour = () => {
   ];
 
   return (
-    <div className="bg-background h-[calc(100vh_-_80px)] flex flex-col items-center">
+    <div className="bg-background h-screen flex flex-col items-center">
       <div className="pt-[180px] w-[936px]">
         <div className="flex flex-col items-center">
         <div className="text-H1 text-text">SW마이스터고</div>
         <div className="text-subText1">소프트웨어 인재를 키우는 4개의 학교, 각 학교의 이야기를 확인해보세요.</div>
         </div>
-      <div className="flex flex-row w-full justify-between mt-[50px]">
+      <div className="flex flex-row w-full justify-between mt-[60px]">
         {schoolLogo.map((school, index) => (
-          <div key={index} className="flex flex-col items-center gap-[30px]">
-            <div key={index} className="w-[220px] h-[300px] bg-white shadow-shadow rounded-[12px] flex flex-col items-center justify-center">
+          <div key={index} className="flex flex-col items-center gap-[25px]">
+            <div key={index} className="w-[220px] h-[290px] bg-white shadow-shadow rounded-[12px] flex flex-col items-center justify-center">
               <img src={school.logo.src} className="w-[80%]" />
             </div>
-              <p className="text-p3 text-text">{school.name}</p>
+              <p className="text-p3 text-subText1">{school.name}</p>
           </div>
         ))}
       </div>
