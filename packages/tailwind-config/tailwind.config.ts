@@ -138,6 +138,9 @@ const config: Omit<Config, 'content'> = {
           { lineHeight: '130%', fontWeight: '500', letterSpacing: '0' },
         ],
       },
+      boxShadow: {
+        'shadow': '0px 2px 12px 0px rgba(171, 190, 209, 0.25)',
+      },
     },
   },
   plugins: [],
