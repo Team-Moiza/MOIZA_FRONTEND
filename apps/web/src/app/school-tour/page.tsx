@@ -17,8 +17,8 @@ const SchoolTour = () => {
         </div>
       <div className="flex flex-row w-full justify-between mt-[60px]">
         {schoolLogo.map((school, index) => (
-          <div key={index} className="flex flex-col items-center gap-[25px]">
-            <div key={index} className="w-[220px] h-[290px] bg-white shadow-shadow rounded-[12px] flex flex-col items-center justify-center">
+          <div key={index} className="flex flex-col items-center gap-[30px]">
+            <div key={index} className="w-[220px] h-[290px] bg-white shadow-shadow rounded-[12px] flex flex-col items-center justify-center transition transform hover:scale-105">
               <img src={school.logo.src} className="w-[80%]" />
             </div>
               <p className="text-p3 text-subText1">{school.name}</p>
