@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Icon } from '@repo/ui/src';
-import { PostType } from '../../utils/types/Post';
+import { PostType } from '../../utils/types/post';
 
 type PostDetailProps = {
   posts: PostType[];

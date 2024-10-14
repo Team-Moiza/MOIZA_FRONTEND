@@ -2,7 +2,7 @@
 import React, { Suspense, useState } from 'react';
 import { Filter } from '../../components/community/Filter';
 import { PostDetail } from '../../components/community/PostDetail';
-import { PostType } from '../../utils/types/Post';
+import { PostType } from '../../utils/types/post';
 import { PostItem } from '../../components/community/PostItem';
 
 type FilterType = '최신순' | '좋아요순' | '팔로우';
