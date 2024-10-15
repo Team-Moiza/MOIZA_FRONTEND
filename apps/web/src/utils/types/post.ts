@@ -1,3 +1,5 @@
+import { UserType } from './user';
+
 export type PostType = {
   title: string;
   content: string;
@@ -6,4 +8,12 @@ export type PostType = {
   hashtags: string[];
   commentCount: number;
   likeCount: number;
+};
+
+export type DetailPostType = {
+  postId: number;
+  title: string;
+  content: string;
+  image: string[] | null;
+  user: Pick<UserType, 'nickname' | 'profile'>;
 };
