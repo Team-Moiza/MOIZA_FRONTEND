@@ -17,3 +17,9 @@ export type DetailPostType = {
   image: string[] | null;
   user: Pick<UserType, 'nickname' | 'profile'>;
 };
+
+export type PostWriteType = {
+  title: string;
+  content: string;
+  image: string[];
+};
