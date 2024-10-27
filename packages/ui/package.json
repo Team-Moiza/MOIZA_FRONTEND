@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./src": "./src/index.ts",
     "./button": "./src/button.tsx",
     "./card": "./src/card.tsx",
-    "./code": "./src/code.tsx"
+    "./code": "./src/code.tsx",
+    "./text": "./src/text.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -14,6 +16,7 @@
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@repo/types-config": "*",
     "@turbo/gen": "^1.12.4",
     "@types/node": "^20.11.24",
     "@types/eslint": "^8.56.5",
