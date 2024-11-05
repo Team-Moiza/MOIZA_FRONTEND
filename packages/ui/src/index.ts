@@ -1,4 +1,3 @@
-import * as Icon from './icons/index';
-import * as Assets from './assets/index'
+const helloworld = 'hello world';
 
-export { Icon, Assets };
+export { helloworld };
