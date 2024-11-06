@@ -5,7 +5,7 @@ const config: Omit<Config, 'content'> = {
     extend: {
       colors: {
         primary: {
-          100: '#DDFAF4',
+          100: '#F3FDFB',
           200: '#C6F7EC',
           300: '#8CEFD9',
           400: '#54E7C7',
