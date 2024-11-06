@@ -30,12 +30,24 @@ const config: Omit<Config, 'content'> = {
         black: '#04201A',
         white: '#FFFFFF',
       },
-      // fontSize: {
-      //   D1: [
-      //     '72px',
-      //     { lineHeight: '130%', fontWeight: 'bold', letterSpacing: '-1.5px' },
-      //   ],
-      // },
+      fontSize: {
+        h1: ['32px', { lineHeight: '130%', fontWeight: 700 }],
+        h2: ['28px', { lineHeight: '130%', fontWeight: 600 }],
+        h3: ['24px', { lineHeight: '140%', fontWeight: 600 }],
+        h4: ['24px', { lineHeight: '140%', fontWeight: 500 }],
+        h5: ['20px', { lineHeight: '150%', fontWeight: 600 }],
+
+        p1: ['20px', { lineHeight: '150%', fontWeight: 400 }],
+        p2: ['18px', { lineHeight: '150%', fontWeight: 600 }],
+        p3: ['18px', { lineHeight: '150%', fontWeight: 400 }],
+        p4: ['16px', { lineHeight: '160%', fontWeight: 500 }],
+        p5: ['16px', { lineHeight: '150%', fontWeight: 400 }],
+
+        btn1: ['14px', { lineHeight: '160%', fontWeight: 500 }],
+
+        caption1: ['14px', { lineHeight: '150%', fontWeight: 400 }],
+        caption2: ['12px', { lineHeight: '140%', fontWeight: 400 }],
+      },
     },
   },
   plugins: [],
