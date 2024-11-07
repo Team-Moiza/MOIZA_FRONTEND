@@ -19,9 +19,5 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "dependencies": {
-    "@repo/typescript-config": "^0.0.0",
-    "axios": "^1.7.7"
-  }
+  ]
 }
