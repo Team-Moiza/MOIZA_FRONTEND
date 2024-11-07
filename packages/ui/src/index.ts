@@ -1,3 +1,3 @@
-const helloworld = 'hello world';
+import * as Assets from './assets/index'
 
-export { helloworld };
+export { Assets };
