@@ -1,4 +1,4 @@
-const sharedConfig = require('@repo/tailwind-config');
+const sharedConfig = require('@moija/tailwind-config');
 
 module.exports = {
   content: [

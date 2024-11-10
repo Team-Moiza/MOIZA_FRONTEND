@@ -1,9 +1,9 @@
 {
-  "name": "@moija/ui",
+  "name": "@moija/hooks",
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./src": "./src/index.ts"
+    ".": "./src/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
