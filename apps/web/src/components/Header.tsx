@@ -10,7 +10,7 @@ const Header = () => {
   const [user, setUser] = useState<User | null>(null);
 
   return (
-    <header className="w-[100vw] fixed justify-center bg-white h-[80px] border-b-[1p] border-gray-100">
+    <header className="w-[100vw] fixed justify-center bg-white h-[80px] border-b-[1px] border-gray-100">
     <div className="mx-[200px] h-full flex justify-between items-center">
       <div className="flex items-center space-x-4">
         <Assets.Logo />
