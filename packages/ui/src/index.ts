@@ -1,3 +1,3 @@
-import * as Assets from './assets/index'
+import * as Assets from './assets/index';
 
 export { Assets };

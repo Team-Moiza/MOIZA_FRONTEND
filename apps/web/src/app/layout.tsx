@@ -1,3 +1,4 @@
+import Header from '../components/Header';
 import './globals.css';
 import localFont from 'next/font/local';
 
@@ -16,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="kr" className={`${pretendard.variable}`}>
       <body className={pretendard.className}>
-        {/* {isHeaderVisible && <Header />} */}
+        {<Header />}
         {children}
       </body>
     </html>
