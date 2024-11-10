@@ -1,4 +1,4 @@
-import * as Assets from '@moija/ui';
+import { Logo } from '@moija/ui';
 
 type User = {
   profile: string;
@@ -17,7 +17,7 @@ const Header = () => {
     <header className="w-[100vw] fixed justify-center bg-white h-[80px] border-b-[1px] border-gray-100">
       <div className="mx-[200px] h-full flex justify-between items-center">
         <div className="flex items-center space-x-4">
-          <Assets.Logo />
+          <Logo />
         </div>
         <div className="flex items-center gap-5">
           {isLoggedIn ? (
