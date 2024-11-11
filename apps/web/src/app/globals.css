@@ -3,12 +3,13 @@
 @tailwind utilities;
 @layer base {
   body {
-    font-family: 'Pretendard', sans-serif;
+    overflow-x: hidden;
   }
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
