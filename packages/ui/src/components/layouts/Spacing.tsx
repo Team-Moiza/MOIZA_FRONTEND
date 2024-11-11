@@ -5,6 +5,8 @@ type SpacingPropsType = {
 
 export const Spacing = ({ children, align }: SpacingPropsType) => {
   return (
-    <div className={`flex items-${align} justify-between`}>{children}</div>
+    <div className={`w-full flex items-${align} justify-between`}>
+      {children}
+    </div>
   );
 };
