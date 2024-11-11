@@ -1,6 +1,6 @@
 import { PropsType } from './iconPropsType';
 
-export const ArrowDown = ({ size, color }: PropsType) => {
+export const ArrowDown = ({ size = 24, color = '#000000' }: PropsType) => {
   return (
     <svg
       width={size}
