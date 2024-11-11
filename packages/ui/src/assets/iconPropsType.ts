@@ -1,4 +1,4 @@
-export type PropsType = {
-  size: number;
-  color: string;
+export type IconPropsType = {
+  size?: number;
+  color?: string;
 };
