@@ -2,6 +2,7 @@ export * from './assets/index';
 
 export * from './components/Dropdown';
 export * from './components/Text';
+export * from './components/Label';
 
 export * from './components/layouts/Center';
 export * from './components/layouts/Flex';
