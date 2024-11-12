@@ -10,7 +10,7 @@ export const Text = ({ children, className }: TextPropsType) => {
   const text = children.toString().split('\\n');
 
   return (
-    <p className={className}>
+    <p className={`${className} cursor-default`}>
       {text.map((item, index) => (
         <React.Fragment key={index}>
           {item}
