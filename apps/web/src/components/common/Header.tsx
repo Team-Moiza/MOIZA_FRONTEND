@@ -26,7 +26,7 @@ const Header = () => {
                 src={user.profile}
                 className="rounded-full w-[42px] h-[42px] flex-shrink-0"
               />
-              <div className="text-p3 text-black">{user.name}</div>
+              <div className="text-p3 text-black">{user.name}님</div>
             </div>
           ) : (
             <div className="gap-[50px] flex">
