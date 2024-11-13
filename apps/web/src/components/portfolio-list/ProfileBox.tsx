@@ -44,7 +44,7 @@ const ProfileBox = ({
                         {tags.map((tag, index) => (
                             <div
                                 key={index}
-                                className="px-[9px] py-1 bg-gray-100 rounded-[8px] text-cation2 text-gray-500"
+                                className="px-[9px] py-1 bg-gray-100 rounded-[8px] text-caption2 text-gray-500"
                             >
                                 {tag}
                             </div>

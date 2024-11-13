@@ -8,12 +8,12 @@ const PortfolioList = () => {
         "전체",
         "프론트엔드 개발자",
         "백엔드 개발자",
-        "UXUI디자이너",
+        "UXUI 디자이너",
         "기획자",
     ];
     const [selectedCategory, setSelectedCategory] = useState("전체");
 
-    const dummyProfiles = [
+    const dummyDat = [
         {
             name: "강민지",
             job: "프론트엔드 개발자",
@@ -45,7 +45,7 @@ const PortfolioList = () => {
         },
         {
             name: "정수민",
-            job: "UX 디자이너",
+            job: "UX/UI 디자이너",
             school: "한국디자인고등학교 2기 출신",
             tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
             introduce:
@@ -55,7 +55,7 @@ const PortfolioList = () => {
         },
     ];
 
-    const filteredProfiles = dummyProfiles.filter(
+    const filteredProfiles = dummyDat.filter(
         (profile) =>
             selectedCategory === "전체" || profile.job === selectedCategory
     );
@@ -78,7 +78,7 @@ const PortfolioList = () => {
                 ))}
             </div>
             <div className="flex gap-5 w-[100%] justify-between">
-                <div className="grid grid-cols-1 gap-5 w-[92%]">
+                <div className="flex flex-col gap-5 w-[92%]">
                     {filteredProfiles.map((profile, index) => (
                         <ProfileBox
                             key={index}
