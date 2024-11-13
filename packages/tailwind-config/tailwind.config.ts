@@ -48,6 +48,11 @@ const config: Omit<Config, 'content'> = {
         caption1: ['14px', { lineHeight: '150%', fontWeight: 400 }],
         caption2: ['12px', { lineHeight: '140%', fontWeight: 400 }],
       },
+      zIndex: {
+        header: 5,
+        dropdown: 1,
+        sidebar: 0,
+      },
     },
   },
   plugins: [],
