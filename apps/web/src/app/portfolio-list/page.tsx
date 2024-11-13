@@ -77,8 +77,8 @@ const PortfolioList = () => {
                     </button>
                 ))}
             </div>
-            <div className="flex gap-5">
-                <div className="grid grid-cols-1 gap-5">
+            <div className="flex gap-5 w-[100%] justify-between">
+                <div className="grid grid-cols-1 gap-5 w-[92%]">
                     {filteredProfiles.map((profile, index) => (
                         <ProfileBox
                             key={index}
