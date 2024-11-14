@@ -8,7 +8,7 @@ const PortfolioList = () => {
         "전체",
         "프론트엔드 개발자",
         "백엔드 개발자",
-        "UXUI 디자이너",
+        "UX/UI 디자이너",
         "기획자",
     ];
     const [selectedCategory, setSelectedCategory] = useState("전체");
@@ -36,7 +36,7 @@ const PortfolioList = () => {
         },
         {
             name: "박지호",
-            job: "데이터 엔지니어",
+            job: "기획자",
             school: "대구소프트웨어고등학교 1기 출신",
             introduce:
                 "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
@@ -61,7 +61,7 @@ const PortfolioList = () => {
     );
 
     return (
-        <div className="h-screen w-screen pt-[120px] px-[200px]">
+        <div className="h-screen w-screen pt-[120px] mb-[200px] px-[200px]">
             <div className="flex gap-2 mb-[30px] ">
                 {categories.map((category) => (
                     <button

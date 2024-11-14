@@ -19,8 +19,8 @@ const Filter = () => {
     const sortOptions: SortOption[] = ["인기순", "최신순", "오래된순"];
 
     return (
-        <div className="flex-col w-[280px]">
-            <div className="mb-[10px] bg-white rounded-[12px] border-[1px] border-gray-200 px-5 py-4">
+        <div className="flex-col">
+            <div className="mb-[10px] w-[260px] bg-white rounded-[12px] border-[1px] border-gray-200 px-5 py-4">
                 <div className="text-black text-h4">필터</div>
                 <div
                     onClick={toggleDropdown}
