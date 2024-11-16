@@ -61,18 +61,22 @@ const Filter = () => {
                 <div
                     onClick={() => toggleDropdown("stack")}
                     className="text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
-                    >
+                >
                     기술 스택
                     <Arrow isOpen={isOpen.stack} />
                 </div>
-                    {isOpen.stack && (
-                        <div className="flex items-center mb-2.5">
-                            <div className="px-4 py-2 border rounded-lg border-gray-200 w-full flex justify-between items-center">
-                                <input className='border-none focus:outline-none focus:border-none' type="text" placeholder="직무 기술 스택 검색"/>
-                                    <Search />
-                            </div>
+                {isOpen.stack && (
+                    <div className="flex items-center mb-2.5">
+                        <div className="px-4 py-2 border rounded-lg border-gray-200 w-full flex justify-between items-center gap-1">
+                            <input
+                                className="border-none focus:outline-none focus:border-none w-[90%]"
+                                type="text"
+                                placeholder="직무 기술 스택 검색"
+                            />
+                            <Search />
                         </div>
-                    )}
+                    </div>
+                )}
                 <div className="border-b border-gray-100" />
 
                 {/* 출신 학교 */}
