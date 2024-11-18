@@ -6,16 +6,18 @@ import Button from "../common/Button";
 type SortOption = "인기순" | "최신순" | "오래된순";
 
 const Filter = () => {
-    const [isOpen, setIsOpen] = useState({
-        sort: false,
-        stack: true,
-        school: false,
-        company: false,
+    const [filterState, setFilterState] = useState({
+        isOpen: {
+            sort: false,
+            stack: true,
+            school: false,
+            company: false,
+        },
+        selectedSort: "인기순" as SortOption,
+        searchInput: "",
+        selectedStacks: [] as string[],
+        filteredStacks: [] as string[],
     });
-    const [selectedSort, setSelectedSort] = useState<SortOption>("인기순");
-    const [searchInput, setSearchInput] = useState("");
-    const [selectedStacks, setSelectedStacks] = useState<string[]>([]);
-    const [filteredStacks, setFilteredStacks] = useState<string[]>([]);
 
     const stacks = [
         "React.js",
@@ -34,35 +36,39 @@ const Filter = () => {
     ];
 
     const handleSortChange = (sortOption: SortOption): void => {
-        setSelectedSort(sortOption);
+        setFilterState((prev) => ({ ...prev, selectedSort: sortOption }));
     };
 
     const sortOptions: SortOption[] = ["인기순", "최신순", "오래된순"];
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        setSearchInput(value);
-
-        if (value.trim() === "") {
-            setFilteredStacks([]);
-        } else {
-            const filtered = stacks.filter((stack) =>
-                stack.toLowerCase().includes(value.toLowerCase())
-            );
-            setFilteredStacks(filtered);
-        }
+        setFilterState((prev) => ({
+            ...prev,
+            searchInput: value,
+            filteredStacks: value.trim() === ""
+                ? []
+                : stacks.filter((stack) =>
+                    stack.toLowerCase().includes(value.toLowerCase())
+                ),
+        }));
     };
 
     const handleToggleStack = (stack: string) => {
-        if (selectedStacks.includes(stack)) {
-            setSelectedStacks(selectedStacks.filter((item) => item !== stack));
-        } else {
-            setSelectedStacks([...selectedStacks, stack]);
-        }
+        setFilterState((prev) => {
+            const selectedStacks = prev.selectedStacks.includes(stack)
+                ? prev.selectedStacks.filter((item) => item !== stack)
+                : [...prev.selectedStacks, stack];
+
+            return { ...prev, selectedStacks };
+        });
     };
 
-    const toggleDropdown = (dropdown: keyof typeof isOpen): void => {
-        setIsOpen((prev) => ({ ...prev, [dropdown]: !prev[dropdown] }));
+    const toggleDropdown = (dropdown: keyof typeof filterState.isOpen): void => {
+        setFilterState((prev) => ({
+            ...prev,
+            isOpen: { ...prev.isOpen, [dropdown]: !prev.isOpen[dropdown] },
+        }));
     };
 
     return (
@@ -76,16 +82,16 @@ const Filter = () => {
                     className="text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
                 >
                     정렬
-                    <Arrow isOpen={isOpen.sort} />
+                    <Arrow isOpen={filterState.isOpen.sort} />
                 </div>
-                {isOpen.sort && (
+                {filterState.isOpen.sort && (
                     <div className="flex items-center justify-center mb-2.5">
                         {sortOptions.map((option, index) => (
                             <div key={option} className="flex items-center">
                                 <div
                                     onClick={() => handleSortChange(option)}
                                     className={`cursor-pointer text-sm font-medium ${
-                                        selectedSort === option
+                                        filterState.selectedSort === option
                                             ? "text-primary-500"
                                             : "text-black"
                                     }`}
@@ -107,9 +113,9 @@ const Filter = () => {
                     className="text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
                 >
                     기술 스택
-                    <Arrow isOpen={isOpen.stack} />
+                    <Arrow isOpen={filterState.isOpen.stack} />
                 </div>
-                {isOpen.stack && (
+                {filterState.isOpen.stack && (
                     <div className="mb-2.5">
                         {/* 검색 입력 */}
                         <div className="px-4 py-2 border rounded-lg border-gray-200 w-full flex justify-between items-center gap-2">
@@ -117,16 +123,16 @@ const Filter = () => {
                                 className="border-none focus:outline-none w-[90%]"
                                 type="text"
                                 placeholder="직무 기술 스택 검색"
-                                value={searchInput}
+                                value={filterState.searchInput}
                                 onChange={handleSearchChange}
                             />
                             <Search />
                         </div>
                         {/* 선택된 스택 */}
-                        {selectedStacks.length > 0 && (
+                        {filterState.selectedStacks.length > 0 && (
                             <>
                                 <div className="flex flex-wrap gap-1 my-2">
-                                    {selectedStacks.map((stack) => (
+                                    {filterState.selectedStacks.map((stack) => (
                                         <div
                                             key={stack}
                                             onClick={() => handleToggleStack(stack)}
@@ -136,21 +142,21 @@ const Filter = () => {
                                         </div>
                                     ))}
                                 </div>
-                                {filteredStacks.length > 0 && (
+                                {filterState.filteredStacks.length > 0 && (
                                     <div className="border-b border-gray-100 mb-2" />
                                 )}
                             </>
                         )}
 
                         {/* 검색 결과 */}
-                        {filteredStacks.length > 0 && (
+                        {filterState.filteredStacks.length > 0 && (
                             <div className="mt-2 flex flex-wrap gap-1">
-                                {filteredStacks.map((stack) => (
+                                {filterState.filteredStacks.map((stack) => (
                                     <div
                                         key={stack}
                                         onClick={() => handleToggleStack(stack)}
                                         className={`py-[5px] px-[10px] border rounded-[8px] text-caption1 cursor-pointer ${
-                                            selectedStacks.includes(stack)
+                                            filterState.selectedStacks.includes(stack)
                                                 ? "bg-primary-500 text-white border-primary-500"
                                                 : "bg-white text-black border-gray-200"
                                         }`}
@@ -170,7 +176,7 @@ const Filter = () => {
                     className="text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
                 >
                     출신 학교
-                    <Arrow isOpen={isOpen.school} />
+                    <Arrow isOpen={filterState.isOpen.school} />
                 </div>
                 <div className="border-b border-gray-100" />
 
@@ -180,7 +186,7 @@ const Filter = () => {
                     className="text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
                 >
                     재직 여부
-                    <Arrow isOpen={isOpen.company} />
+                    <Arrow isOpen={filterState.isOpen.company} />
                 </div>
             </div>
 
