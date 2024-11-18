@@ -3,7 +3,8 @@ import { useState } from "react";
 import { Arrow, Search } from "@moija/ui";
 import Button from "../common/Button";
 
-type SortOption = "인기순" | "최신순" | "오래된순";
+type SortOption = string;
+type SchoolOption = string;
 
 const Filter = () => {
     const [filterState, setFilterState] = useState({
@@ -17,6 +18,7 @@ const Filter = () => {
         searchInput: "",
         selectedStacks: [] as string[],
         filteredStacks: [] as string[],
+        selectedSchool: [] as string[],
     });
 
     const stacks = [
@@ -40,17 +42,24 @@ const Filter = () => {
     };
 
     const sortOptions: SortOption[] = ["인기순", "최신순", "오래된순"];
+    const schoolOptions: SchoolOption[] = [
+        "광주소마고",
+        "대구소마고",
+        "대덕소마고",
+        "부산소마고",
+    ];
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setFilterState((prev) => ({
             ...prev,
             searchInput: value,
-            filteredStacks: value.trim() === ""
-                ? []
-                : stacks.filter((stack) =>
-                    stack.toLowerCase().includes(value.toLowerCase())
-                ),
+            filteredStacks:
+                value.trim() === ""
+                    ? []
+                    : stacks.filter((stack) =>
+                          stack.toLowerCase().includes(value.toLowerCase())
+                      ),
         }));
     };
 
@@ -64,7 +73,19 @@ const Filter = () => {
         });
     };
 
-    const toggleDropdown = (dropdown: keyof typeof filterState.isOpen): void => {
+    const handleToggleSchool = (school: string) => {
+        setFilterState((prev) => {
+            const selectedSchool = prev.selectedSchool.includes(school)
+                ? prev.selectedSchool.filter((item) => item !== school)
+                : [...prev.selectedSchool, school];
+
+            return { ...prev, selectedSchool };
+        });
+    };
+
+    const toggleDropdown = (
+        dropdown: keyof typeof filterState.isOpen
+    ): void => {
         setFilterState((prev) => ({
             ...prev,
             isOpen: { ...prev.isOpen, [dropdown]: !prev.isOpen[dropdown] },
@@ -135,7 +156,9 @@ const Filter = () => {
                                     {filterState.selectedStacks.map((stack) => (
                                         <div
                                             key={stack}
-                                            onClick={() => handleToggleStack(stack)}
+                                            onClick={() =>
+                                                handleToggleStack(stack)
+                                            }
                                             className="bg-primary-500 text-white py-[5px] px-[10px] rounded-[8px] text-caption1 cursor-pointer"
                                         >
                                             {stack}
@@ -156,7 +179,9 @@ const Filter = () => {
                                         key={stack}
                                         onClick={() => handleToggleStack(stack)}
                                         className={`py-[5px] px-[10px] border rounded-[8px] text-caption1 cursor-pointer ${
-                                            filterState.selectedStacks.includes(stack)
+                                            filterState.selectedStacks.includes(
+                                                stack
+                                            )
                                                 ? "bg-primary-500 text-white border-primary-500"
                                                 : "bg-white text-black border-gray-200"
                                         }`}
@@ -178,6 +203,26 @@ const Filter = () => {
                     출신 학교
                     <Arrow isOpen={filterState.isOpen.school} />
                 </div>
+                {filterState.isOpen.school && (
+                    <div className="mb-2.5 flex flex-wrap gap-2">
+                        {schoolOptions.map((option) => (
+                            <div key={option} className="flex items-center">
+                                <div
+                                    onClick={() => handleToggleSchool(option)}
+                                    className={`cursor-pointer py-2 px-4 border rounded-lg ${
+                                        filterState.selectedSchool.includes(
+                                            option
+                                        )
+                                            ? "text-primary-500 bg-primary-100 border-primary-500"
+                                            : "text-black bg-white border-gray-200"
+                                    }`}
+                                >
+                                    {option}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
                 <div className="border-b border-gray-100" />
 
                 {/* 재직 여부 */}
