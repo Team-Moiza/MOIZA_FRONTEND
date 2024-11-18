@@ -5,6 +5,7 @@ import Button from "../common/Button";
 
 type SortOption = string;
 type SchoolOption = string;
+type CompanyOtion = string;
 
 const Filter = () => {
     const [filterState, setFilterState] = useState({
@@ -19,6 +20,7 @@ const Filter = () => {
         selectedStacks: [] as string[],
         filteredStacks: [] as string[],
         selectedSchool: [] as string[],
+        selectedCompany: "전체" as CompanyOtion,
     });
 
     const stacks = [
@@ -37,10 +39,6 @@ const Filter = () => {
         "REST API",
     ];
 
-    const handleSortChange = (sortOption: SortOption): void => {
-        setFilterState((prev) => ({ ...prev, selectedSort: sortOption }));
-    };
-
     const sortOptions: SortOption[] = ["인기순", "최신순", "오래된순"];
     const schoolOptions: SchoolOption[] = [
         "광주소마고",
@@ -48,6 +46,11 @@ const Filter = () => {
         "대덕소마고",
         "부산소마고",
     ];
+    const companyOptions: CompanyOtion[] = ["전체", "재직중", "미재직"];
+
+    const handleSortChange = (status: SortOption): void => {
+        setFilterState((prev) => ({ ...prev, selectedSort: status }));
+    };
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -83,6 +86,10 @@ const Filter = () => {
         });
     };
 
+    const handleCompanyChange = (status: CompanyOtion): void => {
+        setFilterState((prev) => ({ ...prev, selectedCompany: status }));
+    };
+
     const toggleDropdown = (
         dropdown: keyof typeof filterState.isOpen
     ): void => {
@@ -111,7 +118,7 @@ const Filter = () => {
                             <div key={option} className="flex items-center">
                                 <div
                                     onClick={() => handleSortChange(option)}
-                                    className={`cursor-pointer text-sm font-medium ${
+                                    className={`cursor-pointer text-btn ${
                                         filterState.selectedSort === option
                                             ? "text-primary-500"
                                             : "text-black"
@@ -233,6 +240,27 @@ const Filter = () => {
                     재직 여부
                     <Arrow isOpen={filterState.isOpen.company} />
                 </div>
+                {filterState.isOpen.company && (
+                    <div className="flex items-center justify-center">
+                        {companyOptions.map((option, index) => (
+                            <div key={option} className="flex items-center">
+                                <div
+                                    onClick={() => handleCompanyChange(option)}
+                                    className={`cursor-pointer text-btn ${
+                                        filterState.selectedCompany === option
+                                            ? "text-primary-500"
+                                            : "text-black"
+                                    }`}
+                                >
+                                    {option}
+                                </div>
+                                {index < sortOptions.length - 1 && (
+                                    <div className="h-4 w-[1px] mx-3 bg-gray-100" />
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
 
             <Button text="필터 적용하기" />
