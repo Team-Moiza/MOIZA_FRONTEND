@@ -1,27 +1,27 @@
 "use client";
 import { useState } from "react";
-import { Arrow, Search } from "@moija/ui";
-import Button from "../common/Button";
+import { Arrow, Search, Replay } from "@moija/ui";
+import Button from "./Button";
 
-type SortOption = string;
-type SchoolOption = string;
-type CompanyOtion = string;
+type Option = string;
 
 const Filter = () => {
     const [filterState, setFilterState] = useState({
         isOpen: {
             sort: false,
-            stack: true,
+            stack: false,
             school: false,
             company: false,
         },
-        selectedSort: "인기순" as SortOption,
+        selectedSort: "인기순" as Option,
         searchInput: "",
         selectedStacks: [] as string[],
         filteredStacks: [] as string[],
         selectedSchool: [] as string[],
-        selectedCompany: "전체" as CompanyOtion,
+        selectedCompany: "전체" as Option,
     });
+
+    const [isFilterChanged, setIsFilterChanged] = useState(false);
 
     const stacks = [
         "React.js",
@@ -39,17 +39,18 @@ const Filter = () => {
         "REST API",
     ];
 
-    const sortOptions: SortOption[] = ["인기순", "최신순", "오래된순"];
-    const schoolOptions: SchoolOption[] = [
+    const sortOptions: Option[] = ["인기순", "최신순", "오래된순"];
+    const schoolOptions: Option[] = [
         "광주소마고",
         "대구소마고",
         "대덕소마고",
         "부산소마고",
     ];
-    const companyOptions: CompanyOtion[] = ["전체", "재직중", "미재직"];
+    const companyOptions: Option[] = ["전체", "재직중", "미재직"];
 
-    const handleSortChange = (status: SortOption): void => {
+    const handleSortChange = (status: Option): void => {
         setFilterState((prev) => ({ ...prev, selectedSort: status }));
+        setIsFilterChanged(true);
     };
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,6 +65,7 @@ const Filter = () => {
                           stack.toLowerCase().includes(value.toLowerCase())
                       ),
         }));
+        setIsFilterChanged(true);
     };
 
     const handleToggleStack = (stack: string) => {
@@ -74,6 +76,7 @@ const Filter = () => {
 
             return { ...prev, selectedStacks };
         });
+        setIsFilterChanged(true);
     };
 
     const handleToggleSchool = (school: string) => {
@@ -84,10 +87,12 @@ const Filter = () => {
 
             return { ...prev, selectedSchool };
         });
+        setIsFilterChanged(true);
     };
 
-    const handleCompanyChange = (status: CompanyOtion): void => {
+    const handleCompanyChange = (status: Option): void => {
         setFilterState((prev) => ({ ...prev, selectedCompany: status }));
+        setIsFilterChanged(true);
     };
 
     const toggleDropdown = (
@@ -99,15 +104,36 @@ const Filter = () => {
         }));
     };
 
+    const resetFilters = () => {
+        setFilterState({
+            isOpen: {
+                sort: false,
+                stack: false,
+                school: false,
+                company: false,
+            },
+            selectedSort: "인기순" as Option,
+            searchInput: "",
+            selectedStacks: [] as string[],
+            filteredStacks: [] as string[],
+            selectedSchool: [],
+            selectedCompany: "전체" as Option,
+        });
+        setIsFilterChanged(false);
+    };
+
     return (
         <div className="flex-col">
-            <div className="mb-2.5 w-[260px] bg-white rounded-lg border border-gray-200 p-5">
-                <h4 className="text-black font-bold">필터</h4>
+            <div className="mb-2.5 w-[260px] bg-white rounded-2xl border border-gray-200 p-5">
+                <div className="flex justify-between">
+                    <h4 className="text-black text-h4">필터</h4>
+                    {isFilterChanged && <Replay onClick={resetFilters} />}
+                </div>
 
                 {/* 정렬 */}
                 <div
                     onClick={() => toggleDropdown("sort")}
-                    className="text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
+                    className="text-p4 text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
                 >
                     정렬
                     <Arrow isOpen={filterState.isOpen.sort} />
@@ -138,7 +164,7 @@ const Filter = () => {
                 {/* 기술 스택 */}
                 <div
                     onClick={() => toggleDropdown("stack")}
-                    className="text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
+                    className="text-p4 text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
                 >
                     기술 스택
                     <Arrow isOpen={filterState.isOpen.stack} />
@@ -205,7 +231,7 @@ const Filter = () => {
                 {/* 출신 학교 */}
                 <div
                     onClick={() => toggleDropdown("school")}
-                    className="text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
+                    className="text-p4 text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
                 >
                     출신 학교
                     <Arrow isOpen={filterState.isOpen.school} />
@@ -235,7 +261,7 @@ const Filter = () => {
                 {/* 재직 여부 */}
                 <div
                     onClick={() => toggleDropdown("company")}
-                    className="text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
+                    className="text-p4 text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
                 >
                     재직 여부
                     <Arrow isOpen={filterState.isOpen.company} />
@@ -262,7 +288,6 @@ const Filter = () => {
                     </div>
                 )}
             </div>
-
             <Button text="필터 적용하기" />
         </div>
     );
