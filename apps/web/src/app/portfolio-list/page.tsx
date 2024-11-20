@@ -14,7 +14,7 @@ const PortfolioList = () => {
     ];
     const [selectedCategory, setSelectedCategory] = useState("전체");
 
-    const dummyDat = [
+    const dummyData = [
         {
             name: "강민지",
             job: "프론트엔드 개발자",
@@ -56,7 +56,7 @@ const PortfolioList = () => {
         },
     ];
 
-    const filteredProfiles = dummyDat.filter(
+    const filteredProfiles = dummyData.filter(
         (profile) =>
             selectedCategory === "전체" || profile.job === selectedCategory
     );
@@ -81,15 +81,13 @@ const PortfolioList = () => {
             <div className="flex gap-5 w-[100%] justify-between">
                 <div className="flex flex-col gap-5 w-[92%]">
                     <NoProfileBox>
-                        <div className="flex gap-[45px] items-center">
                             <div className="text-h5 text-white">
-                                지금 바로 나의 포트폴리오를 작성하고, 다른
-                                사람의 포트폴리오도 구경해보세요!
+                                지금 바로 나의 포트폴리오를 작성하고,<br/>
+                                다른 사람의 포트폴리오도 구경해보세요!
                             </div>
-                            <button className="px-4 py-2 bg-white text-primary-500 font-semibold rounded-full">
+                            <button className="flex px-[26px] py-2 text-p2 bg-white text-primary-500 rounded-[10px]">
                                 작성하기
                             </button>
-                        </div>
                     </NoProfileBox>
                     {filteredProfiles.map((profile, index) => (
                         <ProfileBox
