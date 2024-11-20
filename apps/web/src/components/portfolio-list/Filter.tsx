@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Arrow, Search, Replay } from "@moija/ui";
-import Button from "./Button";
+import Button from "../common/Button";
 
 type Option = string;
 
@@ -39,14 +39,16 @@ const Filter = () => {
         "REST API",
     ];
 
-    const sortOptions: Option[] = ["인기순", "최신순", "오래된순"];
-    const schoolOptions: Option[] = [
-        "광주소마고",
-        "대구소마고",
-        "대덕소마고",
-        "부산소마고",
-    ];
-    const companyOptions: Option[] = ["전체", "재직중", "미재직"];
+    const options = {
+        sort: ["인기순", "최신순", "오래된순"] as Option[],
+        school: [
+            "광주소마고",
+            "대구소마고",
+            "대덕소마고",
+            "부산소마고",
+        ] as Option[],
+        company: ["전체", "재직중", "미재직"] as Option[],
+    };
 
     const handleSortChange = (status: Option): void => {
         setFilterState((prev) => ({ ...prev, selectedSort: status }));
@@ -62,33 +64,32 @@ const Filter = () => {
                 value.trim() === ""
                     ? []
                     : stacks.filter((stack) =>
-                          stack.toLowerCase().includes(value.toLowerCase())
-                      ),
+                        stack.toLowerCase().includes(value.toLowerCase())
+                    ),
         }));
         setIsFilterChanged(true);
     };
 
-    const handleToggleStack = (stack: string) => {
+    const handleToggleSelection = (item: string, type: 'stack' | 'school') => {
         setFilterState((prev) => {
-            const selectedStacks = prev.selectedStacks.includes(stack)
-                ? prev.selectedStacks.filter((item) => item !== stack)
-                : [...prev.selectedStacks, stack];
+            const selectedItems = type === 'stack' 
+                ? prev.selectedStacks 
+                : prev.selectedSchool;
 
-            return { ...prev, selectedStacks };
+            const updatedItems = selectedItems.includes(item)
+                ? selectedItems.filter((i) => i !== item)
+                : [...selectedItems, item];
+
+            return {
+                ...prev,
+                [type === 'stack' ? 'selectedStacks' : 'selectedSchool']: updatedItems,
+            };
         });
         setIsFilterChanged(true);
     };
 
-    const handleToggleSchool = (school: string) => {
-        setFilterState((prev) => {
-            const selectedSchool = prev.selectedSchool.includes(school)
-                ? prev.selectedSchool.filter((item) => item !== school)
-                : [...prev.selectedSchool, school];
-
-            return { ...prev, selectedSchool };
-        });
-        setIsFilterChanged(true);
-    };
+    const handleToggleStack = (stack: string) => handleToggleSelection(stack, 'stack');
+    const handleToggleSchool = (school: string) => handleToggleSelection(school, 'school');
 
     const handleCompanyChange = (status: Option): void => {
         setFilterState((prev) => ({ ...prev, selectedCompany: status }));
@@ -129,7 +130,6 @@ const Filter = () => {
                     <h4 className="text-black text-h4">필터</h4>
                     {isFilterChanged && <Replay onClick={resetFilters} />}
                 </div>
-
                 {/* 정렬 */}
                 <div
                     onClick={() => toggleDropdown("sort")}
@@ -140,7 +140,7 @@ const Filter = () => {
                 </div>
                 {filterState.isOpen.sort && (
                     <div className="flex items-center justify-center mb-2.5">
-                        {sortOptions.map((option, index) => (
+                        {options.sort.map((option, index) => (
                             <div key={option} className="flex items-center">
                                 <div
                                     onClick={() => handleSortChange(option)}
@@ -152,7 +152,7 @@ const Filter = () => {
                                 >
                                     {option}
                                 </div>
-                                {index < sortOptions.length - 1 && (
+                                {index < options.sort.length - 1 && (
                                     <div className="h-4 w-[1px] mx-3 bg-gray-100" />
                                 )}
                             </div>
@@ -238,7 +238,7 @@ const Filter = () => {
                 </div>
                 {filterState.isOpen.school && (
                     <div className="mb-2.5 flex flex-wrap gap-2">
-                        {schoolOptions.map((option) => (
+                        {options.school.map((option) => (
                             <div key={option} className="flex items-center">
                                 <div
                                     onClick={() => handleToggleSchool(option)}
@@ -268,7 +268,7 @@ const Filter = () => {
                 </div>
                 {filterState.isOpen.company && (
                     <div className="flex items-center justify-center">
-                        {companyOptions.map((option, index) => (
+                        {options.company.map((option, index) => (
                             <div key={option} className="flex items-center">
                                 <div
                                     onClick={() => handleCompanyChange(option)}
@@ -280,7 +280,7 @@ const Filter = () => {
                                 >
                                     {option}
                                 </div>
-                                {index < sortOptions.length - 1 && (
+                                {index < options.sort.length - 1 && (
                                     <div className="h-4 w-[1px] mx-3 bg-gray-100" />
                                 )}
                             </div>

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Filter from "../../components/portfolio-list/Filter";
 import ProfileBox from "../../components/portfolio-list/ProfileBox";
+import { NoProfileBox } from "@moija/ui";
 
 const PortfolioList = () => {
     const categories = [
@@ -79,6 +80,11 @@ const PortfolioList = () => {
             </div>
             <div className="flex gap-5 w-[100%] justify-between">
                 <div className="flex flex-col gap-5 w-[92%]">
+                    <NoProfileBox>
+                        <div className="flex gap-[45px] items-center">
+                        <div className="text-h5 text-white">지금 바로 나의 포트폴리오를 작성하고, 다른 사람의 포트폴리오도 구경해보세요!</div>
+                        </div>
+                    </NoProfileBox>
                     {filteredProfiles.map((profile, index) => (
                         <ProfileBox
                             key={index}
@@ -93,6 +99,7 @@ const PortfolioList = () => {
                     ))}
                 </div>
                 <Filter />
+                
             </div>
         </div>
     );
