@@ -82,7 +82,13 @@ const PortfolioList = () => {
                 <div className="flex flex-col gap-5 w-[92%]">
                     <NoProfileBox>
                         <div className="flex gap-[45px] items-center">
-                        <div className="text-h5 text-white">지금 바로 나의 포트폴리오를 작성하고, 다른 사람의 포트폴리오도 구경해보세요!</div>
+                            <div className="text-h5 text-white">
+                                지금 바로 나의 포트폴리오를 작성하고, 다른
+                                사람의 포트폴리오도 구경해보세요!
+                            </div>
+                            <button className="px-4 py-2 bg-white text-primary-500 font-semibold rounded-full">
+                                작성하기
+                            </button>
                         </div>
                     </NoProfileBox>
                     {filteredProfiles.map((profile, index) => (
@@ -99,7 +105,6 @@ const PortfolioList = () => {
                     ))}
                 </div>
                 <Filter />
-                
             </div>
         </div>
     );
