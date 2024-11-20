@@ -4,7 +4,7 @@ type NoProfileBoxProps = {
 
 export const NoProfileBox = (props: NoProfileBoxProps) => {
     return (
-        <div className="relative w-full flex items-center justify-center pb-10 bg-gradient-to-r from-[#14DBB0] to-[#FFF493] rounded-[20px] h-[180px]">
+        <div className="user-select-none relative w-full flex items-center justify-center pb-10 bg-gradient-to-r from-[#14DBB0] to-[#FFF493] rounded-[20px] h-[180px] overflow-hidden">
             <svg
                 width="824"
                 height="375"
@@ -1207,7 +1207,7 @@ export const NoProfileBox = (props: NoProfileBoxProps) => {
                     />
                 </defs>
             </svg>
-            <div className="absolute w-[500px] gap-[45px] z-10 flex items-center h-full pt-10">
+            <div className="absolute w-[500px] gap-[45px] flex items-center h-full pt-10">
                 {props.children}
             </div>
         </div>
