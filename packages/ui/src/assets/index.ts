@@ -3,3 +3,4 @@ export * from './ArrowDown';
 export * from './Asterisk';
 export * from './Profile';
 export * from './Search';
+export * from './Image';
