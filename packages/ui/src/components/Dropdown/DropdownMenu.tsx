@@ -12,7 +12,7 @@ export const DropdownMenu = ({
   onSelect,
 }: DropdownMenuPropsType) => {
   return (
-    <div className="w-full absolute z-1 mt-[8px] p-[16px] bg-white border border-gray-100 rounded-[8px]">
+    <div className="w-full absolute z-dropdown mt-[8px] p-[16px] bg-white border border-gray-100 rounded-[8px]">
       <div role="menu">
         {items.map((item, index) => (
           <DropdownItem

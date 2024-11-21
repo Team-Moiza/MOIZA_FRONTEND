@@ -16,7 +16,7 @@ export const Dropdown = ({
   onSelect,
 }: DropdownPropsType) => {
   return (
-    <div className="relative w-fit">
+    <div className="relative w-fit z-dropdown">
       {children}
       {isOpen && (
         <DropdownMenu
