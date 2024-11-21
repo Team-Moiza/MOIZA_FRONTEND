@@ -1,9 +1,9 @@
-import { Arrow } from "./arrow";
+import { BottomArrow } from "./bottomarrow";
 import { Heart } from "./heart";
 import { Search } from "./search";
 import { Replay } from "./replay";
 
-export * from "./arrow";
+export * from "./bottomarrow";
 export * from "./heart";
 export * from "./search";
 export * from "./replay";

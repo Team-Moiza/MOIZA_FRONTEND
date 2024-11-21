@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Arrow, Search, Replay } from "@moija/ui";
+import { BottomArrow, Search, Replay } from "@moija/ui";
 import Button from "../common/Button";
 
 type Option = string;
@@ -136,7 +136,7 @@ const Filter = () => {
                     className="text-p4 text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
                 >
                     정렬
-                    <Arrow isOpen={filterState.isOpen.sort} />
+                    <BottomArrow isOpen={filterState.isOpen.sort} />
                 </div>
                 {filterState.isOpen.sort && (
                     <div className="flex items-center justify-center mb-2.5">
@@ -167,7 +167,7 @@ const Filter = () => {
                     className="text-p4 text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
                 >
                     기술 스택
-                    <Arrow isOpen={filterState.isOpen.stack} />
+                    <BottomArrow isOpen={filterState.isOpen.stack} />
                 </div>
                 {filterState.isOpen.stack && (
                     <div className="mb-2.5">
@@ -234,7 +234,7 @@ const Filter = () => {
                     className="text-p4 text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
                 >
                     출신 학교
-                    <Arrow isOpen={filterState.isOpen.school} />
+                    <BottomArrow isOpen={filterState.isOpen.school} />
                 </div>
                 {filterState.isOpen.school && (
                     <div className="mb-2.5 flex flex-wrap gap-2">
@@ -264,7 +264,7 @@ const Filter = () => {
                     className="text-p4 text-black mt-1.5 py-2.5 cursor-pointer flex items-center justify-between"
                 >
                     재직 여부
-                    <Arrow isOpen={filterState.isOpen.company} />
+                    <BottomArrow isOpen={filterState.isOpen.company} />
                 </div>
                 {filterState.isOpen.company && (
                     <div className="flex items-center justify-center">

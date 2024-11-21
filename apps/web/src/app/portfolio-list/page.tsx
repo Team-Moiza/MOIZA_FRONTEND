@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Filter from "../../components/portfolio-list/Filter";
 import ProfileBox from "../../components/portfolio-list/ProfileBox";
 import { NoProfileBox } from "@moija/ui";
+import CustomPagination from "../../components/common/Pagination";
 
 const PortfolioList = () => {
     const categories = [
@@ -13,6 +14,8 @@ const PortfolioList = () => {
         "기획자",
     ];
     const [selectedCategory, setSelectedCategory] = useState("전체");
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 3;
 
     const dummyData = [
         {
@@ -54,11 +57,107 @@ const PortfolioList = () => {
             likes: 20,
             company: "네이버",
         },
+        {
+            name: "정수민",
+            job: "UX/UI 디자이너",
+            school: "한국디자인고등학교 2기 출신",
+            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
+            introduce:
+                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
+            likes: 20,
+            company: "네이버",
+        },
+        {
+            name: "정수민",
+            job: "UX/UI 디자이너",
+            school: "한국디자인고등학교 2기 출신",
+            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
+            introduce:
+                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
+            likes: 20,
+            company: "네이버",
+        },
+        {
+            name: "정수민",
+            job: "UX/UI 디자이너",
+            school: "한국디자인고등학교 2기 출신",
+            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
+            introduce:
+                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
+            likes: 20,
+            company: "네이버",
+        },
+        {
+            name: "정수민",
+            job: "UX/UI 디자이너",
+            school: "한국디자인고등학교 2기 출신",
+            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
+            introduce:
+                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
+            likes: 20,
+            company: "네이버",
+        },
+        {
+            name: "정수민",
+            job: "UX/UI 디자이너",
+            school: "한국디자인고등학교 2기 출신",
+            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
+            introduce:
+                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
+            likes: 20,
+            company: "네이버",
+        },
+        {
+            name: "정수민",
+            job: "UX/UI 디자이너",
+            school: "한국디자인고등학교 2기 출신",
+            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
+            introduce:
+                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
+            likes: 20,
+            company: "네이버",
+        },
+        {
+            name: "정수민",
+            job: "UX/UI 디자이너",
+            school: "한국디자인고등학교 2기 출신",
+            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
+            introduce:
+                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
+            likes: 20,
+            company: "네이버",
+        },
+        {
+            name: "정수민",
+            job: "UX/UI 디자이너",
+            school: "한국디자인고등학교 2기 출신",
+            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
+            introduce:
+                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
+            likes: 20,
+            company: "네이버",
+        },
+        {
+            name: "정수민",
+            job: "UX/UI 디자이너",
+            school: "한국디자인고등학교 2기 출신",
+            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
+            introduce:
+                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
+            likes: 20,
+            company: "네이버",
+        },
     ];
 
     const filteredProfiles = dummyData.filter(
         (profile) =>
             selectedCategory === "전체" || profile.job === selectedCategory
+    );
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedProfiles = filteredProfiles.slice(
+        startIndex,
+        startIndex + itemsPerPage
     );
 
     return (
@@ -67,7 +166,10 @@ const PortfolioList = () => {
                 {categories.map((category) => (
                     <button
                         key={category}
-                        onClick={() => setSelectedCategory(category)}
+                        onClick={() => {
+                            setSelectedCategory(category);
+                            setCurrentPage(1);
+                        }}
                         className={`px-4 py-2 rounded-full ${
                             selectedCategory === category
                                 ? "bg-primary-500 text-white"
@@ -81,15 +183,15 @@ const PortfolioList = () => {
             <div className="flex gap-5 w-[100%] justify-between">
                 <div className="flex flex-col gap-5 w-[92%]">
                     <NoProfileBox>
-                            <div className="text-h5 text-white">
-                                지금 바로 나의 포트폴리오를 작성하고,<br/>
-                                다른 사람의 포트폴리오도 구경해보세요!
-                            </div>
-                            <button className="flex px-[26px] py-2 text-p2 bg-white text-primary-500 rounded-[10px]">
-                                작성하기
-                            </button>
+                        <div className="text-h5 text-white">
+                            지금 바로 나의 포트폴리오를 작성하고,<br />
+                            다른 사람의 포트폴리오도 구경해보세요!
+                        </div>
+                        <button className="flex px-[26px] py-2 text-p2 bg-white text-primary-500 rounded-[10px]">
+                            작성하기
+                        </button>
                     </NoProfileBox>
-                    {filteredProfiles.map((profile, index) => (
+                    {paginatedProfiles.map((profile, index) => (
                         <ProfileBox
                             key={index}
                             name={profile.name}
@@ -101,6 +203,12 @@ const PortfolioList = () => {
                             company={profile.company}
                         />
                     ))}
+                    <CustomPagination
+                        totalItems={filteredProfiles.length}
+                        itemsPerPage={itemsPerPage}
+                        currentPage={currentPage}
+                        onPageChange={setCurrentPage}
+                    />
                 </div>
                 <Filter />
             </div>
