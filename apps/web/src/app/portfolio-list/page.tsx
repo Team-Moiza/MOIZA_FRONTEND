@@ -11,7 +11,7 @@ const PortfolioList = () => {
         "프론트엔드 개발자",
         "백엔드 개발자",
         "UX/UI 디자이너",
-        "기획자",
+        "기타",
     ];
     const [selectedCategory, setSelectedCategory] = useState("전체");
     const [currentPage, setCurrentPage] = useState(1);
@@ -138,12 +138,12 @@ const PortfolioList = () => {
             company: "네이버",
         },
         {
-            name: "정수민",
-            job: "UX/UI 디자이너",
-            school: "한국디자인고등학교 2기 출신",
+            name: "추리랑카",
+            job: "야구선수",
+            school: "서울대 2기 출신",
             tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
             introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
+                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 추추리랑카.",
             likes: 20,
             company: "네이버",
         },
@@ -151,7 +151,9 @@ const PortfolioList = () => {
 
     const filteredProfiles = dummyData.filter(
         (profile) =>
-            selectedCategory === "전체" || profile.job === selectedCategory
+            selectedCategory === "전체" ||
+            profile.job === selectedCategory ||
+            (selectedCategory === "기타" && !categories.includes(profile.job))
     );
 
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -184,7 +186,8 @@ const PortfolioList = () => {
                 <div className="flex flex-col gap-5 w-[92%]">
                     <NoProfileBox>
                         <div className="text-h5 text-white">
-                            지금 바로 나의 포트폴리오를 작성하고,<br />
+                            지금 바로 나의 포트폴리오를 작성하고,
+                            <br />
                             다른 사람의 포트폴리오도 구경해보세요!
                         </div>
                         <button className="flex px-[26px] py-2 text-p2 bg-white text-primary-500 rounded-[10px]">
