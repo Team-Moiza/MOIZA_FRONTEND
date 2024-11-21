@@ -52,6 +52,7 @@ const config: Omit<Config, 'content'> = {
         header: 5,
         dropdown: 1,
         sidebar: 0,
+        input: 0,
       },
     },
   },
