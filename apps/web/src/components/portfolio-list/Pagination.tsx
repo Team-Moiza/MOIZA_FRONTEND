@@ -29,24 +29,16 @@ const CustomPagination = ({
                 pageRangeDisplayed={5}
                 onChange={onPageChange}
                 firstPageText={
-                    <div className="flex items-center justify-center w-8 h-8">
                         <DoubleLeftArrow />
-                    </div>
                 }
                 lastPageText={
-                    <div className="flex items-center justify-center w-8 h-8">
                         <DoubleRightArrow />
-                    </div>
                 }
                 prevPageText={
-                    <div className="flex items-center justify-center w-8 h-8">
                         <LeftArrow />
-                    </div>
                 }
                 nextPageText={
-                    <div className="flex items-center justify-center w-8 h-8">
                         <RightArrow />
-                    </div>
                 }
                 itemClass="flex items-center justify-center w-8 h-8 border border-gray-100 rounded-[8px] cursor-pointer text-black"
                 activeClass="bg-primary-500 text-white border-none"
