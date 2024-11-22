@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Filter from "../../components/portfolio-list/Filter";
 import ProfileBox from "../../components/portfolio-list/ProfileBox";
 import { NoProfileBox } from "@moija/ui";
-import CustomPagination from "../../components/common/Pagination";
+import CustomPagination from "../../components/portfolio-list/Pagination";
 
 const PortfolioList = () => {
     const categories = [
@@ -11,6 +11,7 @@ const PortfolioList = () => {
         "프론트엔드 개발자",
         "백엔드 개발자",
         "UX/UI 디자이너",
+        "기획자",
         "기타",
     ];
     const [selectedCategory, setSelectedCategory] = useState("전체");
