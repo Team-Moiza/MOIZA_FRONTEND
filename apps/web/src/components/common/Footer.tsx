@@ -6,7 +6,7 @@ const Footer = () => {
         <footer className="relative bottom-0 mt-[100px] w-full h-[380px] px-[200px] bg-gray-600 flex flex-col items-center justify-center text-white">
             <div className="font-black text-[22px] mb-6">MOIZA</div>
             <div className="flex gap-4 mb-6 text-caption1 text-white">
-                {["강민지", "김명진", "김수아", "안혜성", "이지후"].map(
+                {["강민지", "김명진", "김수아", "안예성", "이지후"].map(
                     (name) => (
                         <span key={name}>{name}</span>
                     )
