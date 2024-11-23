@@ -21,7 +21,7 @@ const CustomPagination = ({
     onPageChange,
 }: CustomPaginationProps) => {
     return (
-        <div className="mt-10 flex justify-center text-btn">
+        <div className="mt-20 flex justify-center text-btn">
             <Pagination
                 activePage={currentPage}
                 itemsCountPerPage={itemsPerPage}

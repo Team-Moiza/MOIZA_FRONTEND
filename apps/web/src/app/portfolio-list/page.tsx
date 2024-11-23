@@ -166,7 +166,7 @@ const PortfolioList = () => {
 
     return (
         <>
-            <div className="h-screen w-screen pt-[120px] mb-[200px] px-[200px]">
+            <div className="w-screen pt-[120px] px-[200px]">
                 <div className="flex gap-2 mb-[30px] ">
                     {categories.map((category) => (
                         <button
