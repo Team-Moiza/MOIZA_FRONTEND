@@ -7,7 +7,14 @@ import CustomPagination from "../../components/portfolio-list/Pagination";
 import Footer from "../../components/common/Footer";
 
 const PortfolioList = () => {
-    const categories = [
+    type JobCategory =
+        | "전체"
+        | "프론트엔드 개발자"
+        | "백엔드 개발자"
+        | "UX/UI 디자이너"
+        | "기획자"
+        | "기타";
+    const categories: JobCategory[] = [
         "전체",
         "프론트엔드 개발자",
         "백엔드 개발자",
@@ -15,7 +22,8 @@ const PortfolioList = () => {
         "기획자",
         "기타",
     ];
-    const [selectedCategory, setSelectedCategory] = useState("전체");
+    const [selectedCategory, setSelectedCategory] =
+        useState<JobCategory>("전체");
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
 
@@ -130,16 +138,6 @@ const PortfolioList = () => {
             company: "네이버",
         },
         {
-            name: "정수민",
-            job: "UX/UI 디자이너",
-            school: "한국디자인고등학교 2기 출신",
-            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-            introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
-            likes: 20,
-            company: "네이버",
-        },
-        {
             name: "추리랑카",
             job: "야구선수",
             school: "서울대 2기 출신",
@@ -155,7 +153,8 @@ const PortfolioList = () => {
         (profile) =>
             selectedCategory === "전체" ||
             profile.job === selectedCategory ||
-            (selectedCategory === "기타" && !categories.includes(profile.job))
+            (selectedCategory === "기타" &&
+                !categories.includes(profile.job as JobCategory))
     );
 
     const startIndex = (currentPage - 1) * itemsPerPage;
