@@ -1,2 +1,3 @@
+export * from './components/Button';
+
 export * from './assets/index';
-export * from './icons/index';
