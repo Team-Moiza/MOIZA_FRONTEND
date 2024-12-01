@@ -4,7 +4,7 @@ import Filter from "../../components/portfolio-list/Filter";
 import ProfileBox from "../../components/portfolio-list/ProfileBox";
 import { NoProfileBox } from "@moija/ui";
 import CustomPagination from "../../components/portfolio-list/Pagination";
-import Footer from "../../components/common/Footer";
+import Footer from "../../components/layouts/Footer";
 
 const PortfolioList = () => {
     type JobCategory =

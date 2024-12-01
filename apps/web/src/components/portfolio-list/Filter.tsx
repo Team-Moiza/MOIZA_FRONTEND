@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
-import { BottomArrow, Search, Replay } from "@moija/ui";
-import Button from "../common/Button";
+import { BottomArrow, Search, Replay, Button } from "@moija/ui";
 
 type Option = string;
 
@@ -288,7 +287,7 @@ const Filter = () => {
                     </div>
                 )}
             </div>
-            <Button text="필터 적용하기" />
+            <Button type="default" width="100%">필터 적용하기</Button>
         </div>
     );
 };
