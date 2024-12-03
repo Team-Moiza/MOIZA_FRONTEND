@@ -1,3 +1,3 @@
+import { Logo } from "./Logo";
+
 export * from './Logo'
-export * from './NoProfileBox'
-export * from './Github'
