@@ -6,6 +6,7 @@ type DropdownPropsType = {
   items: string[];
   selectedItem?: string;
   onSelect: (item: string) => void;
+  limit?: number;
 };
 
 export const Dropdown = ({
@@ -14,12 +15,14 @@ export const Dropdown = ({
   items,
   selectedItem,
   onSelect,
+  limit,
 }: DropdownPropsType) => {
   return (
     <div className="relative w-fit z-dropdown">
       {children}
       {isOpen && (
         <DropdownMenu
+          limit={limit}
           items={items}
           selectedItem={selectedItem}
           onSelect={onSelect}
