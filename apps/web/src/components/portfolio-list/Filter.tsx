@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import { BottomArrow, Search, Replay, Button } from "@moija/ui";
 
 type Option = string;
