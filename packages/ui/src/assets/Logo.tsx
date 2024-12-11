@@ -1,8 +1,12 @@
-export const Logo = () => {
+type LogoProps = {
+    width?: number;
+};
+
+export const Logo = ({ width = 88 }: LogoProps) => {
     return (
         <svg
-            width="80"
-            height="27"
+            width={width}
+            height="auto"
             viewBox="0 0 80 27"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
