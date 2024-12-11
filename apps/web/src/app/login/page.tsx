@@ -16,7 +16,6 @@ const Login = () => {
                             Google로 로그인
                         </button>
                 </div>
-                {/* 하단 텍스트 */}
                 <div className="text-gray-300 text-caption1 mt-[50px]">
                     ©2024. team MOIZA. All rights reserved.
                 </div>
