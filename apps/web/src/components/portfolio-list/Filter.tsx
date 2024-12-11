@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import { BottomArrow, Search, Replay, Button } from "@moija/ui";
 
 type Option = string;
@@ -46,7 +46,7 @@ const Filter = () => {
             "대덕소마고",
             "부산소마고",
         ] as Option[],
-        company: ["전체", "재직중", "미재직"] as Option[],
+        company: ["전체", "재직��", "미재직"] as Option[],
     };
 
     const handleSortChange = (status: Option): void => {
