@@ -12,9 +12,9 @@ import {
   Stack,
   Text,
   Textarea,
-} from '@moija/ui';
-import { useBoolean, useOutsideClickRef } from '@moija/hooks';
-import { useFormContext } from 'react-hook-form';
+} from "@moija/ui";
+import { useBoolean, useOutsideClickRef } from "@moija/hooks";
+import { useFormContext } from "react-hook-form";
 
 type BasicInfoFormData = {
   email: string;
@@ -40,9 +40,7 @@ export const BasicInfoForm = () => {
               <div className="w-[184px] h-[44px] rounded-[8px] bg-gray-100 text-p5 text-gray-400 flex justify-center items-center">
                 이미지 업로드
               </div>
-              <Text className="text-caption1 text-gray-400">
-                - 업로드 이미지 최대 크기 10MB
-              </Text>
+              <Text className="text-caption1 text-gray-400">- 업로드 이미지 최대 크기 10MB</Text>
             </Stack>
           </Stack>
           <div className="w-[824px]">
@@ -57,12 +55,11 @@ export const BasicInfoForm = () => {
                       width={824}
                       isBig
                       placeholder="이메일을 입력해주세요"
-                      defaultValue=""
-                      {...register('email', {
-                        required: '이메일을 입력해주세요.',
+                      {...register("email", {
+                        required: "이메일을 입력해주세요.",
                         pattern: {
                           value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                          message: '유효한 이메일 주소를 입력해주세요.',
+                          message: "유효한 이메일 주소를 입력해주세요.",
                         },
                       })}
                     />
@@ -77,19 +74,18 @@ export const BasicInfoForm = () => {
                     isBig
                     placeholder="나를 소개하는 글을 써주세요"
                   />
-                  <Text className="text-caption1 text-gray-400">
-                    100자 이내
-                  </Text>
+                  <Text className="text-caption1 text-gray-400">100자 이내</Text>
                 </InputTemplate>
                 <InputTemplate>
                   <Label>개발 직무</Label>
                   <div ref={selectRef}>
                     <Dropdown
                       isOpen={isOpen}
-                      items={['a', 'b', 'c']}
+                      items={["a", "b", "c"]}
                       onSelect={() => {
                         alert();
-                      }}>
+                      }}
+                    >
                       <Select
                         width={824}
                         placeholder="직무를 선택해주세요"

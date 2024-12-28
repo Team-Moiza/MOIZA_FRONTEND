@@ -1,16 +1,4 @@
-import {
-  ArrowDown,
-  Delete,
-  Dropdown,
-  Input,
-  InputTemplate,
-  Label,
-  Plus,
-  Search,
-  Select,
-  Text,
-  Textarea,
-} from "@moija/ui";
+import { ArrowDown, Delete, Input, InputTemplate, Label, Plus, Text, Textarea } from "@moija/ui";
 
 export const AchievementForm = () => {
   return (

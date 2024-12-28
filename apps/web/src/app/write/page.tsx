@@ -30,13 +30,12 @@ export default function WritePortFolio() {
 
   return (
     <FormProvider {...formMethods}>
-      <form className="w-screen h-fit pt-[80px]" onSubmit={onSubmit}>
+      <form className="w-screen pt-[80px]" onSubmit={onSubmit}>
         <div className="w-full h-screen pt-[90px]">
-          <div className="hidden" />
           <BasicInfoForm />
         </div>
-        <div className="w-full h-[3500px] bg-gray-100 pt-[80px] pb-[200px]">
-          <Center vertical={false}>
+        <div className="w-full bg-gray-100 pt-[80px] pb-[200px]">
+          <Center vertical={true}>
             <Flex gap={24}>
               <Stack gap={28}>
                 <EducationForm />
@@ -46,13 +45,14 @@ export default function WritePortFolio() {
                 <AchievementForm />
                 <QualificationForm />
                 <LinkForm />
+                <div className="w-full flex justify-end gap-5 mt-20">
+                  <Button type="white">저장</Button>
+                  <Button>게시</Button>
+                </div>
               </Stack>
+
               <Sidebar />
             </Flex>
-            <div className="w-[1040px] flex justify-end gap-5 mt-20">
-              <Button type="white">저장</Button>
-              <Button>게시</Button>
-            </div>
           </Center>
         </div>
       </form>
