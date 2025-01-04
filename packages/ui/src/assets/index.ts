@@ -7,3 +7,6 @@ export * from "./Image";
 export * from "./Delete";
 export * from "./Plus";
 export * from "./Link";
+export * from "./Google";
+export * from "./NoProfileBox";
+export * from "./Github";
