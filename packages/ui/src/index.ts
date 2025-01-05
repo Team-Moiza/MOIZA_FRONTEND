@@ -1,5 +1,5 @@
-export * from './components/index';
+export * from "./components/index";
 
-export * from './assets/index';
+export * from "./assets/index";
 
-export * from './icons/index';
+export * from "./icons/index";

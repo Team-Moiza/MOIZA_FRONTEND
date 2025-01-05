@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@moija/hooks": "*",
     "@moija/ui": "*",
     "next": "14.2.6",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "react-hook-form": "^7.53.2"
   },
   "devDependencies": {
     "@moija/eslint-config": "*",
