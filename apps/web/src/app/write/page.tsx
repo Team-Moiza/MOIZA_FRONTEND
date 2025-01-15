@@ -50,7 +50,6 @@ export default function WritePortFolio() {
                   <Button>게시</Button>
                 </div>
               </Stack>
-
               <Sidebar />
             </Flex>
           </Center>

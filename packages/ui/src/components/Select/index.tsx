@@ -1,5 +1,5 @@
-import { ArrowDown } from '../../assets';
-import { Text } from '../Text';
+import { ArrowDown } from '../../assets/ArrowDown';
+import { Text } from '../Text/index';
 
 type SelectPropsType = {
   placeholder: string;
