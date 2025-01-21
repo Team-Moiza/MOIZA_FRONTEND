@@ -19,3 +19,5 @@ export * from "./LeftArrow";
 export * from "./DoubleLeftArrow";
 export * from "./DoubleRightArrow";
 export * from "./Edit";
+export * from "./Menu";
+export * from "./Add";
