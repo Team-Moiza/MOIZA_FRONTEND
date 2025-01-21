@@ -1,4 +1,4 @@
-import { DropdownMenu } from './DropdownMenu';
+import { DropdownMenu } from "./DropdownMenu";
 
 type DropdownPropsType = {
   children: React.ReactNode;
@@ -9,25 +9,11 @@ type DropdownPropsType = {
   limit?: number;
 };
 
-export const Dropdown = ({
-  children,
-  isOpen,
-  items,
-  selectedItem,
-  onSelect,
-  limit,
-}: DropdownPropsType) => {
+export const Dropdown = ({ children, isOpen, items, selectedItem, onSelect, limit }: DropdownPropsType) => {
   return (
     <div className="relative w-fit z-dropdown">
       {children}
-      {isOpen && (
-        <DropdownMenu
-          limit={limit}
-          items={items}
-          selectedItem={selectedItem}
-          onSelect={onSelect}
-        />
-      )}
+      {isOpen && <DropdownMenu limit={limit} items={items} selectedItem={selectedItem} onSelect={onSelect} />}
     </div>
   );
 };

@@ -18,3 +18,4 @@ export * from "./RightArrow";
 export * from "./LeftArrow";
 export * from "./DoubleLeftArrow";
 export * from "./DoubleRightArrow";
+export * from "./Edit";
