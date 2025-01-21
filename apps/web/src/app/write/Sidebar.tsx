@@ -1,4 +1,7 @@
-import { Stack, Spacing, Text, Flex, Profile, Asterisk } from '@moija/ui';
+import { Stack, Spacing, Text, Flex, Profile } from "@moija/ui";
+
+const asterisk = " after:ml-1 after:content-['*'] after:text-[#FF3B30] after:font-bold after:text-[16px]";
+const textStyle = "text-caption1 text-black";
 
 export const Sidebar = () => {
   return (
@@ -14,50 +17,19 @@ export const Sidebar = () => {
         <div className="border-y-[1px] border-gray-100 h-[40px] flex items-center px-[8px]">
           <Flex gap={8} align="center">
             <Profile size={14} color="#787878" />
-            <Flex gap={4} align="center">
-              <Text className="text-caption1 text-black">기본 정보</Text>
-              <Asterisk size={10} color={'#FF3B30'} />
-            </Flex>
+            <Text className={textStyle + asterisk}>기본 정보</Text>
           </Flex>
         </div>
-        <Stack>
-          <div className="h-[35px] flex items-center px-[8px]">
-            <Flex gap={4} align="center">
-              <Text className="text-caption1 text-black">학력</Text>
-              <Asterisk size={10} color={'#FF3B30'} />
-            </Flex>
-          </div>
-          <div className="h-[35px] flex items-center px-[8px]">
-            <Flex gap={4} align="center">
-              <Text className="text-caption1 text-black">자기소개</Text>
-            </Flex>
-          </div>
-          <div className="h-[35px] flex items-center px-[8px]">
-            <Flex gap={4} align="center">
-              <Text className="text-caption1 text-black">기술 스택</Text>
-            </Flex>
-          </div>
-          <div className="h-[35px] flex items-center px-[8px]">
-            <Flex gap={4} align="center">
-              <Text className="text-caption1 text-black">프로젝트</Text>
-            </Flex>
-          </div>
-          <div className="h-[35px] flex items-center px-[8px]">
-            <Flex gap={4} align="center">
-              <Text className="text-caption1 text-black">수상내역</Text>
-            </Flex>
-          </div>
-          <div className="h-[35px] flex items-center px-[8px]">
-            <Flex gap={4} align="center">
-              <Text className="text-caption1 text-black">자격증</Text>
-            </Flex>
-          </div>
-          <div className="h-[35px] flex items-center px-[8px]">
-            <Flex gap={4} align="center">
-              <Text className="text-caption1 text-black">링크</Text>
-            </Flex>
-          </div>
-        </Stack>
+        <div className="p-2">
+          <Stack gap={16}>
+            <Text className={textStyle}>자기소개</Text>
+            <Text className={textStyle}>기술 스택</Text>
+            <Text className={textStyle}>프로젝트</Text>
+            <Text className={textStyle}>수상내역</Text>
+            <Text className={textStyle}>자격증</Text>
+            <Text className={textStyle}>링크</Text>
+          </Stack>
+        </div>
       </Stack>
     </div>
   );

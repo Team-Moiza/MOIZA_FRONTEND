@@ -1,22 +1,44 @@
-import { Input, InputTemplate, Label, Link, Plus, Search, Text, Textarea } from "@moija/ui";
+import { InputTemplate, Link, Plus, Text } from "@moija/ui";
+import { FormData } from "./page";
+import { Control, useFieldArray, UseFormRegister } from "react-hook-form";
+import { Close } from "@moija/ui/src/assets/Close";
 
-export const LinkForm = () => {
+interface IProp {
+  control: Control<FormData, any>;
+  register: UseFormRegister<FormData>;
+}
+
+export const LinkForm = ({ control, register }: IProp) => {
+  const { fields, append, remove } = useFieldArray({ control, name: "links" });
+
   return (
     <div className="w-[832px] h-fit px-[28px] pt-[24px] pb-[32px] flex flex-col bg-white gap-5 rounded-[12px]">
       <Text className="text-h2 text-black">기술 스택</Text>
-      <InputTemplate>
-        <div className="flex gap-4 items-center w-[776px] rounded-[8px] px-[20px] py-[11px] border-[1px] border-gray-200 h-fit">
-          <Link size={18} />
-          <div className="flex flex-col">
-            <input className="text-[16px] placeholder:text-gray-400" placeholder="링크 제목" />
-            <input
-              className="text-[16px] placeholder:text-gray-400"
-              placeholder="http://, https://"
-            />
+      {fields.map((fields, index) => (
+        <InputTemplate key={fields.id}>
+          <div className="flex justify-between items-center w-[776px] gap-2 rounded-[8px] px-[20px] py-[11px] border-[1px] border-gray-200 h-fit">
+            <div className="flex gap-4 items-center w-full">
+              <Link size={18} />
+              <div className="flex flex-col w-full">
+                <input className="text-[16px] placeholder:text-gray-400 w-full outline-none" placeholder="링크 제목" {...register(`links.${index}.title`)} defaultValue={fields.title} />
+                <input
+                  className="text-[16px] placeholder:text-gray-400 w-full outline-none"
+                  placeholder="http://, https://"
+                  title="'https://url.com' 과 같은 형식이어야 합니다."
+                  pattern="https?:\/\/[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                  defaultValue={fields.url}
+                  {...register(`links.${index}.url`)}
+                />
+              </div>
+            </div>
+            <button onClick={() => remove(index)} type="button">
+              <Close />
+            </button>
           </div>
-        </div>
-      </InputTemplate>
-      <button className="flex items-center gap-2 cursor-pointer">
+        </InputTemplate>
+      ))}
+
+      <button className="flex items-center gap-2 cursor-pointer" onClick={() => append({ title: "", url: "" })} type="button">
         <div className="rounded-full bg-primary-500 flex items-center justify-center w-[26px] h-[26px]">
           <Plus color="#FFFFFF" size={16} />
         </div>

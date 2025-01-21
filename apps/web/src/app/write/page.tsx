@@ -2,7 +2,6 @@
 
 import { Button, Center, Flex, Stack } from "@moija/ui";
 import { BasicInfoForm } from "./BasicInfoForm";
-import { EducationForm } from "./EducationForm";
 import { IntroduceForm } from "./IntroduceForm";
 import { FormProvider, useForm } from "react-hook-form";
 import { Sidebar } from "./Sidebar";
@@ -12,39 +11,77 @@ import { LinkForm } from "./LinkForm";
 import { AchievementForm } from "./AchievementForm";
 import { QualificationForm } from "./QualificationForm";
 
-type BasicInfoFormData = {
+export type FormData = {
+  title: string;
   email: string;
+  shortIntroduce: string;
+  job: string;
+  company: string;
+  introduce: { introduce: string; url?: string };
+  skillsets: Array<{
+    name: string;
+    id: number;
+  }>;
+  projects: Array<{
+    title: string;
+    skillset: string[];
+    processing?: "진행중" | "서비스중" | "서비스 종료";
+    date: string;
+    introduce: string;
+    url?: string;
+    sections: Array<{
+      title: string;
+      content: string;
+    }>;
+  }>;
+  achievements: Array<{
+    name: string;
+    contestName: string;
+    type: string;
+    date: string;
+    introduce: string;
+  }>;
+  certifications: Array<{
+    name: string;
+    level: string;
+    date: string;
+    issuer: string;
+  }>;
+  links: Array<{
+    title: string;
+    url: string;
+  }>;
 };
 
 export default function WritePortFolio() {
-  const formMethods = useForm<BasicInfoFormData>();
+  const formMethod = useForm<FormData>({ defaultValues: { title: "김수아" } });
+  const { handleSubmit, control } = formMethod;
 
-  const onSubmit = formMethods.handleSubmit(
+  const onSubmit = handleSubmit(
     (data) => {
       console.log("Form Submitted Data:", data);
     },
     (errors) => {
-      console.log("Form Errors:", errors);
+      console.log(errors);
     }
   );
 
   return (
-    <FormProvider {...formMethods}>
+    <FormProvider {...formMethod}>
       <form className="w-screen pt-[80px]" onSubmit={onSubmit}>
         <div className="w-full h-screen pt-[90px]">
-          <BasicInfoForm />
+          <BasicInfoForm formMethod={formMethod} />
         </div>
         <div className="w-full bg-gray-100 pt-[80px] pb-[200px]">
           <Center vertical={true}>
             <Flex gap={24}>
               <Stack gap={28}>
-                <EducationForm />
-                <IntroduceForm />
-                <SkillsetForm />
-                <ProjectForm />
-                <AchievementForm />
-                <QualificationForm />
-                <LinkForm />
+                <IntroduceForm formMethod={formMethod} />
+                <SkillsetForm control={control} />
+                <ProjectForm control={control} register={formMethod.register} />
+                <AchievementForm control={control} register={formMethod.register} />
+                <QualificationForm control={control} register={formMethod.register} />
+                <LinkForm control={control} register={formMethod.register} />
                 <div className="w-full flex justify-end gap-5 mt-20">
                   <Button type="white">저장</Button>
                   <Button>게시</Button>
