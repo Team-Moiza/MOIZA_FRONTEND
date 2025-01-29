@@ -10,3 +10,4 @@ export * from "./Link";
 export * from "./Google";
 export * from "./NoProfileBox";
 export * from "./Github";
+export * from './HashTag'
