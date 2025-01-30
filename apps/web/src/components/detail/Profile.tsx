@@ -7,15 +7,19 @@ const Profile = () => {
         <div className="flex flex-col gap-6">
             <div className="px-3 py-[6px] items-center gap-1 flex bg-primary-100 rounded-full w-fit">
                 <HashTag />
-                <div className="text-btn text-gray-600">{profileData.company}</div>
+                <div className="text-btn text-gray-600">
+                    {profileData.company}
+                </div>
             </div>
             <div className="w-full flex gap-8 mb-10 items-center">
-                <div className="w-[184px] h-[184px] bg-[#e2e2e2] rounded-lg border border-[#e2e2e2] overflow-hidden">
+                <div className="w-[184px] h-[184px] bg-[#e2e2e2] rounded-lg border border-[#e2e2e2] overflow-hidden flex-shrink-0">
                     <Image
                         src={profileData.imageUrl}
                         alt="프로필 이미지"
                         width={184}
                         height={184}
+                        layout="fixed"
+                        objectFit="cover"
                     />
                 </div>
                 <div>
