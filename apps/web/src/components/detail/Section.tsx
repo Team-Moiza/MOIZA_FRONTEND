@@ -7,7 +7,7 @@ interface SectionProps {
 const Section = ({ id, title, children }:SectionProps) => {
   return (
       <section id={id} className="mb-8">
-          <div className="text-h3 mb-4">{title}</div>
+          <div className="text-h3 text-black mb-4">{title}</div>
           {children}
       </section>
   );

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 const NavBar = () => {
     const [scrollProgress, setScrollProgress] = useState(0);
+    const [activeSection, setActiveSection] = useState("");
 
     useEffect(() => {
         const handleScroll = () => {
@@ -14,17 +15,47 @@ const NavBar = () => {
             setScrollProgress(progress);
         };
 
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: "-100px 0px -50% 0px",
+        };
+
+        const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveSection(entry.target.id);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(
+            observerCallback,
+            observerOptions
+        );
+
+        navItems.forEach((item) => {
+            const element = document.getElementById(item.id);
+            if (element) observer.observe(element);
+        });
+
         window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            observer.disconnect();
+        };
     }, []);
 
     const scrollToSection = (sectionId: string) => {
         const section = document.getElementById(sectionId);
         if (section) {
-            section.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
+            const yOffset = -180;
+            const y =
+                section.getBoundingClientRect().top +
+                window.pageYOffset +
+                yOffset;
+            window.scrollTo({ top: y, behavior: "smooth" });
+            setActiveSection(sectionId);
         }
     };
 
@@ -39,13 +70,17 @@ const NavBar = () => {
     ];
 
     return (
-        <div className="sticky top-[80px] bg-white border-b border-gray-200">
+        <div className="sticky top-[80px] bg-white border-b border-gray-200 z-10">
             <div className="flex justify-between items-center px-[235px] h-[56px]">
                 {navItems.map((item) => (
                     <div
                         key={item.id}
                         onClick={() => scrollToSection(item.id)}
-                        className="text-p5 cursor-pointer px-4 py-2 text-gray-500 hover:text-primary-500"
+                        className={`text-p5 cursor-pointer px-4 py-2 ${
+                            activeSection === item.id
+                                ? "text-primary-500"
+                                : "text-gray-500 hover:text-primary-500"
+                        }`}
                     >
                         {item.label}
                     </div>
@@ -53,7 +88,7 @@ const NavBar = () => {
             </div>
             <div className="h-[2px] bg-gray-200">
                 <div
-                    className="h-full bg-primary-500 transition-all duration-300"
+                    className="h-[3px] bg-primary-500 transition-all duration-300"
                     style={{ width: `${scrollProgress}%` }}
                 />
             </div>

@@ -10,9 +10,9 @@ const Detail = () => {
             <div id="education" className="w-screen pt-[80px] px-[200px]">
                 <div className="border-x border-gray-200">
                     <NavBar />
-                    <div className="p-[68px]">
+                    <div className="px-[68px] pt-[68px] pb-[200px]">
                         <Profile />
-                        <div className="flex flex-col gap-[76px]">
+                        <div className="flex flex-col gap-[60px]">
                             <Section id="introduction" title="자기소개">
                                 <p className="text-gray-700 leading-relaxed">
                                     {profileData.introduction}
@@ -33,21 +33,27 @@ const Detail = () => {
                             </Section>
 
                             <Section id="projects" title="프로젝트">
-                                <div className="space-y-6">
-                                    {profileData.projects.map((project) => (
-                                        <div
-                                            key={project.title}
-                                            className="border-b pb-4"
-                                        >
-                                            <h3 className="font-bold mb-2">
-                                                {project.title}
-                                            </h3>
-                                            <p className="text-gray-600 text-sm">
-                                                {project.date}
-                                            </p>
+                                {profileData.projects.map((project) => (
+                                  <>
+                                  <div className="gap-3 flex flex-col">
+                                            <div>
+                                                <div className="text-h5 mb-1">
+                                                    {project.title}
+                                                </div>
+                                                <div className="text-p5 text-gray-500">
+                                                    {project.date}
+                                                </div>
+                                            </div>
+                                            <div className="text-p3 text-black">
+                                                {project.desc}
+                                            </div>
                                         </div>
-                                    ))}
-                                </div>
+                                          <div
+                                              key={project.title}
+                                              className=" text-black border-b my-8"
+                                              />
+                                            </>
+                                ))}
                             </Section>
 
                             <Section id="awards" title="수상 내역">
