@@ -1,6 +1,6 @@
 import { IconPropsType } from "./iconPropsType";
 
-export const Link = ({ size = 24, color = "#000000" }: IconPropsType) => {
+export const LinkIcon = ({ size = 24, color = "#000000" }: IconPropsType) => {
   return (
     <svg
       width={size}
