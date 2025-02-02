@@ -1,6 +1,14 @@
-export const Logo = () => {
-  return (
-    <svg width="80" height="27" viewBox="0 0 80 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+import { IconPropsType } from "./iconPropsType";
+
+export const Logo = ({ size = 80 }: IconPropsType) => {
+    return (
+        <svg
+            width={size}
+            height={size * (27 / 80)}
+            viewBox="0 0 80 27"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
       <path
         fillRule="evenodd"
         clipRule="evenodd"
