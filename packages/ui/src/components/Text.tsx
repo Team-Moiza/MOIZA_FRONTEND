@@ -1,5 +1,5 @@
-'use client';
-import React from 'react';
+"use client";
+import React from "react";
 
 type TextPropsType = {
   children: string;
@@ -7,7 +7,7 @@ type TextPropsType = {
 };
 
 export const Text = ({ children, className }: TextPropsType) => {
-  const text = children.toString().split('\\n');
+  const text = children.toString().split("\\n");
 
   return (
     <p className={`${className} cursor-default`}>

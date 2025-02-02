@@ -10,4 +10,14 @@ export * from "./Link";
 export * from "./Google";
 export * from "./NoProfileBox";
 export * from "./Github";
-export * from './HashTag'
+export * from "./BottomArrow";
+export * from "./Heart";
+export * from "./Search";
+export * from "./Replay";
+export * from "./RightArrow";
+export * from "./LeftArrow";
+export * from "./DoubleLeftArrow";
+export * from "./DoubleRightArrow";
+export * from "./Edit";
+export * from "./Menu";
+export * from "./Add";
