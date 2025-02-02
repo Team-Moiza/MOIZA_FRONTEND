@@ -1,6 +1,7 @@
 import Header from "../components/layouts/Header";
 import "./globals.css";
 import localFont from "next/font/local";
+import { Provider } from "./Provider";
 
 const pretendard = localFont({
   src: "../../public/PretendardVariable.woff2",
@@ -17,8 +18,10 @@ export default function RootLayout({
   return (
     <html lang="kr" className={`${pretendard.variable}`}>
       <body className={pretendard.className}>
-        <Header />
-        {children}
+        <Provider>
+          <Header />
+          {children}
+        </Provider>
       </body>
     </html>
   );
