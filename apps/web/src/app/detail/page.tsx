@@ -33,9 +33,9 @@ const Detail = () => {
                             </Section>
 
                             <Section id="projects" title="프로젝트">
-                                {profileData.projects.map((project) => (
-                                  <>
-                                  <div className="gap-3 flex flex-col">
+                                {profileData.projects.map((project, index) => (
+                                    <>
+                                        <div className="gap-3 flex flex-col">
                                             <div>
                                                 <div className="text-h5 mb-1">
                                                     {project.title}
@@ -48,11 +48,11 @@ const Detail = () => {
                                                 {project.desc}
                                             </div>
                                         </div>
-                                          <div
-                                              key={project.title}
-                                              className=" text-black border-b my-8"
-                                              />
-                                            </>
+                                        {index <
+                                            profileData.projects.length - 1 && (
+                                            <div className="border-b my-8" />
+                                        )}
+                                    </>
                                 ))}
                             </Section>
 
