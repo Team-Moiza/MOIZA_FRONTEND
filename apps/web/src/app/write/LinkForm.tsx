@@ -1,4 +1,4 @@
-import { InputTemplate, Link, Plus, Text } from "@moija/ui";
+import { InputTemplate, LinkIcon, Plus, Text } from "@moija/ui";
 import { FormData } from "./page";
 import { Control, useFieldArray, UseFormRegister } from "react-hook-form";
 import { Close } from "@moija/ui/src/assets/Close";
@@ -18,7 +18,7 @@ export const LinkForm = ({ control, register }: IProp) => {
         <InputTemplate key={fields.id}>
           <div className="flex justify-between items-center w-[776px] gap-2 rounded-[8px] px-[20px] py-[11px] border-[1px] border-gray-200 h-fit">
             <div className="flex gap-4 items-center w-full">
-              <Link size={18} />
+              <LinkIcon size={18} />
               <div className="flex flex-col w-full">
                 <input className="text-[16px] placeholder:text-gray-400 w-full outline-none" placeholder="링크 제목" {...register(`links.${index}.title`)} defaultValue={fields.title} />
                 <input

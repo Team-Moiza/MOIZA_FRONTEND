@@ -104,7 +104,7 @@ const Detail = () => {
                             <Section id="links" title="링크">
                                 <div className="flex flex-col gap-2">
                                     {profileData.links.map((link) => (
-                                        <div className="  w-full px-5 py-3 rounded-lg border border-gray-200">
+                                        <div className="w-full px-5 py-3 rounded-lg border border-gray-200">
                                             {link && (
                                                 <Link
                                                     href={link}
