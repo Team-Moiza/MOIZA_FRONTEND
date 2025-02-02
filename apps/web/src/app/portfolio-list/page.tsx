@@ -5,8 +5,10 @@ import ProfileBox from "../../components/portfolio-list/ProfileBox";
 import { NoProfileBox } from "@moija/ui";
 import CustomPagination from "../../components/portfolio-list/Pagination";
 import Footer from "../../components/layouts/Footer";
+import { useRouter } from "next/navigation";
 
 const PortfolioList = () => {
+    const router = useRouter();
     type JobCategory =
         | "전체"
         | "프론트엔드 개발자"
@@ -192,7 +194,10 @@ const PortfolioList = () => {
                                 <br />
                                 다른 사람의 포트폴리오도 구경해보세요!
                             </div>
-                            <button className="flex px-[26px] py-2 text-p2 bg-white text-primary-500 rounded-[10px]">
+                            <button
+                                className="flex px-[26px] py-2 text-p2 bg-white text-primary-500 rounded-[10px]"
+                                onClick={() => router.push("/write")}
+                            >
                                 작성하기
                             </button>
                         </NoProfileBox>
