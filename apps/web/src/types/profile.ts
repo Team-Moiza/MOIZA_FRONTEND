@@ -10,6 +10,7 @@ export interface Profile {
     projects: Project[];
     awards: Award[];
     certificates: Certificate[];
+    links: String[];
 }
 
 interface Project {
@@ -22,9 +23,11 @@ interface Project {
 interface Award {
     title: string;
     date: string;
+    desc: string;
 }
 
 interface Certificate {
     name: string;
     date: string;
 }
+

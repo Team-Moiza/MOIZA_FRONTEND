@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const NavBar = () => {
     const [scrollProgress, setScrollProgress] = useState(0);
-    const [activeSection, setActiveSection] = useState("");
+    const [activeSection, setActiveSection] = useState("education");
 
     useEffect(() => {
         const handleScroll = () => {
@@ -13,6 +13,10 @@ const NavBar = () => {
             const scrolled = window.scrollY;
             const progress = (scrolled / documentHeight) * 100;
             setScrollProgress(progress);
+            if (Math.ceil(progress) >= 99) {
+                setActiveSection("links");
+                return;
+            }
         };
 
         const observerOptions = {
@@ -22,7 +26,7 @@ const NavBar = () => {
 
         const observerCallback = (entries: IntersectionObserverEntry[]) => {
             entries.forEach((entry) => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting && Math.ceil(scrollProgress) < 99) {
                     setActiveSection(entry.target.id);
                 }
             });
@@ -44,7 +48,7 @@ const NavBar = () => {
             window.removeEventListener("scroll", handleScroll);
             observer.disconnect();
         };
-    }, []);
+    }, [scrollProgress]);
 
     const scrollToSection = (sectionId: string) => {
         const section = document.getElementById(sectionId);

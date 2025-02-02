@@ -1,4 +1,4 @@
-import { Input, InputTemplate, Label, Link, Plus, Search, Text, Textarea } from "@moija/ui";
+import { Input, InputTemplate, Label, LinkIcon, Plus, Search, Text, Textarea } from "@moija/ui";
 
 export const LinkForm = () => {
   return (
@@ -6,7 +6,7 @@ export const LinkForm = () => {
       <Text className="text-h2 text-black">기술 스택</Text>
       <InputTemplate>
         <div className="flex gap-4 items-center w-[776px] rounded-[8px] px-[20px] py-[11px] border-[1px] border-gray-200 h-fit">
-          <Link size={18} />
+          <LinkIcon size={18} />
           <div className="flex flex-col">
             <input className="text-[16px] placeholder:text-gray-400" placeholder="링크 제목" />
             <input

@@ -44,6 +44,10 @@ export const profileData: Profile = {
         {
             title: "App Modernization FKS Jam 1위",
             date: "2023.07",
+            desc: `- 참가한 72팀 중 1위
+- AI 기반 심리 치료 앱 개발
+
+AI 기반 심리 치료 앱 개발AI 기반 심리 치료 앱 개발AI 기반 심리 치료 앱 개발AI 기반 심리 치료 앱 개발AI 기반 심리 치료 앱 개발설명설명설명설명 설명설명 설명설명설명설명 설명설명설명설명설명설명 설명설명설명설명설명설명 설명설명`,
         },
     ],
     certificates: [
@@ -56,4 +60,8 @@ export const profileData: Profile = {
             date: "2021.10",
         },
     ],
+    links : [
+      "https://www.figma.com",
+      "https://www.figma.com",
+    ]
 };
