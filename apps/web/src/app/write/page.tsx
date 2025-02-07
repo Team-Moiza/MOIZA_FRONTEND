@@ -55,9 +55,8 @@ export type FormData = {
 
 export default function WritePortFolio() {
   const formMethod = useForm<FormData>({ defaultValues: { title: "김수아" } });
-  const { handleSubmit, control } = formMethod;
 
-  const onSubmit = handleSubmit(
+  const onSubmit = formMethod.handleSubmit(
     (data) => {
       console.log("Form Submitted Data:", data);
     },
@@ -66,22 +65,24 @@ export default function WritePortFolio() {
     }
   );
 
+  console.log(formMethod.watch());
+
   return (
     <FormProvider {...formMethod}>
       <form className="w-screen pt-[80px]" onSubmit={onSubmit}>
         <div className="w-full h-screen pt-[90px]">
-          <BasicInfoForm formMethod={formMethod} />
+          <BasicInfoForm />
         </div>
         <div className="w-full bg-gray-100 pt-[80px] pb-[200px]">
           <Center vertical={true}>
             <Flex gap={24}>
               <Stack gap={28}>
-                <IntroduceForm formMethod={formMethod} />
-                <SkillsetForm control={control} />
-                <ProjectForm control={control} register={formMethod.register} />
-                <AchievementForm control={control} register={formMethod.register} />
-                <QualificationForm control={control} register={formMethod.register} />
-                <LinkForm control={control} register={formMethod.register} />
+                <IntroduceForm />
+                <SkillsetForm />
+                <ProjectForm />
+                <AchievementForm />
+                <QualificationForm />
+                <LinkForm />
                 <div className="w-full flex justify-end gap-5 mt-20">
                   <Button type="white">저장</Button>
                   <Button>게시</Button>

@@ -1,31 +1,25 @@
-import { ArrowDown, BottomArrow, Delete, Dropdown, Input, InputTemplate, Label, LeftArrow, List, Plus, RightArrow, Search, Select, Textarea } from "@moija/ui";
-import { Control, FieldArrayWithId, useFieldArray, UseFieldArrayReturn, UseFormRegister } from "react-hook-form";
+import { ArrowDown, Delete, Dropdown, Input, InputTemplate, Label, List, Plus, Search, Select, Textarea } from "@moija/ui";
+import { FieldArrayWithId, useFieldArray, UseFieldArrayReturn, useFormContext } from "react-hook-form";
 import { FormData } from "../page";
 import { useBoolean, useOutsideClickRef } from "@moija/hooks";
 
 interface IProp {
   field: FieldArrayWithId<FormData, "projects", "id">;
+  method: UseFieldArrayReturn<FormData, "projects", "id">;
   index: number;
-  fieldArray: UseFieldArrayReturn<FormData, "projects", "id">;
-  register: UseFormRegister<FormData>;
-  control: Control<FormData, any>;
 }
 
-export const Item = ({ field, index, fieldArray, register, control }: IProp) => {
-  const { fields, swap, remove, update } = fieldArray;
+export const Item = ({ field, method, index }: IProp) => {
+  const { control, register } = useFormContext<FormData>();
+  const { fields, swap, remove, update } = method;
   const { boolean: isOpen, toggle, setFalse: setClose } = useBoolean(false);
   const { fields: sections, swap: secSwap, remove: secRemove, append: secAppend } = useFieldArray({ control, name: `projects.${index}.sections` });
   const selectRef = useOutsideClickRef<HTMLDivElement>(setClose);
 
   return (
-    <div className="w-full flex flex-col gap-4" key={field.id}>
+    <div className="w-full flex flex-col gap-4">
       <div className="flex justify-between w-full">
-        <input
-          className="text-h4 text-black placeholder:text-gray-400 w-full outline-none"
-          placeholder="프로젝트명"
-          defaultValue={field.title}
-          {...register(`projects.${index}.title`, { required: `${index}번 프로젝트 제목` })}
-        />
+        <input className="text-h4 text-black placeholder:text-gray-400 w-full outline-none" placeholder="프로젝트명" defaultValue={field.title} {...register(`projects.${index}.title`, { required: `${index}번 프로젝트 제목` })} />
         <div className="border-[1px] w-fit flex rounded-[4px]">
           <button className="w-[32px] h-[32px] flex items-center justify-center border-r-[1px]" type="button" onClick={() => index < fields.length - 1 && swap(index, index + 1)}>
             <ArrowDown size={24} color={index < fields.length - 1 ? "#787878" : "#BFBFBF"} />
@@ -74,13 +68,7 @@ export const Item = ({ field, index, fieldArray, register, control }: IProp) => 
           </InputTemplate>
           <InputTemplate>
             <Label accent>진행 기간</Label>
-            <Input
-              width={512}
-              placeholder="YYYY.MM - YYYY.MM"
-              pattern="\d{4}\.(0[1-9]|1[0-2]) ~ ?(\d{4}\.(0[1-9]|1[0-2]))?"
-              title="'YYYY.MM ~ ' 또는 'YYYY.MM ~ YYYY.MM' 과 같은 형식이어야 합니다."
-              {...register(`projects.${index}.title`, { required: `${index}번 프로젝트 진행 기간` })}
-            />
+            <Input width={512} placeholder="YYYY.MM - YYYY.MM" pattern="\d{4}\.(0[1-9]|1[0-2]) ~ ?(\d{4}\.(0[1-9]|1[0-2]))?" title="'YYYY.MM ~ ' 또는 'YYYY.MM ~ YYYY.MM' 과 같은 형식이어야 합니다." {...register(`projects.${index}.date`, { required: `${index}번 프로젝트 진행 기간` })} />
           </InputTemplate>
         </div>
         <InputTemplate>
@@ -89,13 +77,7 @@ export const Item = ({ field, index, fieldArray, register, control }: IProp) => 
         </InputTemplate>
         <InputTemplate>
           <Label>추가 링크</Label>
-          <Input
-            width={776}
-            placeholder="http://, https://"
-            title="'https://url.com' 과 같은 형식이어야 합니다."
-            pattern="https?:\/\/[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
-            {...register(`projects.${index}.url`)}
-          />
+          <Input width={776} placeholder="http://, https://" title="'https://url.com' 과 같은 형식이어야 합니다." pattern="https?:\/\/[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" {...register(`projects.${index}.url`)} />
         </InputTemplate>
         {sections.map((item, secIndex) => (
           <InputTemplate key={item.id}>

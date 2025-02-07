@@ -1,13 +1,10 @@
 import { Input, InputTemplate, Search, Stack, Text } from "@moija/ui";
 import { FormData } from "./page";
-import { Control, useFieldArray } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { List } from "@moija/ui";
 
-interface IProp {
-  control: Control<FormData, any>;
-}
-
-export const SkillsetForm = ({ control }: IProp) => {
+export const SkillsetForm = () => {
+  const { control } = useFormContext<FormData>();
   const { fields, append, remove } = useFieldArray({ control, name: "skillsets" });
 
   return (

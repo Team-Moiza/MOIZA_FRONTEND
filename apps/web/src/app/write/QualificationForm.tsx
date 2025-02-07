@@ -1,13 +1,9 @@
 import { ArrowDown, Delete, Input, InputTemplate, Label, Plus, Text } from "@moija/ui";
-import { Control, useFieldArray, UseFormRegister } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormData } from "./page";
 
-interface IProp {
-  control: Control<FormData, any>;
-  register: UseFormRegister<FormData>;
-}
-
-export const QualificationForm = ({ control, register }: IProp) => {
+export const QualificationForm = () => {
+  const { control, register } = useFormContext<FormData>();
   const { fields, append, remove, swap } = useFieldArray({ control, name: "certifications" });
 
   return (
@@ -17,12 +13,7 @@ export const QualificationForm = ({ control, register }: IProp) => {
       {fields.map((field, index) => (
         <div className="w-full flex flex-col gap-4" key={field.id}>
           <div className="flex justify-between w-full">
-            <input
-              className="text-h4 text-black placeholder:text-gray-400 w-full outline-none"
-              placeholder="자격증명"
-              defaultValue={field.name}
-              {...register(`certifications.${index}.name`, { required: `${index}번 자격증 이름` })}
-            />
+            <input className="text-h4 text-black placeholder:text-gray-400 w-full outline-none" placeholder="자격증명" defaultValue={field.name} {...register(`certifications.${index}.name`, { required: `${index}번 자격증 이름` })} />
             <div className="border-[1px] w-fit flex rounded-[4px]">
               <button className="w-[32px] h-[32px] flex items-center justify-center border-r-[1px]" type="button" onClick={() => index < fields.length - 1 && swap(index, index + 1)}>
                 <ArrowDown size={24} color={index < fields.length - 1 ? "#787878" : "#BFBFBF"} />
@@ -48,14 +39,7 @@ export const QualificationForm = ({ control, register }: IProp) => {
               </InputTemplate>
               <InputTemplate>
                 <Label accent>취득 날짜</Label>
-                <Input
-                  width={512}
-                  placeholder="YYYY.MM.DD"
-                  pattern="\d{4}\.(0[1-9]|1[0-2])\.(0[1-9]|[1-2][0-9]|3[0-1])"
-                  title="'YYYY.MM.DD' 와 같은 형식이어야 합니다."
-                  defaultValue={field.date}
-                  {...register(`certifications.${index}.name`, { required: `${index}번 자격증 이름` })}
-                />
+                <Input width={512} placeholder="YYYY.MM.DD" pattern="\d{4}\.(0[1-9]|1[0-2])\.(0[1-9]|[1-2][0-9]|3[0-1])" title="'YYYY.MM.DD' 와 같은 형식이어야 합니다." defaultValue={field.date} {...register(`certifications.${index}.name`, { required: `${index}번 자격증 이름` })} />
               </InputTemplate>
             </div>
           </div>

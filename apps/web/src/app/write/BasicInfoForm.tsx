@@ -1,21 +1,18 @@
 import { Center, Dropdown, Edit, Flex, Image as ImageIcon, Input, InputTemplate, Label, Search, Select, Spacing, Stack, Text, Textarea } from "@moija/ui";
 import { useBoolean, useOutsideClickRef } from "@moija/hooks";
-import { UseFormReturn } from "react-hook-form";
+import { useFormContext, UseFormReturn } from "react-hook-form";
 import { FormData } from "./page";
 import { useState } from "react";
 import Image from "next/image";
 
-interface IProp {
-  formMethod: UseFormReturn<FormData, any, undefined>;
-}
-
-export const BasicInfoForm = ({ formMethod }: IProp) => {
+export const BasicInfoForm = () => {
   const { boolean: isOpen, toggle, setFalse: setClose } = useBoolean(false);
   const { boolean: canEditName, toggle: editToggle, setFalse: closeEditName } = useBoolean(false);
   const selectRef = useOutsideClickRef<HTMLDivElement>(setClose);
   const editRef = useOutsideClickRef<HTMLDivElement>(closeEditName);
   const [image, setImage] = useState<File | undefined>(undefined);
-  formMethod.register("job", { required: "개발 직무" });
+  const { register, getValues, setValue } = useFormContext<FormData>();
+  register("job", { required: "개발 직무" });
 
   return (
     <Center horizontal vertical={false}>
@@ -51,10 +48,10 @@ export const BasicInfoForm = ({ formMethod }: IProp) => {
               <Flex align="center" gap={12}>
                 {canEditName ? (
                   <div ref={editRef}>
-                    <input className="outline-none w-fit text-h1 text-black" placeholder={formMethod.getValues("title")} {...formMethod.register("title", { required: "제목" })} />
+                    <input className="outline-none w-fit text-h1 text-black" placeholder={getValues("title")} {...register("title", { required: "제목" })} />
                   </div>
                 ) : (
-                  <Text className={`text-h1 text-black`}>{formMethod.getValues("title")}</Text>
+                  <Text className={`text-h1 text-black`}>{getValues("title")}</Text>
                 )}
 
                 <button type="button" onClick={editToggle}>
@@ -71,8 +68,8 @@ export const BasicInfoForm = ({ formMethod }: IProp) => {
                       width={824}
                       isBig
                       placeholder="이메일을 입력해주세요"
-                      defaultValue={formMethod.getValues("email")}
-                      {...formMethod.register("email", {
+                      defaultValue={getValues("email")}
+                      {...register("email", {
                         required: "이메일",
                         pattern: {
                           value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -84,42 +81,27 @@ export const BasicInfoForm = ({ formMethod }: IProp) => {
                 </Flex>
                 <InputTemplate>
                   <Label>한줄 소개</Label>
-                  <Textarea
-                    width={824}
-                    height={176}
-                    maxLength={100}
-                    isBig
-                    placeholder="나를 소개하는 글을 써주세요"
-                    defaultValue={formMethod.getValues("shortIntroduce")}
-                    {...formMethod.register("shortIntroduce")}
-                  />
+                  <Textarea width={824} height={176} maxLength={100} isBig placeholder="나를 소개하는 글을 써주세요" defaultValue={getValues("shortIntroduce")} {...register("shortIntroduce")} />
                 </InputTemplate>
                 <InputTemplate>
                   <Label accent>개발 직무</Label>
                   <div ref={selectRef}>
                     <Dropdown
                       isOpen={isOpen}
-                      selectedItem={formMethod.getValues("job")}
+                      selectedItem={getValues("job")}
                       items={["a", "b", "c"]}
                       onSelect={(item) => {
-                        formMethod.setValue("job", item);
+                        setValue("job", item);
                         toggle();
                       }}
                     >
-                      <Select width={824} placeholder="직무를 선택해주세요" isOpen={isOpen} isBig value={formMethod.getValues("job")} onClick={toggle} />
+                      <Select width={824} placeholder="직무를 선택해주세요" isOpen={isOpen} isBig value={getValues("job")} onClick={toggle} />
                     </Dropdown>
                   </div>
                 </InputTemplate>
                 <InputTemplate>
                   <Label>회사</Label>
-                  <Input
-                    icon={<Search size={20} color="#787878" />}
-                    width={824}
-                    placeholder="현재 재직 중인 회사"
-                    isBig
-                    defaultValue={formMethod.getValues("company")}
-                    {...formMethod.register("company")}
-                  />
+                  <Input icon={<Search size={20} color="#787878" />} width={824} placeholder="현재 재직 중인 회사" isBig defaultValue={getValues("company")} {...register("company")} />
                 </InputTemplate>
               </Stack>
             </Stack>

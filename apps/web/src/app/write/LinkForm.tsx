@@ -1,14 +1,11 @@
 import { InputTemplate, LinkIcon, Plus, Text } from "@moija/ui";
 import { FormData } from "./page";
-import { Control, useFieldArray, UseFormRegister } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { Close } from "@moija/ui/src/assets/Close";
+import { LinkFormTemp } from "./LinkFormTemp";
 
-interface IProp {
-  control: Control<FormData, any>;
-  register: UseFormRegister<FormData>;
-}
-
-export const LinkForm = ({ control, register }: IProp) => {
+export const LinkForm = () => {
+  const { control, register } = useFormContext<FormData>();
   const { fields, append, remove } = useFieldArray({ control, name: "links" });
 
   return (
@@ -21,14 +18,7 @@ export const LinkForm = ({ control, register }: IProp) => {
               <LinkIcon size={18} />
               <div className="flex flex-col w-full">
                 <input className="text-[16px] placeholder:text-gray-400 w-full outline-none" placeholder="링크 제목" {...register(`links.${index}.title`)} defaultValue={fields.title} />
-                <input
-                  className="text-[16px] placeholder:text-gray-400 w-full outline-none"
-                  placeholder="http://, https://"
-                  title="'https://url.com' 과 같은 형식이어야 합니다."
-                  pattern="https?:\/\/[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
-                  defaultValue={fields.url}
-                  {...register(`links.${index}.url`)}
-                />
+                <input className="text-[16px] placeholder:text-gray-400 w-full outline-none" placeholder="http://, https://" title="'https://url.com' 과 같은 형식이어야 합니다." pattern="https?:\/\/[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" defaultValue={fields.url} {...register(`links.${index}.url`)} />
               </div>
             </div>
             <button onClick={() => remove(index)} type="button">
