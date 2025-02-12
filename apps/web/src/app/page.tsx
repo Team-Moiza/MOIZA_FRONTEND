@@ -1,22 +1,31 @@
 "use client";
-import React, { useState } from "react";
-import Filter from "../components/portfolio-list/Filter";
+
+import React, { useState, useEffect } from "react";
+import { instance } from "../apis/instance";
 import ProfileBox from "../components/portfolio-list/ProfileBox";
-import { NoProfileBox } from "@moija/ui";
 import CustomPagination from "../components/portfolio-list/Pagination";
+import Filter from "../components/portfolio-list/Filter";
 import Footer from "../components/layouts/Footer";
-import { useRouter } from "next/navigation";
+
+interface ProfileType {
+    name: string;
+    job: string;
+    school: string;
+    introduce: string;
+    tags: string[];
+    likes: number;
+    company: string;
+}
 
 const PortfolioList = () => {
-    const router = useRouter();
-    type JobCategory =
-        | "전체"
-        | "프론트엔드 개발자"
-        | "백엔드 개발자"
-        | "UX/UI 디자이너"
-        | "기획자"
-        | "기타";
-    const categories: JobCategory[] = [
+    const [profiles, setProfiles] = useState<ProfileType[]>([]);
+    const [filteredProfiles, setFilteredProfiles] = useState<ProfileType[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [selectedCategory, setSelectedCategory] = useState("전체");
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 3;
+
+    const categories = [
         "전체",
         "프론트엔드 개발자",
         "백엔드 개발자",
@@ -24,140 +33,33 @@ const PortfolioList = () => {
         "기획자",
         "기타",
     ];
-    const [selectedCategory, setSelectedCategory] =
-        useState<JobCategory>("전체");
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 3;
 
-    const dummyData = [
-        {
-            name: "강민지",
-            job: "프론트엔드 개발자",
-            school: "부산소프트웨어마이스터고등학교 3기 출신",
-            introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
-            tags: ["Next.js", "React.js", "TypeScript", "styled-components"],
-            likes: 26,
-            company: "당근마켓 프론트엔드",
-        },
-        {
-            name: "이승현",
-            job: "백엔드 개발자",
-            school: "서울소프트웨어마이스터고등학교 2기 출신",
-            introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다라고할줄알았지 백엔드 개발자입니다",
-            tags: ["Node.js", "Express", "MongoDB", "Docker"],
-            likes: 18,
-            company: "카카오",
-        },
-        {
-            name: "박지호",
-            job: "기획자",
-            school: "대구소프트웨어고등학교 1기 출신",
-            introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
-            tags: ["Python", "Pandas", "BigQuery", "Apache Spark"],
-            likes: 12,
-        },
-        {
-            name: "정수민",
-            job: "UX/UI 디자이너",
-            school: "한국디자인고등학교 2기 출신",
-            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-            introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
-            likes: 20,
-            company: "네이버",
-        },
-        {
-            name: "정수민",
-            job: "UX/UI 디자이너",
-            school: "한국디자인고등학교 2기 출신",
-            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-            introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
-            likes: 20,
-            company: "네이버",
-        },
-        {
-            name: "정수민",
-            job: "UX/UI 디자이너",
-            school: "한국디자인고등학교 2기 출신",
-            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-            introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
-            likes: 20,
-            company: "네이버",
-        },
-        {
-            name: "정수민",
-            job: "UX/UI 디자이너",
-            school: "한국디자인고등학교 2기 출신",
-            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-            introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
-            likes: 20,
-            company: "네이버",
-        },
-        {
-            name: "정수민",
-            job: "UX/UI 디자이너",
-            school: "한국디자인고등학교 2기 출신",
-            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-            introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
-            likes: 20,
-            company: "네이버",
-        },
-        {
-            name: "정수민",
-            job: "UX/UI 디자이너",
-            school: "한국디자인고등학교 2기 출신",
-            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-            introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
-            likes: 20,
-            company: "네이버",
-        },
-        {
-            name: "정수민",
-            job: "UX/UI 디자이너",
-            school: "한국디자인고등학교 2기 출신",
-            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-            introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
-            likes: 20,
-            company: "네이버",
-        },
-        {
-            name: "정수민",
-            job: "UX/UI 디자이너",
-            school: "한국디자인고등학교 2기 출신",
-            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-            introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 강민지입니다.",
-            likes: 20,
-            company: "네이버",
-        },
-        {
-            name: "추리랑카",
-            job: "야구선수",
-            school: "서울대 2기 출신",
-            tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-            introduce:
-                "안녕하세요! 코드의 효율을 중요시하는 주니어 프론트엔드 개발자 추추리랑카.",
-            likes: 20,
-            company: "네이버",
-        },
-    ];
+    useEffect(() => {
+        const fetchProfiles = async () => {
+            try {
+                const response = await instance.get("/portfolio");
+                setProfiles(response.data);
+                setFilteredProfiles(response.data);
+            } catch (error) {
+                console.error("에러남", error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const filteredProfiles = dummyData.filter(
-        (profile) =>
-            selectedCategory === "전체" ||
-            profile.job === selectedCategory ||
-            (selectedCategory === "기타" &&
-                !categories.includes(profile.job as JobCategory))
-    );
+        fetchProfiles();
+    }, []);
+
+    useEffect(() => {
+        const filtered = profiles.filter(
+            (profile) =>
+                selectedCategory === "전체" ||
+                profile.job === selectedCategory ||
+                (selectedCategory === "기타" &&
+                    !categories.includes(profile.job))
+        );
+        setFilteredProfiles(filtered);
+    }, [selectedCategory, profiles]);
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const paginatedProfiles = filteredProfiles.slice(
@@ -165,10 +67,12 @@ const PortfolioList = () => {
         startIndex + itemsPerPage
     );
 
+    if (loading) return <p>로딩중...</p>;
+
     return (
         <>
             <div className="w-screen pt-[120px] px-[200px]">
-                <div className="flex gap-2 mb-[30px] ">
+                <div className="flex gap-2 mb-[30px]">
                     {categories.map((category) => (
                         <button
                             key={category}
@@ -188,19 +92,6 @@ const PortfolioList = () => {
                 </div>
                 <div className="flex gap-5 w-[100%] justify-between">
                     <div className="flex flex-col gap-5 w-[92%]">
-                        <NoProfileBox>
-                            <div className="text-h5 text-white">
-                                지금 바로 나의 포트폴리오를 작성하고,
-                                <br />
-                                다른 사람의 포트폴리오도 구경해보세요!
-                            </div>
-                            <button
-                                className="flex px-[26px] py-2 text-p2 bg-white text-primary-500 rounded-[10px]"
-                                onClick={() => router.push("/write")}
-                            >
-                                작성하기
-                            </button>
-                        </NoProfileBox>
                         {paginatedProfiles.map((profile, index) => (
                             <ProfileBox
                                 key={index}
