@@ -1,38 +1,69 @@
+"use client";
+
 import { Logo } from "@moija/ui";
+import { useEffect, useState } from "react";
+import { instance } from "../../apis/instance";
+import Link from "next/link";
+import Image from "next/image";
 
 type User = {
-  profile: string;
-  name: string;
+    profile: string;
+    nickname: string;
 };
 
 const Header = () => {
-  const isLoggedIn = true;
-  const user: User = {
-    profile: "https://i.pinimg.com/564x/b3/ea/18/b3ea1834562fc0dcbe9a7f3c4ef7612b.jpg",
-    name: "강민지",
-  };
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState<User | null>(null);
 
-  return (
-    <header className="z-10 w-[100vw] fixed justify-center bg-white h-[80px] px-[200px] py-[25px] shadow-custom">
-      <div className="h-full flex justify-between items-center">
-        <div className="flex items-center space-x-4">
-          <Logo />
-        </div>
-        <div className="flex items-center gap-5">
-          {isLoggedIn ? (
-            <div className="flex items-center gap-[14px]">
-              <img src={user.profile} className="rounded-full w-[42px] h-[42px] flex-shrink-0" />
-              <div className="text-p3 text-black">{user.name}님</div>
+    useEffect(() => {
+        const userProfile = async () => {
+            if (localStorage.getItem("accessToken")) {
+                try {
+                    const response = await instance.get("/user");
+                    setUser(response.data);
+                    setIsLoggedIn(true);
+                } catch (error) {
+                    console.error("유저 정보 조회 실패:", error);
+                    setIsLoggedIn(false);
+                }
+            } else {
+                setIsLoggedIn(false);
+            }
+        };
+        userProfile();
+    }, []);
+
+    return (
+        <header className="z-10 w-[100vw] fixed justify-center bg-white h-[80px] px-[200px] py-[25px] shadow-custom">
+            <div className="h-full flex justify-between items-center">
+                <div className="flex items-center space-x-4">
+                    <Link href="/">
+                        <Logo />
+                    </Link>
+                </div>
+                <div className="flex items-center gap-5">
+                    {isLoggedIn && user ? (
+                        <div className="flex items-center gap-[14px]">
+                            <Image
+                                src={user.profile}
+                                alt="프로필"
+                                width={42}
+                                height={42}
+                                className="rounded-full flex-shrink-0"
+                            />
+                            <div className="text-p3 text-black">
+                                {user.nickname}님
+                            </div>
+                        </div>
+                    ) : (
+                        <Link href="/login" className="gap-[50px] flex">
+                            <div className="text-p3 text-black">로그인</div>
+                        </Link>
+                    )}
+                </div>
             </div>
-          ) : (
-            <div className="gap-[50px] flex">
-              <div className="text-p3 text-black">로그인</div>
-            </div>
-          )}
-        </div>
-      </div>
-    </header>
-  );
+        </header>
+    );
 };
 
 export default Header;
