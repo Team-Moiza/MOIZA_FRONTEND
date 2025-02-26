@@ -1,7 +1,6 @@
 "use client";
 
 import { Button, Center, Flex, Stack } from "@moija/ui";
-import { BasicInfoForm } from "./BasicInfoForm";
 import { IntroduceForm } from "./IntroduceForm";
 import { FormProvider, useForm } from "react-hook-form";
 import { Sidebar } from "./Sidebar";
@@ -10,11 +9,11 @@ import { ProjectForm } from "./ProjectForm";
 import { LinkForm } from "./LinkForm";
 import { AchievementForm } from "./AchievementForm";
 import { QualificationForm } from "./QualificationForm";
+import { default as Profile } from "../../my/edit/page";
 
 export type FormData = {
   title: string;
   email: string;
-  shortIntroduce: string;
   job: string;
   company: string;
   introduce: { introduce: string; url?: string };
@@ -60,39 +59,35 @@ export default function WritePortFolio() {
     (data) => {
       console.log("Form Submitted Data:", data);
     },
-    (errors) => {
-      console.log(errors);
-    }
+    (errors) => console.log(errors)
   );
-
-  console.log(formMethod.watch());
 
   return (
     <FormProvider {...formMethod}>
-      <form className="w-screen pt-[80px]" onSubmit={onSubmit}>
-        <div className="w-full h-screen pt-[90px]">
-          <BasicInfoForm />
-        </div>
-        <div className="w-full bg-gray-100 pt-[80px] pb-[200px]">
-          <Center vertical={true}>
-            <Flex gap={24}>
-              <Stack gap={28}>
-                <IntroduceForm />
-                <SkillsetForm />
-                <ProjectForm />
-                <AchievementForm />
-                <QualificationForm />
-                <LinkForm />
-                <div className="w-full flex justify-end gap-5 mt-20">
-                  <Button type="white">저장</Button>
-                  <Button>게시</Button>
-                </div>
-              </Stack>
-              <Sidebar />
-            </Flex>
-          </Center>
-        </div>
-      </form>
+      <div className="w-screen pt-[80px]">
+        <Profile />
+        <form onSubmit={onSubmit}>
+          <div className="w-full bg-gray-100 pt-[80px] pb-[200px]">
+            <Center vertical={true}>
+              <Flex gap={24}>
+                <Stack gap={28}>
+                  <IntroduceForm />
+                  <SkillsetForm />
+                  <ProjectForm />
+                  <AchievementForm />
+                  <QualificationForm />
+                  <LinkForm />
+                  <div className="w-full flex justify-end gap-5 mt-20">
+                    <Button type="white">저장</Button>
+                    <Button>게시</Button>
+                  </div>
+                </Stack>
+                <Sidebar />
+              </Flex>
+            </Center>
+          </div>
+        </form>
+      </div>
     </FormProvider>
   );
 }
