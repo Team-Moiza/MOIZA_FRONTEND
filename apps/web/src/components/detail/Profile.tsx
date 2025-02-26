@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { profileData } from "../../data/profileData";
 import { HashTag } from "@moija/ui";

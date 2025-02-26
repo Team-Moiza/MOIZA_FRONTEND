@@ -17,7 +17,8 @@ const Header = () => {
 
     useEffect(() => {
         const userProfile = async () => {
-            if (localStorage.getItem("accessToken")) {
+            const token = localStorage.getItem("accessToken");
+            if (token) {
                 try {
                     const response = await instance.get("/user");
                     setUser(response.data);

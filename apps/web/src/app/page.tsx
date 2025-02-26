@@ -37,11 +37,14 @@ const PortfolioList = () => {
     useEffect(() => {
         const fetchProfiles = async () => {
             try {
-                const response = await instance.get("/portfolio");
-                setProfiles(response.data);
-                setFilteredProfiles(response.data);
+                const response = await instance.get("portfolios");
+                const data = Array.isArray(response.data) ? response.data : [];
+                setProfiles(data);
+                setFilteredProfiles(data);
             } catch (error) {
                 console.error("에러남", error);
+                setProfiles([]);
+                setFilteredProfiles([]);
             } finally {
                 setLoading(false);
             }
@@ -92,18 +95,24 @@ const PortfolioList = () => {
                 </div>
                 <div className="flex gap-5 w-[100%] justify-between">
                     <div className="flex flex-col gap-5 w-[92%]">
-                        {paginatedProfiles.map((profile, index) => (
-                            <ProfileBox
-                                key={index}
-                                name={profile.name}
-                                job={profile.job}
-                                school={profile.school}
-                                introduce={profile.introduce}
-                                tags={profile.tags}
-                                likes={profile.likes}
-                                company={profile.company}
-                            />
-                        ))}
+                        {paginatedProfiles.length > 0 ? (
+                            paginatedProfiles.map((profile, index) => (
+                                <ProfileBox
+                                    key={index}
+                                    name={profile.name}
+                                    job={profile.job}
+                                    school={profile.school}
+                                    introduce={profile.introduce}
+                                    tags={profile.tags}
+                                    likes={profile.likes}
+                                    company={profile.company}
+                                />
+                            ))
+                        ) : (
+                            <div className="w-full py-20 text-center text-gray-500">
+                                아직 등록된 포트폴리오가 없습니다.
+                            </div>
+                        )}
                         <CustomPagination
                             totalItems={filteredProfiles.length}
                             itemsPerPage={itemsPerPage}

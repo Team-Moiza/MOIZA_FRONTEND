@@ -1,8 +1,11 @@
 "use client";
+
 import { useBoolean, useOutsideClickRef } from "@moija/hooks";
 import { Button, Dropdown, InputTemplate, Label, Select } from "@moija/ui";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { instance } from "../../apis/instance";
+import { School, Major, EducationStatus } from "./enum";
 
 const Register = () => {
     const router = useRouter();
@@ -27,23 +30,56 @@ const Register = () => {
     const majorRef = useOutsideClickRef<HTMLDivElement>(closeMajor);
     const statusRef = useOutsideClickRef<HTMLDivElement>(closeStatus);
 
-    const [selectedSchool, setSelectedSchool] = useState("");
-    const [selectedMajor, setSelectedMajor] = useState("");
-    const [selectedStatus, setSelectedStatus] = useState("");
+    const [selectedSchool, setSelectedSchool] = useState<School | null>(null);
+    const [selectedMajor, setSelectedMajor] = useState<Major | null>(null);
+    const [selectedStatus, setSelectedStatus] =
+        useState<EducationStatus | null>(null);
 
     const schools = [
-        "대구소프트웨어마이스터고",
-        "부산소프트웨어마이스터고",
-        "광주소프트웨어마이스터고",
+        { value: School.DGSM, label: "대구소프트웨어마이스터고" },
+        { value: School.DSM, label: "대덕소프트웨어마이스터고" },
+        { value: School.BSSM, label: "부산소프트웨어마이스터고" },
+        { value: School.GSM, label: "광주소프트웨어마이스터고" },
     ];
+
     const majors = [
-        "소프트웨어개발과",
-        "임베디드개발과",
-        "인공지능소프트웨어개발과",
-        "정보보안과",
-        "스마트 IoT과",
+        { value: Major.SOFTWARE, label: "소프트웨어개발과" },
+        { value: Major.EMBEDDED, label: "임베디드개발과" },
+        { value: Major.SECURITY, label: "정보보안과" },
+        { value: Major.IOT, label: "스마트IoT과" },
+        { value: Major.AI, label: "인공지능소프트웨어개발과" },
     ];
-    const statuses = ["재학중", "졸업"];
+
+    const statuses = [
+        { value: EducationStatus.ENROLLED, label: "재학중" },
+        { value: EducationStatus.GRADUATED, label: "졸업" },
+    ];
+
+    const handleRegister = async () => {
+        if (!selectedSchool || !selectedMajor || !selectedStatus) {
+            alert("모든 항목을 선택해주세요.");
+            return;
+        }
+
+        try {
+            console.log("업데이트 요청 데이터:", {
+                school: selectedSchool,
+                major: selectedMajor,
+                educationStatus: selectedStatus,
+            });
+
+            const response = await instance.patch("/user/update", {
+                school: selectedSchool,
+                major: selectedMajor,
+                educationStatus: selectedStatus,
+            });
+
+            console.log("회원정보 업데이트 성공:", response.data);
+            router.push("/");
+        } catch (error) {
+            console.error("회원정보 업데이트 실패:", error);
+        }
+    };
 
     return (
         <div className="w-screen h-screen flex items-center justify-center bg-gray-50">
@@ -64,10 +100,19 @@ const Register = () => {
                             <div ref={schoolRef}>
                                 <Dropdown
                                     isOpen={isSchoolOpen}
-                                    selectedItem={selectedSchool}
-                                    items={schools}
+                                    selectedItem={
+                                        schools.find(
+                                            (item) =>
+                                                item.value === selectedSchool
+                                        )?.label || ""
+                                    }
+                                    items={schools.map((item) => item.label)}
                                     onSelect={(item) => {
-                                        setSelectedSchool(item);
+                                        const selectedValue =
+                                            schools.find(
+                                                (s) => s.label === item
+                                            )?.value || null;
+                                        setSelectedSchool(selectedValue);
                                         toggleSchool();
                                     }}
                                 >
@@ -75,45 +120,75 @@ const Register = () => {
                                         width={400}
                                         placeholder="학교 선택"
                                         isOpen={isSchoolOpen}
-                                        value={selectedSchool}
+                                        value={
+                                            schools.find(
+                                                (item) =>
+                                                    item.value ===
+                                                    selectedSchool
+                                            )?.label || ""
+                                        }
                                         onClick={toggleSchool}
                                     />
                                 </Dropdown>
                             </div>
                         </InputTemplate>
 
+                        {/* 학과 선택 */}
                         <InputTemplate>
                             <Label>과</Label>
                             <div ref={majorRef}>
                                 <Dropdown
                                     isOpen={isMajorOpen}
-                                    selectedItem={selectedMajor}
-                                    items={majors}
+                                    selectedItem={
+                                        majors.find(
+                                            (item) =>
+                                                item.value === selectedMajor
+                                        )?.label || ""
+                                    }
+                                    items={majors.map((item) => item.label)}
                                     onSelect={(item) => {
-                                        setSelectedMajor(item);
+                                        const selectedValue =
+                                            majors.find((m) => m.label === item)
+                                                ?.value || null;
+                                        setSelectedMajor(selectedValue);
                                         toggleMajor();
                                     }}
                                 >
                                     <Select
                                         width={400}
-                                        placeholder="과 선택"
+                                        placeholder="학과 선택"
                                         isOpen={isMajorOpen}
-                                        value={selectedMajor}
+                                        value={
+                                            majors.find(
+                                                (item) =>
+                                                    item.value === selectedMajor
+                                            )?.label || ""
+                                        }
                                         onClick={toggleMajor}
                                     />
                                 </Dropdown>
                             </div>
                         </InputTemplate>
 
+                        {/* 재학 상태 선택 */}
                         <InputTemplate>
                             <Label>재학 상태</Label>
                             <div ref={statusRef}>
                                 <Dropdown
                                     isOpen={isStatusOpen}
-                                    selectedItem={selectedStatus}
-                                    items={statuses}
+                                    selectedItem={
+                                        statuses.find(
+                                            (item) =>
+                                                item.value === selectedStatus
+                                        )?.label || ""
+                                    }
+                                    items={statuses.map((item) => item.label)}
                                     onSelect={(item) => {
-                                        setSelectedStatus(item);
+                                        const selectedValue =
+                                            statuses.find(
+                                                (s) => s.label === item
+                                            )?.value || null;
+                                        setSelectedStatus(selectedValue);
                                         toggleStatus();
                                     }}
                                 >
@@ -121,15 +196,25 @@ const Register = () => {
                                         width={400}
                                         placeholder="재학 상태"
                                         isOpen={isStatusOpen}
-                                        value={selectedStatus}
+                                        value={
+                                            statuses.find(
+                                                (item) =>
+                                                    item.value ===
+                                                    selectedStatus
+                                            )?.label || ""
+                                        }
                                         onClick={toggleStatus}
                                     />
                                 </Dropdown>
                             </div>
                         </InputTemplate>
 
-                        <Button width="100%">회원가입</Button>
+                        {/* 회원가입 버튼 */}
+                        <Button width="100%" onClick={handleRegister}>
+                            회원가입
+                        </Button>
 
+                        {/* 로그인 링크 */}
                         <div className="text-center text-p5 text-gray-500">
                             이미 계정이 있다면?{" "}
                             <span
