@@ -20,7 +20,7 @@ const Header = () => {
             const token = localStorage.getItem("accessToken");
             if (token) {
                 try {
-                    const response = await instance.get("/user");
+                    const response = await instance.get("/users");
                     setUser(response.data);
                     setIsLoggedIn(true);
                 } catch (error) {
