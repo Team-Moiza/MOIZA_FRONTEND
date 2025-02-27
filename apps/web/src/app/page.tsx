@@ -8,13 +8,13 @@ import Filter from "../components/portfolio-list/Filter";
 import Footer from "../components/layouts/Footer";
 
 interface ProfileType {
+    id: number;
     name: string;
-    job: string;
     school: string;
+    major: string;
     introduce: string;
-    tags: string[];
-    likes: number;
-    company: string;
+    profile: string;
+    likeCnt: number;
 }
 
 const PortfolioList = () => {
@@ -35,14 +35,14 @@ const PortfolioList = () => {
     ];
 
     useEffect(() => {
-        const fetchProfiles = async () => {
+        const getProfiles = async () => {
             try {
                 const response = await instance.get("portfolios");
-                const data = Array.isArray(response.data) ? response.data : [];
+                const data = response.data.content || [];
                 setProfiles(data);
                 setFilteredProfiles(data);
             } catch (error) {
-                console.error("에러남", error);
+                console.error("에러 발생 :", error);
                 setProfiles([]);
                 setFilteredProfiles([]);
             } finally {
@@ -50,16 +50,16 @@ const PortfolioList = () => {
             }
         };
 
-        fetchProfiles();
+        getProfiles();
     }, []);
 
     useEffect(() => {
         const filtered = profiles.filter(
             (profile) =>
                 selectedCategory === "전체" ||
-                profile.job === selectedCategory ||
+                profile.major === selectedCategory ||
                 (selectedCategory === "기타" &&
-                    !categories.includes(profile.job))
+                    !categories.includes(profile.major))
         );
         setFilteredProfiles(filtered);
     }, [selectedCategory, profiles]);
@@ -96,16 +96,16 @@ const PortfolioList = () => {
                 <div className="flex gap-5 w-[100%] justify-between">
                     <div className="flex flex-col gap-5 w-[92%]">
                         {paginatedProfiles.length > 0 ? (
-                            paginatedProfiles.map((profile, index) => (
+                            paginatedProfiles.map((profile) => (
                                 <ProfileBox
-                                    key={index}
+                                    key={profile.id}
                                     name={profile.name}
-                                    job={profile.job}
+                                    job={profile.major}
                                     school={profile.school}
                                     introduce={profile.introduce}
-                                    tags={profile.tags}
-                                    likes={profile.likes}
-                                    company={profile.company}
+                                    tags={[]}
+                                    likes={profile.likeCnt}
+                                    company={""}
                                 />
                             ))
                         ) : (

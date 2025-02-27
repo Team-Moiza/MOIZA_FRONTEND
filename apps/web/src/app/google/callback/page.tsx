@@ -16,7 +16,6 @@ const GoogleCallback = () => {
                 instance
                     .post("/auth", { token: accessToken })
                     .then((response) => {
-                        console.log("토큰 응답:", response.data);
                         const { accessToken: newAccessToken, refreshToken } =
                             response.data;
 
@@ -35,12 +34,7 @@ const GoogleCallback = () => {
                         const isNewUser =
                             !userData.school ||
                             !userData.major ||
-                            !userData.educationStatus ||
-                            !userData.enrollmentStartDate ||
-                            !userData.enrollmentEndDate ||
-                            !userData.job ||
-                            !userData.company ||
-                            !userData.introduce;
+                            !userData.educationStatus;
 
                         if (isNewUser) {
                             router.push("/register");
@@ -62,7 +56,7 @@ const GoogleCallback = () => {
         }
     }, [router]);
 
-    return <div>로그인 처리중...</div>;
+    return <div>로그인 중...</div>;
 };
 
 export default GoogleCallback;

@@ -48,7 +48,7 @@ const Register = () => {
         { value: Major.SECURITY, label: "정보보안과" },
         { value: Major.IOT, label: "스마트IoT과" },
         { value: Major.AI, label: "인공지능소프트웨어개발과" },
-    ];
+    ] as const;
 
     const statuses = [
         { value: EducationStatus.ENROLLED, label: "재학중" },
@@ -61,23 +61,37 @@ const Register = () => {
             return;
         }
 
+        const requestData = {
+            school: selectedSchool,
+            major: selectedMajor,
+            educationStatus: selectedStatus,
+        };
+
         try {
-            console.log("업데이트 요청 데이터:", {
-                school: selectedSchool,
-                major: selectedMajor,
-                educationStatus: selectedStatus,
-            });
-
-            const response = await instance.patch("/user/update", {
-                school: selectedSchool,
-                major: selectedMajor,
-                educationStatus: selectedStatus,
-            });
-
+            const response = await instance.patch("/users/update", requestData);
             console.log("회원정보 업데이트 성공:", response.data);
             router.push("/");
-        } catch (error) {
-            console.error("회원정보 업데이트 실패:", error);
+        } catch (error: any) {
+            console.error(
+                "회원정보 업데이트 실패:",
+                error.response?.data || error.message
+            );
+        }
+    };
+
+    const handleDropdownToggle = (dropdown: string) => {
+        if (dropdown === "school") {
+            toggleSchool();
+            closeMajor();
+            closeStatus();
+        } else if (dropdown === "major") {
+            closeSchool();
+            toggleMajor();
+            closeStatus();
+        } else if (dropdown === "status") {
+            closeSchool();
+            closeMajor();
+            toggleStatus();
         }
     };
 
@@ -93,7 +107,6 @@ const Register = () => {
                             회원가입하고 소마고생들의 포트폴리오를 구경해보세요!
                         </div>
                     </div>
-
                     <div className="flex flex-col gap-5 w-full">
                         <InputTemplate>
                             <Label>학교</Label>
@@ -113,7 +126,7 @@ const Register = () => {
                                                 (s) => s.label === item
                                             )?.value || null;
                                         setSelectedSchool(selectedValue);
-                                        toggleSchool();
+                                        handleDropdownToggle("school");
                                     }}
                                 >
                                     <Select
@@ -127,13 +140,14 @@ const Register = () => {
                                                     selectedSchool
                                             )?.label || ""
                                         }
-                                        onClick={toggleSchool}
+                                        onClick={() =>
+                                            handleDropdownToggle("school")
+                                        }
                                     />
                                 </Dropdown>
                             </div>
                         </InputTemplate>
 
-                        {/* 학과 선택 */}
                         <InputTemplate>
                             <Label>과</Label>
                             <div ref={majorRef}>
@@ -151,7 +165,7 @@ const Register = () => {
                                             majors.find((m) => m.label === item)
                                                 ?.value || null;
                                         setSelectedMajor(selectedValue);
-                                        toggleMajor();
+                                        handleDropdownToggle("major");
                                     }}
                                 >
                                     <Select
@@ -164,13 +178,14 @@ const Register = () => {
                                                     item.value === selectedMajor
                                             )?.label || ""
                                         }
-                                        onClick={toggleMajor}
+                                        onClick={() =>
+                                            handleDropdownToggle("major")
+                                        }
                                     />
                                 </Dropdown>
                             </div>
                         </InputTemplate>
 
-                        {/* 재학 상태 선택 */}
                         <InputTemplate>
                             <Label>재학 상태</Label>
                             <div ref={statusRef}>
@@ -189,7 +204,7 @@ const Register = () => {
                                                 (s) => s.label === item
                                             )?.value || null;
                                         setSelectedStatus(selectedValue);
-                                        toggleStatus();
+                                        handleDropdownToggle("status");
                                     }}
                                 >
                                     <Select
@@ -203,18 +218,18 @@ const Register = () => {
                                                     selectedStatus
                                             )?.label || ""
                                         }
-                                        onClick={toggleStatus}
+                                        onClick={() =>
+                                            handleDropdownToggle("status")
+                                        }
                                     />
                                 </Dropdown>
                             </div>
                         </InputTemplate>
 
-                        {/* 회원가입 버튼 */}
                         <Button width="100%" onClick={handleRegister}>
                             회원가입
                         </Button>
 
-                        {/* 로그인 링크 */}
                         <div className="text-center text-p5 text-gray-500">
                             이미 계정이 있다면?{" "}
                             <span
