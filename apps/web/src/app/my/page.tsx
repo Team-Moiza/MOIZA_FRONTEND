@@ -32,12 +32,11 @@ export default function Page() {
         <div className="pt-[80px] w-[1040px] h-screen flex gap-[30ox]">
           <nav className="w-[216px] py-[110px] px-[24px] h-full ">
             <Stack gap={20}>
-              <div className="h-[67px] flex items-center">
-                <span className="text-p2 text-black">프로필</span>
-              </div>
+                <div className="text-p4 text-black">프로필</div>
+                <div className="text-p4 text-black">좋아요 목록</div>
               <div className="w-full h-[1px] bg-gray-200" />
-              <span className="text-p2 text-gray-400">로그아웃</span>
-              <span className="text-p2 text-sub-red">회원탈퇴</span>
+              <span className="text-p4 text-gray-400">로그아웃</span>
+              <span className="text-p4 text-sub-red">회원탈퇴</span>
             </Stack>
           </nav>
           <div className="w-full mt-10 flex flex-col gap-[25px]">

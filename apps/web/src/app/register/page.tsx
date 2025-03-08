@@ -4,7 +4,7 @@ import { useBoolean, useOutsideClickRef } from "@moija/hooks";
 import { Button, Dropdown, InputTemplate, Label, Select } from "@moija/ui";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { instance } from "../../apis/instance";
+import { resgister } from "../../apis/register";
 import { School, Major, EducationStatus } from "./enum";
 
 const Register = () => {
@@ -61,15 +61,12 @@ const Register = () => {
             return;
         }
 
-        const requestData = {
-            school: selectedSchool,
-            major: selectedMajor,
-            educationStatus: selectedStatus,
-        };
-
         try {
-            const response = await instance.patch("/users/update", requestData);
-            console.log("회원정보 업데이트 성공:", response.data);
+            await resgister.register({
+                school: selectedSchool,
+                major: selectedMajor,
+                educationStatus: selectedStatus,
+            });
             router.push("/");
         } catch (error: any) {
             console.error(

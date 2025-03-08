@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Heart } from "@moija/ui";
 
 type ProfileBoxProps = {
@@ -20,6 +20,12 @@ const ProfileBox = ({
     likes,
     company,
 }: ProfileBoxProps) => {
+    const [liked, setLiked] = useState(false);
+
+    const handleLikeClick = () => {
+        setLiked(!liked);
+    };
+
     return (
         <div className="w-[100%] h-45 px-[50px] py-[34px] bg-white rounded-[20px] border border-gray-200 justify-between items-center inline-flex">
             <div className="flex items-center gap-[30px]">
@@ -53,8 +59,8 @@ const ProfileBox = ({
                 </div>
             </div>
             <div className="flex items-center text-gray-500">
-                <div className="mr-1">
-                    <Heart />
+                <div className="mr-1" onClick={handleLikeClick}>
+                    <Heart fill={liked ? "red" : "none"} />
                 </div>
                 <div className="text-caption1 text-gray-500">{likes}</div>
             </div>
