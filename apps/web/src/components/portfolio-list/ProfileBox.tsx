@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Heart } from "@moija/ui";
+import { likeApi } from "../../app/api/likeApi";
 
 type ProfileBoxProps = {
+    id: string;
     name: string;
     job: string;
     school: string;
     introduce: string;
     tags: string[];
-    likes: number;
-    company?: string | null;
+    likes: string;
+    company: string;
 };
 
 const ProfileBox = ({
+    id,
     name,
     job,
     school,
@@ -21,9 +24,48 @@ const ProfileBox = ({
     company,
 }: ProfileBoxProps) => {
     const [liked, setLiked] = useState(false);
+    const [likesCount, setLikesCount] = useState(0);
 
-    const handleLikeClick = () => {
-        setLiked(!liked);
+    useEffect(() => {
+        const checkLikeStatus = async () => {
+            try {
+                const status = await likeApi.getLikeStatus(id);
+                console.log("좋아요 상태:", status);
+                setLiked(status.isLiked);
+                setLikesCount(Number(likes));
+            } catch (error) {
+                console.error("좋아요 상태 확인 실패:", error);
+                setLiked(false);
+                setLikesCount(Number(likes));
+            }
+        };
+
+        if (localStorage.getItem("accessToken")) {
+            checkLikeStatus();
+        } else {
+            setLiked(false);
+            setLikesCount(Number(likes));
+        }
+    }, [id, likes]);
+
+    const handleLikeClick = async () => {
+        if (!localStorage.getItem("accessToken")) {
+            alert("로그인이 필요합니다.");
+            return;
+        }
+
+        try {
+            const newLikeState = !liked;
+            if (newLikeState) {
+                await likeApi.addLike(id);
+            } else {
+                await likeApi.removeLike(id);
+            }
+            setLiked(newLikeState);
+            setLikesCount((prev) => (newLikeState ? prev + 1 : prev - 1));
+        } catch (error) {
+            console.error("좋아요 토글 실패:", error);
+        }
     };
 
     return (
@@ -58,11 +100,15 @@ const ProfileBox = ({
                     </div>
                 </div>
             </div>
-            <div className="flex items-center text-gray-500">
-                <div className="mr-1" onClick={handleLikeClick}>
-                    <Heart fill={liked ? "red" : "none"} />
+            <div className="flex gap-[5px] w-10 items-center justify-center text-gray-500">
+                <Heart
+                    onClick={handleLikeClick}
+                    fill={liked ? "#e96221" : "none"}
+                    stroke={liked ? "none" : "#5a5a5a"}
+                />
+                <div className="text-cation2 text-gray-500">
+                    {likesCount ?? Number(likes)}
                 </div>
-                <div className="text-caption1 text-gray-500">{likes}</div>
             </div>
         </div>
     );

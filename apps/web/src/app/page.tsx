@@ -14,7 +14,7 @@ interface ProfileType {
     major: string;
     introduce: string;
     profile: string;
-    likeCnt: number;
+    likeCnt: string;
 }
 
 const PortfolioList = () => {
@@ -41,6 +41,7 @@ const PortfolioList = () => {
                 const data = response.data.content || [];
                 setProfiles(data);
                 setFilteredProfiles(data);
+                console.log(data);
             } catch (error) {
                 console.error("에러 발생 :", error);
                 setProfiles([]);
@@ -98,7 +99,7 @@ const PortfolioList = () => {
                         {paginatedProfiles.length > 0 ? (
                             paginatedProfiles.map((profile) => (
                                 <ProfileBox
-                                    key={profile.id}
+                                    id={profile.id.toString()}
                                     name={profile.name}
                                     job={profile.major}
                                     school={profile.school}

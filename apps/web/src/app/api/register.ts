@@ -1,5 +1,5 @@
-import { instance } from "./instance";
-import { School, Major, EducationStatus } from "../app/register/enum";
+import { instance } from "../../apis/instance";
+import { School, Major, EducationStatus } from "../register/enum";
 
 interface RegisterRequest {
     school: School;
