@@ -5,16 +5,16 @@ const textStyle = "text-caption1 text-black";
 
 export const Sidebar = () => {
   return (
-    <div className="bg-white rounded-[8px] sticky top-[116px] z-sidebar w-[184px] h-fit px-[12px] pt-[28px] pb-[8px]">
+    <div className="bg-white rounded-[8px] sticky top-[116px] z-sidebar w-[184px] h-fit px-[12px] pt-[8px] pb-[8px]">
       <Stack gap={10}>
-        <Stack gap={8}>
+        {/* <Stack gap={8}>
           <Spacing>
             <Text className="text-btn text-black">프로필 완성도</Text>
             <Text className="text-btn text-black">0%</Text>
           </Spacing>
           <div className="w-full h-[7px] rounded-[10px] bg-gray-200"></div>
-        </Stack>
-        <div className="border-y-[1px] border-gray-100 h-[40px] flex items-center px-[8px]">
+        </Stack> */}
+        <div className="border-b-[1px] border-gray-100 h-[40px] flex items-center px-[8px]">
           <Flex gap={8} align="center">
             <Profile size={14} color="#787878" />
             <Text className={textStyle + asterisk}>기본 정보</Text>
@@ -22,6 +22,7 @@ export const Sidebar = () => {
         </div>
         <div className="p-2">
           <Stack gap={16}>
+            <Text className={textStyle}>제목</Text>
             <Text className={textStyle}>자기소개</Text>
             <Text className={textStyle}>기술 스택</Text>
             <Text className={textStyle}>프로젝트</Text>

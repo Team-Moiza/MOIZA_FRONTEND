@@ -23,7 +23,7 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
     <div className="w-[246.5px] h-[127.2px] p-4 rounded-lg bg-gray-100">
       <Stack gap={8}>
         <div className="w-full flex items-center justify-between">
-          <Link className="text-btn1 cursor-pointer hover:underline" href={`/detail/${"test"}`}>
+          <Link className="text-btn1 cursor-pointer hover:underline" href={`/detail/${id}`}>
             {title}
           </Link>
           <div className="relative">

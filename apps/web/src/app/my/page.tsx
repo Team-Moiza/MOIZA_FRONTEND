@@ -7,14 +7,16 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { addPortfolio, deletePortFolio, myPortFolio } from "../../apis";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { user } from "../../apis/user";
+import { logout, removeAccount, user } from "../../apis/user";
 import { educationstat, FormType, job, major, school } from "./edit/page";
 import { Info } from "./Info";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const { data: userData } = useQuery<FormType>({ queryKey: ["user"], queryFn: async () => (await user()).data });
   const { data, refetch } = useQuery({ queryKey: ["my", "portfolio"], queryFn: myPortFolio });
   const [type, setType] = useState<null | `removeResume_${string}` | "removeAccount">(null);
+  const { replace } = useRouter();
 
   const { mutate } = useMutation({
     mutationFn: addPortfolio,
@@ -30,6 +32,15 @@ export default function Page() {
       toast.success("이력서를 성공적으로 제거하였습니다!");
       refetch();
     },
+  });
+
+  const { mutate: userLogout } = useMutation({
+    mutationFn: logout,
+    onSuccess: () => replace("/login"),
+  });
+  const { mutate: removeA } = useMutation({
+    mutationFn: removeAccount,
+    onSuccess: () => replace("/"),
   });
 
   return (
@@ -50,6 +61,8 @@ export default function Page() {
                 onClick={() => {
                   if (type !== "removeAccount") {
                     remove(type.split("_")[1] as string);
+                  } else {
+                    removeA();
                   }
                   setType(null);
                 }}
@@ -61,16 +74,18 @@ export default function Page() {
         </div>
       )}
       <Center>
-        <div className="pt-[80px] w-[1040px] h-screen flex gap-[10px] mb-[250px]">
+        <div className="pt-[80px] w-[1040px] h-screen flex gap-[10px] ">
           <nav className="w-[216px] py-[110px] px-[24px] h-full ">
             <Stack gap={20}>
               <span className="text-p2 text-black">프로필</span>
               <span className="text-p2 text-black">좋아요 목록</span>
               <div className="w-full h-[1px] bg-gray-200" />
-              <span className="text-p2 text-gray-400">로그아웃</span>
-              <span className="text-p2 text-sub-red" onClick={() => setType("removeAccount")}>
+              <button className="text-p2 text-gray-400 w-fit" onClick={() => userLogout()}>
+                로그아웃
+              </button>
+              <button className="text-p2 text-sub-red w-fit" onClick={() => setType("removeAccount")}>
                 회원탈퇴
-              </span>
+              </button>
             </Stack>
           </nav>
           <div className="w-full mt-10 flex flex-col h-fit gap-[25px]">
@@ -87,7 +102,7 @@ export default function Page() {
                 </div>
               </Stack>
             </div>
-            <div className="w-full h-fit px-[36px] py-[24px] border-[1px] rounded-xl border-gray-200">
+            <div className="w-full h-fit px-[36px] py-[24px] border-[1px] rounded-xl border-gray-200 mb-[100px]">
               <Stack gap={20}>
                 <div className="flex justify-between items-center">
                   <span className="text-p2">기본 정보</span>
@@ -104,7 +119,7 @@ export default function Page() {
                   <span className="text-gray-400 text-p5">{educationstat[userData?.educationStatus as keyof typeof educationstat]}</span>
                 </Info>
                 <Info name="개발 직무" value={job[userData?.job as keyof typeof job]} />
-                <Info name="이메일" value={userData?.company} />
+                <Info name="회사" value={userData?.company} />
               </Stack>
             </div>
           </div>

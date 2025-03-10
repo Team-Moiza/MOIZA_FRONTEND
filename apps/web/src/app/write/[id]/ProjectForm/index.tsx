@@ -14,7 +14,7 @@ export const ProjectForm = () => {
         <Item field={field} method={fieldMethods} index={index} key={field.id} />
       ))}
 
-      <button className="flex items-center gap-2 cursor-pointer" type="button" onClick={() => fieldMethods.append({ date: "", introduce: "", processing: "진행중", skillset: [], title: "", url: "", sections: [] })}>
+      <button className="flex items-center gap-2 cursor-pointer" type="button" onClick={() => fieldMethods.append({ title: "", status: false, startDate: "", endDate: "", description: "", link: "" })}>
         <div className="rounded-full bg-primary-500 flex items-center justify-center w-[26px] h-[26px]">
           <Plus color="#FFFFFF" size={16} />
         </div>

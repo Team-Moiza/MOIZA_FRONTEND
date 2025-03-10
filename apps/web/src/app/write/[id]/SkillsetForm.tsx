@@ -17,10 +17,12 @@ export const SkillsetForm = () => {
             width={776}
             placeholder="기술 스택을 등록하세요"
             onKeyDown={(e) => {
-              if (e.key === "Enter" && e.currentTarget.value) {
+              if (e.key === "Enter") {
                 e.preventDefault();
-                append({ id: fields.length, name: e.currentTarget.value });
-                e.currentTarget.value = "";
+                if (e.currentTarget.value && !e.nativeEvent.isComposing) {
+                  append({ id: Math.floor(Math.random() * 1000000), name: e.currentTarget.value });
+                  e.currentTarget.value = "";
+                }
               }
             }}
           />

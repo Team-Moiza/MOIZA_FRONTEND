@@ -27,8 +27,8 @@ export const myPortFolio = async () => {
   return await instance.get("/portfolios/my");
 };
 
-export const editPortFolio = async (id: string) => {
-  return await instance.patch(`/portfolios/${id}`);
+export const editPortFolio = async (id: string, data: any) => {
+  return await instance.patch(`/portfolios/${id}`, data);
 };
 
 export const deletePortFolio = async (id: string) => {

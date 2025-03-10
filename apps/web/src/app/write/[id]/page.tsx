@@ -10,50 +10,73 @@ import { LinkForm } from "./LinkForm";
 import { AchievementForm } from "./AchievementForm";
 import { QualificationForm } from "./QualificationForm";
 import { default as Profile } from "../../my/edit/page";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useParams, useRouter } from "next/navigation";
+import { detailPortFolio, editPortFolio, publishPortFolio } from "../../../apis";
+import { useEffect } from "react";
+// import { TitleForm } from "./TitleForm";
 
 export type FormData = {
+  id: number;
+  name: string;
+  major: string;
   title: string;
-  email: string;
-  job: string;
-  company: string;
-  introduce: { introduce: string; url?: string };
+  introduce: string;
+  introduction: { introduce: string; url: string };
   skillsets: Array<{
     name: string;
     id: number;
   }>;
   projects: Array<{
     title: string;
-    skillset: string[];
-    processing?: "진행중" | "서비스중" | "서비스 종료";
-    date: string;
-    introduce: string;
-    url?: string;
-    sections: Array<{
-      title: string;
-      content: string;
-    }>;
+    status: boolean;
+    startDate: string;
+    endDate: string;
+    description: string;
+    link: string;
   }>;
-  achievements: Array<{
+  awards: Array<{
     name: string;
-    contestName: string;
     type: string;
     date: string;
-    introduce: string;
+    description: string;
   }>;
-  certifications: Array<{
+  qualifications: Array<{
     name: string;
-    level: string;
+    score: string;
     date: string;
-    issuer: string;
   }>;
+  codes: Array<{ id: number; keyword: string }>;
   links: Array<{
-    title: string;
+    id: string | number;
     url: string;
   }>;
 };
 
 export default function WritePortFolio() {
   const formMethod = useForm<FormData>({ defaultValues: { title: "김수아" } });
+  const navigate = useRouter();
+  const { id } = useParams();
+  const client = useQueryClient();
+  const { data } = useQuery({ queryKey: ["portfolio", "write", id], queryFn: () => detailPortFolio(id as string) });
+  const { mutate } = useMutation({
+    mutationFn: async () => (await publishPortFolio(id as string)) as any,
+    onSuccess: async () => {
+      await client.invalidateQueries(["my", "portfolio"] as any);
+      navigate.replace("/my");
+    },
+  });
+  const { mutate: edit } = useMutation({
+    mutationFn: () => editPortFolio(id as string, formMethod.getValues()) as any,
+    onSuccess: () => {
+      client.invalidateQueries(["portfolio", "write", id] as any);
+      navigate.replace("/my");
+    },
+  });
+
+  useEffect(() => {
+    formMethod.reset(data?.data);
+  }, [data?.data]);
 
   const onSubmit = formMethod.handleSubmit(
     (data) => {
@@ -71,6 +94,7 @@ export default function WritePortFolio() {
             <Center vertical={true}>
               <Flex gap={24}>
                 <Stack gap={28}>
+                  {/* <TitleForm /> */}
                   <IntroduceForm />
                   <SkillsetForm />
                   <ProjectForm />
@@ -78,8 +102,10 @@ export default function WritePortFolio() {
                   <QualificationForm />
                   <LinkForm />
                   <div className="w-full flex justify-end gap-5 mt-20">
-                    <Button type="white">저장</Button>
-                    <Button>게시</Button>
+                    <Button type="white" onClick={() => edit()}>
+                      저장
+                    </Button>
+                    <Button onClick={mutate}>게시</Button>
                   </div>
                 </Stack>
                 <Sidebar />
