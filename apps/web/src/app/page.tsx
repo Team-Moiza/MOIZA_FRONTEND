@@ -5,7 +5,7 @@ import { instance } from "../apis/instance";
 import ProfileBox from "../components/portfolio-list/ProfileBox";
 import CustomPagination from "../components/portfolio-list/Pagination";
 import Filter from "../components/portfolio-list/Filter";
-import Footer from "../components/layouts/Footer";
+import { Footer } from "../components/layouts/Footer";
 
 interface ProfileType {
     id: number;
@@ -71,7 +71,7 @@ const PortfolioList = () => {
         startIndex + itemsPerPage
     );
 
-    if (loading) return <p>로딩중...</p>;
+    if (loading) return <div>로딩중...</div>;
 
     return (
         <>

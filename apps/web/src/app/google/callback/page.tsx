@@ -29,7 +29,6 @@ const GoogleCallback = () => {
                     })
                     .then((userResponse) => {
                         const userData = userResponse.data;
-                        console.log("유저 데이터:", userData);
 
                         const isNewUser =
                             !userData.school ||
