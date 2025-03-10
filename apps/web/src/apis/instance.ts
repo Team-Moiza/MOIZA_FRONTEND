@@ -5,8 +5,6 @@ export const instance = axios.create({
     timeout: 3000,
 });
 
-console.log(process.env.NEXT_PUBLIC_BASE_URL)
-
 instance.interceptors.request.use((config) => {
     const token = localStorage.getItem("accessToken");
     if (token) {
@@ -16,13 +14,28 @@ instance.interceptors.request.use((config) => {
 });
 
 instance.interceptors.response.use(
-    (response) => response,
-    async (error) => {
-        if (error.response?.status === 401) {
-            console.error("인증 실패:", error);
+    (res) => res,
+    async (err) => {
+        if (err.response?.status !== 401) {
+            return Promise.reject(err);
+        }
+
+        try {
+            localStorage.removeItem("accessToken");
+            const refreshToken = localStorage.getItem("refreshToken");
+
+            const { data } = await instance.post(`/auth/refresh`, {
+                refreshToken,
+            });
+
+            localStorage.setItem("accessToken", data.accessToken);
+            window.location.reload();
+            return;
+        } catch (refreshErr) {
+            alert("토큰이 만료되거나 존재하지 않습니다. 다시 로그인 해주세요.");
             localStorage.clear();
             window.location.replace("/login");
+            return Promise.reject(refreshErr);
         }
-        return Promise.reject(error);
     }
 );
