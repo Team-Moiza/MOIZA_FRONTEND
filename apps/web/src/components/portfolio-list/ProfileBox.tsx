@@ -8,7 +8,7 @@ type ProfileBoxProps = {
     job: string;
     school: string;
     introduce: string;
-    tags: string[];
+    codes?: { keyword: string }[];
     likes: string;
     company: string;
 };
@@ -19,7 +19,7 @@ const ProfileBox = ({
     job,
     school,
     introduce,
-    tags,
+    codes,
     likes,
     company,
 }: ProfileBoxProps) => {
@@ -68,7 +68,7 @@ const ProfileBox = ({
     };
 
     return (
-        <div className="w-[100%] h-45 px-[50px] py-[34px] bg-white rounded-[20px] border border-gray-200 justify-between items-center inline-flex">
+        <div className="min-w-[600px] w-[100%] h-45 px-[50px] py-[34px] bg-white rounded-[20px] border border-gray-200 justify-between items-center inline-flex">
             <div className="flex items-center gap-[30px]">
                 <div className="w-16 h-16 rounded-xl bg-gray-300 "></div>
                 <div className="flex-col w-[37vw]">
@@ -88,12 +88,12 @@ const ProfileBox = ({
                         {introduce}
                     </div>
                     <div className="flex mt-2 gap-2">
-                        {tags.map((tag, index) => (
+                        {codes?.map((code, index) => (
                             <div
                                 key={index}
                                 className="px-[9px] py-1 bg-gray-100 rounded-[8px] text-caption2 text-gray-500"
                             >
-                                {tag}
+                                {code.keyword}
                             </div>
                         ))}
                     </div>

@@ -6,7 +6,7 @@ import ProfileBox from "../components/portfolio-list/ProfileBox";
 import CustomPagination from "../components/portfolio-list/Pagination";
 import Filter from "../components/portfolio-list/Filter";
 import { Footer } from "../components/layouts/Footer";
-import { SchoolNames } from "./enums/portfolio-list";
+import { School } from "../enum/enums";
 
 interface ProfileType {
     id: number;
@@ -16,6 +16,7 @@ interface ProfileType {
     introduce: string;
     profile: string;
     likeCnt: string;
+    codes?: { keyword: string }[];
 }
 
 const PortfolioList = () => {
@@ -24,7 +25,7 @@ const PortfolioList = () => {
     const [loading, setLoading] = useState(true);
     const [selectedCategory, setSelectedCategory] = useState("전체");
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 3;
+    const itemsPerPage = 8;
 
     const categories = [
         "전체",
@@ -103,14 +104,14 @@ const PortfolioList = () => {
                                     name={profile.name}
                                     job={profile.major}
                                     school={
-                                        SchoolNames[
-                                            profile.school as keyof typeof SchoolNames
+                                        School[
+                                            profile.school as keyof typeof School
                                         ] || profile.school
                                     }
                                     introduce={profile.introduce}
-                                    tags={[]}
                                     likes={profile.likeCnt}
                                     company={""}
+                                    codes={profile.codes || []}
                                 />
                             ))
                         ) : (
