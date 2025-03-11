@@ -1,10 +1,25 @@
 "use client";
 import React, { useState } from "react";
 import { BottomArrow, Search, Replay, Button } from "@moija/ui";
+import { School } from "../../enum/enums";
 
 type Option = string;
 
-const Filter = () => {
+type SchoolOption = {
+    label: string;
+    value: School;
+};
+
+interface FilterProps {
+    onFilterApply: (filters: {
+        sort: string;
+        stacks: string[];
+        schools: string[];
+        company: string;
+    }) => void;
+}
+
+const Filter = ({ onFilterApply }: FilterProps) => {
     const [filterState, setFilterState] = useState({
         isOpen: {
             sort: false,
@@ -16,7 +31,7 @@ const Filter = () => {
         searchInput: "",
         selectedStacks: [] as string[],
         filteredStacks: [] as string[],
-        selectedSchool: [] as string[],
+        selectedSchool: [] as SchoolOption[],
         selectedCompany: "전체" as Option,
     });
 
@@ -41,11 +56,11 @@ const Filter = () => {
     const options = {
         sort: ["인기순", "최신순", "오래된순"] as Option[],
         school: [
-            "광주소마고",
-            "대구소마고",
-            "대덕소마고",
-            "부산소마고",
-        ] as Option[],
+            { label: "부산소마고", value: School.BSSM },
+            { label: "대구소마고", value: School.DGSM },
+            { label: "대덕소마고", value: School.DSM },
+            { label: "광주소마고", value: School.GSM },
+        ] as SchoolOption[],
         company: ["전체", "재직중", "미재직"] as Option[],
     };
 
@@ -63,32 +78,45 @@ const Filter = () => {
                 value.trim() === ""
                     ? []
                     : stacks.filter((stack) =>
-                        stack.toLowerCase().includes(value.toLowerCase())
-                    ),
+                          stack.toLowerCase().includes(value.toLowerCase())
+                      ),
         }));
         setIsFilterChanged(true);
     };
 
-    const handleToggleSelection = (item: string, type: 'stack' | 'school') => {
+    const handleToggleSelection = (item: SchoolOption) => {
         setFilterState((prev) => {
-            const selectedItems = type === 'stack' 
-                ? prev.selectedStacks 
-                : prev.selectedSchool;
+            const selectedItems = prev.selectedSchool;
+            const isSelected = selectedItems.some(
+                (i) => i.value === item.value
+            );
 
-            const updatedItems = selectedItems.includes(item)
-                ? selectedItems.filter((i) => i !== item)
+            const updatedItems = isSelected
+                ? selectedItems.filter((i) => i.value !== item.value)
                 : [...selectedItems, item];
 
             return {
                 ...prev,
-                [type === 'stack' ? 'selectedStacks' : 'selectedSchool']: updatedItems,
+                selectedSchool: updatedItems,
             };
         });
         setIsFilterChanged(true);
     };
 
-    const handleToggleStack = (stack: string) => handleToggleSelection(stack, 'stack');
-    const handleToggleSchool = (school: string) => handleToggleSelection(school, 'school');
+    const handleToggleStackSelection = (stack: string) => {
+        setFilterState((prev) => {
+            const updatedStacks = prev.selectedStacks.includes(stack)
+                ? prev.selectedStacks.filter((i) => i !== stack)
+                : [...prev.selectedStacks, stack];
+            return { ...prev, selectedStacks: updatedStacks };
+        });
+        setIsFilterChanged(true);
+    };
+
+    const handleToggleSchool = (school: SchoolOption) =>
+        handleToggleSelection(school);
+    const handleToggleStack = (stack: string) =>
+        handleToggleStackSelection(stack);
 
     const handleCompanyChange = (status: Option): void => {
         setFilterState((prev) => ({ ...prev, selectedCompany: status }));
@@ -120,6 +148,15 @@ const Filter = () => {
             selectedCompany: "전체" as Option,
         });
         setIsFilterChanged(false);
+    };
+
+    const handleApplyFilter = () => {
+        onFilterApply({
+            sort: filterState.selectedSort,
+            stacks: filterState.selectedStacks,
+            schools: filterState.selectedSchool.map((school) => school.value),
+            company: filterState.selectedCompany,
+        });
     };
 
     return (
@@ -238,18 +275,21 @@ const Filter = () => {
                 {filterState.isOpen.school && (
                     <div className="mb-2.5 flex flex-wrap gap-2">
                         {options.school.map((option) => (
-                            <div key={option} className="flex items-center">
+                            <div
+                                key={option.label}
+                                className="flex items-center"
+                            >
                                 <div
                                     onClick={() => handleToggleSchool(option)}
                                     className={`cursor-pointer py-2 px-4 border rounded-lg ${
-                                        filterState.selectedSchool.includes(
-                                            option
+                                        filterState.selectedSchool.some(
+                                            (s) => s.value === option.value
                                         )
                                             ? "text-primary-500 bg-primary-100 border-primary-500"
                                             : "text-black bg-white border-gray-200"
                                     }`}
                                 >
-                                    {option}
+                                    {option.label}
                                 </div>
                             </div>
                         ))}
@@ -287,7 +327,9 @@ const Filter = () => {
                     </div>
                 )}
             </div>
-            <Button type="default" width="100%">필터 적용하기</Button>
+            <Button type="default" width="100%" onClick={handleApplyFilter}>
+                필터 적용하기
+            </Button>
         </div>
     );
 };

@@ -17,6 +17,7 @@ interface ProfileType {
     profile: string;
     likeCnt: string;
     codes?: { keyword: string }[];
+    company: string | null;
 }
 
 const PortfolioList = () => {
@@ -26,6 +27,10 @@ const PortfolioList = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>("전체");
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
+    const [sortOption, setSortOption] = useState("인기순");
+    const [selectedStacks, setSelectedStacks] = useState<string[]>([]);
+    const [selectedSchools, setSelectedSchools] = useState<string[]>([]);
+    const [companyStatus, setCompanyStatus] = useState("전체");
 
     const categories = [
         "전체",
@@ -62,16 +67,69 @@ const PortfolioList = () => {
         getProfiles();
     }, []);
 
+    const handleFilterApply = ({
+        sort,
+        stacks,
+        schools,
+        company,
+    }: {
+        sort: string;
+        stacks: string[];
+        schools: string[];
+        company: string;
+    }) => {
+        setSortOption(sort);
+        setSelectedStacks(stacks);
+        setSelectedSchools(schools);
+        setCompanyStatus(company);
+    };
+
     useEffect(() => {
-        const filtered = profiles.filter(
-            (profile) =>
+        const filtered = profiles.filter((profile) => {
+            const categoryMatch =
                 selectedCategory === "전체" ||
                 Job[profile.job] === selectedCategory ||
                 (selectedCategory === Job.OTHER &&
-                    !Object.values(Job).includes(Job[profile.job]))
-        );
-        setFilteredProfiles(filtered);
-    }, [selectedCategory, profiles]);
+                    !Object.values(Job).includes(Job[profile.job]));
+
+            // 학교 필터
+            const schoolMatch =
+                selectedSchools.length === 0 ||
+                selectedSchools.includes(School[profile.school]);
+
+            const stackMatch =
+                selectedStacks.length === 0 ||
+                profile.codes?.some((code) =>
+                    selectedStacks.includes(code.keyword)
+                );
+
+            const companyMatch =
+                companyStatus === "전체" ||
+                (companyStatus === "재직중" && profile.company !== null) ||
+                (companyStatus === "미재직" && profile.company === null);
+
+            return categoryMatch && schoolMatch && stackMatch && companyMatch;
+        });
+
+        const sorted = [...filtered].sort((a, b) => {
+            if (sortOption === "인기순") {
+                return Number(b.likeCnt) - Number(a.likeCnt);
+            } else if (sortOption === "최신순") {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+
+        setFilteredProfiles(sorted);
+    }, [
+        selectedCategory,
+        selectedStacks,
+        selectedSchools,
+        companyStatus,
+        sortOption,
+        profiles,
+    ]);
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const paginatedProfiles = filteredProfiles.slice(
@@ -84,7 +142,7 @@ const PortfolioList = () => {
     return (
         <>
             <div className="w-screen pt-[120px] px-[200px]">
-                <div className="overflow-x-auto pb-4 flex gap-2 scrollbar-hide">
+                <div className="overflow-x-auto pb-5 flex gap-2 scrollbar-hide">
                     {categories.map((category) => (
                         <button
                             key={category}
@@ -113,7 +171,7 @@ const PortfolioList = () => {
                                     school={School[profile.school]}
                                     introduce={profile.introduce}
                                     likes={profile.likeCnt}
-                                    company={""}
+                                    company={profile.company || ""}
                                     codes={profile.codes || []}
                                 />
                             ))
@@ -129,7 +187,7 @@ const PortfolioList = () => {
                             onPageChange={setCurrentPage}
                         />
                     </div>
-                    <Filter />
+                    <Filter onFilterApply={handleFilterApply} />
                 </div>
             </div>
             <Footer />
