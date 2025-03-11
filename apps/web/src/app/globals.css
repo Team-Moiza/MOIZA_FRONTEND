@@ -2,32 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 @layer base {
-  body {
-    overflow-x: hidden;
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-.animate-float {
-  animation: float 2s ease-in-out infinite;
-}
-
-@layer utilities {
-    .scrollbar-hide {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;     /* Firefox */
-    }
-    
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none;  /* Chrome, Safari, Opera */
+    body {
+        overflow-x: hidden;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 }
