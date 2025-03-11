@@ -30,11 +30,9 @@ const ProfileBox = ({
         const checkLikeStatus = async () => {
             try {
                 const status = await likeApi.getLikeStatus(id);
-                console.log("좋아요 상태:", status);
                 setLiked(status.isLiked);
                 setLikesCount(Number(likes));
             } catch (error) {
-                console.error("좋아요 상태 확인 실패:", error);
                 setLiked(false);
                 setLikesCount(Number(likes));
             }
@@ -50,7 +48,8 @@ const ProfileBox = ({
 
     const handleLikeClick = async () => {
         if (!localStorage.getItem("accessToken")) {
-            alert("로그인이 필요합니다.");
+            alert("로그인이 필요한 서비스입니다.");
+            window.location.href = "/login";
             return;
         }
 

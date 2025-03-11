@@ -6,6 +6,7 @@ import ProfileBox from "../components/portfolio-list/ProfileBox";
 import CustomPagination from "../components/portfolio-list/Pagination";
 import Filter from "../components/portfolio-list/Filter";
 import { Footer } from "../components/layouts/Footer";
+import { SchoolNames } from "./enums/portfolio-list";
 
 interface ProfileType {
     id: number;
@@ -43,7 +44,6 @@ const PortfolioList = () => {
                 setFilteredProfiles(data);
                 console.log(data);
             } catch (error) {
-                console.error("에러 발생 :", error);
                 setProfiles([]);
                 setFilteredProfiles([]);
             } finally {
@@ -102,7 +102,11 @@ const PortfolioList = () => {
                                     id={profile.id.toString()}
                                     name={profile.name}
                                     job={profile.major}
-                                    school={profile.school}
+                                    school={
+                                        SchoolNames[
+                                            profile.school as keyof typeof SchoolNames
+                                        ] || profile.school
+                                    }
                                     introduce={profile.introduce}
                                     tags={[]}
                                     likes={profile.likeCnt}
