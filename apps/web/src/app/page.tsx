@@ -6,13 +6,13 @@ import ProfileBox from "../components/portfolio-list/ProfileBox";
 import CustomPagination from "../components/portfolio-list/Pagination";
 import Filter from "../components/portfolio-list/Filter";
 import { Footer } from "../components/layouts/Footer";
-import { School } from "../enum/enums";
+import { School, Job } from "../enum/enums";
 
 interface ProfileType {
     id: number;
     name: string;
-    school: string;
-    major: string;
+    school: keyof typeof School;
+    job: keyof typeof Job;
     introduce: string;
     profile: string;
     likeCnt: string;
@@ -23,17 +23,24 @@ const PortfolioList = () => {
     const [profiles, setProfiles] = useState<ProfileType[]>([]);
     const [filteredProfiles, setFilteredProfiles] = useState<ProfileType[]>([]);
     const [loading, setLoading] = useState(true);
-    const [selectedCategory, setSelectedCategory] = useState("전체");
+    const [selectedCategory, setSelectedCategory] = useState<string>("전체");
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
 
     const categories = [
         "전체",
-        "프론트엔드 개발자",
-        "백엔드 개발자",
-        "UX/UI 디자이너",
-        "기획자",
-        "기타",
+        Job.FRONTEND_DEVELOPER,
+        Job.BACKEND_DEVELOPER,
+        Job.ANDROID_DEVELOPER,
+        Job.DEVOPS_DEVELOPER,
+        Job.FULLSTACK_DEVELOPER,
+        Job.GAME_DEVELOPER,
+        Job.HW_EMBEDDED,
+        Job.IOS_DEVELOPER,
+        Job.SECURITY_SPECIALIST,
+        Job.UI_UX_DESIGNER,
+        Job.PLANNER,
+        Job.OTHER,
     ];
 
     useEffect(() => {
@@ -59,9 +66,9 @@ const PortfolioList = () => {
         const filtered = profiles.filter(
             (profile) =>
                 selectedCategory === "전체" ||
-                profile.major === selectedCategory ||
-                (selectedCategory === "기타" &&
-                    !categories.includes(profile.major))
+                Job[profile.job] === selectedCategory ||
+                (selectedCategory === Job.OTHER &&
+                    !Object.values(Job).includes(Job[profile.job]))
         );
         setFilteredProfiles(filtered);
     }, [selectedCategory, profiles]);
@@ -77,7 +84,7 @@ const PortfolioList = () => {
     return (
         <>
             <div className="w-screen pt-[120px] px-[200px]">
-                <div className="flex gap-2 mb-[30px]">
+                <div className="overflow-x-auto pb-4 flex gap-2 scrollbar-hide">
                     {categories.map((category) => (
                         <button
                             key={category}
@@ -85,7 +92,7 @@ const PortfolioList = () => {
                                 setSelectedCategory(category);
                                 setCurrentPage(1);
                             }}
-                            className={`px-4 py-2 rounded-full ${
+                            className={`px-4 py-2 rounded-full whitespace-nowrap ${
                                 selectedCategory === category
                                     ? "bg-primary-500 text-white"
                                     : "bg-white text-gray-600 border-[1px] border-gray-200"
@@ -102,12 +109,8 @@ const PortfolioList = () => {
                                 <ProfileBox
                                     id={profile.id.toString()}
                                     name={profile.name}
-                                    job={profile.major}
-                                    school={
-                                        School[
-                                            profile.school as keyof typeof School
-                                        ] || profile.school
-                                    }
+                                    job={Job[profile.job]}
+                                    school={School[profile.school]}
                                     introduce={profile.introduce}
                                     likes={profile.likeCnt}
                                     company={""}

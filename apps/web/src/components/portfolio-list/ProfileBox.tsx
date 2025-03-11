@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Heart } from "@moija/ui";
 import { likeApi } from "../../app/api/likeApi";
+import { Job, School } from "../enum/enums";
 
 type ProfileBoxProps = {
     id: string;
     name: string;
-    job: string;
-    school: string;
+    job: string;        // Job[keyof typeof Job]로도 가능
+    school: string;     // School[keyof typeof School]로도 가능
     introduce: string;
     codes?: { keyword: string }[];
     likes: string;
