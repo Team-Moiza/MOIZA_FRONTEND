@@ -10,3 +10,12 @@
         user-select: none;
     }
 }
+.scrollbar-hide {
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
