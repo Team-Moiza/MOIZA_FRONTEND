@@ -13,6 +13,11 @@ export interface Profile {
     links: String[];
 }
 
+export interface ProfileListProps {
+    paginatedProfiles: Profile[];
+    isLoggedOut: boolean;
+} 
+
 interface Project {
     title: string;
     date: string;

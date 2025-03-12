@@ -2,40 +2,31 @@
 
 import React, { useState, useEffect } from "react";
 import { instance } from "../apis/instance";
-import ProfileBox from "../components/portfolio-list/ProfileBox";
+import ProfileList from "../components/portfolio-list/ProfileList";
 import CustomPagination from "../components/portfolio-list/Pagination";
 import Filter from "../components/portfolio-list/Filter";
 import { Footer } from "../components/layouts/Footer";
 import { School, Job } from "../enum/enums";
-
-interface ProfileType {
-    id: number;
-    name: string;
-    school: keyof typeof School;
-    job: keyof typeof Job;
-    introduce: string;
-    profile: string;
-    likeCnt: string;
-    codes?: { keyword: string }[];
-    company: string | null;
-}
+import { FilterApply, Profile } from "../types/portfolio";
 
 const PortfolioList = () => {
-    const [profiles, setProfiles] = useState<ProfileType[]>([]);
-    const [filteredProfiles, setFilteredProfiles] = useState<ProfileType[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [selectedCategory, setSelectedCategory] = useState<string>("전체");
+    const [profiles, setProfiles] = useState<Profile[]>([]);
+    const [filteredProfiles, setFilteredProfiles] = useState<Profile[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState("전체");
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
+    const itemsPerPage = 10;
     const [sortOption, setSortOption] = useState("인기순");
     const [selectedStacks, setSelectedStacks] = useState<string[]>([]);
-    const [selectedSchools, setSelectedSchools] = useState<string[]>([]);
+    const [selectedSchools, setSelectedSchools] = useState<
+        (keyof typeof School)[]
+    >([]);
     const [companyStatus, setCompanyStatus] = useState("전체");
 
     const categories = [
         "전체",
         Job.FRONTEND_DEVELOPER,
         Job.BACKEND_DEVELOPER,
+        Job.UI_UX_DESIGNER,
         Job.ANDROID_DEVELOPER,
         Job.DEVOPS_DEVELOPER,
         Job.FULLSTACK_DEVELOPER,
@@ -43,10 +34,11 @@ const PortfolioList = () => {
         Job.HW_EMBEDDED,
         Job.IOS_DEVELOPER,
         Job.SECURITY_SPECIALIST,
-        Job.UI_UX_DESIGNER,
         Job.PLANNER,
         Job.OTHER,
     ];
+
+    const isLoggedOut = !localStorage.getItem("accessToken");
 
     useEffect(() => {
         const getProfiles = async () => {
@@ -55,12 +47,9 @@ const PortfolioList = () => {
                 const data = response.data.content || [];
                 setProfiles(data);
                 setFilteredProfiles(data);
-                console.log(data);
             } catch (error) {
                 setProfiles([]);
                 setFilteredProfiles([]);
-            } finally {
-                setLoading(false);
             }
         };
 
@@ -72,15 +61,10 @@ const PortfolioList = () => {
         stacks,
         schools,
         company,
-    }: {
-        sort: string;
-        stacks: string[];
-        schools: string[];
-        company: string;
-    }) => {
+    }: FilterApply) => {
         setSortOption(sort);
         setSelectedStacks(stacks);
-        setSelectedSchools(schools);
+        setSelectedSchools(schools as (keyof typeof School)[]);
         setCompanyStatus(company);
     };
 
@@ -92,10 +76,9 @@ const PortfolioList = () => {
                 (selectedCategory === Job.OTHER &&
                     !Object.values(Job).includes(Job[profile.job]));
 
-            // 학교 필터
             const schoolMatch =
                 selectedSchools.length === 0 ||
-                selectedSchools.includes(School[profile.school]);
+                selectedSchools.includes(profile.school as keyof typeof School);
 
             const stackMatch =
                 selectedStacks.length === 0 ||
@@ -137,7 +120,14 @@ const PortfolioList = () => {
         startIndex + itemsPerPage
     );
 
-    if (loading) return <div>로딩중...</div>;
+    const handlePageChange = (page: number) => {
+        if (isLoggedOut) {
+            alert("로그인이 필요한 서비스입니다.");
+            window.location.replace("/login");
+        } else {
+            setCurrentPage(page);
+        }
+    };
 
     return (
         <>
@@ -162,29 +152,15 @@ const PortfolioList = () => {
                 </div>
                 <div className="flex gap-5 w-[100%] justify-between">
                     <div className="flex flex-col gap-5 w-[92%]">
-                        {paginatedProfiles.length > 0 ? (
-                            paginatedProfiles.map((profile) => (
-                                <ProfileBox
-                                    id={profile.id.toString()}
-                                    name={profile.name}
-                                    job={Job[profile.job]}
-                                    school={School[profile.school]}
-                                    introduce={profile.introduce}
-                                    likes={profile.likeCnt}
-                                    company={profile.company || ""}
-                                    codes={profile.codes || []}
-                                />
-                            ))
-                        ) : (
-                            <div className="w-full py-20 text-center text-gray-500">
-                                아직 등록된 포트폴리오가 없습니다.
-                            </div>
-                        )}
+                        <ProfileList
+                            paginatedProfiles={paginatedProfiles}
+                            isLoggedOut={isLoggedOut}
+                        />
                         <CustomPagination
                             totalItems={filteredProfiles.length}
                             itemsPerPage={itemsPerPage}
                             currentPage={currentPage}
-                            onPageChange={setCurrentPage}
+                            onPageChange={handlePageChange}
                         />
                     </div>
                     <Filter onFilterApply={handleFilterApply} />

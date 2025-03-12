@@ -1,7 +1,7 @@
-"use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BottomArrow, Search, Replay, Button } from "@moija/ui";
 import { School } from "../../enum/enums";
+import getCodes from "../../app/api/codes";
 
 type Option = string;
 
@@ -37,21 +37,15 @@ const Filter = ({ onFilterApply }: FilterProps) => {
 
     const [isFilterChanged, setIsFilterChanged] = useState(false);
 
-    const stacks = [
-        "React.js",
-        "Next.js",
-        "TypeScript",
-        "JavaScript",
-        "Node.js",
-        "TailwindCSS",
-        "Python",
-        "Django",
-        "Flask",
-        "MySQL",
-        "MongoDB",
-        "GraphQL",
-        "REST API",
-    ];
+    const [stacks, setStacks] = useState<string[]>([]);
+
+    useEffect(() => {
+        const getStacks = async () => {
+            const data: { id: number; keyword: string }[] = await getCodes();
+            setStacks(data.map((stack) => stack.keyword));
+        };
+        getStacks();
+    }, []);
 
     const options = {
         sort: ["인기순", "최신순", "오래된순"] as Option[],
@@ -69,19 +63,33 @@ const Filter = ({ onFilterApply }: FilterProps) => {
         setIsFilterChanged(true);
     };
 
-    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearchChange = async (
+        e: React.ChangeEvent<HTMLInputElement>
+    ) => {
         const value = e.target.value;
         setFilterState((prev) => ({
             ...prev,
             searchInput: value,
-            filteredStacks:
-                value.trim() === ""
-                    ? []
-                    : stacks.filter((stack) =>
-                          stack.toLowerCase().includes(value.toLowerCase())
-                      ),
         }));
         setIsFilterChanged(true);
+
+        if (value.trim() === "") {
+            setFilterState((prev) => ({ ...prev, filteredStacks: [] }));
+            return;
+        }
+
+        try {
+            const response: { id: number; keyword: string }[] =
+                await getCodes(value);
+            setFilterState((prev) => ({
+                ...prev,
+                filteredStacks: response.map(
+                    (item: { id: number; keyword: string }) => item.keyword
+                ),
+            }));
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
     };
 
     const handleToggleSelection = (item: SchoolOption) => {
