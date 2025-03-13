@@ -19,10 +19,7 @@ const ProfileList = ({ paginatedProfiles }: ProfileListProps) => {
                 const response = await instance.get("/users");
                 setUserStatus(response.data.userStatus);
             } catch (error) {
-                console.error(
-                    "사용자 상태를 가져오는 데 오류가 발생했습니다:",
-                    error
-                );
+                console.error(error);
             }
         };
 
@@ -55,11 +52,11 @@ const ProfileList = ({ paginatedProfiles }: ProfileListProps) => {
                         />
                     );
                 })
-            ) : (
+            ) : userStatus === "PORTFOLIO_PUBLISHED" ? (
                 <div className="w-full py-20 text-center text-gray-500">
                     아직 등록된 포트폴리오가 없습니다.
                 </div>
-            )}
+            ) : null}
             {userStatus !== "PORTFOLIO_PUBLISHED" && (
                 <LogoutMessage userStatus={userStatus} />
             )}
