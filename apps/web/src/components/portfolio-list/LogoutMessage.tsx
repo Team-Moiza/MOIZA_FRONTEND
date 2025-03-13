@@ -5,27 +5,29 @@ import dummyProfiles from "../../data/profileList";
 
 const LogoutMessage = () => {
     return (
-        <div className="relative h-full min-w-[600px]">
+        <div className="relative -z-10 h-full min-w-[600px]">
+            <div className="flex flex-col gap-5">
             {dummyProfiles.map((profile) => (
                 <ProfileBox
-                    key={profile.id}
-                    id={profile.id.toString()}
-                    name={profile.name}
-                    job={profile.job}
-                    profileImg={profile.profileImg}
-                    school={profile.school}
-                    introduce={profile.introduce}
-                    codes={profile.codes}
-                    likeCnt={profile.likeCnt}
-                    company={profile.company || ""}
+                key={profile.id}
+                id={profile.id.toString()}
+                name={profile.name}
+                job={profile.job}
+                profileImg={profile.profileImg}
+                school={profile.school}
+                introduce={profile.introduce}
+                codes={profile.codes}
+                likeCnt={profile.likeCnt}
+                company={profile.company || ""}
                 />
             ))}
+            </div>
             <div
                 className="absolute inset-0"
                 style={{
                     background:
                         "linear-gradient(180deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.88) 16%, rgba(255, 255, 255, 0.96) 49%, #FFF 100%)",
-        
+                    backdropFilter: "blur(2px)",
                     zIndex: 1,
                 }}
             ></div>

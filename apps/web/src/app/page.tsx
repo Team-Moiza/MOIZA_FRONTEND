@@ -9,7 +9,7 @@ import { Footer } from "../components/layouts/Footer";
 import { School, Job } from "../enum/enums";
 import { FilterApply, Profile } from "../types/portfolio";
 
-const PortfolioList = () => {
+const Main = () => {
     const [profiles, setProfiles] = useState<Profile[]>([]);
     const [filteredProfiles, setFilteredProfiles] = useState<Profile[]>([]);
     const [selectedCategory, setSelectedCategory] = useState("전체");
@@ -72,13 +72,18 @@ const PortfolioList = () => {
         const filtered = profiles.filter((profile) => {
             const categoryMatch =
                 selectedCategory === "전체" ||
-                Job[profile.job] === selectedCategory ||
+                Job[profile.job as unknown as keyof typeof Job] ===
+                    selectedCategory ||
                 (selectedCategory === Job.OTHER &&
-                    !Object.values(Job).includes(Job[profile.job]));
+                    !Object.values(Job).includes(
+                        profile.job as unknown as Job
+                    ));
 
             const schoolMatch =
                 selectedSchools.length === 0 ||
-                selectedSchools.includes(profile.school as keyof typeof School);
+                selectedSchools.includes(
+                    profile.school as unknown as keyof typeof School
+                );
 
             const stackMatch =
                 selectedStacks.length === 0 ||
@@ -151,7 +156,7 @@ const PortfolioList = () => {
                     ))}
                 </div>
                 <div className="flex gap-5 w-[100%] justify-between">
-                    <div className="flex flex-col gap-5 w-[92%]">
+                    <div className="flex flex-col gap-5">
                         <ProfileList
                             paginatedProfiles={paginatedProfiles}
                             isLoggedOut={isLoggedOut}
@@ -171,4 +176,4 @@ const PortfolioList = () => {
     );
 };
 
-export default PortfolioList;
+export default Main;
