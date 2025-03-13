@@ -1,28 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Heart } from "@moija/ui";
 import { likeApi } from "../../app/api/likeApi";
-
-type ProfileBoxProps = {
-    id: string;
-    name: string;
-    job: string;
-    school: string;
-    introduce: string;
-    codes?: { keyword: string }[];
-    likes: string;
-    company: string;
-};
+import { Profile } from "../../types/portfolio";
+import Image from "next/image";
 
 const ProfileBox = ({
     id,
     name,
     job,
+    profileImg,
     school,
     introduce,
     codes,
-    likes,
+    likeCnt,
     company,
-}: ProfileBoxProps) => {
+}: Profile) => {
     const [liked, setLiked] = useState(false);
     const [likesCount, setLikesCount] = useState(0);
 
@@ -31,10 +23,10 @@ const ProfileBox = ({
             try {
                 const status = await likeApi.getLikeStatus(id);
                 setLiked(status.isLiked);
-                setLikesCount(Number(likes));
+                setLikesCount(Number(likeCnt));
             } catch (error) {
                 setLiked(false);
-                setLikesCount(Number(likes));
+                setLikesCount(Number(likeCnt));
             }
         };
 
@@ -42,9 +34,9 @@ const ProfileBox = ({
             checkLikeStatus();
         } else {
             setLiked(false);
-            setLikesCount(Number(likes));
+            setLikesCount(Number(likeCnt));
         }
-    }, [id, likes]);
+    }, [id, likeCnt]);
 
     const handleLikeClick = async () => {
         if (!localStorage.getItem("accessToken")) {
@@ -56,9 +48,9 @@ const ProfileBox = ({
         try {
             const newLikeState = !liked;
             if (newLikeState) {
-                await likeApi.addLike(id);
+                await likeApi.addLike(id.toString());
             } else {
-                await likeApi.removeLike(id);
+                await likeApi.removeLike(id.toString());
             }
             setLiked(newLikeState);
             setLikesCount((prev) => (newLikeState ? prev + 1 : prev - 1));
@@ -70,7 +62,14 @@ const ProfileBox = ({
     return (
         <div className="min-w-[600px] w-[100%] h-45 px-[50px] py-[34px] bg-white rounded-[20px] border border-gray-200 justify-between items-center inline-flex">
             <div className="flex items-center gap-[30px]">
-                <div className="w-16 h-16 rounded-xl bg-gray-300 "></div>
+                <div className="w-16 h-16 rounded-xl overflow-hidden bg-gray-300">
+                    <Image
+                        src={profileImg}
+                        alt={`프로필 사진`}
+                        width={64}
+                        height={64}
+                    />
+                </div>
                 <div className="flex-col w-[37vw]">
                     {company ? (
                         <div className="text-caption1 text-gray-500">
@@ -106,7 +105,7 @@ const ProfileBox = ({
                     stroke={liked ? "none" : "#5a5a5a"}
                 />
                 <div className="text-cation2 text-gray-500">
-                    {likesCount ?? Number(likes)}
+                    {likesCount ?? Number(likeCnt)}
                 </div>
             </div>
         </div>

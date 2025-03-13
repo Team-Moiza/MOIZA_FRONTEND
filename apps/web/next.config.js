@@ -5,9 +5,12 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: "lh3.googleusercontent.com",
+                hostname: "s3.ap-northeast-2.amazonaws.com",
+                port: "",
+                pathname: "/toonda-image/**",
             },
         ],
+        domains: ["i.pinimg.com"],
     },
     transpilePackages: ["@moija/ui", "@moija/hooks"],
 };

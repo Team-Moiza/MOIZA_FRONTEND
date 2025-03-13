@@ -1,13 +1,13 @@
 import { Job, School } from "../enum/enums";
 
 export interface Profile {
-    id: number;
+    id: string;
     name: string;
-    school: keyof typeof School;
-    job: keyof typeof Job;
+    school: School;
+    job: Job;
     introduce: string;
-    profile: string;
-    likeCnt: string;
+    profileImg: string;
+    likeCnt: number;
     codes?: { keyword: string }[];
     company: string | null;
 }
