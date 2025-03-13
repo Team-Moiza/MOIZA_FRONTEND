@@ -65,7 +65,7 @@ const ProfileBox = ({
                 <div className="w-16 h-16 rounded-xl overflow-hidden bg-gray-300">
                     <Image
                         src={profileImg}
-                        alt={`프로필 사진`}
+                        alt={"프로필 사진"}
                         width={64}
                         height={64}
                     />

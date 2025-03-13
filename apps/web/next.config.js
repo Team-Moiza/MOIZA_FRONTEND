@@ -10,7 +10,7 @@ const nextConfig = {
                 pathname: "/toonda-image/**",
             },
         ],
-        domains: ["i.pinimg.com"],
+        domains: ["i.pinimg.com", "lh3.googleusercontent.com"],
     },
     transpilePackages: ["@moija/ui", "@moija/hooks"],
 };
