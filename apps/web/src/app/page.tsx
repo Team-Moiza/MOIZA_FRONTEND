@@ -156,7 +156,7 @@ const Main = () => {
                     ))}
                 </div>
                 <div className="flex gap-5 w-[100%] justify-between">
-                    <div className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-5 w-[93%]">
                         <ProfileList
                             paginatedProfiles={paginatedProfiles}
                             isLoggedOut={isLoggedOut}
