@@ -30,10 +30,9 @@ const Register = () => {
     const majorRef = useOutsideClickRef<HTMLDivElement>(closeMajor);
     const statusRef = useOutsideClickRef<HTMLDivElement>(closeStatus);
 
-    const [selectedSchool, setSelectedSchool] = useState<School | null>(null);
-    const [selectedMajor, setSelectedMajor] = useState<Major | null>(null);
-    const [selectedStatus, setSelectedStatus] =
-        useState<EducationStatus | null>(null);
+    const [selectedSchool, setSelectedSchool] = useState<string | null>(null);
+    const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
+    const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
 
     const handleRegister = async () => {
         if (!selectedSchool || !selectedMajor || !selectedStatus) {
@@ -43,9 +42,9 @@ const Register = () => {
 
         try {
             await resgister.register({
-                school: selectedSchool,
-                major: selectedMajor,
-                educationStatus: selectedStatus,
+                school: selectedSchool as School,
+                major: selectedMajor as Major,
+                educationStatus: selectedStatus as EducationStatus,
             });
             window.location.replace("/");
         } catch (error: any) {
@@ -72,6 +71,26 @@ const Register = () => {
         }
     };
 
+    const schoolName = [
+        { label: "부산소프트웨어마이스터고등학교", value: "BSSM" },
+        { label: "대구소프트웨어마이스터고등학교", value: "DGSM" },
+        { label: "대덕소프트웨어마이스터고등학교", value: "DSM" },
+        { label: "광주소소프트웨어마이스터고등학교", value: "GSM" },
+    ];
+
+    const majorName = [
+        { label: "소프트웨어개발과", value: "SOFTWARE" },
+        { label: "임베디드개발과", value: "EMBEDDED" },
+        { label: "정보보안과", value: "SECURITY" },
+        { label: "스마트IoT과", value: "IOT" },
+        { label: "인공지능소프트웨어개발과", value: "AI" },
+    ];
+
+    const statuseName = [
+        { label: "재학중", value: "ENROLLED" },
+        { label: "졸업", value: "GRADUATED" },
+    ];
+
     return (
         <div className="w-screen h-screen flex items-center justify-center bg-gray-50">
             <div className="flex flex-col items-center">
@@ -91,9 +110,16 @@ const Register = () => {
                                 <Dropdown
                                     isOpen={isSchoolOpen}
                                     selectedItem={selectedSchool || ""}
-                                    items={Object.values(School)}
+                                    items={schoolName.map(
+                                        (school) => school.label
+                                    )}
                                     onSelect={(item) => {
-                                        setSelectedSchool(item as School);
+                                        const selectedSchoolValue =
+                                            schoolName.find(
+                                                (school) =>
+                                                    school.label === item
+                                            )?.value ?? null;
+                                        setSelectedSchool(selectedSchoolValue);
                                         handleDropdownToggle("school");
                                     }}
                                 >
@@ -101,7 +127,13 @@ const Register = () => {
                                         width={400}
                                         placeholder="학교 선택"
                                         isOpen={isSchoolOpen}
-                                        value={selectedSchool || ""}
+                                        value={
+                                            schoolName.find(
+                                                (school) =>
+                                                    school.value ===
+                                                    selectedSchool
+                                            )?.label || ""
+                                        }
                                         onClick={() =>
                                             handleDropdownToggle("school")
                                         }
@@ -116,9 +148,15 @@ const Register = () => {
                                 <Dropdown
                                     isOpen={isMajorOpen}
                                     selectedItem={selectedMajor || ""}
-                                    items={Object.values(Major)}
+                                    items={majorName.map(
+                                        (major) => major.label
+                                    )}
                                     onSelect={(item) => {
-                                        setSelectedMajor(item as Major);
+                                        const selectedMajorValue =
+                                            majorName.find(
+                                                (major) => major.label === item
+                                            )?.value ?? null;
+                                        setSelectedMajor(selectedMajorValue);
                                         handleDropdownToggle("major");
                                     }}
                                 >
@@ -126,7 +164,13 @@ const Register = () => {
                                         width={400}
                                         placeholder="학과 선택"
                                         isOpen={isMajorOpen}
-                                        value={selectedMajor || ""}
+                                        value={
+                                            majorName.find(
+                                                (major) =>
+                                                    major.value ===
+                                                    selectedMajor
+                                            )?.label || ""
+                                        }
                                         onClick={() =>
                                             handleDropdownToggle("major")
                                         }
@@ -141,11 +185,16 @@ const Register = () => {
                                 <Dropdown
                                     isOpen={isStatusOpen}
                                     selectedItem={selectedStatus || ""}
-                                    items={Object.values(EducationStatus)}
+                                    items={statuseName.map(
+                                        (status) => status.label
+                                    )}
                                     onSelect={(item) => {
-                                        setSelectedStatus(
-                                            item as EducationStatus
-                                        );
+                                        const selectedStatusValue =
+                                            statuseName.find(
+                                                (status) =>
+                                                    status.label === item
+                                            )?.value ?? null;
+                                        setSelectedStatus(selectedStatusValue);
                                         handleDropdownToggle("status");
                                     }}
                                 >
@@ -153,7 +202,13 @@ const Register = () => {
                                         width={400}
                                         placeholder="재학 상태"
                                         isOpen={isStatusOpen}
-                                        value={selectedStatus || ""}
+                                        value={
+                                            statuseName.find(
+                                                (status) =>
+                                                    status.value ===
+                                                    selectedStatus
+                                            )?.label || ""
+                                        }
                                         onClick={() =>
                                             handleDropdownToggle("status")
                                         }

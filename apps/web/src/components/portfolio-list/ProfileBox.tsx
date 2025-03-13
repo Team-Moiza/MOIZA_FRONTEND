@@ -62,9 +62,12 @@ const ProfileBox = ({
     return (
         <div className="min-w-[600px] w-[100%] h-45 px-[50px] py-[34px] bg-white rounded-[20px] border border-gray-200 justify-between items-center inline-flex">
             <div className="flex items-center gap-[30px]">
-                <div className="w-16 h-16 rounded-xl overflow-hidden bg-gray-300">
+                <div className="w-16 h-16 rounded-xl overflow-hidden border-gray-100 border">
                     <Image
-                        src={profileImg}
+                        src={
+                            profileImg ||
+                            "https://i.pinimg.com/736x/04/15/e3/0415e3a6c56fc6e8f1e0ac1bed4b6aaf.jpg"
+                        }
                         alt={"프로필 사진"}
                         width={64}
                         height={64}
