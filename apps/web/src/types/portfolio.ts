@@ -18,7 +18,7 @@ export interface ProfileListProps {
 }
 
 export interface FilterApply {
-    sort: string;
+    sort: "dateSort:ASC" | "likeSort:DESC" | null;
     stacks: { id: number; keyword: string }[];
     schools: string[];
     company: "전체" | "재직중" | "미재직";

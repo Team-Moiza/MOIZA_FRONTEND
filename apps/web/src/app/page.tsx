@@ -15,14 +15,6 @@ const Main = () => {
     const [selectedCategory, setSelectedCategory] = useState("전체");
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
-    const [sortOption, setSortOption] = useState("인기순");
-    const [selectedStacks, setSelectedStacks] = useState<
-        { id: number; keyword: string }[]
-    >([]);
-    const [selectedSchools, setSelectedSchools] = useState<
-        (keyof typeof School)[]
-    >([]);
-    const [companyStatus, setCompanyStatus] = useState("전체");
 
     const categories = [
         "전체",
@@ -76,20 +68,26 @@ const Main = () => {
         );
         const employmentStatus =
             company === "재직중"
-                ? "true"
+                ? "false"
                 : company === "미재직"
-                    ? "false"
+                    ? "true"
                     : null;
+
         const query = new URLSearchParams({
-            page: (currentPage - 1).toString(),
+            page: currentPage.toString(),
             size: itemsPerPage.toString(),
             ...(stackIds.length > 0 && { code: stackIds.join(",") }),
             ...(schools.length > 0 && { school: schoolKeys.join(",") }),
             ...(employmentStatus !== null && { isEmployed: employmentStatus }),
-            dateSort: sort || "DESC",
-        }).toString();
+        });
+        if (sort) {
+            const [sortKey, sortValue] = sort.split(":");
+            if (sortKey && sortValue) {
+                query.set(sortKey, sortValue);
+            }
+        }
 
-        fetchProfiles(query);
+        fetchProfiles(query.toString());
     };
 
     const startIndex = (currentPage - 1) * itemsPerPage;

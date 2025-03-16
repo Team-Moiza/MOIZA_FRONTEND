@@ -14,12 +14,11 @@ export interface FilterState {
         school: boolean;
         company: boolean;
     };
-    selectedSort: string;
+    selectedSort: "dateSort:ASC" | "likeSort:DESC" | null;
     searchInput: string;
     selectedStacks: { id: number; keyword: string }[];
     filteredStacks: string[];
     selectedSchool: SchoolOption[];
     filteredSchools: SchoolOption[];
     selectedCompany: "전체" | "재직중" | "미재직";
-    
 }

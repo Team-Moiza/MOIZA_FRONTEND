@@ -11,7 +11,7 @@ import { SchoolOption, FilterState } from "../../../types/ProfileFilter";
 type Option = string;
 interface ProfileFilterProps {
     applyFilter: (filters: {
-        sort: string;
+        sort: "dateSort:ASC" | "likeSort:DESC" | null;
         stacks: { id: number; keyword: string }[];
         schools: string[];
         company: "전체" | "재직중" | "미재직";
@@ -26,7 +26,7 @@ const ProfileFilter = ({ applyFilter }: ProfileFilterProps) => {
             school: false,
             company: false,
         },
-        selectedSort: "인기순",
+        selectedSort: null,
         searchInput: "",
         selectedStacks: [],
         filteredStacks: [],
@@ -59,7 +59,7 @@ const ProfileFilter = ({ applyFilter }: ProfileFilterProps) => {
                 school: false,
                 company: false,
             },
-            selectedSort: "인기순" as Option,
+            selectedSort: null,
             searchInput: "",
             selectedStacks: [] as { id: number; keyword: string }[],
             filteredStacks: [] as string[],
