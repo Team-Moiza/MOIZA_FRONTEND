@@ -28,10 +28,6 @@ export const QualificationForm = () => {
           </div>
 
           <div className="w-full flex flex-col gap-8">
-            {/* <InputTemplate>
-              <Label accent>발급사</Label>
-              <Input width={776} placeholder="대회명을 입력하세요" defaultValue={field.issuer} {...register(`qualifications.${index}.`, { required: `${index}번 자격증 발급사` })} />
-            </InputTemplate> */}
             <div className="w-full flex justify-between">
               <InputTemplate>
                 <Label accent>점수/급</Label>

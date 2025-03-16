@@ -27,10 +27,10 @@ export const AchievementForm = () => {
           </div>
 
           <div className="w-full flex flex-col gap-8">
-            {/* <InputTemplate>
+            <InputTemplate>
               <Label accent>대회명</Label>
-              <Input width={776} defaultValue={field.contestName} placeholder="대회명을 입력하세요" {...register(`achievements.${index}.contestName`, { required: `${index}번 수상 대회명` })} />
-            </InputTemplate> */}
+              <Input width={776} defaultValue={field.competitionName} placeholder="대회명을 입력하세요" {...register(`awards.${index}.competitionName`, { required: `${index}번 수상 대회명` })} />
+            </InputTemplate>
             <div className="w-full flex justify-between">
               <InputTemplate>
                 <Label accent>종류</Label>
@@ -49,7 +49,7 @@ export const AchievementForm = () => {
         </div>
       ))}
 
-      <button className="flex items-center gap-2 cursor-pointer" type="button" onClick={() => append({ date: "", name: "", type: "", description: "" })}>
+      <button className="flex items-center gap-2 cursor-pointer" type="button" onClick={() => append({ date: "", name: "", type: "", competitionName: "", description: "" })}>
         <div className="rounded-full bg-primary-500 flex items-center justify-center w-[26px] h-[26px]">
           <Plus color="#FFFFFF" size={16} />
         </div>

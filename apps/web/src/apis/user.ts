@@ -10,7 +10,8 @@ export const updateUser = async (data: any) => {
 };
 
 export const logout = async () => {
-  return await instance.patch("/users", { data: { token: cookies.get("refresh_token") as string } });
+  console.log(cookies.get("refresh_token"));
+  return await instance.patch("/auth", { token: cookies.get("refresh_token") as string });
 };
 
 export const removeAccount = async () => {

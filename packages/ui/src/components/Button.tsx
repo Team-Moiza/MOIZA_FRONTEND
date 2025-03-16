@@ -3,10 +3,11 @@ interface ButtonPropsType {
   type?: "default" | "white" | "special";
   isDisabled?: boolean;
   width?: number | string;
+  submit?: boolean;
   onClick?: () => void;
 }
 
-export const Button = ({ type = "default", isDisabled = false, width = 136, children, onClick }: ButtonPropsType) => {
+export const Button = ({ type = "default", submit = false, isDisabled = false, width = 136, children, onClick }: ButtonPropsType) => {
   const styleGenerator = () => {
     switch (type) {
       case "white":
@@ -32,7 +33,7 @@ export const Button = ({ type = "default", isDisabled = false, width = 136, chil
   };
 
   return (
-    <button style={{ width: typeof width === "number" ? `${width}px` : width }} className={`h-[44px] rounded-[8px] ${styleGenerator()}`} onClick={onClick} type="button" disabled={isDisabled}>
+    <button style={{ width: typeof width === "number" ? `${width}px` : width }} className={`h-[44px] rounded-[8px] ${styleGenerator()}`} onClick={onClick} type={submit ? "submit" : "button"} disabled={isDisabled}>
       <div className={`text-p2 ${textGenerator()}`}>{children}</div>
     </button>
   );

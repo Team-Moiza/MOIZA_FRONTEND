@@ -38,3 +38,11 @@ export const deletePortFolio = async (id: string) => {
 export const publishPortFolio = async (id: string) => {
   return await instance.patch(`/portfolios/publish/${id}`);
 };
+
+export const findSkillset = async (id: string) => {
+  return await instance.get(`/codes?keyword=${id}`);
+};
+
+export const addSkillset = async (id: string) => {
+  return await instance.post(`/codes?keyword=${id}`);
+};

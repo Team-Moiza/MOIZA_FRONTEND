@@ -1,7 +1,6 @@
-import { ArrowDown, Delete, Dropdown, Input, InputTemplate, Label, List, Plus, Search, Select, Textarea } from "@moija/ui";
-import { FieldArrayWithId, useFieldArray, UseFieldArrayReturn, useFormContext } from "react-hook-form";
+import { ArrowDown, Delete, Input, InputTemplate, Label, List, Plus, Search, Select, Textarea } from "@moija/ui";
+import { FieldArrayWithId, UseFieldArrayReturn, useFormContext } from "react-hook-form";
 import { FormData } from "../page";
-// import { useBoolean, useOutsideClickRef } from "@moija/hooks";
 
 interface IProp {
   field: FieldArrayWithId<FormData, "projects", "id">;
@@ -10,11 +9,8 @@ interface IProp {
 }
 
 export const Item = ({ field, method, index }: IProp) => {
-  const { control, register } = useFormContext<FormData>();
-  const { fields, swap, remove, update } = method;
-  // const { boolean: isOpen, toggle, setFalse: setClose } = useBoolean(false);
-  // const { fields: sections, swap: secSwap, remove: secRemove, append: secAppend } = useFieldArray({ control, name: `projects.${index}.sections` });
-  // const selectRef = useOutsideClickRef<HTMLDivElement>(setClose);
+  const { register } = useFormContext<FormData>();
+  const { fields, swap, remove } = method;
 
   return (
     <div className="w-full flex flex-col gap-4">
@@ -34,40 +30,11 @@ export const Item = ({ field, method, index }: IProp) => {
       </div>
 
       <div className="w-full flex flex-col gap-8">
-        {/* <InputTemplate>
-          <Label>기술 스택</Label>
-          <Input
-            icon={<Search size={20} color="#787878" />}
-            width={776}
-            placeholder="기술 스택을 등록하세요"
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && e.currentTarget.value) {
-                e.preventDefault();
-                update(index, { ...field, skillset: [...field.skillset, e.currentTarget.value] });
-                e.currentTarget.value = "";
-              }
-            }}
-          />
-          <List list={field.skillset} remove={(item) => update(index, { ...field, skillset: field.skillset.filter((_, j) => j !== item) })} />
-        </InputTemplate> */}
         <div className="w-full flex justify-between">
           <InputTemplate>
             <Label accent>진행 여부</Label>
 
             <input type="checkbox" defaultChecked={field.status} {...register(`projects.${index}.status`)} />
-            {/* <div ref={selectRef}>
-              
-              <Dropdown
-                isOpen={isOpen}
-                items={["진행중", "서비스중", "서비스 종료"]}
-                selectedItem={field.processing}
-                onSelect={(item) => {
-                  update(index, { ...field, processing: item as "진행중" | "서비스중" | "서비스 종료" });
-                }}
-              >
-                <Select width={247} placeholder="선택" isOpen={isOpen} value={field.processing} onClick={toggle} />
-              </Dropdown>
-            </div> */}
           </InputTemplate>
           <InputTemplate>
             <Label accent>시작일</Label>
@@ -93,30 +60,6 @@ export const Item = ({ field, method, index }: IProp) => {
           <Label>추가 링크</Label>
           <Input width={776} placeholder="http://, https://" title="'https://url.com' 과 같은 형식이어야 합니다." pattern="https?:\/\/[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" {...register(`projects.${index}.link`)} />
         </InputTemplate>
-        {/* {sections.map((item, secIndex) => (
-          <InputTemplate key={item.id}>
-            <div className="w-full flex items-center gap-2">
-              <input placeholder="섹션 제목" className="w-full outline-none" defaultValue={item.title} {...register(`projects.${index}.sections.${secIndex}.title`)} />
-              <div className="flex gap-2 items-center">
-                <button type="button" onClick={() => secIndex < sections.length - 1 && secSwap(secIndex, secIndex + 1)}>
-                  <ArrowDown size={24} color={secIndex < sections.length - 1 ? "#787878" : "#BFBFBF"} />
-                </button>
-                <button type="button" className="rotate-180" onClick={() => secIndex > 0 && secSwap(secIndex, secIndex - 1)}>
-                  <ArrowDown size={24} color={secIndex > 0 ? "#787878" : "#BFBFBF"} />
-                </button>
-                <button type="button" onClick={() => secRemove(secIndex)}>
-                  <Delete />
-                </button>
-              </div>
-            </div>
-
-            <Input width={776} placeholder="섹션 내용" defaultValue={item.content} {...register(`projects.${index}.sections.${secIndex}.content`)} />
-          </InputTemplate>
-        ))}
-        <button className="flex items-center justify-center w-full rounded-[8px] gap-2 bg-gray-100 text-gray-500 h-[48px]" type="button" onClick={() => secAppend({ title: "", content: "" })}>
-          <Plus size={18} color="#787878" />
-          섹션 추가
-        </button> */}
       </div>
     </div>
   );

@@ -246,7 +246,9 @@ export default function Page() {
                   </InputTemplate>
                 </Stack>
                 <div className="w-full flex justify-end">
-                  <Button type="white">수정</Button>
+                  <Button submit type="white">
+                    수정
+                  </Button>
                 </div>
               </Stack>
             </div>

@@ -16,7 +16,6 @@ export const LinkForm = () => {
             <div className="flex gap-4 items-center w-full">
               <LinkIcon size={18} />
               <div className="flex flex-col w-full">
-                <input className="text-[16px] placeholder:text-gray-400 w-full outline-none" placeholder="링크 제목" {...register(`links.${index}.id`)} defaultValue={fields.id} />
                 <input className="text-[16px] placeholder:text-gray-400 w-full outline-none" placeholder="http://, https://" title="'https://url.com' 과 같은 형식이어야 합니다." pattern="https?:\/\/[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" defaultValue={fields.url} {...register(`links.${index}.url`)} />
               </div>
             </div>
@@ -27,7 +26,7 @@ export const LinkForm = () => {
         </InputTemplate>
       ))}
 
-      <button className="flex items-center gap-2 cursor-pointer" onClick={() => append({ id: "", url: "" })} type="button">
+      <button className="flex items-center gap-2 cursor-pointer" onClick={() => append({ url: "" })} type="button">
         <div className="rounded-full bg-primary-500 flex items-center justify-center w-[26px] h-[26px]">
           <Plus color="#FFFFFF" size={16} />
         </div>

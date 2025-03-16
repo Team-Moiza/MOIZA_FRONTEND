@@ -14,17 +14,21 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import { detailPortFolio, editPortFolio, publishPortFolio } from "../../../apis";
 import { useEffect } from "react";
-// import { TitleForm } from "./TitleForm";
+import { TitleForm } from "./TitleForm";
 
 export type FormData = {
+  job: null | string;
+  school: null | string;
+  company: null | string;
+  educationStatus: null | string;
   id: number;
   name: string;
   major: string;
   title: string;
   introduce: string;
   introduction: { introduce: string; url: string };
-  skillsets: Array<{
-    name: string;
+  codes: Array<{
+    keyword: string;
     id: number;
   }>;
   projects: Array<{
@@ -40,15 +44,14 @@ export type FormData = {
     type: string;
     date: string;
     description: string;
+    competitionName: string;
   }>;
   qualifications: Array<{
     name: string;
     score: string;
     date: string;
   }>;
-  codes: Array<{ id: number; keyword: string }>;
   links: Array<{
-    id: string | number;
     url: string;
   }>;
 };
@@ -94,7 +97,7 @@ export default function WritePortFolio() {
             <Center vertical={true}>
               <Flex gap={24}>
                 <Stack gap={28}>
-                  {/* <TitleForm /> */}
+                  <TitleForm />
                   <IntroduceForm />
                   <SkillsetForm />
                   <ProjectForm />
