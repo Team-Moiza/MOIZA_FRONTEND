@@ -6,7 +6,7 @@ import ProfileListContainer from "../components/portfolio-list/ProfileListContai
 import CategoryFilter from "../components/portfolio-list/CategoryFilter";
 import ProfileFilter from "../components/portfolio-list/ProfileFilter";
 import { Footer } from "../components/layouts/Footer";
-import { School, Job, SchoolKeyByValue } from "../enum/enums";
+import { School, Job, SchoolKeyByValue, jobMap } from "../enum/enums";
 import { FilterApply, Profile } from "../types/portfolio";
 
 const Main = () => {
@@ -70,8 +70,8 @@ const Main = () => {
             company === "재직중"
                 ? "false"
                 : company === "미재직"
-                    ? "true"
-                    : null;
+                  ? "true"
+                  : null;
 
         const query = new URLSearchParams({
             page: currentPage.toString(),
@@ -108,6 +108,16 @@ const Main = () => {
 
     const handleCategoryChange = (category: string) => {
         setSelectedCategory(category);
+
+        if (category === "전체") {
+            setFilteredProfiles(profiles);
+        } else {
+            const filtered = profiles.filter(
+                (profile) => jobMap[profile.job] === category
+            );
+            setFilteredProfiles(filtered);
+        }
+
         setCurrentPage(1);
     };
 

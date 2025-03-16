@@ -11,18 +11,16 @@ interface ProfileListContainerProps {
     onPageChange: (page: number) => void;
 }
 
-const ProfileListContainer: React.FC<ProfileListContainerProps> = ({
+const ProfileListContainer = ({
     paginatedProfiles,
     totalItems,
     itemsPerPage,
     currentPage,
     onPageChange,
-}) => {
+}: ProfileListContainerProps) => {
     return (
         <div className="flex flex-col gap-5 w-[93%]">
-            <ProfileList
-                paginatedProfiles={paginatedProfiles}
-            />
+            <ProfileList paginatedProfiles={paginatedProfiles} />
             <CustomPagination
                 totalItems={totalItems}
                 itemsPerPage={itemsPerPage}

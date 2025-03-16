@@ -7,11 +7,11 @@ interface CategoryFilterProps {
     onCategoryChange: (category: string) => void;
 }
 
-const CategoryFilter: React.FC<CategoryFilterProps> = ({
+const CategoryFilter = ({
     categories,
     selectedCategory,
     onCategoryChange,
-}) => {
+}: CategoryFilterProps) => {
     return (
         <div className="overflow-x-auto pb-5 flex gap-2 scrollbar-hide">
             {categories.map((category) => (
@@ -31,4 +31,4 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
     );
 };
 
-export default CategoryFilter; 
+export default CategoryFilter;
