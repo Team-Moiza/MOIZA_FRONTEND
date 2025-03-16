@@ -19,7 +19,7 @@ export interface ProfileListProps {
 
 export interface FilterApply {
     sort: string;
-    stacks: string[];
+    stacks: { id: number; keyword: string }[];
     schools: string[];
     company: string;
 }

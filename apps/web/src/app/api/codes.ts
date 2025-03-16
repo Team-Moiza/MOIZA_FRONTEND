@@ -12,6 +12,7 @@ const getCodes = async (keyword?: string): Promise<CodeItem[]> => {
         });
         return response.data;
     } catch (error) {
+        console.error(error);
         return [];
     }
 };
