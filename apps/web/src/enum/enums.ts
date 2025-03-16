@@ -5,6 +5,13 @@ export enum School {
     GSM = "광주소프트웨어마이스터고등학교",
 }
 
+export const SchoolKeyByValue: Record<School, keyof typeof School> = {
+    [School.BSSM]: "BSSM",
+    [School.DGSM]: "DGSM",
+    [School.DSM]: "DSM",
+    [School.GSM]: "GSM",
+};
+
 export enum Major {
     SOFTWARE = "소프트웨어개발과",
     EMBEDDED = "임베디드개발과",

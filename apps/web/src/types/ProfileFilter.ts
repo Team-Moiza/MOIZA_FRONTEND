@@ -19,5 +19,6 @@ export interface FilterState {
     selectedStacks: { id: number; keyword: string }[];
     filteredStacks: string[];
     selectedSchool: SchoolOption[];
+    filteredSchools: SchoolOption[];
     selectedCompany: string;
 }

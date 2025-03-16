@@ -5,6 +5,7 @@ import { FilterState } from "../../../types/ProfileFilter";
 interface StackDropdownProps {
     filterState: FilterState;
     setFilterState: React.Dispatch<React.SetStateAction<FilterState>>;
+    setIsFilterChanged: React.Dispatch<React.SetStateAction<boolean>>;
     stacks: { id: number; keyword: string }[];
     handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -13,6 +14,7 @@ const StackDropdown = ({
     filterState,
     setFilterState,
     stacks,
+    setIsFilterChanged,
     handleSearchChange,
 }: StackDropdownProps) => {
     const handleToggleStack = (keyword: string) => {

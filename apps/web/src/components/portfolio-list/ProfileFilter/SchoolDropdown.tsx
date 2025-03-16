@@ -4,8 +4,8 @@ import { BottomArrow } from "@moija/ui";
 import { FilterState, SchoolOption } from "../../../types/ProfileFilter";
 
 interface SchoolDropdownProps {
-    filterState: any;
-    setFilterState: React.Dispatch<React.SetStateAction<any>>;
+    filterState: FilterState;
+    setFilterState: React.Dispatch<React.SetStateAction<FilterState>>;
     setIsFilterChanged: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -14,6 +14,7 @@ const SchoolDropdown = ({
     setFilterState,
     setIsFilterChanged,
 }: SchoolDropdownProps) => {
+    // 학교 옵션 정의 (한국어 이름 + 코드)
     const options = [
         { label: "부산소마고", value: School.BSSM },
         { label: "대구소마고", value: School.DGSM },
@@ -21,24 +22,16 @@ const SchoolDropdown = ({
         { label: "광주소마고", value: School.GSM },
     ];
 
-    const handleToggleSelection = (item: { label: string; value: School }) => {
-        setFilterState((prev: FilterState) => {
-            const selectedItems = prev.selectedSchool;
-            const isSelected = selectedItems.some(
-                (i: SchoolOption) => i.value === item.value
-            );
-
-            const updatedItems = isSelected
-                ? selectedItems.filter(
-                      (i: SchoolOption) => i.value !== item.value
-                  )
-                : [...selectedItems, item];
-
-            return {
-                ...prev,
-                selectedSchool: updatedItems,
-            };
-        });
+    // 학교 선택 핸들러
+    const handleToggleSelection = (item: SchoolOption) => {
+        setFilterState((prev) => ({
+            ...prev,
+            selectedSchool: prev.selectedSchool.some(
+                (s) => s.value === item.value
+            )
+                ? prev.selectedSchool.filter((s) => s.value !== item.value)
+                : [...prev.selectedSchool, item],
+        }));
         setIsFilterChanged(true);
     };
 
@@ -46,7 +39,7 @@ const SchoolDropdown = ({
         <div>
             <div
                 onClick={() =>
-                    setFilterState((prev: FilterState) => ({
+                    setFilterState((prev) => ({
                         ...prev,
                         isOpen: { ...prev.isOpen, school: !prev.isOpen.school },
                     }))
@@ -56,16 +49,17 @@ const SchoolDropdown = ({
                 출신 학교
                 <BottomArrow isOpen={filterState.isOpen.school} />
             </div>
+
             {filterState.isOpen.school && (
-                <div className="mb-2.5 flex flex-wrap gap-2">
-                    {options.map((option) => (
-                        <div key={option.label} className="flex items-center">
+                <div className="mb-2.5">
+                    <div className="flex flex-wrap gap-2 mt-2">
+                        {options.map((option) => (
                             <div
+                                key={option.value}
                                 onClick={() => handleToggleSelection(option)}
                                 className={`cursor-pointer py-2 px-4 border rounded-lg ${
                                     filterState.selectedSchool.some(
-                                        (s: SchoolOption) =>
-                                            s.value === option.value
+                                        (s) => s.value === option.value
                                     )
                                         ? "text-primary-500 bg-primary-100 border-primary-500"
                                         : "text-black bg-white border-gray-200"
@@ -73,8 +67,8 @@ const SchoolDropdown = ({
                             >
                                 {option.label}
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             )}
         </div>
