@@ -1,5 +1,4 @@
 import React from "react";
-import { Job } from "../../enum/enums";
 
 interface CategoryFilterProps {
     categories: string[];
