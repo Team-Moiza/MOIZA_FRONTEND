@@ -39,3 +39,4 @@ export enum Job {
     SECURITY_SPECIALIST = "정보보안 담당자",
     OTHER = "기타",
 }
+
