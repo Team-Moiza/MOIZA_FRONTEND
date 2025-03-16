@@ -14,7 +14,6 @@ const SchoolDropdown = ({
     setFilterState,
     setIsFilterChanged,
 }: SchoolDropdownProps) => {
-    // 학교 옵션 정의 (한국어 이름 + 코드)
     const options = [
         { label: "부산소마고", value: School.BSSM },
         { label: "대구소마고", value: School.DGSM },
@@ -22,7 +21,6 @@ const SchoolDropdown = ({
         { label: "광주소마고", value: School.GSM },
     ];
 
-    // 학교 선택 핸들러
     const handleToggleSelection = (item: SchoolOption) => {
         setFilterState((prev) => ({
             ...prev,

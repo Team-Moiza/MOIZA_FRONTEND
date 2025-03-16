@@ -3,8 +3,8 @@ import { BottomArrow } from "@moija/ui";
 import { FilterState } from "../../../types/ProfileFilter";
 
 interface CompanyDropdownProps {
-    filterState: any;
-    setFilterState: React.Dispatch<React.SetStateAction<any>>;
+    filterState: FilterState;
+    setFilterState: React.Dispatch<React.SetStateAction<FilterState>>;
     setIsFilterChanged: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -13,10 +13,14 @@ const CompanyDropdown = ({
     setFilterState,
     setIsFilterChanged,
 }: CompanyDropdownProps) => {
-    const options = ["전체", "재직중", "미재직"];
+    const options: ("전체" | "재직중" | "미재직")[] = [
+        "전체",
+        "재직중",
+        "미재직",
+    ];
 
-    const handleCompanyChange = (status: string) => {
-        setFilterState((prev: FilterState) => ({
+    const handleCompanyChange = (status: "전체" | "재직중" | "미재직") => {
+        setFilterState((prev) => ({
             ...prev,
             selectedCompany: status,
         }));

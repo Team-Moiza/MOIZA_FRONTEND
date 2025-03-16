@@ -64,7 +64,6 @@ const Main = () => {
         }
     };
 
-    // Main.tsx
     const applyFilterFromMain = ({
         sort,
         stacks,
@@ -73,14 +72,20 @@ const Main = () => {
     }: FilterApply) => {
         const stackIds = stacks.map((stack) => stack.id);
         const schoolKeys = schools.map(
-            (school) => SchoolKeyByValue[school as School] // 역방향 매핑 사용
+            (school) => SchoolKeyByValue[school as School]
         );
+        const employmentStatus =
+            company === "재직중"
+                ? "true"
+                : company === "미재직"
+                    ? "false"
+                    : null;
         const query = new URLSearchParams({
             page: (currentPage - 1).toString(),
             size: itemsPerPage.toString(),
             ...(stackIds.length > 0 && { code: stackIds.join(",") }),
-            ...(schools.length > 0 && { school: schoolKeys.join(",") }), // BSSM,DSM 전달
-            isEmployed: company === "재직중" ? "true" : "false",
+            ...(schools.length > 0 && { school: schoolKeys.join(",") }),
+            ...(employmentStatus !== null && { isEmployed: employmentStatus }),
             dateSort: sort || "DESC",
         }).toString();
 

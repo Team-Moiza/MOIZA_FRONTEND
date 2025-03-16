@@ -21,5 +21,5 @@ export interface FilterApply {
     sort: string;
     stacks: { id: number; keyword: string }[];
     schools: string[];
-    company: string;
+    company: "전체" | "재직중" | "미재직";
 }

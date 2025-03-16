@@ -20,5 +20,6 @@ export interface FilterState {
     filteredStacks: string[];
     selectedSchool: SchoolOption[];
     filteredSchools: SchoolOption[];
-    selectedCompany: string;
+    selectedCompany: "전체" | "재직중" | "미재직";
+    
 }

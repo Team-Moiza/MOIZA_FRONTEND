@@ -55,7 +55,7 @@ const ProfileBox = ({
             setLiked(newLikeState);
             setLikesCount((prev) => (newLikeState ? prev + 1 : prev - 1));
         } catch (error) {
-            console.error("좋아요 토글 실패:", error);
+            console.error(error);
         }
     };
 

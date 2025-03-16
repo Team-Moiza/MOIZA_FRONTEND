@@ -6,34 +6,33 @@ import SchoolDropdown from "./SchoolDropdown";
 import CompanyDropdown from "./CompanyDropdown";
 import getCodes from "../../../app/api/codes";
 import { School } from "../../../enum/enums";
-import { SchoolOption } from "../../../types/ProfileFilter";
+import { SchoolOption, FilterState } from "../../../types/ProfileFilter";
 
 type Option = string;
-
 interface ProfileFilterProps {
     applyFilter: (filters: {
         sort: string;
         stacks: { id: number; keyword: string }[];
         schools: string[];
-        company: string;
+        company: "전체" | "재직중" | "미재직";
     }) => void;
 }
 
 const ProfileFilter = ({ applyFilter }: ProfileFilterProps) => {
-    const [filterState, setFilterState] = useState({
+    const [filterState, setFilterState] = useState<FilterState>({
         isOpen: {
             sort: false,
             stack: false,
             school: false,
             company: false,
         },
-        selectedSort: "인기순" as Option,
+        selectedSort: "인기순",
         searchInput: "",
-        selectedStacks: [] as { id: number; keyword: string }[],
-        filteredStacks: [] as string[],
-        selectedSchool: [] as SchoolOption[],
-        filteredSchools: [] as SchoolOption[],
-        selectedCompany: "전체" as Option,
+        selectedStacks: [],
+        filteredStacks: [],
+        selectedSchool: [],
+        filteredSchools: [],
+        selectedCompany: "전체",
     });
 
     const [isFilterChanged, setIsFilterChanged] = useState(false);
@@ -67,7 +66,7 @@ const ProfileFilter = ({ applyFilter }: ProfileFilterProps) => {
             selectedSchool: [] as SchoolOption[],
 
             filteredSchools: [] as SchoolOption[],
-            selectedCompany: "전체" as Option,
+            selectedCompany: "전체",
         });
         setIsFilterChanged(false);
         window.location.reload();
