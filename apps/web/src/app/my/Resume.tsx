@@ -31,11 +31,9 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
               <Menu color="#9E9E9E" />
             </button>
             {menu && (
-              <div className="absolute top-3 flex flex-col w-[144px] right-0 z-30" ref={menuRef} onClick={() => closeMenu()}>
+              <div className="absolute top-1 flex flex-col w-[144px] right-0 z-30" ref={menuRef} onClick={() => closeMenu()}>
                 <div className="relative h-fit">
-                  <div className="w-0 h-0 border-8 border-l-transparent border-r-transparent border-t-transparent absolute right-0 border-gray-50 z-50 top-[1px]" />
-                  <div className="w-0 h-0 border-[9px] border-l-transparent border-r-transparent border-t-transparent absolute  border-gray-200 z-40 -top-[1.6px] -right-[1px]" />
-                  <div className="w-full mt-4 h-fit bg-white border-[1px] border-gray-50 rounded-md left-3 shadow-md absolute z-10 flex flex-col px-4 py-2 pt-4">
+                  <div className="w-full mt-4 h-fit bg-white border-[1px] border-gray-50 rounded-md left-3 shadow-md absolute z-10 flex flex-col px-4 py-2 pt-2">
                     <button className="text-btn1 text-gray-600 cursor-pointer flex items-center w-full gap-3 py-[6px]">
                       <DownloadResume /> PDF 저장하기
                     </button>
@@ -43,7 +41,7 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
                       <EditResume />
                       수정
                     </Link>
-                    <button className="text-btn1 text-gray-600 cursor-pointer flex items-center w-full gap-1 py-[6px]" onClick={() => setType(`removeResume_${id}`)}>
+                    <button className="text-btn1 text-gray-600 cursor-pointer flex items-center w-full gap-3 py-[6px]" onClick={() => setType(`removeResume_${id}`)}>
                       <Delete />
                       삭제
                     </button>

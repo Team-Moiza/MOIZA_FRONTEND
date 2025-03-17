@@ -48,10 +48,7 @@ const Register = () => {
             });
             window.location.replace("/");
         } catch (error: any) {
-            console.error(
-                "회원정보 업데이트 실패:",
-                error.response?.data || error.message
-            );
+            console.error(error);
         }
     };
 

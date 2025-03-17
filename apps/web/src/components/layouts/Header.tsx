@@ -23,9 +23,7 @@ const Header = () => {
                     const response = await instance.get("/users");
                     setUser(response.data);
                     setIsLoggedIn(true);
-                    console.log("유저 데이터:", response.data);
                 } catch (error) {
-                    console.error("유저 정보 조회 실패:", error);
                     setIsLoggedIn(false);
                 }
             } else {

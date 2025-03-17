@@ -1,7 +1,3 @@
-"use client";
-
-import Image from "next/image";
-// import Image from "next/image";
 import { profileData } from "../../data/profileData";
 import { FormData } from "../../app/write/[id]/page";
 

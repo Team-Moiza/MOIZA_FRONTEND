@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookie from "js-cookie";
 
 export const instance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL,
