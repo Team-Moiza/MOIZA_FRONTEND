@@ -1,4 +1,4 @@
-import { instance } from "../../apis/instance";
+import { instance } from "./instance";
 
 export const likeApi = {
     getLikeStatus: async (portfolioId: string) => {
@@ -9,7 +9,6 @@ export const likeApi = {
                 likeCount: null,
             };
         } catch (error) {
-            console.error("좋아요 상태 조회 실패:", error);
             return {
                 isLiked: false,
                 likeCount: null,

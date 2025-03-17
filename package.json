@@ -8,6 +8,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/react-js-pagination": "^3.0.7",
     "prettier": "^3.2.5",
     "turbo": "^2.1.2",
@@ -24,7 +25,9 @@
   "dependencies": {
     "@tanstack/react-query": "^5.66.0",
     "axios": "^1.7.9",
+    "js-cookie": "^3.0.5",
     "react-hook-form": "^7.54.2",
-    "react-js-pagination": "^3.0.3"
+    "react-js-pagination": "^3.0.3",
+    "react-toastify": "^11.0.5"
   }
 }

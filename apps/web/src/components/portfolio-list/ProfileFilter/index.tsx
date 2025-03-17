@@ -4,7 +4,7 @@ import SortDropdown from "./SortDropdown";
 import StackDropdown from "./StackDropdown";
 import SchoolDropdown from "./SchoolDropdown";
 import CompanyDropdown from "./CompanyDropdown";
-import getCodes from "../../../app/api/codes";
+import { getCodes } from "../../../apis/portfolio";
 import { SchoolOption, FilterState } from "../../../types/ProfileFilter";
 
 interface ProfileFilterProps {

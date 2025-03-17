@@ -4,7 +4,7 @@ import { useBoolean, useOutsideClickRef } from "@moija/hooks";
 import { Button, Dropdown, InputTemplate, Label, Select } from "@moija/ui";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { resgister } from "../api/register";
+import { resgister } from "../../apis/register";
 import { School, Major, EducationStatus } from "../../enum/enums";
 
 const Register = () => {

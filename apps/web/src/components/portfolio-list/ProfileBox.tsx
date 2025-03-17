@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Heart } from "@moija/ui";
-import { likeApi } from "../../app/api/likeApi";
+import { likeApi } from "../../apis/likeApi";
 import { Profile } from "../../types/portfolio";
 import Image from "next/image";
 
