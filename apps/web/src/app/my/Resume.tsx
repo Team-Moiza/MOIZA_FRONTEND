@@ -33,7 +33,7 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
             {menu && (
               <div className="absolute top-1 flex flex-col w-[144px] right-0 z-30" ref={menuRef} onClick={() => closeMenu()}>
                 <div className="relative h-fit">
-                  <div className="w-full mt-4 h-fit bg-white border-[1px] border-gray-50 rounded-md left-3 shadow-md absolute z-10 flex flex-col px-4 py-2 pt-2">
+                  <div className="w-full mt-4 h-fit bg-white border-[1px] border-gray-50 rounded-lg left-3 shadow-md absolute z-10 flex flex-col px-4 py-2 pt-2">
                     <button className="text-btn1 text-gray-600 cursor-pointer flex items-center w-full gap-3 py-[6px]">
                       <DownloadResume /> PDF 저장하기
                     </button>
