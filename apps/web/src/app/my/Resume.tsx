@@ -1,9 +1,10 @@
-import { useBoolean, useOutsideClickRef } from "@moija/hooks";
-import { Delete, DownloadResume, EditResume, Menu, Stack, Toggle } from "@moija/ui";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { Dispatch, SetStateAction } from "react";
+import { Stack, Toggle } from "@moija/ui";
 import Link from "next/link";
 import { publishPortFolio } from "../../apis";
-import { Dispatch, SetStateAction } from "react";
+import { ActionMenu } from "@moija/ui";
+import { Delete, DownloadResume, EditResume } from "@moija/ui";
 
 interface IProp {
   title: string;
@@ -14,8 +15,6 @@ interface IProp {
 }
 
 export const Resume = ({ title, date, checked, id, setType }: IProp) => {
-  const { boolean: menu, toggle: toggleMenu, setFalse: closeMenu } = useBoolean(false);
-  const menuRef = useOutsideClickRef<HTMLDivElement>(closeMenu);
   const { refetch } = useQuery({ queryKey: ["my", "portfolio"] });
   const { mutate } = useMutation({ mutationFn: async () => (await publishPortFolio(id)) as any, onSuccess: refetch });
 
@@ -26,30 +25,13 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
           <Link className="text-btn1 cursor-pointer hover:underline" href={`/detail/${id}`}>
             {title}
           </Link>
-          <div className="relative">
-            <button type="button" onClick={toggleMenu}>
-              <Menu color="#9E9E9E" />
-            </button>
-            {menu && (
-              <div className="absolute top-1 flex flex-col w-[144px] right-0 z-30" ref={menuRef} onClick={() => closeMenu()}>
-                <div className="relative h-fit">
-                  <div className="w-full mt-4 h-fit bg-white border-[1px] border-gray-50 rounded-lg left-3 shadow-md absolute z-10 flex flex-col px-4 py-2 pt-2">
-                    <button className="text-btn1 text-gray-600 cursor-pointer flex items-center w-full gap-3 py-[6px]">
-                      <DownloadResume /> PDF 저장하기
-                    </button>
-                    <Link className="text-btn1 text-gray-600 cursor-pointer flex items-center w-full gap-3 py-[6px]" href={`/write/${id}`}>
-                      <EditResume />
-                      수정
-                    </Link>
-                    <button className="text-btn1 text-gray-600 cursor-pointer flex items-center w-full gap-3 py-[6px]" onClick={() => setType(`removeResume_${id}`)}>
-                      <Delete />
-                      삭제
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+          <ActionMenu
+            items={[
+              { icon: <DownloadResume />, label: "PDF 저장하기", onClick: () => console.log("PDF 저장") },
+              { icon: <EditResume />, label: "수정", onClick: () => console.log(`수정 페이지 이동: /write/${id}`) },
+              { icon: <Delete />, label: "삭제", onClick: () => setType(`removeResume_${id}`) },
+            ]}
+          />
         </div>
         <span className="text-caption2 text-gray-500">{date}</span>
         <div className="mt-5 flex items-center justify-between ">
