@@ -48,4 +48,4 @@ export const addSkillset = async (id: string) => {
 };
 
 export const getCodes = async (keyword = "") =>
-    (await instance.get("/codes", { params: { keyword } })).data || [];
+    (await instance.get(`/codes`, { params: { keyword } })).data || [];

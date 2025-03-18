@@ -44,16 +44,10 @@ const Main = () => {
     }, [currentPage]);
 
     const fetchProfiles = async (query: string) => {
-        try {
-            const response = await instance.get(`portfolios?${query}`);
-            const data = response.data.content || [];
-            setProfiles(data);
-            setFilteredProfiles(data);
-        } catch (error) {
-            console.error(error);
-            setProfiles([]);
-            setFilteredProfiles([]);
-        }
+        const response = await instance.get(`portfolios?${query}`);
+        const data = response.data.content || [];
+        setProfiles(data);
+        setFilteredProfiles(data);
     };
 
     const applyFilterFromMain = ({
@@ -67,11 +61,11 @@ const Main = () => {
             (school) => SchoolKeyByValue[school as School]
         );
         const employmentStatus =
-            company === "재직중"
+            company === "미재직"
                 ? "false"
-                : company === "미재직"
-                  ? "true"
-                  : null;
+                : company === "재직중"
+                    ? "true"
+                    : null;
 
         const query = new URLSearchParams({
             page: currentPage.toString(),
