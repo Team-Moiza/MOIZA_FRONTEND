@@ -1,7 +1,7 @@
 "use client";
 
 import { Center, Stack } from "@moija/ui";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProfilePage } from "./ProfilePage";
 import { LikedList } from "./LikedList";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -51,11 +51,12 @@ export default function MyPage() {
         onSuccess: () => replace("/"),
     });
 
+
     return (
         <>
             {type && (
-                <div className="absolute z-10 top-0 w-full h-screen bg-[#00000030] flex justify-center items-center">
-                    <div className="w-[478px] h-[330px] py-[52px] items-center justify-center bg-white rounded-2xl flex-col flex z-20 gap-[60px]">
+                <div className="fixed z-[101] top-0 w-full h-screen bg-[#00000030] flex justify-center items-center ">
+                    <div className="w-[438px] h-[280px] py-[52px] items-center justify-center bg-white rounded-2xl flex-col flex z-20 gap-[40px]">
                         <div className="flex flex-col gap-4 items-center">
                             <span className="text-h4">
                                 {type === "removeAccount"
