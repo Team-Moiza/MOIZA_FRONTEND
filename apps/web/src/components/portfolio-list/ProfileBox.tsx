@@ -52,7 +52,7 @@ const ProfileBox = ({
 
     return (
         <div 
-            className="min-w-[600px] w-[100%] h-45 px-[50px] py-[34px] bg-white rounded-[20px] border border-gray-200 justify-between items-center inline-flex cursor-pointer hover:bg-gray-50"
+            className="min-w-[600px] w-[100%] h-45 px-[50px] py-[34px] bg-white rounded-[20px] border border-gray-200 justify-between items-center inline-flex cursor-pointer hover:bg-[#fafafa]"
             onClick={() => router.push(`/detail/${id}`)}
         >
             <div className="flex items-center gap-[30px]">

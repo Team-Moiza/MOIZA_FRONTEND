@@ -15,12 +15,8 @@ const ProfileList = ({ paginatedProfiles }: ProfileListProps) => {
 
     useEffect(() => {
         const fetchUserStatus = async () => {
-            try {
-                const response = await instance.get("/users");
-                setUserStatus(response.data.userStatus);
-            } catch (error) {
-                console.error(error);
-            }
+            const response = await instance.get("/users");
+            setUserStatus(response.data.userStatus);
         };
 
         fetchUserStatus();
