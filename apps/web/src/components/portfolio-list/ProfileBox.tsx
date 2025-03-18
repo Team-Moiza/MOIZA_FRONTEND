@@ -4,6 +4,7 @@ import { likeApi } from "../../apis/likeApi";
 import { Profile } from "../../types/portfolio";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { School, Job } from "../../enum/enums";
 
 const ProfileBox = ({
     id,
@@ -71,10 +72,12 @@ const ProfileBox = ({
                 </div>
                 <div className="flex flex-col w-[37vw]">
                     <div className="text-caption1 text-gray-500">
-                        {company ? `${company} / ${school}` : school}
+                        {company
+                            ? `${company} / ${School[school as unknown as keyof typeof School]}`
+                            : School[school as unknown as keyof typeof School]}
                     </div>
                     <div className="text-p2 text-black">
-                        {job} · {name}
+                        {Job[job as unknown as keyof typeof Job]} · {name}
                     </div>
                     <div className="text-p4 text-gray-500 overflow-hidden whitespace-nowrap text-ellipsis break-all">
                         {introduce}

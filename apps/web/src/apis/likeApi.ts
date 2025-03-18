@@ -23,7 +23,7 @@ export const likeApi = {
             name: portfolio.name,
             school: portfolio.school,
             major: portfolio.major,
-            introduce: portfolio.introduc,
+            introduce: portfolio.introduce,
             likeCnt: portfolio.likeCnt,
             job: portfolio.job,
             company: portfolio.company,

@@ -17,7 +17,7 @@ export const LikedList = () => {
     }, []);
 
     return (
-        <div className="w-full h-fit px-[36px] py-[24px]">
+        <div className="w-full h-fit pt-[24px] pb-28">
             <Stack gap={20}>
                 <span className="text-p2">좋아요 목록</span>
                 {likedProfiles.length > 0 ? (

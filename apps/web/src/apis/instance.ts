@@ -1,5 +1,4 @@
 import axios from "axios";
-import Cookie from "js-cookie";
 
 export const instance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -17,7 +16,7 @@ instance.interceptors.response.use(
     async (err) => {
         const originalRequest = err.config;
 
-        if (originalRequest.url === "/auth/refresh") {
+        if (originalRequest._retry) {
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
             window.location.replace("/login");
@@ -29,13 +28,16 @@ instance.interceptors.response.use(
         try {
             originalRequest._retry = true;
             const refreshToken = localStorage.getItem("refreshToken");
+            if (!refreshToken) {
+                throw new Error("리프레시 토큰이 없습니다.");
+            }
+
             const { data } = await axios.post("/auth/refresh", {
                 token: refreshToken,
             });
 
             localStorage.setItem("accessToken", data.accessToken);
-            instance.defaults.headers.common["Authorization"] =
-                `Bearer ${data.accessToken}`;
+            instance.defaults.headers.common["Authorization"] = `Bearer ${data.accessToken}`;
 
             return instance(originalRequest);
         } catch (error) {
