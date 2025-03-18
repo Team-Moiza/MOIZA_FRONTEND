@@ -1,38 +1,84 @@
+"use client";
+
 import { Logo } from "@moija/ui";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { ActionMenu } from "@moija/ui";
+import { user, logout } from "../../apis/user";
+import { instance } from "../../apis";
 
 type User = {
-  profile: string;
-  name: string;
+    profile: string;
+    nickname: string;
 };
 
 const Header = () => {
-  const isLoggedIn = true;
-  const user: User = {
-    profile: "https://i.pinimg.com/564x/b3/ea/18/b3ea1834562fc0dcbe9a7f3c4ef7612b.jpg",
-    name: "강민지",
-  };
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  return (
-    <header className="z-10 w-[100vw] fixed justify-center bg-white h-[80px] px-[200px] py-[25px] shadow-custom">
-      <div className="h-full flex justify-between items-center">
-        <div className="flex items-center space-x-4">
-          <Logo />
-        </div>
-        <div className="flex items-center gap-5">
-          {isLoggedIn ? (
-            <div className="flex items-center gap-[14px]">
-              <img src={user.profile} className="rounded-full w-[42px] h-[42px] flex-shrink-0" />
-              <div className="text-p3 text-black">{user.name}님</div>
+    const [user, setUser] = useState<User | null>(null);
+    const router = useRouter();
+    useEffect(() => {
+        const userProfile = async () => {
+            const token = localStorage.getItem("accessToken");
+            if (token) {
+                const response = await instance.get("/users");
+                setUser(response.data);
+                setIsLoggedIn(true);
+            }
+        };
+        userProfile();
+    }, []);
+
+    return (
+        <header className="z-[100] w-[100vw] fixed justify-center bg-white h-[80px] px-[200px] py-[25px] shadow-custom">
+            <div className="h-full flex justify-between items-center">
+                <div className="flex items-center space-x-4">
+                    <Link href="/">
+                        <Logo />
+                    </Link>
+                </div>
+                <div className="flex items-center gap-5">
+                    {isLoggedIn && user ? (
+                        <ActionMenu
+                            items={[
+                                {
+                                    label: "이력시 목록",
+                                    onClick: () => router.push("/"),
+                                },
+                                {
+                                    label: "프로필 보기",
+                                    onClick: () => router.push("/my"),
+                                },
+                                {
+                                    label: "로그아웃",
+                                    fontColor: "text-red-500",
+                                },
+                            ]}
+                        >
+                            <div className="flex items-center gap-3 cursor-pointer">
+                                <Image
+                                    src={user.profile}
+                                    alt="프로필"
+                                    width={42}
+                                    height={42}
+                                    className="rounded-full flex-shrink-0"
+                                />
+                                <div className="text-p3 text-black">
+                                    {user.nickname}님
+                                </div>
+                            </div>
+                        </ActionMenu>
+                    ) : (
+                        <Link href="/login" className="gap-[50px] flex">
+                            <div className="text-p3 text-black">로그인</div>
+                        </Link>
+                    )}
+                </div>
             </div>
-          ) : (
-            <div className="gap-[50px] flex">
-              <div className="text-p3 text-black">로그인</div>
-            </div>
-          )}
-        </div>
-      </div>
-    </header>
-  );
+        </header>
+    );
 };
 
 export default Header;

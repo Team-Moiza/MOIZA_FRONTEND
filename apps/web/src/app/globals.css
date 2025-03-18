@@ -2,21 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 @layer base {
-  body {
-    overflow-x: hidden;
-  }
+    body {
+        overflow-x: hidden;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}
+.scrollbar-hide {
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-.animate-float {
-  animation: float 2s ease-in-out infinite;
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

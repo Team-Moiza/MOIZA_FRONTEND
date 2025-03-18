@@ -1,12 +1,12 @@
 import { Github } from "@moija/ui";
 import Link from "next/link";
 
-const Footer = () => {
+export const Footer = () => {
     return (
         <footer className="relative bottom-0 mt-[100px] w-full h-[380px] px-[200px] bg-gray-600 flex flex-col items-center justify-center text-white">
             <div className="font-black text-[22px] mb-6">MOIZA</div>
             <div className="flex gap-4 mb-6 text-caption1 text-white">
-                {["강민지", "김명진", "김수아", "안예성", "이지후"].map(
+                {["강민지", "김명진", "김수아", "안예성", "육기준"].map(
                     (name) => (
                         <span key={name}>{name}</span>
                     )
@@ -19,7 +19,7 @@ const Footer = () => {
             <div className="text-[13px] text-gray-300 flex items-center mt-[30px]">
                 ©2024. team MOIZA. All rights reserved.
             </div>
-            <div className="absolute top-[240px] right-[200px] ">
+            <div className="absolute top-[240px] right-[200px] w-12 h-12">
                 <Link href="https://github.com/Team-Moiza">
                     <Github />
                 </Link>
@@ -27,5 +27,3 @@ const Footer = () => {
         </footer>
     );
 };
-
-export default Footer;

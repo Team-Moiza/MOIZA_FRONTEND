@@ -30,4 +30,3 @@ interface Certificate {
     name: string;
     date: string;
 }
-

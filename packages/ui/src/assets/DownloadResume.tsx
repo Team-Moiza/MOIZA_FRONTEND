@@ -1,6 +1,6 @@
 import { IconPropsType } from "./iconPropsType";
 
-export const DownloadResume = ({ size = 16, color = "#000000" }: IconPropsType) => {
+export const DownloadResume = ({ size = 16, color = "#5a5a5a" }: IconPropsType) => {
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8.08171 10.7907L8.08171 2.7634" stroke={color} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

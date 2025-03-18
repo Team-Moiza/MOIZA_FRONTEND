@@ -1,35 +1,35 @@
 import { IconPropsType } from "./iconPropsType";
 
-export const Delete = ({ size = 24, color = "#000000" }: IconPropsType) => {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox={`0 0 ${size} ${size}`}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M14.4933 7.1012C14.4933 7.1012 14.0861 12.1524 13.8498 14.2802C13.7373 15.2964 13.1096 15.8919 12.0813 15.9107C10.1246 15.9459 8.1656 15.9482 6.2096 15.9069C5.22035 15.8867 4.6031 15.2837 4.49285 14.2854C4.2551 12.1389 3.8501 7.1012 3.8501 7.1012"
-        stroke={color}
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <path
-        d="M15.531 4.67981H2.8125"
-        stroke={color}
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <path
-        d="M13.0804 4.6798C12.4917 4.6798 11.9847 4.26355 11.8692 3.6868L11.6869 2.7748C11.5744 2.35405 11.1934 2.06305 10.7592 2.06305H7.58443C7.15018 2.06305 6.76918 2.35405 6.65668 2.7748L6.47443 3.6868C6.35893 4.26355 5.85193 4.6798 5.26318 4.6798"
-        stroke={color}
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
-  );
+export const Delete = ({ size = 16, color = "#000000" }: IconPropsType) => {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox={`0 0 ${size} ${size}`}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M12.8833 6.81213C12.8833 6.81213 12.5213 11.3021 12.3113 13.1935C12.2113 14.0968 11.6533 14.6261 10.7393 14.6428C8.99994 14.6741 7.25861 14.6761 5.51994 14.6395C4.64061 14.6215 4.09194 14.0855 3.99394 13.1981C3.78261 11.2901 3.42261 6.81213 3.42261 6.81213"
+                stroke="#5A5A5A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M13.8056 4.65981H2.50024"
+                stroke="#5A5A5A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M11.6271 4.6598C11.1038 4.6598 10.6531 4.2898 10.5505 3.77713L10.3885 2.96647C10.2885 2.59247 9.9498 2.3338 9.5638 2.3338H6.7418C6.3558 2.3338 6.01713 2.59247 5.91713 2.96647L5.75513 3.77713C5.65247 4.2898 5.2018 4.6598 4.67847 4.6598"
+                stroke="#5A5A5A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+    );
 };
