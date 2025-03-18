@@ -1,6 +1,6 @@
 import { IconPropsType } from "./iconPropsType";
 
-export const EditResume = ({ size = 16, color = "#5a5a5a" }: IconPropsType) => {
+export const EditResume = ({ size = 16, color = "#000000" }: IconPropsType) => {
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M7.66198 2.35933H5.16932C3.11932 2.35933 1.83398 3.81066 1.83398 5.86533V11.408C1.83398 13.4627 3.11332 14.914 5.16932 14.914H11.052C13.1087 14.914 14.388 13.4627 14.388 11.408V8.72266" stroke={color} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

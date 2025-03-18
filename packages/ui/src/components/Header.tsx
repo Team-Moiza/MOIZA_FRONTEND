@@ -1,15 +1,16 @@
-import { Logo } from "@moija/ui";
+import { Logo } from '@moija/ui';
 
 type User = {
   profile: string;
   name: string;
 };
 
-const Header = () => {
+export const Header = () => {
   const isLoggedIn = true;
   const user: User = {
-    profile: "https://i.pinimg.com/564x/b3/ea/18/b3ea1834562fc0dcbe9a7f3c4ef7612b.jpg",
-    name: "강민지",
+    profile:
+      'https://i.pinimg.com/564x/b3/ea/18/b3ea1834562fc0dcbe9a7f3c4ef7612b.jpg',
+    name: '강민지',
   };
 
   return (
@@ -21,7 +22,10 @@ const Header = () => {
         <div className="flex items-center gap-5">
           {isLoggedIn ? (
             <div className="flex items-center gap-[14px]">
-              <img src={user.profile} className="rounded-full w-[42px] h-[42px] flex-shrink-0" />
+              <img
+                src={user.profile}
+                className="rounded-full w-[42px] h-[42px] flex-shrink-0"
+              />
               <div className="text-p3 text-black">{user.name}님</div>
             </div>
           ) : (
@@ -34,5 +38,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;

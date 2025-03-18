@@ -1,7 +1,7 @@
 import { Github } from "@moija/ui";
 import Link from "next/link";
 
-const Footer = () => {
+export const Footer = () => {
     return (
         <footer className="relative bottom-0 mt-[100px] w-full h-[380px] px-[200px] bg-gray-600 flex flex-col items-center justify-center text-white">
             <div className="font-black text-[22px] mb-6">MOIZA</div>
@@ -27,5 +27,3 @@ const Footer = () => {
         </footer>
     );
 };
-
-export default Footer;
