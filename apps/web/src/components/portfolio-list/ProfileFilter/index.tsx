@@ -82,17 +82,12 @@ const ProfileFilter = ({ applyFilter }: ProfileFilterProps) => {
             setFilterState((prev) => ({ ...prev, filteredStacks: [] }));
             return;
         }
-
-        try {
-            const response: { id: number; keyword: string }[] =
-                await getCodes(value);
-            setFilterState((prev) => ({
-                ...prev,
-                filteredStacks: response.map((item) => item.keyword),
-            }));
-        } catch (error) {
-            console.error(error);
-        }
+        const response: { id: number; keyword: string }[] =
+            await getCodes(value);
+        setFilterState((prev) => ({
+            ...prev,
+            filteredStacks: response.map((item) => item.keyword),
+        }));
     };
 
     const handleApplyFilter = () => {

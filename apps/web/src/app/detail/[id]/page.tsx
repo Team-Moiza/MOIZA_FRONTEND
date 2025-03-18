@@ -1,7 +1,6 @@
 "use client";
 import NavBar from "../../../components/detail/NavBar";
 import Section from "../../../components/detail/Section";
-import { profileData } from "../../../data/profileData";
 import Profile from "../../../components/detail/Profile";
 import { Heart, LinkIcon, Stack } from "@moija/ui";
 import Link from "next/link";
