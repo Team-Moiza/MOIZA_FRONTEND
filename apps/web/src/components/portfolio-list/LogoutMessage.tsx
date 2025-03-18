@@ -2,9 +2,9 @@ import { Button } from "@moija/ui";
 import React from "react";
 import ProfileBox from "./ProfileBox";
 import dummyProfiles from "../../data/profileList";
-import { useRouter } from 'next/navigation';
-
+import { useRouter } from "next/navigation";
 interface LogoutMessageProps {
+    id: string;
     userStatus:
         | "NOT_LOGGED_IN"
         | "LOGGED_IN"
@@ -12,7 +12,7 @@ interface LogoutMessageProps {
         | "PORTFOLIO_PUBLISHED";
 }
 
-const LogoutMessage = ({ userStatus }: LogoutMessageProps) => {
+const LogoutMessage = ({ userStatus, id }: LogoutMessageProps) => {
     const router = useRouter();
 
     const getMessage = () => {
@@ -51,7 +51,7 @@ const LogoutMessage = ({ userStatus }: LogoutMessageProps) => {
                 router.push("/login");
                 break;
             case "LOGGED_IN":
-                router.push("/write");
+                router.push(`/write/${id}`);
                 break;
             case "PORTFOLIO_COMPLETED":
                 router.push("/my");
