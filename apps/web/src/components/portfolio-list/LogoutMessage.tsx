@@ -4,7 +4,7 @@ import ProfileBox from "./ProfileBox";
 import dummyProfiles from "../../data/profileList";
 import { useRouter } from "next/navigation";
 interface LogoutMessageProps {
-    id: string;
+    id?: string;
     userStatus:
         | "NOT_LOGGED_IN"
         | "LOGGED_IN"

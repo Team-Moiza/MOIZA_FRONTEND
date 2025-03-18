@@ -15,20 +15,22 @@ export const likeApi = {
             };
         }
     },
-
+    
     getLikedPortfolios: async () => {
         const response = await instance.get(`/likes`);
         return response.data.map((portfolio: any) => ({
             id: portfolio.portfolioId,
             name: portfolio.name,
-            profileImg: portfolio.profile,
             school: portfolio.school,
             major: portfolio.major,
-            introduce: portfolio.introduce,
-            likeCnt: portfolio.likeCnt
+            introduce: portfolio.introduc,
+            likeCnt: portfolio.likeCnt,
+            job: portfolio.job,
+            company: portfolio.company,
+            enrollmentStartDate: portfolio.enrollmentStartDate,
+            codes: portfolio.codes,
         }));
     },
-    
 
     addLike: async (portfolioId: string) => {
         const response = await instance.post(
