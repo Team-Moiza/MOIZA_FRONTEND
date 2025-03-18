@@ -1,4 +1,3 @@
-import React from "react";
 import ProfileList from "./ProfileList";
 import CustomPagination from "./Pagination";
 import { Profile } from "../../types/portfolio";
