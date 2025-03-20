@@ -3,7 +3,7 @@ import ProfileBox from "./ProfileBox";
 import LogoutMessage from "./LogoutMessage";
 import { ProfileListProps } from "../../types/portfolio";
 import { user } from "../../apis/user";
-import { NoProfileBox } from "@moija/ui";
+import NoWriteBanner from "./NoWriteBanner";
 
 const ProfileList = ({ paginatedProfiles }: ProfileListProps) => {
     const [userStatus, setUserStatus] = useState<
@@ -24,16 +24,8 @@ const ProfileList = ({ paginatedProfiles }: ProfileListProps) => {
 
     return (
         <>
-            <NoProfileBox>
-                <div className="text-h5 text-white">
-                    지금 바로 나의 포트폴리오를 작성하고,
-                    <br />
-                    다른 사람의 포트폴리오도 구경해보세요!
-                </div>
-                <button className="flex px-[26px] py-2 text-p2 bg-white text-primary-500 rounded-[10px]">
-                    작성하기
-                </button>
-            </NoProfileBox>
+            {userStatus !== "PORTFOLIO_PUBLISHED" && <NoWriteBanner />}
+
             {paginatedProfiles.length > 0 ? (
                 paginatedProfiles.map((profile) => (
                     <ProfileBox key={profile.id} {...profile} />
