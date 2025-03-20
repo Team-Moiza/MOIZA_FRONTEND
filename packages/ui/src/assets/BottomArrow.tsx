@@ -1,16 +1,20 @@
 interface BottomArrowProps {
     isOpen?: boolean;
+    size?: string;
 }
 
-export const BottomArrow = ({ isOpen }: BottomArrowProps) => {
+export const BottomArrow = ({ isOpen, size='14' }: BottomArrowProps) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
+            width={size}
+            height={size}
             viewBox="0 0 14 14"
             fill="none"
-            style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.3s" }}
+            style={{
+                transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "transform 0.3s",
+            }}
         >
             <path
                 d="M11.0833 4.95825L6.99996 9.04159L2.91663 4.95825"

@@ -1,6 +1,6 @@
 "use client";
 
-import { Logo } from "@moija/ui";
+import { BottomArrow, Logo } from "@moija/ui";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -65,8 +65,11 @@ const Header = () => {
                                     height={42}
                                     className="rounded-full flex-shrink-0"
                                 />
-                                <div className="text-p3 text-black">
-                                    {user.nickname}님
+                                <div className="flex items-center gap-1.5">
+                                    <div className="text-p3 text-black">
+                                        {user.nickname}님
+                                    </div>
+                                    <BottomArrow size="18" />
                                 </div>
                             </div>
                         </ActionMenu>
