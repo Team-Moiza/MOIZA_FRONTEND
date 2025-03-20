@@ -5,41 +5,29 @@ import { instance } from "../../../apis/instance";
 const GoogleCallback = () => {
     useEffect(() => {
         const handleAuth = async () => {
-            try {
-                const hash = window.location.hash;
-                if (!hash) {
-                    window.location.replace("/login");
-                    return;
-                }
+            const hash = window.location.hash;
+            if (!hash) return window.location.replace("/login");
 
-                const params = new URLSearchParams(hash.substring(1));
-                const accessToken = params.get("access_token");
+            const params = new URLSearchParams(hash.substring(1));
+            const accessToken = params.get("access_token");
+            if (!accessToken) return window.location.replace("/login");
 
-                if (!accessToken) {
-                    window.location.replace("/login");
-                    return;
-                }
+            const authResponse = await instance.post("/auth", {
+                token: accessToken,
+            });
+            const { accessToken: newAccessToken, refreshToken } =
+                authResponse.data;
 
-                const authResponse = await instance.post("/auth", {
-                    token: accessToken,
-                });
-                const { accessToken: newAccessToken, refreshToken } =
-                    authResponse.data;
+            localStorage.setItem("accessToken", newAccessToken);
+            localStorage.setItem("refreshToken", refreshToken);
 
-                localStorage.setItem("accessToken", newAccessToken);
-                localStorage.setItem("refreshToken", refreshToken);
+            const { data: userData } = await instance.get("/users");
 
-                const userResponse = await instance.get("/users");
-                const userData = userResponse.data;
-
-                const isNewUser =
-                    !userData.school ||
-                    !userData.major ||
-                    !userData.educationStatus;
-                window.location.replace(isNewUser ? "/register" : "/");
-            } catch (error) {
-                window.location.replace("/login");
-            }
+            window.location.replace(
+                !userData.school || !userData.major || !userData.educationStatus
+                    ? "/register"
+                    : "/"
+            );
         };
 
         handleAuth();

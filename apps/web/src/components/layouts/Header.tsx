@@ -44,7 +44,7 @@ const Header = () => {
                         <ActionMenu
                             items={[
                                 {
-                                    label: "이력시 목록",
+                                    label: "이력서 목록",
                                     onClick: () => router.push("/"),
                                 },
                                 {
