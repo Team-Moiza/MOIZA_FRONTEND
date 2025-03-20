@@ -50,7 +50,7 @@ export const MyPageNav = ({
         </span>
         <div className="w-full h-px bg-gray-200" />
         <button
-          className="text-p4 text-gray-400 w-fit hover:text-black transition-colors"
+          className="text-p4 text-gray-500 w-fit hover:text-black transition-colors"
           onClick={userLogout}
         >
           로그아웃
