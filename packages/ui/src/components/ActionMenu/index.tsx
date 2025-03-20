@@ -33,7 +33,7 @@ export const ActionMenu = ({ items, children }: ActionMenuProps) => {
                             <button
                                 key={index}
                                 className={`
-                                    w-full text-left px-4 py-2 text-p4 cursor-pointer
+                                    w-full text-left px-4 py-3 text-p4 cursor-pointer
                                     ${fontColor || "text-gray-700"}
                                     hover:bg-[#F7F9FA]
                                 `}
@@ -42,7 +42,7 @@ export const ActionMenu = ({ items, children }: ActionMenuProps) => {
                                     closeMenu();
                                 }}
                             >
-                                <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-2.5">
                                     {icon}
                                     {label}
                                 </div>
