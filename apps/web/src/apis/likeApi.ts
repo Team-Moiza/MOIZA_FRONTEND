@@ -1,3 +1,4 @@
+import { profile } from "console";
 import { instance } from "./instance";
 
 export const likeApi = {
@@ -15,13 +16,14 @@ export const likeApi = {
             };
         }
     },
-    
+
     getLikedPortfolios: async () => {
         const response = await instance.get(`/likes`);
         return response.data.map((portfolio: any) => ({
             id: portfolio.portfolioId,
             name: portfolio.name,
             school: portfolio.school,
+            profile: portfolio.profile,
             major: portfolio.major,
             introduce: portfolio.introduce,
             likeCnt: portfolio.likeCnt,
