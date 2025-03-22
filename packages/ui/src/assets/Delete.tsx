@@ -1,6 +1,6 @@
 import { IconPropsType } from "./iconPropsType";
 
-export const Delete = ({ size = 16, color = "#000000" }: IconPropsType) => {
+export const Delete = ({ size = 18, color = "#5A5A5A" }: IconPropsType) => {
     return (
         <svg
             width={size}

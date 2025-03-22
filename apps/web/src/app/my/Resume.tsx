@@ -1,11 +1,9 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { Dispatch, SetStateAction } from "react";
-import { Stack, Toggle, Menu } from "@moija/ui";
-import Link from "next/link";
+import { ActionMenu, Delete, DownloadResume, EditResume, Menu, Stack, Toggle } from "@moija/ui";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { publishPortFolio } from "../../apis";
-import { ActionMenu } from "@moija/ui";
-import { Delete, DownloadResume, EditResume } from "@moija/ui";
+import Link from "next/link";
+import { Dispatch, SetStateAction } from "react";
 
 interface IProp {
     title: string;

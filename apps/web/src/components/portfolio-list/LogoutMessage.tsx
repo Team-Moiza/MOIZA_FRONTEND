@@ -70,7 +70,7 @@ const LogoutMessage = ({ userStatus, id }: LogoutMessageProps) => {
                         id={profile.id.toString()}
                         name={profile.name}
                         job={profile.job}
-                        profileImg={profile.profileImg}
+                        profile={profile.profile}
                         school={profile.school}
                         introduce={profile.introduce}
                         codes={profile.codes}

@@ -5,9 +5,15 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
+                hostname: "nas.anys.kro.kr",
+                port: "",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
                 hostname: "s3.ap-northeast-2.amazonaws.com",
                 port: "",
-                pathname: "/toonda-image/**",
+                pathname: "/**",
             },
         ],
         domains: ["i.pinimg.com", "lh3.googleusercontent.com"],

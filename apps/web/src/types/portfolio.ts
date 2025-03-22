@@ -6,7 +6,7 @@ export interface Profile {
     school: School;
     job: Job;
     introduce: string;
-    profileImg: string;
+    profile: string;
     likeCnt: number;
     codes?: { keyword: string }[];
     company: string | null;

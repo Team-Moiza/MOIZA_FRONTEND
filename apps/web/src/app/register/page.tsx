@@ -72,7 +72,7 @@ const Register = () => {
         { label: "부산소프트웨어마이스터고등학교", value: "BSSM" },
         { label: "대구소프트웨어마이스터고등학교", value: "DGSM" },
         { label: "대덕소프트웨어마이스터고등학교", value: "DSM" },
-        { label: "광주소소프트웨어마이스터고등학교", value: "GSM" },
+        { label: "광주소프트웨어마이스터고등학교", value: "GSM" },
     ];
 
     const majorName = [
