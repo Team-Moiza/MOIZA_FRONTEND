@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 const NoWriteBanner = () => {
     const router = useRouter();
     return (
-        <div className="bg-[url('/images/noWriteBanner.png')] relative bg-cover bg-center overflow-hidden flex items-center justify-center rounded-[20px] min-h-[180px] min-w-[600px]">
+        <div className="bg-[url('/noWriteBanner.png')] relative bg-cover bg-center overflow-hidden flex items-center justify-center rounded-[20px] min-h-[180px] min-w-[600px]">
             <div className="absolute w-[500px] gap-[45px] flex items-center h-full">
                 <div className="text-h5 text-white">
                     지금 바로 나의 포트폴리오를 작성하고,

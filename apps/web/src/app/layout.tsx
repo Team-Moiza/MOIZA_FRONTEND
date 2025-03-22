@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 	title: "모이자",
 	description: "4대 소마고 이력서 공유 사이트",
 	icons: {
-		icon: "Moiza.jpg",
+		icon: "/Moiza.jpg",
 	},
 };
 

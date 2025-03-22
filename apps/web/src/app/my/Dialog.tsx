@@ -27,7 +27,7 @@ export const Dialog = ({ type, setType, removeAccount, removeResume, refetch }: 
 
     return (
         <div className="fixed z-[101] top-0 w-full h-screen bg-[#00000030] flex justify-center items-center">
-            <div className="w-[438px] h-[280px] py-[52px] items-center justify-center bg-white rounded-2xl flex-col flex z-20 gap-[40px]">
+            <div className="w-[430px] h-[260px] py-[52px] items-center justify-center bg-white rounded-2xl flex-col flex gap-[30px]">
                 <div className="flex flex-col gap-4 items-center">
                     <span className="text-h4">{isAccountRemoval ? "정말 탈퇴하시겠어요?" : "이력서를 삭제하시겠습니까?"}</span>
                     <span className="text-p3 text-gray-500">
