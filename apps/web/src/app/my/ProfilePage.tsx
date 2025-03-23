@@ -1,24 +1,31 @@
-import { Add, Center, Stack } from "@moija/ui";
+import { Stack, Add } from "@moija/ui";
 import { Resume } from "./Resume";
 import Link from "next/link";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { addPortfolio, deletePortFolio, myPortFolio } from "../../apis";
+import { addPortfolio, myPortFolio } from "../../apis";
 import { toast } from "react-toastify";
-import { logout, removeAccount, user } from "../../apis/user";
-import { educationstat, FormType, job, major, school } from "./edit/page";
-import { Info } from "./Info";
+import { user } from "../../apis/user";
+import { FormType, school, major, educationstat, job } from "./edit/page";
+import { Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
+import { Info } from "./Info";
 
-export const ProfilePage = () => {
+interface ProfilePageProps {
+    setType: Dispatch<
+        SetStateAction<`removeResume_${string}` | "removeAccount" | null>
+    >;
+}
+
+export const ProfilePage = ({ setType }: ProfilePageProps) => {
     const { data: userData } = useQuery<FormType>({
         queryKey: ["user"],
         queryFn: async () => (await user()).data,
     });
+
     const { data, refetch } = useQuery({
         queryKey: ["my", "portfolio"],
         queryFn: myPortFolio,
     });
-
 
     const { mutate } = useMutation({
         mutationFn: addPortfolio,
@@ -28,84 +35,78 @@ export const ProfilePage = () => {
         },
     });
 
-
+    // const router = useRouter();
 
     return (
-        <>
-            <div className="w-full mt-10 flex flex-col h-fit gap-[25px]">
-                <div className="w-full h-fit px-[36px] py-[24px] border-[1px] rounded-xl border-gray-200">
-                    <Stack gap={20}>
-                        <span className="text-p2">내 프로필</span>
-                        <div className="w-full flex gap-3 flex-wrap">
-                            {data?.data.map((i: any) => (
-                                <Resume
-                                    key={i.id}
-                                    title={i.title}
-                                    date={i.updatedAt
-                                        .split("T")[0]
-                                        .replace("-", ".")}
-                                    id={i.id}
-                                    checked={i.isPublished}
-                                    setType={i.setType}
-                                />
-                            ))}
+        <div className="w-full mt-10 flex flex-col h-fit gap-[25px]">
+            <div className="w-full h-fit px-[36px] py-[24px] border-[1px] rounded-xl border-gray-200">
+                <Stack gap={20}>
+                    <span className="text-p2">내 프로필</span>
+                    <div className="w-full flex gap-3 flex-wrap">
+                        {data?.data?.map((i: any) => (
+                            <Resume
+                                key={i.id}
+                                title={i.title}
+                                date={i.updatedAt
+                                    .split("T")[0]
+                                    .replace("-", ".")}
+                                id={i.id}
+                                checked={i.isPublished}
+                                setType={setType}
+                            />
+                        ))}
 
-                            <button
-                                className="w-[246.5px] h-[127.2px] p-4 bg-gray-100 rounded-lg flex flex-col items-center justify-center gap-2"
-                                type="button"
-                                onClick={() => mutate()}
-                            >
-                                <Add />
-                                <span className="text-caption1 text-gray-500">
-                                    새 이력서를 작성해보세요!
-                                </span>
-                            </button>
-                        </div>
-                    </Stack>
-                </div>
-                <div className="w-full h-fit px-[36px] py-[24px] border-[1px] rounded-xl border-gray-200 mb-[100px]">
-                    <Stack gap={20}>
-                        <div className="flex justify-between items-center">
-                            <span className="text-p2">기본 정보</span>
-                            <Link
-                                href="/my/edit"
-                                className="text-p4 text-gray-400"
-                            >
-                                수정
-                            </Link>
-                        </div>
-                        <Info name="이름" value={userData?.nickname} />
-                        <Info name="이메일" value={userData?.email} />
-                        <Info
-                            name="학교"
-                            value={
-                                school[userData?.school as keyof typeof school]
-                            }
+                        <button
+                            className="w-[246.5px] h-[127.2px] p-4 bg-gray-100 rounded-lg flex flex-col items-center justify-center gap-2"
+                            type="button"
+                            onClick={() => mutate()}
                         >
-                            <span className="text-gray-400 text-p5">
-                                {major[userData?.major as keyof typeof major]}
+                            <Add />
+                            <span className="text-caption1 text-gray-500">
+                                새 이력서를 작성해보세요!
                             </span>
-                        </Info>
-                        <Info
-                            name="재학 상태"
-                            value={`${userData?.enrollmentStartDate} ~ ${userData?.enrollmentStartDate}`}
-                        >
-                            <span className="text-gray-400 text-p5">
-                                {
-                                    educationstat[
-                                        userData?.educationStatus as keyof typeof educationstat
-                                    ]
-                                }
-                            </span>
-                        </Info>
-                        <Info
-                            name="개발 직무"
-                            value={job[userData?.job as keyof typeof job]}
-                        />
-                        <Info name="회사" value={userData?.company} />
-                    </Stack>
-                </div>
+                        </button>
+                    </div>
+                </Stack>
             </div>
-        </>
+
+            <div className="w-full h-fit px-[36px] py-[24px] border-[1px] rounded-xl border-gray-200 mb-[100px]">
+                <Stack gap={20}>
+                    <div className="flex justify-between items-center">
+                        <span className="text-p2">기본 정보</span>
+                        <Link href="/my/edit" className="text-p4 text-gray-400">
+                            수정
+                        </Link>
+                    </div>
+                    <Info name="이름" value={userData?.nickname} />
+                    <Info name="이메일" value={userData?.email} />
+                    <Info
+                        name="학교"
+                        value={school[userData?.school as keyof typeof school]}
+                    >
+                        <span className="text-gray-400 text-p5">
+                            {major[userData?.major as keyof typeof major]}
+                        </span>
+                    </Info>
+                    <Info
+                        name="재학 상태"
+                        value={`${userData?.enrollmentStartDate} ~ ${userData?.enrollmentStartDate}`}
+                    >
+                        <span className="text-gray-400 text-p5">
+                            {
+                                educationstat[
+                                    userData?.educationStatus as keyof typeof educationstat
+                                ]
+                            }
+                        </span>
+                    </Info>
+                    <Info
+                        name="개발 직무"
+                        value={job[userData?.job as keyof typeof job]}
+                    />
+                    <Info name="회사" value={userData?.company} />
+                </Stack>
+            </div>
+        </div>
     );
 };

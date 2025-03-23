@@ -3,6 +3,7 @@ import ProfileBox from "./ProfileBox";
 import LogoutMessage from "./LogoutMessage";
 import { ProfileListProps } from "../../types/portfolio";
 import { user } from "../../apis/user";
+import NoWriteBanner from "./NoWriteBanner";
 
 const ProfileList = ({ paginatedProfiles }: ProfileListProps) => {
     const [userStatus, setUserStatus] = useState<
@@ -23,6 +24,8 @@ const ProfileList = ({ paginatedProfiles }: ProfileListProps) => {
 
     return (
         <>
+            {userStatus !== "PORTFOLIO_PUBLISHED" && <NoWriteBanner />}
+
             {paginatedProfiles.length > 0 ? (
                 paginatedProfiles.map((profile) => (
                     <ProfileBox key={profile.id} {...profile} />

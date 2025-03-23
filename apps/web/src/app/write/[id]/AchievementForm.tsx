@@ -37,7 +37,7 @@ export const AchievementForm = () => {
                 <Input width={247} defaultValue={field.type} placeholder="수상 종류를 입력하세요" {...register(`awards.${index}.type`, { required: `${index}번 수상 종류` })} />
               </InputTemplate>
               <InputTemplate>
-                <Label accent>진행 기간</Label>
+                <Label accent>수상 날짜</Label>
                 <Input width={512} defaultValue={field.date} placeholder="YYYY-MM-DD" {...register(`awards.${index}.date`, { required: `${index}번 수상일` })} />
               </InputTemplate>
             </div>
