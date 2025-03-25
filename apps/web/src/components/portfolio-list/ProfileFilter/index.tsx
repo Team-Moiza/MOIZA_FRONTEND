@@ -38,13 +38,8 @@ const ProfileFilter = ({ applyFilter }: ProfileFilterProps) => {
 
     useEffect(() => {
         const getStacks = async () => {
-            try {
-                const data: { id: number; keyword: string }[] =
-                    await getCodes();
-                setStacks(data || []);
-            } catch (error) {
-                console.error(error);
-            }
+            const data: { id: number; keyword: string }[] = await getCodes();
+            setStacks(data || []);
         };
         getStacks();
     }, []);
@@ -65,10 +60,10 @@ const ProfileFilter = ({ applyFilter }: ProfileFilterProps) => {
             filteredSchools: [] as SchoolOption[],
             selectedCompany: "전체",
         };
-    
+
         setFilterState(resetState);
         setIsFilterChanged(false);
-        
+
         applyFilter({
             sort: resetState.selectedSort,
             stacks: resetState.selectedStacks,
@@ -76,7 +71,6 @@ const ProfileFilter = ({ applyFilter }: ProfileFilterProps) => {
             company: resetState.selectedCompany,
         });
     };
-    
 
     const handleSearchChange = async (
         e: React.ChangeEvent<HTMLInputElement>
@@ -114,9 +108,7 @@ const ProfileFilter = ({ applyFilter }: ProfileFilterProps) => {
             <div className="mb-2.5 w-[260px] bg-white rounded-2xl border border-gray-200 p-5">
                 <div className="flex justify-between">
                     <h4 className="text-black text-h4">필터</h4>
-                    {isFilterChanged && (
-                        <Replay onClick={resetFilters} />
-                    )}
+                    {isFilterChanged && <Replay onClick={resetFilters} />}
                 </div>
                 <SortDropdown
                     filterState={filterState}
