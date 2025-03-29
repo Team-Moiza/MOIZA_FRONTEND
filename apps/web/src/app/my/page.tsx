@@ -26,7 +26,11 @@ export default function MyPage() {
 
   const { mutate: userLogout } = useMutation({
     mutationFn: logout,
-    onSuccess: () => replace("/login"),
+    onSuccess: () => {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      replace("/login");
+    },
   });
 
   const { mutate: removeA } = useMutation({
