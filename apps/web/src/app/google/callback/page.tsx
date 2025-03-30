@@ -1,6 +1,8 @@
 "use client";
+
 import { useEffect } from "react";
 import { instance } from "../../../apis/instance";
+import cookies from "js-cookie";
 
 const GoogleCallback = () => {
     useEffect(() => {
@@ -18,8 +20,8 @@ const GoogleCallback = () => {
             const { accessToken: newAccessToken, refreshToken } =
                 authResponse.data;
 
-            localStorage.setItem("accessToken", newAccessToken);
-            localStorage.setItem("refreshToken", refreshToken);
+            cookies.set("accessToken", newAccessToken);
+            cookies.set("refreshToken", refreshToken);
 
             const { data: userData } = await instance.get("/users");
 

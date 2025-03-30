@@ -1,4 +1,5 @@
 "use client";
+
 import NavBar from "../../../components/detail/NavBar";
 import Section from "../../../components/detail/Section";
 import Profile from "../../../components/detail/Profile";
@@ -10,6 +11,7 @@ import { detailPortFolio } from "../../../apis";
 import { FormData } from "../../write/[id]/page";
 import { useEffect, useState } from "react";
 import { likeApi } from "../../../apis/likeApi";
+import cookies from "js-cookie";
 
 export const school = {
   BSSM: "부산소프트웨어마이스터고등학교",
@@ -42,8 +44,8 @@ export const job = {
 } as const;
 
 export const educationstat = {
-    ENROLLED: "재학중",
-    GRADUATED: "졸업",
+  ENROLLED: "재학중",
+  GRADUATED: "졸업",
 } as const;
 
 const Detail = () => {
@@ -59,7 +61,7 @@ const Detail = () => {
   const [likesCount, setLikesCount] = useState(0);
 
   useEffect(() => {
-    if (!id || !localStorage.getItem("accessToken")) return;
+    if (!id || !cookies.get("accessToken")) return;
 
     const fetchLikeStatus = async () => {
       const status = await likeApi.getLikeStatus(id as string);
@@ -71,7 +73,7 @@ const Detail = () => {
   }, [id]);
 
   const handleLikeClick = async () => {
-    if (!localStorage.getItem("accessToken")) {
+    if (!cookies.get("accessToken")) {
       alert("로그인이 필요한 서비스입니다.");
       window.location.href = "/login";
       return;
@@ -176,10 +178,9 @@ const Detail = () => {
               <Section id="links" title="링크">
                 <div className="flex flex-col gap-2">
                   {rData?.links.map(({ url }, i) => (
-                    <div className="w-full px-5 py-3 rounded-lg border border-gray-200 cursor-pointer">
+                    <div className="w-full px-5 py-3 rounded-lg border border-gray-200 cursor-pointer" key={i}>
                       {url && (
                         <span
-                          key={i}
                           className="text-black text-p5 flex items-center gap-3 underline"
                           onClick={() => window.open(url as unknown as URL)}
                         >

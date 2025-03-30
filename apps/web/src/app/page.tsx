@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { instance } from "../apis/instance";
+import cookies from "js-cookie";
 import ProfileListContainer from "../components/portfolio-list/ProfileListContainer";
 import CategoryFilter from "../components/portfolio-list/CategoryFilter";
 import ProfileFilter from "../components/portfolio-list/ProfileFilter";
@@ -64,30 +65,29 @@ const Main = () => {
             company === "미재직"
                 ? "false"
                 : company === "재직중"
-                ? "true"
-                : null;
-    
+                    ? "true"
+                    : null;
+
         const query = new URLSearchParams({
             page: currentPage.toString(),
             size: itemsPerPage.toString(),
             ...(stackIds.length > 0 && { code: stackIds.join(",") }),
             ...(employmentStatus !== null && { isEmployed: employmentStatus }),
         });
-    
+
         schoolKeys.forEach((school) => {
             query.append("school", school);
         });
-    
+
         if (sort) {
             const [sortKey, sortValue] = sort.split(":");
             if (sortKey && sortValue) {
                 query.set(sortKey, sortValue);
             }
         }
-    
+
         fetchProfiles(query.toString());
     };
-    
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const paginatedProfiles = filteredProfiles.slice(
@@ -96,7 +96,7 @@ const Main = () => {
     );
 
     const handlePageChange = (page: number) => {
-        const isLoggedOut = !localStorage.getItem("accessToken");
+        const isLoggedOut = !cookies.get("accessToken");
         if (isLoggedOut) {
             alert("로그인이 필요한 서비스입니다.");
             window.location.replace("/login");

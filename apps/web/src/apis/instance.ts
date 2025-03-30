@@ -1,4 +1,5 @@
 import axios from "axios";
+import cookies from "js-cookie";
 
 export const instance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -6,7 +7,7 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-    const token = localStorage.getItem("accessToken");
+    const token = cookies.get("accessToken");
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
 });
@@ -17,8 +18,8 @@ instance.interceptors.response.use(
         const originalRequest = err.config;
 
         if (originalRequest._retry) {
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
+            cookies.remove("accessToken");
+            cookies.remove("refreshToken");
             window.location.replace("/login");
             return Promise.reject(err);
         }
@@ -27,7 +28,7 @@ instance.interceptors.response.use(
 
         try {
             originalRequest._retry = true;
-            const refreshToken = localStorage.getItem("refreshToken");
+            const refreshToken = cookies.get("refreshToken");
             if (!refreshToken) {
                 throw new Error("리프레시 토큰이 없습니다.");
             }
@@ -36,13 +37,14 @@ instance.interceptors.response.use(
                 token: refreshToken,
             });
 
-            localStorage.setItem("accessToken", data.accessToken);
-            instance.defaults.headers.common["Authorization"] = `Bearer ${data.accessToken}`;
+            cookies.set("accessToken", data.accessToken);
+            instance.defaults.headers.common["Authorization"] =
+                `Bearer ${data.accessToken}`;
 
             return instance(originalRequest);
         } catch (error) {
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
+            cookies.remove("accessToken");
+            cookies.remove("refreshToken");
             window.location.replace("/login");
             return Promise.reject(error);
         }

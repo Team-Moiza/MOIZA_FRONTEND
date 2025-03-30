@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import { user } from "../../apis/user";
 import { FormType, school, major, educationstat, job } from "./edit/page";
 import { Dispatch, SetStateAction } from "react";
-import { useRouter } from "next/navigation";
 import { Info } from "./Info";
 
 interface ProfilePageProps {
