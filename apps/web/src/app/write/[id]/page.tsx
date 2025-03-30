@@ -19,6 +19,7 @@ import { TitleForm } from "./TitleForm";
 export type FormData = {
   job: null | string;
   school: null | string;
+  profile: string;
   company: null | string;
   educationStatus: null | string;
   id: number;
@@ -61,7 +62,10 @@ export default function WritePortFolio() {
   const navigate = useRouter();
   const { id } = useParams();
   const client = useQueryClient();
-  const { data } = useQuery({ queryKey: ["portfolio", "write", id], queryFn: () => detailPortFolio(id as string) });
+  const { data } = useQuery({
+    queryKey: ["portfolio", "write", id],
+    queryFn: () => detailPortFolio(id as string),
+  });
   const { mutate } = useMutation({
     mutationFn: async () => (await publishPortFolio(id as string)) as any,
     onSuccess: async () => {
