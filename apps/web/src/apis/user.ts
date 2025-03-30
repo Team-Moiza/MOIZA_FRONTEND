@@ -1,4 +1,5 @@
 import { instance } from "./instance";
+import cookies from "js-cookie";
 
 export const user = async () => {
   return await instance.get(`/users`);
@@ -9,7 +10,7 @@ export const updateUser = async (data: any) => {
 };
 
 export const logout = async () => {
-  return await instance.patch("/auth", { token: localStorage.getItem("refreshToken") as string });
+  return await instance.patch("/auth", { token: cookies.get("refreshToken") as string });
 };
 
 export const removeAccount = async () => {

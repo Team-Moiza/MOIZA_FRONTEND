@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { Heart } from "@moija/ui";
 import { likeApi } from "../../apis/likeApi";
@@ -5,6 +7,7 @@ import { Profile } from "../../types/portfolio";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { School, Job } from "../../enum/enums";
+import cookies from "js-cookie";
 
 const ProfileBox = ({
     id,
@@ -23,7 +26,7 @@ const ProfileBox = ({
     const [likesCount, setLikesCount] = useState(Number(likeCnt));
 
     useEffect(() => {
-        if (!localStorage.getItem("accessToken")) return;
+        if (!cookies.get("accessToken")) return;
 
         const fetchLikeStatus = async () => {
             const status = await likeApi.getLikeStatus(id);
@@ -36,7 +39,7 @@ const ProfileBox = ({
     const handleLikeClick = async (e: React.MouseEvent) => {
         e.stopPropagation();
 
-        if (!localStorage.getItem("accessToken")) {
+        if (!cookies.get("accessToken")) {
             alert("로그인이 필요한 서비스입니다.");
             window.location.href = "/login";
             return;

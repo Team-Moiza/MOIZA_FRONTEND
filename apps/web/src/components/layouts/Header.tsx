@@ -9,6 +9,7 @@ import { ActionMenu } from "@moija/ui";
 import { user, logout } from "../../apis/user";
 import { instance } from "../../apis";
 import { useMutation } from "@tanstack/react-query";
+import cookies from "js-cookie";
 
 type User = {
   profile: string;
@@ -17,27 +18,27 @@ type User = {
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const [userData, setUserData] = useState<User | null>(null);
 
   const router = useRouter();
   useEffect(() => {
-    const userProfile = async () => {
-      const token = localStorage.getItem("accessToken");
+    const fetchUserProfile = async () => {
+      const token = cookies.get("accessToken");
       if (token) {
         const response = await instance.get("/users");
-        setUser(response.data);
+        setUserData(response.data);
         setIsLoggedIn(true);
       }
     };
-    userProfile();
+    fetchUserProfile();
   }, []);
 
   const { mutate: userLogout } = useMutation({
     mutationFn: logout,
     onSuccess: () => {
-      localStorage.removeItem("accessToken");
-      setUser(null);
-      localStorage.removeItem("refreshToken");
+      cookies.remove("accessToken");
+      cookies.remove("refreshToken");
+      setUserData(null);
       router.replace("/login");
     },
   });
@@ -51,7 +52,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex items-center gap-5">
-          {isLoggedIn && user ? (
+          {isLoggedIn && userData ? (
             <ActionMenu
               items={[
                 {
@@ -71,14 +72,14 @@ const Header = () => {
             >
               <div className="flex items-center gap-3 cursor-pointer">
                 <Image
-                  src={user.profile}
+                  src={userData.profile}
                   alt="프로필"
                   width={42}
                   height={42}
                   className="rounded-full flex-shrink-0"
                 />
                 <div className="flex items-center gap-1.5">
-                  <div className="text-p3 text-black">{user.nickname}님</div>
+                  <div className="text-p3 text-black">{userData.nickname}님</div>
                   <BottomArrow size="18" />
                 </div>
               </div>

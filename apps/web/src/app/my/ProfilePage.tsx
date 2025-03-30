@@ -5,9 +5,15 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { addPortfolio, myPortFolio } from "../../apis";
 import { toast } from "react-toastify";
 import { user } from "../../apis/user";
-import { FormType, school, major, educationstat, job } from "./edit/page";
+import { FormType } from "./edit/page";
+import {
+    School as school,
+    Job as job,
+    Major as major,
+    EducationStatus as educationstat,
+} from "../../enum/enums";
+
 import { Dispatch, SetStateAction } from "react";
-import { useRouter } from "next/navigation";
 import { Info } from "./Info";
 
 interface ProfilePageProps {
@@ -34,8 +40,6 @@ export const ProfilePage = ({ setType }: ProfilePageProps) => {
             refetch();
         },
     });
-
-    // const router = useRouter();
 
     return (
         <div className="w-full mt-10 flex flex-col h-fit gap-[25px]">
