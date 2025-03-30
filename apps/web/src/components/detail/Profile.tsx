@@ -1,7 +1,11 @@
 import Image from "next/image";
-import { profileData } from "../../data/profileData";
 import { FormData } from "../../app/write/[id]/page";
-import { educationstat, job, major, school } from "../../app/my/edit/page";
+import {
+  School as school,
+  Major as major,
+  Job as job,
+  EducationStatus as educationstat,
+} from "../../enum/enums";
 
 const Profile = ({ data }: { data: FormData | undefined }) => {
   console.log(data);
