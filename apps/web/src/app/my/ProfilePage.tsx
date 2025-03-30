@@ -41,8 +41,6 @@ export const ProfilePage = ({ setType }: ProfilePageProps) => {
         },
     });
 
-    // const router = useRouter();
-
     return (
         <div className="w-full mt-10 flex flex-col h-fit gap-[25px]">
             <div className="w-full h-fit px-[36px] py-[24px] border-[1px] rounded-xl border-gray-200">
