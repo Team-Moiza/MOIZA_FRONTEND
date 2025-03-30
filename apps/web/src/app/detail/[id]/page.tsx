@@ -42,8 +42,8 @@ export const job = {
 } as const;
 
 export const educationstat = {
-    ENROLLED: "재학중",
-    GRADUATED: "졸업",
+  ENROLLED: "진학중",
+  GRADUATED: "졸업",
 } as const;
 
 const Detail = () => {

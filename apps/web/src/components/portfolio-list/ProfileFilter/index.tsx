@@ -38,14 +38,19 @@ const ProfileFilter = ({ applyFilter }: ProfileFilterProps) => {
 
     useEffect(() => {
         const getStacks = async () => {
-            const data: { id: number; keyword: string }[] = await getCodes();
-            setStacks(data || []);
+            try {
+                const data: { id: number; keyword: string }[] =
+                    await getCodes();
+                setStacks(data || []);
+            } catch (error) {
+                console.error(error);
+            }
         };
         getStacks();
     }, []);
 
     const resetFilters = () => {
-        const resetState: FilterState = {
+        setFilterState({
             isOpen: {
                 sort: false,
                 stack: false,
@@ -59,17 +64,8 @@ const ProfileFilter = ({ applyFilter }: ProfileFilterProps) => {
             selectedSchool: [] as SchoolOption[],
             filteredSchools: [] as SchoolOption[],
             selectedCompany: "전체",
-        };
-
-        setFilterState(resetState);
-        setIsFilterChanged(false);
-
-        applyFilter({
-            sort: resetState.selectedSort,
-            stacks: resetState.selectedStacks,
-            schools: resetState.selectedSchool.map((school) => school.value),
-            company: resetState.selectedCompany,
         });
+        setIsFilterChanged(false);
     };
 
     const handleSearchChange = async (
@@ -122,6 +118,7 @@ const ProfileFilter = ({ applyFilter }: ProfileFilterProps) => {
                     stacks={stacks}
                     handleSearchChange={handleSearchChange}
                 />
+
                 <SchoolDropdown
                     filterState={filterState}
                     setFilterState={setFilterState}

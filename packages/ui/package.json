@@ -1,12 +1,12 @@
 {
-    "name": "@moija/ui",
-    "version": "1.0.0",
-    "type": "module",
-    "main": "src/index.ts",
-    "scripts": {
-        "build": "tsc"
-    },
-    "dependencies": {
-        "react": "^18.2.0"
-    }
+  "name": "your-package-name",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "react": "^18.2.0"
+  }
 }

@@ -90,11 +90,7 @@ export const ProfilePage = ({ setType }: ProfilePageProps) => {
                     </Info>
                     <Info
                         name="재학 상태"
-                        value={
-                            userData?.enrollmentStartDate
-                                ? `${userData?.enrollmentStartDate} ~ ${userData?.enrollmentStartDate}`
-                                : "값을 입력하세요"
-                        }
+                        value={`${userData?.enrollmentStartDate} ~ ${userData?.enrollmentStartDate}`}
                     >
                         <span className="text-gray-400 text-p5">
                             {
@@ -104,7 +100,6 @@ export const ProfilePage = ({ setType }: ProfilePageProps) => {
                             }
                         </span>
                     </Info>
-
                     <Info
                         name="개발 직무"
                         value={job[userData?.job as keyof typeof job]}
