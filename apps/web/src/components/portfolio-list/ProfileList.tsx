@@ -4,6 +4,7 @@ import LogoutMessage from "./LogoutMessage";
 import { ProfileListProps } from "../../types/portfolio";
 import { user } from "../../apis/user";
 import NoWriteBanner from "./NoWriteBanner";
+import cookies from "js-cookie";
 
 const ProfileList = ({ paginatedProfiles }: ProfileListProps) => {
     const [userStatus, setUserStatus] = useState<
@@ -15,6 +16,8 @@ const ProfileList = ({ paginatedProfiles }: ProfileListProps) => {
 
     useEffect(() => {
         const fetchUserStatus = async () => {
+            const token = cookies.get("accessToken");
+            if (!token) return;
             const response = await user();
             setUserStatus(response.data.userStatus);
         };
