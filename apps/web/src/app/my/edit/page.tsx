@@ -40,7 +40,7 @@ export const job = {
 } as const;
 
 export const educationstat = {
-  ENROLLED: "진학중",
+  ENROLLED: "재학중",
   GRADUATED: "졸업",
 } as const;
 
