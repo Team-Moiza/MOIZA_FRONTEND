@@ -1,7 +1,7 @@
 "use client";
 
 import { Dialog } from "./Dialog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
     logout,
@@ -9,19 +9,20 @@ import {
     deletePortFolio,
     myPortFolio,
 } from "../../apis";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { ProfilePage } from "./ProfilePage";
-import { LikedList } from "./LikedList";
+import { LikedList } from "./like/page";
 import { MyPageNav } from "./MypageNav";
 import { Center } from "@moija/ui";
 
 export default function MyPage() {
+    const searchParams = useSearchParams();
+    const router = useRouter();
     const [activeTab, setActiveTab] = useState<"profile" | "liked">("profile");
     const [type, setType] = useState<
         null | `removeResume_${string}` | "removeAccount"
     >(null);
-    const { replace } = useRouter();
 
     const { mutate: removeResume } = useMutation({
         mutationFn: deletePortFolio,
@@ -36,7 +37,7 @@ export default function MyPage() {
         onSuccess: () => {
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
-            replace("/login");
+            router.replace("/login");
         },
     });
 
@@ -45,7 +46,7 @@ export default function MyPage() {
         onSuccess: () => {
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
-            replace("/");
+            router.replace("/");
         },
     });
 
@@ -53,6 +54,20 @@ export default function MyPage() {
         queryKey: ["my", "portfolio"],
         queryFn: myPortFolio,
     });
+
+    useEffect(() => {
+        const tabParam = searchParams.get("tab");
+        if (tabParam === "liked") {
+            setActiveTab("liked");
+        } else {
+            setActiveTab("profile");
+        }
+    }, [searchParams]);
+
+    const handleTabChange = (tab: "profile" | "liked") => {
+        router.push(`/my?tab=${tab}`);
+        setActiveTab(tab);
+    };
 
     return (
         <>
@@ -68,7 +83,7 @@ export default function MyPage() {
                 <div className="pt-[80px] w-[1040px] h-screen flex gap-[10px]">
                     <MyPageNav
                         activeTab={activeTab}
-                        setActiveTab={setActiveTab}
+                        setActiveTab={handleTabChange}
                         userLogout={userLogout}
                         setType={setType}
                     />
