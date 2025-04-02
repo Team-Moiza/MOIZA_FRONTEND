@@ -58,7 +58,7 @@ export type FormData = {
 };
 
 export default function WritePortFolio() {
-  const formMethod = useForm<FormData>({ defaultValues: { title: "김수아" } });
+  const formMethod = useForm<FormData>({ defaultValues: { title: "" } });
   const navigate = useRouter();
   const { id } = useParams();
   const client = useQueryClient();
