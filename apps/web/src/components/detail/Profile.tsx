@@ -4,13 +4,15 @@ import { FormData } from "../../app/write/[id]/page";
 import { educationstat, job, major, school } from "../../app/my/edit/page";
 
 const Profile = ({ data }: { data: FormData | undefined }) => {
-  console.log(data);
   return (
     <div className="flex flex-col gap-6">
-      <div className="px-3 py-[6px] items-center gap-3 flex bg-primary-100 rounded-full w-fit">
-        <span className="text-primary-500 font-bold">#</span>
-        <span className="text-btn text-gray-600">{data?.company || "회사 없음"}</span>
-      </div>
+      {data?.company && (
+        <div className="px-3 py-[6px] items-center gap-3 flex bg-primary-100 rounded-full w-fit">
+          <span className="text-primary-500 font-bold">#</span>
+          <span className="text-btn text-gray-600">{data.company}</span>
+        </div>
+      )}
+
       <div className="w-full flex gap-8 mb-10 items-center">
         <div className="w-[184px] h-[184px] bg-[#e2e2e2] rounded-lg border border-[#e2e2e2] overflow-hidden flex-shrink-0 relative">
           {data?.profile && (
