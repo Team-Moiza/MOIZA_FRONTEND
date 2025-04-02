@@ -9,8 +9,33 @@ export const AchievementForm = () => {
   return (
     <div className="w-[832px] h-fit px-[28px] pt-[24px] pb-[32px] flex flex-col bg-white gap-5 rounded-[12px]">
       <Text className="text-h2 text-black">수상</Text>
+
       {fields.map((field, index) => (
         <div className="w-full flex flex-col gap-4" key={field.id}>
+          <div className="border-[1px] w-fit z-20 flex rounded-[4px] self-end">
+            <button
+              className="w-[32px] h-[32px] flex items-center justify-center border-r-[1px]"
+              type="button"
+              onClick={() => index < fields.length - 1 && swap(index, index + 1)}
+            >
+              <ArrowDown size={24} color={index < fields.length - 1 ? "#787878" : "#BFBFBF"} />
+            </button>
+            <button
+              className="w-[32px] h-[32px] flex items-center justify-center rotate-180 border-l-[1px]"
+              type="button"
+              onClick={() => index > 0 && swap(index, index - 1)}
+            >
+              <ArrowDown size={24} color={index > 0 ? "#787878" : "#BFBFBF"} />
+            </button>
+            <button
+              className="w-[32px] h-[32px] flex items-center justify-center"
+              type="button"
+              onClick={() => remove(index)}
+            >
+              <Delete size={18} color="#787878" />
+            </button>
+          </div>
+
           <div className="flex justify-between w-full">
             <InputTemplate>
               <Label accent>수상명</Label>
@@ -21,35 +46,6 @@ export const AchievementForm = () => {
                 {...register(`qualifications.${index}.name`, { required: `${index}번 대회 이름` })}
               />
             </InputTemplate>
-            <input
-              className="text-h4 text-black placeholder:text-gray-400 w-full outline-none"
-              placeholder="수상명"
-              defaultValue={field.name}
-              {...register(`awards.${index}.name`, { required: `${index}번 수상 제목` })}
-            />
-            <div className="border-[1px] w-fit flex rounded-[4px]">
-              <button
-                className="w-[32px] h-[32px] flex items-center justify-center border-r-[1px]"
-                type="button"
-                onClick={() => index < fields.length - 1 && swap(index, index + 1)}
-              >
-                <ArrowDown size={24} color={index < fields.length - 1 ? "#787878" : "#BFBFBF"} />
-              </button>
-              <button
-                className="w-[32px] h-[32px] flex items-center justify-center rotate-180 border-l-[1px]"
-                type="button"
-                onClick={() => index > 0 && swap(index, index - 1)}
-              >
-                <ArrowDown size={24} color={index > 0 ? "#787878" : "#BFBFBF"} />
-              </button>
-              <button
-                className="w-[32px] h-[32px] flex items-center justify-center"
-                type="button"
-                onClick={() => remove(index)}
-              >
-                <Delete size={18} color="#787878" />
-              </button>
-            </div>
           </div>
 
           <div className="w-full flex flex-col gap-8">
