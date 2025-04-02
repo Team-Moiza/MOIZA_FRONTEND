@@ -39,6 +39,7 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
             const link = document.createElement("a");
             link.href = data.url;
             link.download = `${title}.pdf`;
+            link.target = "_blank";
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -60,9 +61,7 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
                             {
                                 icon: <DownloadResume />,
                                 label: "PDF 저장하기",
-                                onClick: () => {
-                                    downloadPdfMutate;
-                                },
+                                onClick: () => downloadPdfMutate(id),
                             },
                             {
                                 icon: <EditResume />,
