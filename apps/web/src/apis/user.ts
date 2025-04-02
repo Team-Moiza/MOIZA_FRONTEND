@@ -16,3 +16,8 @@ export const logout = async () => {
 export const removeAccount = async () => {
   return await instance.delete("/users");
 };
+
+export const downloadPdf = async (id: string) => {
+  const { data } = await instance.get(`/users/pdf/${id}`);
+  return data;
+};

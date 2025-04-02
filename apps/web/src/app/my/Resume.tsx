@@ -1,7 +1,17 @@
-import { ActionMenu, Delete, DownloadResume, EditResume, Menu, Stack, Toggle } from "@moija/ui";
+"use client";
+
+import {
+    ActionMenu,
+    Delete,
+    DownloadResume,
+    EditResume,
+    Menu,
+    Stack,
+    Toggle,
+} from "@moija/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { publishPortFolio } from "../../apis";
+import { publishPortFolio, downloadPdf } from "../../apis";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 
@@ -21,8 +31,19 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
         mutationFn: async () => (await publishPortFolio(id)) as any,
         onSuccess: refetch,
     });
-
     const router = useRouter();
+
+    const { mutate: downloadPdfMutate } = useMutation({
+        mutationFn: downloadPdf,
+        onSuccess: (data: { url: string }) => {
+            const link = document.createElement("a");
+            link.href = data.url;
+            link.download = `${title}.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        },
+    });
 
     return (
         <div className="w-[246.5px] h-[127.2px] p-4 rounded-lg bg-gray-100">
@@ -39,7 +60,9 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
                             {
                                 icon: <DownloadResume />,
                                 label: "PDF 저장하기",
-                                onClick: () => router.push(`/download/${id}`),
+                                onClick: () => {
+                                    downloadPdfMutate;
+                                },
                             },
                             {
                                 icon: <EditResume />,
