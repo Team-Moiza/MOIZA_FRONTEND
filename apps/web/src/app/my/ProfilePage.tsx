@@ -5,9 +5,15 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { addPortfolio, myPortFolio } from "../../apis";
 import { toast } from "react-toastify";
 import { user } from "../../apis/user";
-import { FormType, school, major, educationstat, job } from "./edit/page";
+import { FormType } from "./edit/page";
+import {
+    School as school,
+    Job as job,
+    Major as major,
+    EducationStatus as educationstat,
+} from "../../enum/enums";
+
 import { Dispatch, SetStateAction } from "react";
-import { useRouter } from "next/navigation";
 import { Info } from "./Info";
 
 interface ProfilePageProps {
@@ -34,8 +40,6 @@ export const ProfilePage = ({ setType }: ProfilePageProps) => {
             refetch();
         },
     });
-
-    // const router = useRouter();
 
     return (
         <div className="w-full mt-10 flex flex-col h-fit gap-[25px]">
@@ -90,7 +94,11 @@ export const ProfilePage = ({ setType }: ProfilePageProps) => {
                     </Info>
                     <Info
                         name="재학 상태"
-                        value={`${userData?.enrollmentStartDate} ~ ${userData?.enrollmentStartDate}`}
+                        value={
+                            userData?.enrollmentStartDate
+                                ? `${userData?.enrollmentStartDate} ~ ${userData?.enrollmentStartDate}`
+                                : "값을 입력하세요"
+                        }
                     >
                         <span className="text-gray-400 text-p5">
                             {
@@ -100,6 +108,7 @@ export const ProfilePage = ({ setType }: ProfilePageProps) => {
                             }
                         </span>
                     </Info>
+
                     <Info
                         name="개발 직무"
                         value={job[userData?.job as keyof typeof job]}

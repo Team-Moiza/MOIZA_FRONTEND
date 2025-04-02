@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Button,
   Center,
@@ -24,50 +25,22 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-export const school = {
-  BSSM: "부산소프트웨어마이스터고등학교",
-  DGSM: "대구소프트웨어마이스터고등학교",
-  DSM: "대덕소프트웨어마이스터고등학교",
-  GSM: "광주소프트웨어마이스터고등학교",
-} as const;
-
-export const major = {
-  SOFTWARE: "소프트웨어개발과",
-  EMBEDDED: "임베디드과",
-  SECURITY: "보안과",
-  IOT: "IOT과",
-  AI: "인공지능과",
-} as const;
-
-export const job = {
-  BACKEND_DEVELOPER: "서버/백엔드 개발자",
-  FRONTEND_DEVELOPER: "프론트엔드 개발자",
-  ANDROID_DEVELOPER: "안드로이드 개발자",
-  IOS_DEVELOPER: "iOS 개발자",
-  GAME_DEVELOPER: "게임 개발자",
-  DEVOPS_DEVELOPER: "DevOps 개발자",
-  PLANNER: "기획자",
-  UI_UX_DESIGNER: "UI/UX 디자이너",
-  HW_EMBEDDED: "HW/임베디드",
-  FULLSTACK_DEVELOPER: "풀스택 개발자",
-  SECURITY_SPECIALIST: "정보보안 담당자",
-  OTHER: "기타",
-} as const;
-
-export const educationstat = {
-  ENROLLED: "진학중",
-  GRADUATED: "졸업",
-} as const;
+import {
+  School,
+  Major,
+  Job,
+  EducationStatus,
+} from "../../../enum/enums";
 
 export interface FormType {
   nickname: string;
-  school: keyof typeof school;
-  major: keyof typeof major;
+  school: keyof typeof School;
+  major: keyof typeof Major;
   email?: string;
-  educationStatus: keyof typeof educationstat;
+  educationStatus: keyof typeof EducationStatus;
   enrollmentStartDate: string;
   enrollmentEndDate: string;
-  job: keyof typeof job;
+  job: keyof typeof Job;
   company: string;
   introduce: string;
   profile?: string;
@@ -88,6 +61,7 @@ export default function Page() {
     queryKey: ["user"],
     queryFn: async () => (await user()).data,
   });
+  
   const { mutate } = useMutation({
     mutationFn: updateUser,
     onSuccess: async () => {
@@ -165,10 +139,10 @@ export default function Page() {
                     이미지 제거
                   </button>
                 )}
-
                 <Text className="text-caption1 text-gray-400">- 업로드 이미지 최대 크기 10MB</Text>
               </Stack>
             </Stack>
+
             <div className="w-[824px]">
               <Stack gap={28}>
                 <Stack gap={20}>
@@ -179,11 +153,10 @@ export default function Page() {
                       isBig
                       placeholder="이름을 입력해주세요"
                       defaultValue={getValues("nickname")}
-                      {...register("nickname", {
-                        required: "이름을 입력해주세요",
-                      })}
+                      {...register("nickname", { required: "이름을 입력해주세요" })}
                     />
                   </InputTemplate>
+
                   <InputTemplate>
                     <Label accent>이메일</Label>
                     <Input
@@ -195,6 +168,7 @@ export default function Page() {
                       disabled
                     />
                   </InputTemplate>
+
                   <Flex gap={20}>
                     <InputTemplate>
                       <Label>학교명</Label>
@@ -221,6 +195,7 @@ export default function Page() {
                         />
                       </div>
                     </InputTemplate>
+
                     <InputTemplate>
                       <Label>전공명</Label>
                       <div ref={selectRef}>
@@ -247,6 +222,7 @@ export default function Page() {
                       </div>
                     </InputTemplate>
                   </Flex>
+
                   <Flex gap={20}>
                     <InputTemplate>
                       <Label>재학 상태</Label>
@@ -273,6 +249,7 @@ export default function Page() {
                         />
                       </div>
                     </InputTemplate>
+
                     <InputTemplate>
                       <Label accent>재학 시작일</Label>
                       <Input
@@ -286,6 +263,7 @@ export default function Page() {
                         })}
                       />
                     </InputTemplate>
+
                     <InputTemplate>
                       <Label accent>재학 종료일</Label>
                       <Input
@@ -329,6 +307,7 @@ export default function Page() {
                       />
                     </div>
                   </InputTemplate>
+
                   <InputTemplate>
                     <Label>회사</Label>
                     <Input
@@ -339,6 +318,7 @@ export default function Page() {
                       {...register("company")}
                     />
                   </InputTemplate>
+
                   <InputTemplate>
                     <Label>한줄 소개</Label>
                     <Textarea
@@ -352,6 +332,7 @@ export default function Page() {
                     />
                   </InputTemplate>
                 </Stack>
+
                 <div className="w-full flex justify-end">
                   <Button submit type="white">
                     수정

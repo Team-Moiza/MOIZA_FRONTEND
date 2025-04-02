@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { instance } from "../apis/instance";
+import cookies from "js-cookie";
 import ProfileListContainer from "../components/portfolio-list/ProfileListContainer";
 import CategoryFilter from "../components/portfolio-list/CategoryFilter";
 import ProfileFilter from "../components/portfolio-list/ProfileFilter";
@@ -71,9 +72,13 @@ const Main = () => {
             page: currentPage.toString(),
             size: itemsPerPage.toString(),
             ...(stackIds.length > 0 && { code: stackIds.join(",") }),
-            ...(schools.length > 0 && { school: schoolKeys.join(",") }),
             ...(employmentStatus !== null && { isEmployed: employmentStatus }),
         });
+
+        schoolKeys.forEach((school) => {
+            query.append("school", school);
+        });
+
         if (sort) {
             const [sortKey, sortValue] = sort.split(":");
             if (sortKey && sortValue) {
@@ -91,7 +96,7 @@ const Main = () => {
     );
 
     const handlePageChange = (page: number) => {
-        const isLoggedOut = !localStorage.getItem("accessToken");
+        const isLoggedOut = !cookies.get("accessToken");
         if (isLoggedOut) {
             alert("로그인이 필요한 서비스입니다.");
             window.location.replace("/login");

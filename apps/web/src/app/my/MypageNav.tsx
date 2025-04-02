@@ -4,7 +4,7 @@ import { Stack } from "@moija/ui";
 
 interface MyPageNavProps {
   activeTab: "profile" | "liked";
-  setActiveTab: React.Dispatch<React.SetStateAction<"profile" | "liked">>;
+  setActiveTab: (tab: "profile" | "liked") => void;
   userLogout: () => void;
   setType: React.Dispatch<
     React.SetStateAction<null | `removeResume_${string}` | "removeAccount">

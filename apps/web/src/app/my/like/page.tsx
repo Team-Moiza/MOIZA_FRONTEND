@@ -1,8 +1,10 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { likeApi } from "../../apis/likeApi";
-import ProfileBox from "../../components/portfolio-list/ProfileBox";
+import { likeApi } from "../../../apis/likeApi";
+import ProfileBox from "../../../components/portfolio-list/ProfileBox";
 import { Stack } from "@moija/ui";
-import { Profile } from "../../types/portfolio";
+import { Profile } from "../../../types/portfolio";
 
 export const LikedList = () => {
     const [likedProfiles, setLikedProfiles] = useState<Profile[]>([]);
