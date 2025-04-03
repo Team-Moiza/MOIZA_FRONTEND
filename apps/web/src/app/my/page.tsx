@@ -1,6 +1,5 @@
 "use client";
 
-import { Dialog } from "./Dialog";
 import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
@@ -15,6 +14,7 @@ import { ProfilePage } from "./ProfilePage";
 import { LikedList } from "./like/page";
 import { MyPageNav } from "./MypageNav";
 import { Center } from "@moija/ui";
+import { RemoveDialog } from "./dialog/RemoveDialog.tsx";
 
 export default function MyPage() {
     const searchParams = useSearchParams();
@@ -71,14 +71,15 @@ export default function MyPage() {
 
     return (
         <>
-            <Dialog
-                type={type}
-                setType={setType}
-                removeAccount={removeA}
-                removeResume={(resumeId: string) => removeResume(resumeId)}
-                refetch={refetch}
-            />
-
+            {type && (
+                <RemoveDialog
+                    type={type}
+                    setType={setType}
+                    removeAccount={removeA}
+                    removeResume={(resumeId: string) => removeResume(resumeId)}
+                    refetch={refetch}
+                />
+            )}
             <Center>
                 <div className="pt-[80px] w-[1040px] h-screen flex gap-[10px]">
                     <MyPageNav
