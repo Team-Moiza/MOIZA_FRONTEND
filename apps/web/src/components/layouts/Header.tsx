@@ -56,16 +56,16 @@ const Header = () => {
             <ActionMenu
               items={[
                 {
-                  label: "이력서 목록",
-                  onClick: () => router.push("/"),
-                },
-                {
                   label: "프로필 보기",
                   onClick: () => router.push("/my"),
                 },
                 {
                   label: "좋아요 목록",
                   onClick: () => router.push("/my?tab=liked"),
+                },
+                {
+                  label: "이력서 목록",
+                  onClick: () => router.push("/"),
                 },
                 {
                   label: "로그아웃",
