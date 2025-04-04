@@ -9,7 +9,6 @@ import {
   Input,
   InputTemplate,
   Label,
-  Search,
   Select,
   Spacing,
   Stack,
@@ -61,7 +60,6 @@ export default function Page() {
     queryKey: ["user"],
     queryFn: async () => (await user()).data,
   });
-  
   const { mutate } = useMutation({
     mutationFn: updateUser,
     onSuccess: async () => {
@@ -179,14 +177,14 @@ export default function Page() {
                           render={({ field: { value, onChange } }) => (
                             <Dropdown
                               isOpen={open === "school"}
-                              items={Object.values(school)}
-                              onSelect={(item) => onChange(findKeyByValue(item, school))}
+                              items={Object.values(School)}
+                              onSelect={(item) => onChange(findKeyByValue(item, School))}
                             >
                               <Select
                                 width={557}
                                 isBig
                                 placeholder="학교를 선택해주세요"
-                                value={school[value]}
+                                value={School[value]}
                                 isOpen={open === "school"}
                                 onClick={() => setOpen((prev) => (prev ? null : "school"))}
                               />
@@ -205,14 +203,14 @@ export default function Page() {
                           render={({ field: { value, onChange } }) => (
                             <Dropdown
                               isOpen={open === "major"}
-                              items={Object.values(major)}
-                              onSelect={(item) => onChange(findKeyByValue(item, major))}
+                              items={Object.values(Major)}
+                              onSelect={(item) => onChange(findKeyByValue(item, Major))}
                             >
                               <Select
                                 width={247}
                                 isBig
                                 placeholder="전공을 선택해주세요"
-                                value={major[value]}
+                                value={Major[value]}
                                 isOpen={open === "major"}
                                 onClick={() => setOpen((prev) => (prev ? null : "major"))}
                               />
@@ -233,14 +231,14 @@ export default function Page() {
                           render={({ field: { value, onChange } }) => (
                             <Dropdown
                               isOpen={open === "stat"}
-                              items={Object.values(educationstat)}
-                              onSelect={(item) => onChange(findKeyByValue(item, educationstat))}
+                              items={Object.values(EducationStatus)}
+                              onSelect={(item) => onChange(findKeyByValue(item, EducationStatus))}
                             >
                               <Select
                                 width={261}
                                 isBig
                                 placeholder="재학 상태"
-                                value={educationstat[value]}
+                                value={EducationStatus[value]}
                                 isOpen={open === "stat"}
                                 onClick={() => setOpen((prev) => (prev ? null : "stat"))}
                               />
@@ -288,17 +286,17 @@ export default function Page() {
                         render={({ field: { value, onChange } }) => (
                           <Dropdown
                             isOpen={open === "job"}
-                            items={Object.values(job)}
+                            items={Object.values(Job)}
                             onSelect={(item) => {
                               setOpen((prev) => (prev ? null : "job"));
-                              onChange(findKeyByValue(item, job));
+                              onChange(findKeyByValue(item, Job));
                             }}
                           >
                             <Select
                               width={824}
                               isBig
                               placeholder="개발 직무"
-                              value={job[value]}
+                              value={Job[value]}
                               isOpen={open === "job"}
                               onClick={() => setOpen((prev) => (prev ? null : "job"))}
                             />

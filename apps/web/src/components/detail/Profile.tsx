@@ -3,8 +3,6 @@ import { FormData } from "../../app/write/[id]/page";
 import {
   School as school,
   Major as major,
-  Job as job,
-  EducationStatus as educationstat,
 } from "../../enum/enums";
 
 const Profile = ({ data }: { data: FormData | undefined }) => {

@@ -5,16 +5,15 @@ import { Stack } from "@moija/ui";
 interface MyPageNavProps {
   activeTab: "profile" | "liked";
   setActiveTab: (tab: "profile" | "liked") => void;
-  userLogout: () => void;
+
   setType: React.Dispatch<
-    React.SetStateAction<null | `removeResume_${string}` | "removeAccount">
+    React.SetStateAction<null | `removeResume_${string}` | "removeAccount" | "logout">
   >;
 }
 
 export const MyPageNav = ({
   activeTab,
   setActiveTab,
-  userLogout,
   setType,
 }: MyPageNavProps) => {
   return (
@@ -51,7 +50,7 @@ export const MyPageNav = ({
         <div className="w-full h-px bg-gray-200" />
         <button
           className="text-p4 text-gray-500 w-fit hover:text-black transition-colors"
-          onClick={userLogout}
+          onClick={() => setType("logout")}
         >
           로그아웃
         </button>
