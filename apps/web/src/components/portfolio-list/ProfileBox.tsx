@@ -7,7 +7,7 @@ import { Profile } from "../../types/portfolio";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { School, Job } from "../../enum/enums";
-import cookies from "js-cookie";
+import Cookies from "js-cookie";
 
 const ProfileBox = ({
   id,
@@ -26,7 +26,7 @@ const ProfileBox = ({
   const [likesCount, setLikesCount] = useState(Number(likeCnt));
 
   useEffect(() => {
-    if (!localStorage.getItem("accessToken")) return;
+    if (!Cookies.get("accessToken")) return;
 
     const fetchLikeStatus = async () => {
       const status = await likeApi.getLikeStatus(id);
@@ -39,7 +39,7 @@ const ProfileBox = ({
   const handleLikeClick = async (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    if (!localStorage.getItem("accessToken")) {
+    if (!Cookies.get("accessToken")) {
       alert("로그인이 필요한 서비스입니다.");
       window.location.href = "/login";
       return;
@@ -65,7 +65,8 @@ const ProfileBox = ({
         <div className="relative w-16 h-16 rounded-xl overflow-hidden border-gray-100 border">
           <Image
             src={
-              profile || "https://i.pinimg.com/736x/04/15/e3/0415e3a6c56fc6e8f1e0ac1bed4b6aaf.jpg"
+              profile ||
+              "https://i.pinimg.com/736x/04/15/e3/0415e3a6c56fc6e8f1e0ac1bed4b6aaf.jpg"
             }
             alt="프로필 사진"
             fill // ✅ fill 속성
