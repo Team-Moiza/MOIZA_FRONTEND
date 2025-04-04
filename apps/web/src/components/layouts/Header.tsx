@@ -12,91 +12,93 @@ import { useMutation } from "@tanstack/react-query";
 import cookies from "js-cookie";
 
 type User = {
-  profile: string;
-  nickname: string;
+    profile: string;
+    nickname: string;
 };
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState<User | null>(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userData, setUserData] = useState<User | null>(null);
 
-  const router = useRouter();
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      const token = cookies.get("accessToken");
-      if (token) {
-        const response = await instance.get("/users");
-        setUserData(response.data);
-        setIsLoggedIn(true);
-      }
-    };
-    fetchUserProfile();
-  }, []);
+    const router = useRouter();
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            const token = cookies.get("accessToken");
+            if (token) {
+                const response = await instance.get("/users");
+                setUserData(response.data);
+                setIsLoggedIn(true);
+            }
+        };
+        fetchUserProfile();
+    }, []);
 
-  const { mutate: userLogout } = useMutation({
-    mutationFn: logout,
-    onSuccess: () => {
-      cookies.remove("accessToken");
-      cookies.remove("refreshToken");
-      setUserData(null);
-      router.replace("/login");
-    },
-  });
+    const { mutate: userLogout } = useMutation({
+        mutationFn: logout,
+        onSuccess: () => {
+            cookies.remove("accessToken");
+            cookies.remove("refreshToken");
+            setUserData(null);
+            router.replace("/login");
+        },
+    });
 
-  return (
-    <header className="z-[100] w-[100vw] fixed justify-center bg-white h-[80px] px-[200px] py-[25px] shadow-custom">
-      <div className="h-full flex justify-between items-center">
-        <div className="flex items-center space-x-4">
-          <Link href="/">
-            <Logo />
-          </Link>
-        </div>
-        <div className="flex items-center gap-5">
-          {isLoggedIn && userData ? (
-            <ActionMenu
-              items={[
-                {
-                  label: "프로필 보기",
-                  onClick: () => router.push("/my"),
-                },
-                {
-                  label: "좋아요 목록",
-                  onClick: () => router.push("/my?tab=liked"),
-                },
-                {
-                  label: "이력서 목록",
-                  onClick: () => router.push("/"),
-                },
-                {
-                  label: "로그아웃",
-                  onClick: userLogout,
-                  fontColor: "text-red-500",
-                },
-              ]}
-            >
-              <div className="flex items-center gap-3 cursor-pointer">
-                <Image
-                  src={userData.profile}
-                  alt="프로필"
-                  width={42}
-                  height={42}
-                  className="rounded-full flex-shrink-0"
-                />
-                <div className="flex items-center gap-1.5">
-                  <div className="text-p3 text-black">{userData.nickname}님</div>
-                  <BottomArrow size="18" />
+    return (
+        <header className="z-[100] w-[100vw] fixed justify-center bg-white h-[80px] px-[200px] py-[25px] shadow-custom">
+            <div className="h-full flex justify-between items-center">
+                <div className="flex items-center space-x-4">
+                    <Link href="/">
+                        <Logo />
+                    </Link>
                 </div>
-              </div>
-            </ActionMenu>
-          ) : (
-            <Link href="/login" className="gap-[50px] flex">
-              <div className="text-p3 text-black">로그인</div>
-            </Link>
-          )}
-        </div>
-      </div>
-    </header>
-  );
+                <div className="flex items-center gap-5">
+                    {isLoggedIn && userData ? (
+                        <ActionMenu
+                            items={[
+                                {
+                                    label: "프로필 보기",
+                                    onClick: () => router.push("/my"),
+                                },
+                                {
+                                    label: "좋아요 목록",
+                                    onClick: () => router.push("/my?tab=liked"),
+                                },
+                                {
+                                    label: "이력서 목록",
+                                    onClick: () => router.push("/"),
+                                },
+                                {
+                                    label: "로그아웃",
+                                    onClick: userLogout,
+                                    fontColor: "text-red-500",
+                                },
+                            ]}
+                        >
+                            <div className="flex items-center gap-3 cursor-pointer">
+                                <Image
+                                    src={userData.profile}
+                                    alt="프로필"
+                                    width={42}
+                                    height={42}
+                                    className="rounded-full flex-shrink-0"
+                                />
+                                <div className="flex items-center gap-1.5">
+                                    <div className="text-p3 text-black">
+                                        {userData.nickname}님
+                                    </div>
+                                    <BottomArrow size="18" />
+                                </div>
+                            </div>
+                        </ActionMenu>
+                    ) : (
+                        <Link href="/login" className="gap-[50px] flex">
+                            <div className="text-p3 text-black">로그인</div>
+                        </Link>
+                    )}
+                </div>
+            </div>
+        </header>
+    );
 };
 
 export default Header;

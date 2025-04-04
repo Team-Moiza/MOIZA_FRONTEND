@@ -1,5 +1,3 @@
-"use client";
-
 import { Dialog } from "./index";
 
 interface RemoveDialogProps {

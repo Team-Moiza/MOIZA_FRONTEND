@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { publishPortFolio, downloadPdf } from "../../apis";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
-import { PDFWaitingModal } from "./dialog/PdfWaiting";
+import { PDFWaitingModal } from "./dialog/PDFWaiting";
 import { PDFDownloadModal } from "./dialog/PDFDownload.tsx";
 
 interface IProp {
@@ -41,17 +41,15 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
     const { mutate: generatePdf } = useMutation({
         mutationFn: downloadPdf,
         onMutate: () => {
-            console.log("PDF 생성 시작");
             setIsGenerating(true);
             setPdfUrl(null);
         },
-        onSuccess: (data: { url: string }) => {
-            console.log("PDF 생성 완료", data);
+        onSuccess: (response: any) => {
             setIsGenerating(false);
-            setPdfUrl(data.url);
+            const url = typeof response === "string" ? response : response.data;
+            setPdfUrl(url);
         },
         onError: (error) => {
-            console.error("PDF 생성 실패", error);
             setIsGenerating(false);
             alert("PDF 생성에 실패했습니다.");
         },
@@ -67,7 +65,7 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
                     onClose={() => setPdfUrl(null)}
                 />
             )}
-            
+
             <div className="w-[246.5px] h-[127.2px] p-4 rounded-lg bg-gray-100">
                 <Stack gap={8}>
                     <div className="w-full flex items-center justify-between">
