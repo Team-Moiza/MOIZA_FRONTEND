@@ -58,10 +58,10 @@ const Detail = () => {
     return (
         <>
             <div id="education" className="w-screen pt-[80px] px-[200px]">
-                <button
-                    onClick={handleLikeClick}
-                    className="fixed top-1/2 right-[224px] translate-y-[-50%] size-[54px] flex items-center justify-center rounded-full shadow-[0px_2px_8px_0px_rgba(0,0,0,0.16)]"
-                >
+            <button
+    onClick={handleLikeClick}
+    className="fixed bottom-10 right-60 translate-y-[-50%] size-[54px] flex items-center justify-center rounded-full shadow-[0px_2px_8px_0px_rgba(0,0,0,0.16)]"
+>
                     <Heart
                         size={24}
                         fill={liked ? "#e96221" : "none"}
