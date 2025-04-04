@@ -60,7 +60,6 @@ export default function Page() {
     queryKey: ["user"],
     queryFn: async () => (await user()).data,
   });
-
   const { mutate } = useMutation({
     mutationFn: updateUser,
     onSuccess: async () => {
@@ -84,7 +83,10 @@ export default function Page() {
   };
 
   return (
-    <form className="w-full h-[1100px] pt-[100px] mb-[100px]" onSubmit={handleSubmit(onSubmit, onFail)}>
+    <form
+      className="w-full h-[1100px] pt-[100px] mb-[100px]"
+      onSubmit={handleSubmit(onSubmit, onFail)}
+    >
       <Center horizontal vertical={false}>
         <div className="w-[1040px]">
           <Spacing>
@@ -116,9 +118,7 @@ export default function Page() {
                   <input
                     id="image"
                     className="invisible absolute"
-                    onChange={({ target }) =>
-                      setImage(target.files ? target.files[0] : undefined)
-                    }
+                    onChange={({ target }) => setImage(target.files ? target.files[0] : undefined)}
                     type="file"
                   />
                   <button
@@ -129,7 +129,11 @@ export default function Page() {
                   </button>
                 </label>
                 {image && (
-                  <button type="button" className="text-sm text-red-400" onClick={() => setImage(undefined)}>
+                  <button
+                    type="button"
+                    className="text-sm text-red-400"
+                    onClick={() => setImage(undefined)}
+                  >
                     이미지 제거
                   </button>
                 )}
@@ -274,7 +278,7 @@ export default function Page() {
                   </Flex>
 
                   <InputTemplate>
-                    <Label>희망 직무</Label>
+                    <Label>개발 직무</Label>
                     <div ref={selectRef}>
                       <Controller
                         control={control}
@@ -283,7 +287,10 @@ export default function Page() {
                           <Dropdown
                             isOpen={open === "job"}
                             items={Object.values(Job)}
-                            onSelect={(item) => onChange(findKeyByValue(item, Job))}
+                            onSelect={(item) => {
+                              setOpen((prev) => (prev ? null : "job"));
+                              onChange(findKeyByValue(item, Job));
+                            }}
                           >
                             <Select
                               width={824}

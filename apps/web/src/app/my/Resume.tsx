@@ -23,7 +23,7 @@ interface IProp {
     id: string;
     checked: boolean;
     setType: Dispatch<
-        SetStateAction<`removeResume_${string}` | "removeAccount" | null>
+        SetStateAction<`removeResume_${string}` | "removeAccount" | "logout" | null>
     >;
 }
 

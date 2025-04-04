@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
-    logout,
     removeAccount,
     deletePortFolio,
     myPortFolio,
@@ -14,6 +13,7 @@ import { ProfilePage } from "./ProfilePage";
 import { LikedList } from "./like/page";
 import { MyPageNav } from "./MypageNav";
 import { Center } from "@moija/ui";
+import Cookies from "js-cookie";
 import { RemoveDialog } from "./dialog/RemoveDialog.tsx";
 
 export default function MyPage() {
@@ -21,7 +21,7 @@ export default function MyPage() {
     const router = useRouter();
     const [activeTab, setActiveTab] = useState<"profile" | "liked">("profile");
     const [type, setType] = useState<
-        null | `removeResume_${string}` | "removeAccount"
+        null | `removeResume_${string}` | "removeAccount" | "logout"
     >(null);
 
     const { mutate: removeResume } = useMutation({
@@ -32,20 +32,11 @@ export default function MyPage() {
         },
     });
 
-    const { mutate: userLogout } = useMutation({
-        mutationFn: logout,
-        onSuccess: () => {
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-            router.replace("/login");
-        },
-    });
-
     const { mutate: removeA } = useMutation({
         mutationFn: removeAccount,
         onSuccess: () => {
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
+            Cookies.remove("refreshToken")
+            Cookies.remove("accessToken");
             router.replace("/");
         },
     });
@@ -85,7 +76,6 @@ export default function MyPage() {
                     <MyPageNav
                         activeTab={activeTab}
                         setActiveTab={handleTabChange}
-                        userLogout={userLogout}
                         setType={setType}
                     />
                     <div className="w-full mt-10 flex flex-col gap-6">
