@@ -2,7 +2,7 @@
 
 import { Dialog } from "./index";
 
-export const PDFWaiting = () => {
+export const PdfWaiting = () => {
     return (
         <>
             <style jsx>{`
@@ -32,7 +32,7 @@ export const PDFWaiting = () => {
                             잠시만 기다려 주세요.
                         </span>
                     </>
-                    <div className="w-[75%] bg-gray-100 rounded-full p-[6px]">
+                    <div className="w-[75%] bg-gray-100 rounded-full p-[6px] mt-4">
                         <div className="relative h-[14px] bg-gray-100 rounded-full overflow-hidden">
                             <div
                                 className="absolute top-0 left-0 h-full rounded-full bg-primary-500"

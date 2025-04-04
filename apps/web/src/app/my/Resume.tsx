@@ -14,8 +14,8 @@ import { useRouter } from "next/navigation";
 import { publishPortFolio, downloadPdf } from "../../apis";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
-import { PDFWaitingModal } from "./dialog/PDFWaiting";
-import { PDFDownloadModal } from "./dialog/PDFDownload.tsx";
+import { PdfDownload } from "./dialog/PdfDownload.tsx";
+import { PdfWaiting } from "./dialog/PdfWaiting";
 
 interface IProp {
     title: string;
@@ -36,7 +36,7 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
     const router = useRouter();
 
     const [isGenerating, setIsGenerating] = useState(false);
-    const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+    const [pdfUrl, setPdfUrl] = useState<Blob | null>(null);
 
     const { mutate: generatePdf } = useMutation({
         mutationFn: downloadPdf,
@@ -46,24 +46,27 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
         },
         onSuccess: (response: any) => {
             setIsGenerating(false);
-            const url = typeof response === "string" ? response : response.data;
-            setPdfUrl(url);
+            const blob = new Blob([response], { type: "application/pdf" });
+            const url = URL.createObjectURL(blob);
+            setPdfUrl(blob);
+
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `${title}.pdf`;
+            a.target = "_blank";
+            a.click();
         },
-        onError: (error) => {
+        onError: () => {
             setIsGenerating(false);
-            alert("PDF 생성에 실패했습니다.");
+            alert("PDF 생성에 실패했습니다. 다시 시도해주세요.");
         },
     });
 
     return (
         <>
-            {isGenerating && !pdfUrl && <PDFWaitingModal />}
+            {isGenerating && !pdfUrl && <PdfWaiting />}
             {pdfUrl && !isGenerating && (
-                <PDFDownloadModal
-                    pdfUrl={pdfUrl}
-                    title={title}
-                    onClose={() => setPdfUrl(null)}
-                />
+                <PdfDownload onClose={() => setPdfUrl(null)} />
             )}
 
             <div className="w-[246.5px] h-[127.2px] p-4 rounded-lg bg-gray-100">
