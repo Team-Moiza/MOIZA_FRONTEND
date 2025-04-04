@@ -18,7 +18,7 @@ import { Info } from "./Info";
 
 interface ProfilePageProps {
     setType: Dispatch<
-        SetStateAction<`removeResume_${string}` | "removeAccount" | null>
+        SetStateAction<`removeResume_${string}` | "removeAccount" | "logout" | null>
     >;
 }
 
