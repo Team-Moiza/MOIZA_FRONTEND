@@ -1,20 +1,6 @@
 "use client";
 
-import {
-  Button,
-  Center,
-  Dropdown,
-  Flex,
-  Image as ImageIcon,
-  Input,
-  InputTemplate,
-  Label,
-  Select,
-  Spacing,
-  Stack,
-  Text,
-  Textarea,
-} from "@moija/ui";
+import { Button, Center, Dropdown, Flex, Image as ImageIcon, Input, InputTemplate, Label, Select, Spacing, Stack, Text, Textarea } from "@moija/ui";
 import { useOutsideClickRef } from "@moija/hooks";
 import { Controller, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
@@ -24,12 +10,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-import {
-  School,
-  Major,
-  Job,
-  EducationStatus,
-} from "../../../enum/enums";
+import { School, Major, Job, EducationStatus } from "../../../enum/enums";
 
 export interface FormType {
   nickname: string;
@@ -73,6 +54,10 @@ export default function Page() {
   }, [data]);
 
   const onSubmit = (value: FormType) => {
+    if (!value.introduce) {
+      alert("입력되지 않은 항목이 있습니다.");
+      return;
+    }
     delete value.email;
     delete value.profile;
     mutate(value);
@@ -83,23 +68,14 @@ export default function Page() {
   };
 
   return (
-    <form
-      className="w-full h-[1100px] pt-[100px] mb-[100px]"
-      onSubmit={handleSubmit(onSubmit, onFail)}
-    >
+    <form className="w-full h-[1100px] pt-[100px] mb-[100px]" onSubmit={handleSubmit(onSubmit, onFail)}>
       <Center horizontal vertical={false}>
         <div className="w-[1040px]">
           <Spacing>
             <Stack gap={12}>
               <div className="w-[184px] h-[184px] overflow-hidden rounded-[8px] bg-gray-200">
                 {data?.profile ? (
-                  <Image
-                    src={data?.profile}
-                    className="object-cover w-[184px] h-[184px]"
-                    width={184}
-                    height={184}
-                    alt="profile"
-                  />
+                  <Image src={data?.profile} className="object-cover w-[184px] h-[184px]" width={184} height={184} alt="profile" />
                 ) : (
                   <Center>
                     <ImageIcon size={38} color="#787878" />
@@ -115,25 +91,13 @@ export default function Page() {
                     toast.error("사용할 수 없습니다");
                   }}
                 >
-                  <input
-                    id="image"
-                    className="invisible absolute"
-                    onChange={({ target }) => setImage(target.files ? target.files[0] : undefined)}
-                    type="file"
-                  />
-                  <button
-                    disabled
-                    className="w-[184px] h-[44px] rounded-[8px] bg-gray-100 text-p5 text-gray-400 flex justify-center items-center cursor-not-allowed"
-                  >
+                  <input id="image" className="invisible absolute" onChange={({ target }) => setImage(target.files ? target.files[0] : undefined)} type="file" />
+                  <button disabled className="w-[184px] h-[44px] rounded-[8px] bg-gray-100 text-p5 text-gray-400 flex justify-center items-center cursor-not-allowed">
                     이미지 업로드
                   </button>
                 </label>
                 {image && (
-                  <button
-                    type="button"
-                    className="text-sm text-red-400"
-                    onClick={() => setImage(undefined)}
-                  >
+                  <button type="button" className="text-sm text-red-400" onClick={() => setImage(undefined)}>
                     이미지 제거
                   </button>
                 )}
@@ -146,25 +110,12 @@ export default function Page() {
                 <Stack gap={20}>
                   <InputTemplate>
                     <Label accent>이름</Label>
-                    <Input
-                      width={824}
-                      isBig
-                      placeholder="이름을 입력해주세요"
-                      defaultValue={getValues("nickname")}
-                      {...register("nickname", { required: "이름을 입력해주세요" })}
-                    />
+                    <Input width={824} isBig placeholder="이름을 입력해주세요" defaultValue={getValues("nickname")} {...register("nickname", { required: "이름을 입력해주세요" })} />
                   </InputTemplate>
 
                   <InputTemplate>
                     <Label accent>이메일</Label>
-                    <Input
-                      type="email"
-                      width={824}
-                      isBig
-                      placeholder="이메일을 입력해주세요"
-                      value={getValues("email")}
-                      disabled
-                    />
+                    <Input type="email" width={824} isBig placeholder="이메일을 입력해주세요" value={getValues("email")} disabled />
                   </InputTemplate>
 
                   <Flex gap={20}>
@@ -175,11 +126,7 @@ export default function Page() {
                           control={control}
                           name="school"
                           render={({ field: { value, onChange } }) => (
-                            <Dropdown
-                              isOpen={open === "school"}
-                              items={Object.values(School)}
-                              onSelect={(item) => onChange(findKeyByValue(item, School))}
-                            >
+                            <Dropdown isOpen={open === "school"} items={Object.values(School)} onSelect={(item) => onChange(findKeyByValue(item, School))}>
                               <Select
                                 width={557}
                                 isBig
@@ -201,19 +148,8 @@ export default function Page() {
                           control={control}
                           name="major"
                           render={({ field: { value, onChange } }) => (
-                            <Dropdown
-                              isOpen={open === "major"}
-                              items={Object.values(Major)}
-                              onSelect={(item) => onChange(findKeyByValue(item, Major))}
-                            >
-                              <Select
-                                width={247}
-                                isBig
-                                placeholder="전공을 선택해주세요"
-                                value={Major[value]}
-                                isOpen={open === "major"}
-                                onClick={() => setOpen((prev) => (prev ? null : "major"))}
-                              />
+                            <Dropdown isOpen={open === "major"} items={Object.values(Major)} onSelect={(item) => onChange(findKeyByValue(item, Major))}>
+                              <Select width={247} isBig placeholder="전공을 선택해주세요" value={Major[value]} isOpen={open === "major"} onClick={() => setOpen((prev) => (prev ? null : "major"))} />
                             </Dropdown>
                           )}
                         />
@@ -229,19 +165,8 @@ export default function Page() {
                           control={control}
                           name="educationStatus"
                           render={({ field: { value, onChange } }) => (
-                            <Dropdown
-                              isOpen={open === "stat"}
-                              items={Object.values(EducationStatus)}
-                              onSelect={(item) => onChange(findKeyByValue(item, EducationStatus))}
-                            >
-                              <Select
-                                width={261}
-                                isBig
-                                placeholder="재학 상태"
-                                value={EducationStatus[value]}
-                                isOpen={open === "stat"}
-                                onClick={() => setOpen((prev) => (prev ? null : "stat"))}
-                              />
+                            <Dropdown isOpen={open === "stat"} items={Object.values(EducationStatus)} onSelect={(item) => onChange(findKeyByValue(item, EducationStatus))}>
+                              <Select width={261} isBig placeholder="재학 상태" value={EducationStatus[value]} isOpen={open === "stat"} onClick={() => setOpen((prev) => (prev ? null : "stat"))} />
                             </Dropdown>
                           )}
                         />
@@ -292,14 +217,7 @@ export default function Page() {
                               onChange(findKeyByValue(item, Job));
                             }}
                           >
-                            <Select
-                              width={824}
-                              isBig
-                              placeholder="개발 직무"
-                              value={Job[value]}
-                              isOpen={open === "job"}
-                              onClick={() => setOpen((prev) => (prev ? null : "job"))}
-                            />
+                            <Select width={824} isBig placeholder="개발 직무" value={Job[value]} isOpen={open === "job"} onClick={() => setOpen((prev) => (prev ? null : "job"))} />
                           </Dropdown>
                         )}
                       />
@@ -308,26 +226,12 @@ export default function Page() {
 
                   <InputTemplate>
                     <Label>회사</Label>
-                    <Input
-                      width={824}
-                      placeholder="현재 재직 중인 회사"
-                      isBig
-                      defaultValue={getValues("company")}
-                      {...register("company")}
-                    />
+                    <Input width={824} placeholder="현재 재직 중인 회사" isBig defaultValue={getValues("company")} {...register("company")} />
                   </InputTemplate>
 
                   <InputTemplate>
-                    <Label>한줄 소개</Label>
-                    <Textarea
-                      width={824}
-                      height={176}
-                      maxLength={100}
-                      isBig
-                      placeholder="나를 소개하는 글을 써주세요"
-                      defaultValue={getValues("introduce")}
-                      {...register("introduce")}
-                    />
+                    <Label accent>한줄 소개</Label>
+                    <Textarea width={824} height={176} maxLength={100} isBig placeholder="나를 소개하는 글을 써주세요" defaultValue={getValues("introduce")} {...register("introduce")} />
                   </InputTemplate>
                 </Stack>
 

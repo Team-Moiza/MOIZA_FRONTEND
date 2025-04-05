@@ -22,6 +22,8 @@ export type FormData = {
   profile: string;
   company: null | string;
   educationStatus: null | string;
+  enrollmentEndDate: null | string;
+  enrollmentStartDate: null | string;
   id: number;
   name: string;
   major: string;
