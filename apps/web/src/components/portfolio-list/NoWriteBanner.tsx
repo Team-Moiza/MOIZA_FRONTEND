@@ -13,7 +13,7 @@ const NoWriteBanner = () => {
                 </div>
                 <button
                     className="flex px-[22px] py-2 text-p2 bg-white text-primary-500 rounded-[10px] gap-1 items-center"
-                    onClick={() => router.push("/write")}
+                    onClick={() => router.push("/my")}
                 >
                     작성하기
                     <RightArrow color="#1ADFB4" size="22" />
