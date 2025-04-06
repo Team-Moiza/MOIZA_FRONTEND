@@ -22,6 +22,8 @@ export type FormData = {
   profile: string;
   company: null | string;
   educationStatus: null | string;
+  enrollmentEndDate: null | string;
+  enrollmentStartDate: null | string;
   id: number;
   name: string;
   major: string;
@@ -74,7 +76,15 @@ export default function WritePortFolio() {
     },
   });
   const { mutate: edit } = useMutation({
-    mutationFn: () => editPortFolio(id as string, formMethod.getValues()) as any,
+    mutationFn: async () => {
+      const data = formMethod.getValues();
+      data.projects = data.projects.map((i) => ({
+        ...i,
+        startDate: i.startDate.length === 10 ? i.startDate : `${i.startDate}-01`,
+        endDate: i.endDate ? (i.endDate.length === 10 ? i.endDate : `${i.endDate}-01`) : "",
+      }));
+      return (await editPortFolio(id as string, data)) as any;
+    },
     onSuccess: () => {
       client.invalidateQueries(["portfolio", "write", id] as any);
       navigate.replace("/my");
