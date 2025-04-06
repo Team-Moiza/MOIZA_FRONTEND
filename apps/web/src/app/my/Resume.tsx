@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { publishPortFolio, downloadPdf } from "../../apis";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
-import { PdfDownload } from "./dialog/PdfDownload.tsx";
+import { PdfDownload } from "./dialog/PdfDownload";
 import { PdfWaiting } from "./dialog/PdfWaiting";
 
 interface IProp {
