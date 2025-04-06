@@ -10,44 +10,46 @@ import { user, logout } from "../../apis/user";
 import { instance } from "../../apis";
 import { useMutation } from "@tanstack/react-query";
 import cookies from "js-cookie";
-import { Dialog } from "../../app/my/Dialog";
+import { CombinedDialog } from "../../app/my/dialog/CombinedDialog";
 
 type User = {
-    profile: string;
-    nickname: string;
+  profile: string;
+  nickname: string;
 };
 
 const Header = () => {
-  const [type, setType] = useState<any>(null);
+  const [type, setType] = useState<
+    null | `removeResume_${string}` | "removeAccount" | "logout"
+  >(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState<User | null>(null);
+  const router = useRouter();
 
-    const router = useRouter();
-    useEffect(() => {
-        const fetchUserProfile = async () => {
-            const token = cookies.get("accessToken");
-            if (token) {
-                const response = await instance.get("/users");
-                setUserData(response.data);
-                setIsLoggedIn(true);
-            }
-        };
-        fetchUserProfile();
-    }, []);
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const token = cookies.get("accessToken");
+      if (token) {
+        const response = await instance.get("/users");
+        setUserData(response.data);
+        setIsLoggedIn(true);
+      }
+    };
+    fetchUserProfile();
+  }, []);
 
-    const { mutate: userLogout } = useMutation({
-        mutationFn: logout,
-        onSuccess: () => {
-            cookies.remove("accessToken");
-            cookies.remove("refreshToken");
-            setUserData(null);
-            router.replace("/login");
-        },
-    });
+  const { mutate: userLogout } = useMutation({
+    mutationFn: logout,
+    onSuccess: () => {
+      cookies.remove("accessToken");
+      cookies.remove("refreshToken");
+      setUserData(null);
+      router.replace("/login");
+    },
+  });
 
   return (
     <>
-      <Dialog type={type} setType={setType} />
+      <CombinedDialog type={type} setType={setType} />
       <header className="z-[100] w-[100vw] fixed justify-center bg-white h-[80px] px-[200px] py-[25px] shadow-custom">
         <div className="h-full flex justify-between items-center">
           <div className="flex items-center space-x-4">

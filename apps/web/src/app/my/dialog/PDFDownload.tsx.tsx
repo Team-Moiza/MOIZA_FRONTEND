@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@moija/ui";
-import { Dialog } from "./index";
+import { Dialog } from ".";
 
 interface PDFDownloadModalProps {
     onClose: () => void;

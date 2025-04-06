@@ -2,11 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import {
-    removeAccount,
-    deletePortFolio,
-    myPortFolio,
-} from "../../apis";
+import { removeAccount, deletePortFolio, myPortFolio } from "../../apis";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { ProfilePage } from "./ProfilePage";
@@ -14,7 +10,7 @@ import { LikedList } from "./like/page";
 import { MyPageNav } from "./MypageNav";
 import { Center } from "@moija/ui";
 import Cookies from "js-cookie";
-import { RemoveDialog } from "./dialog/RemoveDialog.tsx";
+import { CombinedDialog } from "./dialog/CombinedDialog";
 
 export default function MyPage() {
     const searchParams = useSearchParams();
@@ -35,7 +31,7 @@ export default function MyPage() {
     const { mutate: removeA } = useMutation({
         mutationFn: removeAccount,
         onSuccess: () => {
-            Cookies.remove("refreshToken")
+            Cookies.remove("refreshToken");
             Cookies.remove("accessToken");
             router.replace("/");
         },
@@ -63,7 +59,7 @@ export default function MyPage() {
     return (
         <>
             {type && (
-                <RemoveDialog
+                <CombinedDialog
                     type={type}
                     setType={setType}
                     removeAccount={removeA}
@@ -71,6 +67,7 @@ export default function MyPage() {
                     refetch={refetch}
                 />
             )}
+
             <Center>
                 <div className="pt-[80px] w-[1040px] h-screen flex gap-[10px]">
                     <MyPageNav
