@@ -55,30 +55,39 @@ const Detail = () => {
     }
   };
 
-  return (
-    <>
-      <div id="education" className="w-screen pt-[80px] px-[200px]">
-        <button
-          onClick={handleLikeClick}
-          className="fixed top-1/2 right-[224px] translate-y-[-50%] size-[54px] flex items-center justify-center rounded-full shadow-[0px_2px_8px_0px_rgba(0,0,0,0.16)]"
-        >
-          <Heart size={24} fill={liked ? "#e96221" : "none"} stroke={liked ? "none" : "#5a5a5a"} />
-        </button>
-        <div className="border-x border-gray-200">
-          <NavBar />
-          <div className="px-[68px] pt-[68px] pb-[200px]">
-            <Profile data={rData} />
-            <div className="flex flex-col gap-[76px]">
-              <Section id="introduction" title="자기소개">
-                <Stack gap={12}>
-                  <p className="text-gray-700 leading-relaxed">{rData?.introduction.introduce}</p>
-                  {rData?.introduction?.url && (
-                    <Link href={rData?.introduction.url} className="text-primary-500 text-p3">
-                      {rData?.introduction.url}
-                    </Link>
-                  )}
-                </Stack>
-              </Section>
+    return (
+        <>
+            <div id="education" className="w-screen pt-[80px] px-[200px]">
+            <button
+    onClick={handleLikeClick}
+    className="fixed bottom-10 right-60 translate-y-[-50%] size-[54px] flex items-center justify-center rounded-full shadow-[0px_2px_8px_0px_rgba(0,0,0,0.16)]"
+>
+                    <Heart
+                        size={24}
+                        fill={liked ? "#e96221" : "none"}
+                        stroke={liked ? "none" : "#5a5a5a"}
+                    />
+                </button>
+                <div className="border-x border-gray-200">
+                    <NavBar />
+                    <div className="px-[68px] pt-[68px] pb-[200px]">
+                        <Profile data={rData} />
+                        <div className="flex flex-col gap-[76px]">
+                            <Section id="introduction" title="자기소개">
+                                <Stack gap={12}>
+                                    <p className="text-gray-700 leading-relaxed">
+                                        {rData?.introduction.introduce}
+                                    </p>
+                                    {rData?.introduction?.url && (
+                                        <Link
+                                            href={rData?.introduction.url}
+                                            className="text-primary-500 text-p3"
+                                        >
+                                            {rData?.introduction.url}
+                                        </Link>
+                                    )}
+                                </Stack>
+                            </Section>
 
               <Section id="skills" title="기술 스택">
                 <div className="flex flex-wrap gap-3">
