@@ -6,46 +6,32 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ActionMenu } from "@moija/ui";
-import { user, logout } from "../../apis/user";
 import { instance } from "../../apis";
-import { useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import cookies from "js-cookie";
 import { CombinedDialog } from "../../app/my/dialog/CombinedDialog";
 
-type User = {
-  profile: string;
-  nickname: string;
-};
-
-const Header = () => {
-  const [type, setType] = useState<
-    null | `removeResume_${string}` | "removeAccount" | "logout"
-  >(null);
+export const Header = () => {
+  const [type, setType] = useState<null | `removeResume_${string}` | "removeAccount" | "logout">(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState<User | null>(null);
+  const { data } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      if (cookies.get("accessToken")) {
+        const data = await instance.get("/users");
+
+        return data?.data;
+      }
+    },
+  });
+
   const router = useRouter();
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      const token = cookies.get("accessToken");
-      if (token) {
-        const response = await instance.get("/users");
-        setUserData(response.data);
-        setIsLoggedIn(true);
-      }
-    };
-    fetchUserProfile();
+    if (cookies.get("accessToken")) {
+      setIsLoggedIn(true);
+    }
   }, []);
-
-  const { mutate: userLogout } = useMutation({
-    mutationFn: logout,
-    onSuccess: () => {
-      cookies.remove("accessToken");
-      cookies.remove("refreshToken");
-      setUserData(null);
-      router.replace("/login");
-    },
-  });
 
   return (
     <>
@@ -58,7 +44,7 @@ const Header = () => {
             </Link>
           </div>
           <div className="flex items-center gap-5">
-            {isLoggedIn && userData ? (
+            {isLoggedIn && data ? (
               <ActionMenu
                 items={[
                   {
@@ -81,17 +67,12 @@ const Header = () => {
                 ]}
               >
                 <div className="flex items-center gap-3 cursor-pointer">
-                  <Image
-                    src={userData.profile}
-                    alt="프로필"
-                    width={42}
-                    height={42}
-                    className="rounded-full flex-shrink-0"
-                  />
+                  <div className="relative w-[42px] h-[42px] shrink-0">
+                    <Image src={data?.profile} alt="프로필" fill className="object-cover rounded-full w-[42px_!important] h-[42px_!important]" />
+                  </div>
+
                   <div className="flex items-center gap-1.5">
-                    <div className="text-p3 text-black">
-                      {userData.nickname}님
-                    </div>
+                    <div className="text-p3 text-black">{data?.nickname}님</div>
                     <BottomArrow size="18" />
                   </div>
                 </div>
@@ -107,5 +88,3 @@ const Header = () => {
     </>
   );
 };
-
-export default Header;

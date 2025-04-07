@@ -7,10 +7,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { updateUser, user } from "../../../apis/user";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 import { School, Major, Job, EducationStatus } from "../../../enum/enums";
+import { instance } from "../../../apis";
 
 export interface FormType {
   nickname: string;
@@ -34,7 +34,6 @@ export default function Page() {
   const [open, setOpen] = useState<null | string>(null);
   const selectRef = useOutsideClickRef<HTMLDivElement>(() => setOpen(null));
   const { control, register, reset, getValues, handleSubmit } = useForm<FormType>();
-  const [image, setImage] = useState<File | undefined>(undefined);
   const { replace } = useRouter();
 
   const { data, refetch } = useQuery({
@@ -84,23 +83,29 @@ export default function Page() {
               </div>
 
               <Stack gap={8}>
-                <label
-                  className="relative"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toast.error("사용할 수 없습니다");
-                  }}
-                >
-                  <input id="image" className="invisible absolute" onChange={({ target }) => setImage(target.files ? target.files[0] : undefined)} type="file" />
-                  <button disabled className="w-[184px] h-[44px] rounded-[8px] bg-gray-100 text-p5 text-gray-400 flex justify-center items-center cursor-not-allowed">
-                    이미지 업로드
-                  </button>
+                <label className="relative">
+                  <input
+                    id="image"
+                    className="invisible absolute"
+                    onChange={({ target }) => {
+                      if (target?.files?.[0]) {
+                        const formdata = new FormData();
+                        formdata.append("file", target.files[0]);
+                        instance.patch("/users/picture", formdata).then(() => {
+                          refetch();
+                        });
+                      }
+                    }}
+                    type="file"
+                    accept="image/*"
+                  />
+                  <div className="w-[184px] h-[44px] rounded-[8px] bg-gray-100 text-p5 text-gray-400 flex justify-center items-center cursor-not-allowed">이미지 업로드</div>
                 </label>
-                {image && (
+                {/* {data?.image && (
                   <button type="button" className="text-sm text-red-400" onClick={() => setImage(undefined)}>
                     이미지 제거
                   </button>
-                )}
+                )} */}
                 <Text className="text-caption1 text-gray-400">- 업로드 이미지 최대 크기 10MB</Text>
               </Stack>
             </Stack>

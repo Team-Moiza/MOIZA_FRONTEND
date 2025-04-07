@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { forceRefreshIfTokenMissing } from "../apis/instance";
-import Header from "../components/layouts/Header";
+import { Header } from "../components/layouts/Header";
 import { Provider } from "./Provider";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
