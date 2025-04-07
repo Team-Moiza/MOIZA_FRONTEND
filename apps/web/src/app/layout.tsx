@@ -1,8 +1,7 @@
-import Header from "../components/layouts/Header";
 import "./globals.css";
 import localFont from "next/font/local";
-import { Provider } from "./Provider";
 import { Metadata } from "next";
+import ClientLayout from "./ClientLayout";
 
 const pretendard = localFont({
   src: "../../public/PretendardVariable.woff2",
@@ -12,26 +11,21 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-	title: "모이자",
-	description: "4대 소마고 이력서 공유 사이트",
-	icons: {
-		icon: "/Moiza.jpg",
-	},
+  title: "모이자",
+  description: "4대 소마고 이력서 공유 사이트",
+  icons: {
+    icon: "/Moiza.jpg",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="kr" className={`${pretendard.variable}`}>
-      <body className={pretendard.className}>
-        <Provider>
-          <Header />
-          {children}
-        </Provider>
-      </body>
+    <html lang="kr" className={pretendard.variable}>
+      <ClientLayout>{children}</ClientLayout>
     </html>
   );
 }
