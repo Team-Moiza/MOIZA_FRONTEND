@@ -22,7 +22,7 @@ const Profile = ({ data }: { data: FormData | undefined }) => {
         {data?.enrollmentStartDate && (
           <div className="px-3 py-[6px] items-center gap-3 flex bg-primary-100 rounded-full w-fit">
             <span className="text-primary-500 font-bold">#</span>
-            <span className="text-btn text-gray-600">{`${data.enrollmentStartDate} 에 입학`}</span>
+            <span className="text-btn text-gray-600">{`${data.enrollmentStartDate} 입학`}</span>
           </div>
         )}
         {data?.job && (
