@@ -2,32 +2,33 @@ import Image from "next/image";
 import { FormData } from "../../app/write/[id]/page";
 import { School as school, Major as major } from "../../enum/enums";
 import { Job } from "../../enum/enums";
+import {HashTag} from "@moija/ui"
 
 const Profile = ({ data }: { data: FormData | undefined }) => {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-3">
         {data?.company && (
-          <div className="px-3 py-[6px] items-center gap-3 flex bg-primary-100 rounded-full w-fit">
-            <span className="text-primary-500 font-bold">#</span>
+          <div className="px-3 py-[6px] items-center gap-1 flex bg-primary-100 rounded-full w-fit">
+            <HashTag/>
             <span className="text-btn text-gray-600">{data.company}</span>
           </div>
         )}
         {data?.educationStatus && (
-          <div className="px-3 py-[6px] items-center gap-3 flex bg-primary-100 rounded-full w-fit">
-            <span className="text-primary-500 font-bold">#</span>
+          <div className="px-3 py-[6px] items-center gap-1 flex bg-primary-100 rounded-full w-fit">
+            <HashTag/>
             <span className="text-btn text-gray-600">{data.educationStatus === "ENROLLED" ? "재학중" : "졸업"}</span>
           </div>
         )}
         {data?.enrollmentStartDate && (
-          <div className="px-3 py-[6px] items-center gap-3 flex bg-primary-100 rounded-full w-fit">
-            <span className="text-primary-500 font-bold">#</span>
+          <div className="px-3 py-[6px] items-center gap-1 flex bg-primary-100 rounded-full w-fit">
+            <HashTag/>
             <span className="text-btn text-gray-600">{`${data.enrollmentStartDate} 입학`}</span>
           </div>
         )}
         {data?.job && (
-          <div className="px-3 py-[6px] items-center gap-3 flex bg-primary-100 rounded-full w-fit">
-            <span className="text-primary-500 font-bold">#</span>
+          <div className="px-3 py-[6px] items-center gap-1 flex bg-primary-100 rounded-full w-fit">
+            <HashTag/>
             <span className="text-btn text-gray-600">{`${Job[data.job as unknown as keyof typeof Job]}`}</span>
           </div>
         )}

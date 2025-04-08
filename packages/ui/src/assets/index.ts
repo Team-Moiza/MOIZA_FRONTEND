@@ -22,3 +22,4 @@ export * from "./Menu";
 export * from "./Add";
 export * from "./DownloadResume";
 export * from "./EditResume";
+export * from "./HashTag"
