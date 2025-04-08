@@ -66,8 +66,8 @@ export const CombinedDialog = ({
                     {isLogout
                         ? "로그아웃"
                         : isAccountRemoval
-                            ? "정말 탈퇴하시겠어요?"
-                            : "이력서를 삭제하시겠습니까?"}
+                          ? "정말 탈퇴하시겠어요?"
+                          : "이력서를 삭제하시겠습니까?"}
                 </span>
                 {(isLogout || !isLogout) && (
                     <span className="text-p3 text-gray-500">
