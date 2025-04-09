@@ -68,6 +68,7 @@ const ProfileBox = ({
             alt="프로필 사진"
             fill
             className="object-cover"
+            unoptimized
           />
         </div>
 

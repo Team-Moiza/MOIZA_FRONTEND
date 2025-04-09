@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FormData } from "../../app/write/[id]/page";
+import { FormData } from "../../types/FormData";
 import { School as school, Major as major } from "../../enum/enums";
 import { Job } from "../../enum/enums";
 import {HashTag} from "@moija/ui"
@@ -36,7 +36,7 @@ const Profile = ({ data }: { data: FormData | undefined }) => {
 
       <div className="w-full flex gap-8 mb-10 items-center">
         <div className="w-[184px] h-[184px] bg-[#e2e2e2] rounded-lg border border-[#e2e2e2] overflow-hidden flex-shrink-0 relative">
-          {data?.profile && <Image src={data.profile} alt="프로필 이미지" fill className="object-cover " />}
+          {data?.profile && <Image src={data.profile} alt="프로필 이미지" fill className="object-cover " unoptimized />}
         </div>
         <div className="w-full">
           <div className="gap-2.5 flex flex-col w-full">
