@@ -1,31 +1,26 @@
 "use client";
 
 import { Button, Center, Flex, Stack } from "@moija/ui";
-import { IntroduceForm } from "../../../components/write/IntroduceForm";
+import { IntroduceForm } from "../../components/write/IntroduceForm";
 import { FormProvider, useForm } from "react-hook-form";
-import { Sidebar } from "../../../components/write/Sidebar";
-import { SkillsetForm } from "../../../components/write/SkillsetForm";
-import { ProjectForm } from "../../../components/write/ProjectForm";
-import { LinkForm } from "../../../components/write/LinkForm";
-import { AchievementForm } from "../../../components/write/AchievementForm";
-import { QualificationForm } from "../../../components/write/QualificationForm";
-import { default as Profile } from "../../my/edit/page";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useParams, useRouter } from "next/navigation";
-import { detailPortFolio, editPortFolio, publishPortFolio } from "../../../apis";
+import { Sidebar } from "../../components/write/Sidebar";
+import { SkillsetForm } from "../../components/write/SkillsetForm";
+import { ProjectForm } from "../../components/write/ProjectForm";
+import { LinkForm } from "../../components/write/LinkForm";
+import { AchievementForm } from "../../components/write/AchievementForm";
+import { QualificationForm } from "../../components/write/QualificationForm";
+import { default as Profile } from "../my/edit/page";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { addPortfolio, publishPortFolio } from "../../apis";
 import { useEffect } from "react";
-import { TitleForm } from "../../../components/write/TitleForm";
-import { FormData } from "../../../types/FormData";
+import { TitleForm } from "../../components/write/TitleForm";
+import { FormData } from "../../types/FormData";
 
 export default function WritePortFolio() {
   const formMethod = useForm<FormData>();
   const navigate = useRouter();
-  const { id } = useParams();
   const client = useQueryClient();
-  const { data } = useQuery({
-    queryKey: ["portfolio", "write", id],
-    queryFn: () => detailPortFolio(id as string),
-  });
   const { mutate } = useMutation({
     mutationFn: async () => {
       const data = formMethod.getValues();
@@ -34,15 +29,17 @@ export default function WritePortFolio() {
         startDate: i.startDate.length === 10 ? i.startDate : `${i.startDate}-01`,
         endDate: i.endDate ? (i.endDate.length === 10 ? i.endDate : `${i.endDate}-01`) : "",
       }));
-      (await editPortFolio(id as string, data)) as any
-      (await publishPortFolio(id as string)) as any
+      const response = await addPortfolio(data);
+      const newId = response.data;
+      console.log(newId);
+      (await publishPortFolio(newId as string)) as any
     },
     onSuccess: async () => {
       await client.invalidateQueries(["my", "portfolio"] as any);
       navigate.replace("/my");
     },
   });
-  const { mutate: edit } = useMutation({
+  const { mutate: create } = useMutation({
     mutationFn: async () => {
       const data = formMethod.getValues();
       data.projects = data.projects.map((i) => ({
@@ -50,17 +47,13 @@ export default function WritePortFolio() {
         startDate: i.startDate.length === 10 ? i.startDate : `${i.startDate}-01`,
         endDate: i.endDate ? (i.endDate.length === 10 ? i.endDate : `${i.endDate}-01`) : "",
       }));
-      return (await editPortFolio(id as string, data)) as any;
+      return (await addPortfolio(data)) as any;
     },
     onSuccess: () => {
-      client.invalidateQueries(["portfolio", "write", id] as any);
+      client.invalidateQueries(["portfolio", "write"] as any);
       navigate.replace("/my");
     },
   });
-
-  useEffect(() => {
-    formMethod.reset(data?.data);
-  }, [data?.data]);
 
   const onSubmit = formMethod.handleSubmit(
     (data) => {
@@ -86,10 +79,10 @@ export default function WritePortFolio() {
                   <QualificationForm />
                   <LinkForm />
                   <div className="w-full flex justify-end gap-5 mt-20">
-                    <Button type="white" onClick={() => edit()}>
-                      수정
+                    <Button type="white" onClick={() => create()}>
+                      저장
                     </Button>
-                    <Button onClick={mutate}>수정 및 게시</Button>
+                    <Button onClick={mutate}>저장 및 게시</Button>
                   </div>
                 </Stack>
                 <Sidebar />
