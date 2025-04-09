@@ -1,6 +1,6 @@
 import { Stack, Spacing, Text, Flex, Profile } from "@moija/ui";
 import { useFormContext } from "react-hook-form";
-import { FormData } from "./page";
+import { FormData } from "../../types/FormData";
 
 const asterisk =
   " after:ml-1 after:content-['*'] after:text-[#FF3B30] after:font-bold after:text-[16px]";

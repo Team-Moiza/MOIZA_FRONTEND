@@ -1,5 +1,5 @@
 import { InputTemplate, LinkIcon, Plus, Text } from "@moija/ui";
-import { FormData } from "./page";
+import { FormData } from "../../types/FormData";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Close } from "@moija/ui/src/assets/Close";
 

@@ -1,6 +1,6 @@
 import { Input, InputTemplate, Label, Text } from "@moija/ui";
 import { useFormContext } from "react-hook-form";
-import { FormData } from "./page";
+import { FormData } from "../../types/FormData";
 
 export const TitleForm = () => {
   const formMethod = useFormContext<FormData>();

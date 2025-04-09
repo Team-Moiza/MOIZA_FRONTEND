@@ -10,7 +10,7 @@ import Section from "../../../components/detail/Section";
 import Profile from "../../../components/detail/Profile";
 import { Heart, LinkIcon, Stack } from "@moija/ui";
 import { detailPortFolio } from "../../../apis";
-import { FormData } from "../../write/[id]/page";
+import { FormData } from "../../../types/FormData";
 import { likeApi } from "../../../apis/likeApi";
 import NoPermission from "./Forbidden";
 import { AxiosError } from "axios";

@@ -1,6 +1,6 @@
 import { ArrowDown, Delete, Input, InputTemplate, Label, Plus, Text, Textarea } from "@moija/ui";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { FormData } from "./page";
+import { FormData } from "../../types/FormData";
 
 export const AchievementForm = () => {
   const { control, register } = useFormContext<FormData>();
@@ -16,7 +16,7 @@ export const AchievementForm = () => {
             <InputTemplate full>
               <Label accent>수상명</Label>
               <div className="w-full flex justify-between items-center">
-                <Input width={670} placeholder="대회명을 입력하세요" defaultValue={field.name} {...register(`qualifications.${index}.name`, { required: `${index}번 대회 이름` })} />
+                <Input width={670} placeholder="대회명을 입력하세요" defaultValue={field.name} {...register(`awards.${index}.name`, { required: `${index}번 대회 이름` })} />
                 <div className="border-[1px] w-fit z-20 flex rounded-[4px]">
                   <button className="w-[32px] h-[32px] flex items-center justify-center border-r-[1px]" type="button" onClick={() => index < fields.length - 1 && swap(index, index + 1)}>
                     <ArrowDown size={24} color={index < fields.length - 1 ? "#787878" : "#BFBFBF"} />

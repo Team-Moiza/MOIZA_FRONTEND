@@ -1,10 +1,10 @@
 import { Input, InputTemplate, Search, Stack, Text } from "@moija/ui";
-import { FormData } from "./page";
+import { FormData } from "../../types/FormData";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { List } from "@moija/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { addSkillset, findSkillset } from "../../../apis";
+import { addSkillset, findSkillset } from "../../apis";
 
 let time: undefined | NodeJS.Timeout = undefined;
 export const SkillsetForm = () => {

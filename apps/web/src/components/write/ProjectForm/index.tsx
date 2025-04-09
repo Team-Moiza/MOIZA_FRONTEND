@@ -1,6 +1,6 @@
 import { Plus, Text } from "@moija/ui";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { FormData } from "../page";
+import { FormData } from "../../../types/FormData";
 import { Item } from "./Item";
 
 export const ProjectForm = () => {
