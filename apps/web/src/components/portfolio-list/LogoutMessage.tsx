@@ -37,6 +37,7 @@ const LogoutMessage = ({ userStatus, id }: LogoutMessageProps) => {
             case "NOT_LOGGED_IN":
                 return "로그인하러 가기";
             case "LOGGED_IN":
+            case "PROFILE_INFO_UPDATED":
                 return "이력서 작성하기";
             case "PORTFOLIO_COMPLETED":
                 return "이력서 공개하기";
@@ -53,7 +54,8 @@ const LogoutMessage = ({ userStatus, id }: LogoutMessageProps) => {
                 router.push("/login");
                 break;
             case "LOGGED_IN":
-                router.push(`/write/${id}`);
+            case "PROFILE_INFO_UPDATED":
+                router.push('/write');
                 break;
             case "PORTFOLIO_COMPLETED":
                 router.push("/my");
