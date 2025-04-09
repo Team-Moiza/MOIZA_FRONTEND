@@ -14,21 +14,23 @@ export const Item = ({ field, method, index }: IProp) => {
 
   return (
     <div className="w-full flex flex-col gap-4">
-      <div className="border-[1px] w-fit flex rounded-[4px] self-end">
-        <button className="w-[32px] h-[32px] flex items-center justify-center border-r-[1px]" type="button" onClick={() => index < fields.length - 1 && swap(index, index + 1)}>
-          <ArrowDown size={24} color={index < fields.length - 1 ? "#787878" : "#BFBFBF"} />
-        </button>
-        <button className="w-[32px] h-[32px] flex items-center justify-center rotate-180 border-l-[1px]" type="button" onClick={() => index > 0 && swap(index, index - 1)}>
-          <ArrowDown size={24} color={index > 0 ? "#787878" : "#BFBFBF"} />
-        </button>
-        <button className="w-[32px] h-[32px] flex items-center justify-center" type="button" onClick={() => remove(index)}>
-          <Delete size={18} color="#787878" />
-        </button>
-      </div>
-      <div className="flex justify-between w-full">
-        <InputTemplate>
+      <div className="flex justify-between items-center w-full">
+        <InputTemplate full>
           <Label accent>프로젝트명</Label>
-          <Input width={776} placeholder="프로젝트명을 입력하세요" defaultValue={field.title} {...register(`projects.${index}.title`, { required: `${index}번 프로젝트 제목` })} />
+          <div className="w-full flex items-center justify-between">
+            <Input width={670} placeholder="프로젝트명을 입력하세요" defaultValue={field.title} {...register(`projects.${index}.title`, { required: `${index}번 프로젝트 제목` })} />
+            <div className="border-[1px] w-fit flex rounded-[4px] h-fit">
+              <button className="w-[32px] h-[32px] flex items-center justify-center border-r-[1px]" type="button" onClick={() => index < fields.length - 1 && swap(index, index + 1)}>
+                <ArrowDown size={24} color={index < fields.length - 1 ? "#787878" : "#BFBFBF"} />
+              </button>
+              <button className="w-[32px] h-[32px] flex items-center justify-center rotate-180 border-l-[1px]" type="button" onClick={() => index > 0 && swap(index, index - 1)}>
+                <ArrowDown size={24} color={index > 0 ? "#787878" : "#BFBFBF"} />
+              </button>
+              <button className="w-[32px] h-[32px] flex items-center justify-center" type="button" onClick={() => remove(index)}>
+                <Delete size={18} color="#787878" />
+              </button>
+            </div>
+          </div>
         </InputTemplate>
       </div>
 

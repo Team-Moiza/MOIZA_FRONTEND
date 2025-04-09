@@ -12,51 +12,29 @@ export const QualificationForm = () => {
 
       {fields.map((field, index) => (
         <div className="w-full flex flex-col gap-4" key={field.id}>
-          <div className="border-[1px] w-fit flex rounded-[4px] self-end">
-            <button
-              className="w-[32px] h-[32px] flex items-center justify-center border-r-[1px]"
-              type="button"
-              onClick={() => index < fields.length - 1 && swap(index, index + 1)}
-            >
-              <ArrowDown size={24} color={index < fields.length - 1 ? "#787878" : "#BFBFBF"} />
-            </button>
-            <button
-              className="w-[32px] h-[32px] flex items-center justify-center rotate-180 border-l-[1px]"
-              type="button"
-              onClick={() => index > 0 && swap(index, index - 1)}
-            >
-              <ArrowDown size={24} color={index > 0 ? "#787878" : "#BFBFBF"} />
-            </button>
-            <button
-              className="w-[32px] h-[32px] flex items-center justify-center"
-              type="button"
-              onClick={() => remove(index)}
-            >
-              <Delete size={18} color="#787878" />
-            </button>
-          </div>
-          <div className="flex justify-between w-full">
-            <InputTemplate>
-              <Label accent>대회명</Label>
-              <Input
-                width={776}
-                placeholder="대회명을 입력하세요"
-                defaultValue={field.name}
-                {...register(`qualifications.${index}.name`, { required: `${index}번 대회 이름` })}
-              />
-            </InputTemplate>
-          </div>
+          <InputTemplate full>
+            <Label accent>대회명</Label>
+            <div className="flex justify-between w-full items-center">
+              <Input width={670} placeholder="대회명을 입력하세요" defaultValue={field.name} {...register(`qualifications.${index}.name`, { required: `${index}번 대회 이름` })} />
+              <div className="border-[1px] w-fit flex rounded-[4px]">
+                <button className="w-[32px] h-[32px] flex items-center justify-center border-r-[1px]" type="button" onClick={() => index < fields.length - 1 && swap(index, index + 1)}>
+                  <ArrowDown size={24} color={index < fields.length - 1 ? "#787878" : "#BFBFBF"} />
+                </button>
+                <button className="w-[32px] h-[32px] flex items-center justify-center rotate-180 border-l-[1px]" type="button" onClick={() => index > 0 && swap(index, index - 1)}>
+                  <ArrowDown size={24} color={index > 0 ? "#787878" : "#BFBFBF"} />
+                </button>
+                <button className="w-[32px] h-[32px] flex items-center justify-center" type="button" onClick={() => remove(index)}>
+                  <Delete size={18} color="#787878" />
+                </button>
+              </div>
+            </div>
+          </InputTemplate>
 
           <div className="w-full flex flex-col gap-8">
             <div className="w-full flex justify-between">
               <InputTemplate>
                 <Label>점수/급</Label>
-                <Input
-                  width={247}
-                  placeholder="점수 또는 급을 입력하세요"
-                  defaultValue={field.score}
-                  {...register(`qualifications.${index}.score`)}
-                />
+                <Input width={247} placeholder="점수 또는 급을 입력하세요" defaultValue={field.score} {...register(`qualifications.${index}.score`)} />
               </InputTemplate>
               <InputTemplate>
                 <Label accent>취득 날짜</Label>
@@ -75,11 +53,7 @@ export const QualificationForm = () => {
         </div>
       ))}
 
-      <button
-        className="flex items-center gap-2 cursor-pointer"
-        type="button"
-        onClick={() => append({ date: "", score: "", name: "" })}
-      >
+      <button className="flex items-center gap-2 cursor-pointer" type="button" onClick={() => append({ date: "", score: "", name: "" })}>
         <div className="rounded-full bg-primary-500 flex items-center justify-center w-[26px] h-[26px]">
           <Plus color="#FFFFFF" size={16} />
         </div>

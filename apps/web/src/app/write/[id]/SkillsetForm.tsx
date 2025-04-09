@@ -50,11 +50,11 @@ export const SkillsetForm = () => {
             />
           </InputTemplate>
           {input !== "" && (
-            <div className="w-full h-[300px] absolute z-20 bg-white rounded-lg p-[16px] border-gray-200 border-[1px]">
+            <div className="mt-3 w-full h-[300px] absolute z-20 bg-white rounded-lg p-[16px] border-gray-200 border-[1px] overflow-auto">
               {data?.data?.length ? (
                 data.data.map(({ id, keyword }: any) => (
                   <button
-                    className="flex px-4 py-2 items-center w-full h-[50px] rounded-lg hover:bg-gray-200"
+                    className="flex px-4 py-2 items-center w-full h-[50px] rounded-lg hover:bg-gray-100"
                     onClick={() => {
                       setValue("");
                       setInput("");

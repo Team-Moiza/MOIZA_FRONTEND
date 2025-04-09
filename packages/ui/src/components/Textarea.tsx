@@ -9,7 +9,7 @@ interface TextareaPropsType extends React.TextareaHTMLAttributes<HTMLTextAreaEle
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaPropsType>(({ width, height, isBig = false, ...rest }: TextareaPropsType, ref) => {
-  const [value, setValue] = useState<string>(rest?.defaultValue + "" || "");
+  const [value, setValue] = useState<string>(rest?.defaultValue ? (rest.defaultValue as string) : "");
 
   return (
     <label className="flex flex-col gap-1 items-center">
