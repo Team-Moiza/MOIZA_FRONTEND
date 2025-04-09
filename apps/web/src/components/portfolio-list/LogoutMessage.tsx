@@ -8,6 +8,7 @@ interface LogoutMessageProps {
     userStatus:
         | "NOT_LOGGED_IN"
         | "LOGGED_IN"
+        | "PROFILE_INFO_UPDATED"
         | "PORTFOLIO_COMPLETED"
         | "PORTFOLIO_PUBLISHED";
 }
@@ -20,6 +21,7 @@ const LogoutMessage = ({ userStatus, id }: LogoutMessageProps) => {
             case "NOT_LOGGED_IN":
                 return "로그인하시면 더 많은 이력서를 확인할 수 있습니다!";
             case "LOGGED_IN":
+            case "PROFILE_INFO_UPDATED":
                 return "이력서를 작성하시면 더 많은 이력서를 열람할 수 있습니다!";
             case "PORTFOLIO_COMPLETED":
                 return "이력서를 공개하시면 모든 이력서를 열람할 수 있습니다!";
