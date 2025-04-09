@@ -20,8 +20,6 @@ const ProfileBox = ({
   likeCnt,
   company,
 }: Profile) => {
-  const router = useRouter();
-
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(Number(likeCnt));
 
@@ -69,8 +67,8 @@ const ProfileBox = ({
               "https://i.pinimg.com/736x/04/15/e3/0415e3a6c56fc6e8f1e0ac1bed4b6aaf.jpg"
             }
             alt="프로필 사진"
-            fill // ✅ fill 속성
-            className="object-cover" // 부모 컨테이너를 가득 채우도록
+            fill
+            className="object-cover"
           />
         </div>
 
