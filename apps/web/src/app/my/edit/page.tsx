@@ -99,7 +99,7 @@ export default function Page() {
                     type="file"
                     accept="image/*"
                   />
-                  <div className="w-[184px] h-[44px] rounded-[8px] bg-gray-100 text-p5 text-gray-400 flex justify-center items-center cursor-not-allowed">이미지 업로드</div>
+                  <div className="w-[184px] h-[44px] rounded-[8px] bg-primary-500 text-p5 text-white flex justify-center items-center cursor-pointer">이미지 업로드</div>
                 </label>
                 {/* {data?.image && (
                   <button type="button" className="text-sm text-red-400" onClick={() => setImage(undefined)}>
@@ -241,7 +241,7 @@ export default function Page() {
                 </Stack>
 
                 <div className="w-full flex justify-end">
-                  <Button submit type="white">
+                  <Button submit >
                     수정
                   </Button>
                 </div>
