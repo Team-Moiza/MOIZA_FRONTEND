@@ -2,10 +2,11 @@ import { Stack, Add } from "@moija/ui";
 import { Resume } from "./Resume";
 import Link from "next/link";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { addPortfolio, myPortFolio } from "../../apis";
+import { myPortFolio } from "../../apis";
 import { toast } from "react-toastify";
 import { user } from "../../apis/user";
 import { FormType } from "./edit/page";
+import { useRouter } from "next/navigation";
 import {
     School as school,
     Job as job,
@@ -23,6 +24,7 @@ interface ProfilePageProps {
 }
 
 export const ProfilePage = ({ setType }: ProfilePageProps) => {
+    const navigate = useRouter();
     const { data: userData } = useQuery<FormType>({
         queryKey: ["user"],
         queryFn: async () => (await user()).data,
@@ -31,14 +33,6 @@ export const ProfilePage = ({ setType }: ProfilePageProps) => {
     const { data, refetch } = useQuery({
         queryKey: ["my", "portfolio"],
         queryFn: myPortFolio,
-    });
-
-    const { mutate } = useMutation({
-        mutationFn: addPortfolio,
-        onSuccess: () => {
-            toast.success("이력서를 성공적으로 생성하였습니다!");
-            refetch();
-        },
     });
 
     return (
@@ -63,7 +57,7 @@ export const ProfilePage = ({ setType }: ProfilePageProps) => {
                         <button
                             className="w-[246.5px] h-[127.2px] p-4 bg-gray-100 rounded-lg flex flex-col items-center justify-center gap-2"
                             type="button"
-                            onClick={() => mutate()}
+                            onClick={() => navigate.replace("/write")}
                         >
                             <Add />
                             <span className="text-caption1 text-gray-500">

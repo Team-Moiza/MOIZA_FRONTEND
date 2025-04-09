@@ -13,7 +13,6 @@ import { default as Profile } from "../my/edit/page";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { addPortfolio, publishPortFolio } from "../../apis";
-import { useEffect } from "react";
 import { TitleForm } from "../../components/write/TitleForm";
 import { FormData } from "../../types/FormData";
 
@@ -47,10 +46,11 @@ export default function WritePortFolio() {
         startDate: i.startDate.length === 10 ? i.startDate : `${i.startDate}-01`,
         endDate: i.endDate ? (i.endDate.length === 10 ? i.endDate : `${i.endDate}-01`) : "",
       }));
-      return (await addPortfolio(data)) as any;
+      const response = await addPortfolio(data);
+      return response.data;
     },
-    onSuccess: () => {
-      client.invalidateQueries(["portfolio", "write"] as any);
+    onSuccess: (id: string) => {
+      client.invalidateQueries(["portfolio", "write", id] as any);
       navigate.replace("/my");
     },
   });
