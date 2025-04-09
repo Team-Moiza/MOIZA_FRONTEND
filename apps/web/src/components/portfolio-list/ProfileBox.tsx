@@ -5,7 +5,6 @@ import { Heart } from "@moija/ui";
 import { likeApi } from "../../apis/likeApi";
 import { Profile } from "../../types/portfolio";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { School, Job } from "../../enum/enums";
 import Cookies from "js-cookie";
 

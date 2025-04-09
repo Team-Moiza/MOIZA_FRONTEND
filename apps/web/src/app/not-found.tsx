@@ -10,7 +10,6 @@ const Custom404 = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-white text-center">
             <Image src="/404.png" alt="404" width={250} height={250} />
-
             <h1 className="mt-3 text-h5 text-black">
                 앗! 이 페이지에는 아무것도 존재하지 않는 것 같아요.
             </h1>
