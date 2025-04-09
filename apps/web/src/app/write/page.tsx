@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { addPortfolio, publishPortFolio } from "../../apis";
 import { TitleForm } from "../../components/write/TitleForm";
 import { FormData } from "../../types/FormData";
+import { toast, Bounce } from "react-toastify";
 
 export default function WritePortFolio() {
   const formMethod = useForm<FormData>();
@@ -34,6 +35,17 @@ export default function WritePortFolio() {
       (await publishPortFolio(newId as string)) as any
     },
     onSuccess: async () => {
+      toast.success('이력서 생성 및 게시에 성공하였습니다.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
       await client.invalidateQueries(["my", "portfolio"] as any);
       navigate.replace("/my");
     },
@@ -50,6 +62,17 @@ export default function WritePortFolio() {
       return response.data;
     },
     onSuccess: (id: string) => {
+      toast.success('이력서 생성에 성공하였습니다.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
       client.invalidateQueries(["portfolio", "write", id] as any);
       navigate.replace("/my");
     },
@@ -80,9 +103,9 @@ export default function WritePortFolio() {
                   <LinkForm />
                   <div className="w-full flex justify-end gap-5 mt-20">
                     <Button type="white" onClick={() => create()}>
-                      저장
+                      생성
                     </Button>
-                    <Button onClick={mutate}>저장 및 게시</Button>
+                    <Button onClick={mutate}>생성 및 게시</Button>
                   </div>
                 </Stack>
                 <Sidebar />

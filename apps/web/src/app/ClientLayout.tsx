@@ -17,8 +17,8 @@ return (
     <Provider>
       <Header />
       {children}
+      <ToastContainer />
     </Provider>
-    <ToastContainer />
   </body>
 );
 }
