@@ -24,7 +24,7 @@ export default function WritePortFolio() {
   const { mutate } = useMutation({
     mutationFn: async () => {
       const data = formMethod.getValues();
-      data.projects = data.projects.map((i) => ({
+      data.projects = data.projects!!.map((i) => ({
         ...i,
         startDate: i.startDate.length === 10 ? i.startDate : `${i.startDate}-01`,
         endDate: i.endDate ? (i.endDate.length === 10 ? i.endDate : `${i.endDate}-01`) : "",
@@ -52,6 +52,18 @@ export default function WritePortFolio() {
     onError: (error: any) => {
       if (error?.response?.status === 409) {
         toast.error("유저 프로필을 먼저 수정해 주세요.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
+      } if (error?.response?.status === 400) {
+        toast.error("이력서의 필수 값을 채워 주세요.", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

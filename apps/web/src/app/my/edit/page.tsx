@@ -242,7 +242,7 @@ export default function Page() {
 
                   <InputTemplate>
                     <Label>회사</Label>
-                    <Input width={824} placeholder="현재 재직 중인 회사(없다면 빈값 가능)" isBig defaultValue={getValues("company")} {...register("company")} />
+                    <Input width={824} placeholder="현재 재직 중인 회사 (없다면 생략 가능)" isBig defaultValue={getValues("company")} {...register("company")} />
                   </InputTemplate>
 
                   <InputTemplate>

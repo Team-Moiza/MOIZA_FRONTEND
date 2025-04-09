@@ -41,10 +41,10 @@ export const Sidebar = () => {
         </div>
         <div className="p-2">
           <Stack gap={16}>
-            <Text className={textStyle}>제목</Text>
+            <Text className={textStyle + asterisk}>제목</Text>
             <Text className={textStyle}>자기소개</Text>
-            <Text className={textStyle}>기술 스택</Text>
-            <Text className={textStyle}>프로젝트</Text>
+            <Text className={textStyle + asterisk}>기술 스택</Text>
+            <Text className={textStyle + asterisk}>프로젝트</Text>
             <Text className={textStyle}>수상내역</Text>
             <Text className={textStyle}>자격증</Text>
             <Text className={textStyle}>링크</Text>
