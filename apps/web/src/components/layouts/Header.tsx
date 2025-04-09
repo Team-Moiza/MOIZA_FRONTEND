@@ -75,6 +75,7 @@ export const Header = () => {
                       alt="프로필"
                       fill
                       className="object-cover rounded-full w-[42px_!important] h-[42px_!important]"
+                      unoptimized
                     />
                   </div>
                   <div className="flex items-center gap-1.5">
