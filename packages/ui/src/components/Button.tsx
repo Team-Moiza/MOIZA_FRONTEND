@@ -13,7 +13,7 @@ export const Button = ({ type = "default", submit = false, isDisabled = false, w
       case "white":
         return "bg-white border border-gray-200";
       case "special":
-        return "";
+        return "bg-primary-100 border border-primary-500";
       case "default":
       default:
         return "bg-primary-500";
