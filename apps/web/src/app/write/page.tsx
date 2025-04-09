@@ -49,6 +49,21 @@ export default function WritePortFolio() {
       await client.invalidateQueries(["my", "portfolio"] as any);
       navigate.replace("/my");
     },
+    onError: (error: any) => {
+      if (error?.response?.status === 409) {
+        toast.error("유저 프로필을 먼저 수정해 주세요.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
+      }
+    },
   });
   const { mutate: create } = useMutation({
     mutationFn: async () => {
@@ -75,6 +90,21 @@ export default function WritePortFolio() {
       });
       client.invalidateQueries(["portfolio", "write", id] as any);
       navigate.replace("/my");
+    },
+    onError: (error: any) => {
+      if (error?.response?.status === 409) {
+        toast.error("유저 프로필을 먼저 수정해 주세요.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
+      }
     },
   });
 

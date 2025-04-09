@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 
 import { School, Major, Job, EducationStatus } from "../../../enum/enums";
 import { instance } from "../../../apis";
+import { toast, Bounce } from "react-toastify";
 
 export interface FormType {
   nickname: string;
@@ -43,8 +44,18 @@ export default function Page() {
   const { mutate } = useMutation({
     mutationFn: updateUser,
     onSuccess: async () => {
+      toast.success('유저 정보를 수정하였습니다.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
       await refetch();
-      replace("/my");
     },
   });
 
@@ -231,7 +242,7 @@ export default function Page() {
 
                   <InputTemplate>
                     <Label>회사</Label>
-                    <Input width={824} placeholder="현재 재직 중인 회사" isBig defaultValue={getValues("company")} {...register("company")} />
+                    <Input width={824} placeholder="현재 재직 중인 회사(없다면 빈값 가능)" isBig defaultValue={getValues("company")} {...register("company")} />
                   </InputTemplate>
 
                   <InputTemplate>
