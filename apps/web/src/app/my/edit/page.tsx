@@ -85,7 +85,7 @@ export default function Page() {
             <Stack gap={12}>
               <div className="w-[184px] h-[184px] overflow-hidden rounded-[8px] bg-gray-200">
                 {data?.profile ? (
-                  <Image src={data?.profile} className="object-cover w-[184px] h-[184px]" width={184} height={184} alt="profile" />
+                  <Image src={data?.profile} className="object-cover w-[184px] h-[184px]" width={184} height={184} alt="profile" unoptimized />
                 ) : (
                   <Center>
                     <ImageIcon size={38} color="#787878" />
