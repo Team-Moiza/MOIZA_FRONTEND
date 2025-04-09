@@ -1,6 +1,6 @@
 import { Stack, Spacing, Text, Flex, Profile } from "@moija/ui";
 import { useFormContext } from "react-hook-form";
-import { FormData } from "./page";
+import { FormData } from "../../types/FormData";
 
 const asterisk =
   " after:ml-1 after:content-['*'] after:text-[#FF3B30] after:font-bold after:text-[16px]";
@@ -41,10 +41,10 @@ export const Sidebar = () => {
         </div>
         <div className="p-2">
           <Stack gap={16}>
-            <Text className={textStyle}>제목</Text>
+            <Text className={textStyle + asterisk}>제목</Text>
             <Text className={textStyle}>자기소개</Text>
-            <Text className={textStyle}>기술 스택</Text>
-            <Text className={textStyle}>프로젝트</Text>
+            <Text className={textStyle + asterisk}>기술 스택</Text>
+            <Text className={textStyle + asterisk}>프로젝트</Text>
             <Text className={textStyle}>수상내역</Text>
             <Text className={textStyle}>자격증</Text>
             <Text className={textStyle}>링크</Text>

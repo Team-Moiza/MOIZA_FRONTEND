@@ -1,66 +1,24 @@
 "use client";
 
 import { Button, Center, Flex, Stack } from "@moija/ui";
-import { IntroduceForm } from "./IntroduceForm";
+import { IntroduceForm } from "../../../components/write/IntroduceForm";
 import { FormProvider, useForm } from "react-hook-form";
-import { Sidebar } from "./Sidebar";
-import { SkillsetForm } from "./SkillsetForm";
-import { ProjectForm } from "./ProjectForm";
-import { LinkForm } from "./LinkForm";
-import { AchievementForm } from "./AchievementForm";
-import { QualificationForm } from "./QualificationForm";
+import { Sidebar } from "../../../components/write/Sidebar";
+import { SkillsetForm } from "../../../components/write/SkillsetForm";
+import { ProjectForm } from "../../../components/write/ProjectForm";
+import { LinkForm } from "../../../components/write/LinkForm";
+import { AchievementForm } from "../../../components/write/AchievementForm";
+import { QualificationForm } from "../../../components/write/QualificationForm";
 import { default as Profile } from "../../my/edit/page";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import { detailPortFolio, editPortFolio, publishPortFolio } from "../../../apis";
 import { useEffect } from "react";
-import { TitleForm } from "./TitleForm";
-
-export type FormData = {
-  job: null | string;
-  school: null | string;
-  profile: string;
-  company: null | string;
-  educationStatus: null | string;
-  enrollmentEndDate: null | string;
-  enrollmentStartDate: null | string;
-  id: number;
-  name: string;
-  major: string;
-  title: string;
-  introduce: string;
-  introduction: { introduce: string; url: string };
-  codes: Array<{
-    keyword: string;
-    id: number;
-  }>;
-  projects: Array<{
-    title: string;
-    status: boolean;
-    startDate: string;
-    endDate: string;
-    description: string;
-    link: string;
-  }>;
-  awards: Array<{
-    name: string;
-    type: string;
-    date: string;
-    description: string;
-    competitionName: string;
-  }>;
-  qualifications: Array<{
-    name: string;
-    score: string;
-    date: string;
-  }>;
-  links: Array<{
-    url: string;
-  }>;
-};
+import { TitleForm } from "../../../components/write/TitleForm";
+import { FormData } from "../../../types/FormData";
 
 export default function WritePortFolio() {
-  const formMethod = useForm<FormData>({ defaultValues: { title: "" } });
+  const formMethod = useForm<FormData>();
   const navigate = useRouter();
   const { id } = useParams();
   const client = useQueryClient();
@@ -69,7 +27,16 @@ export default function WritePortFolio() {
     queryFn: () => detailPortFolio(id as string),
   });
   const { mutate } = useMutation({
-    mutationFn: async () => (await publishPortFolio(id as string)) as any,
+    mutationFn: async () => {
+      const data = formMethod.getValues();
+      data.projects = data.projects.map((i) => ({
+        ...i,
+        startDate: i.startDate.length === 10 ? i.startDate : `${i.startDate}-01`,
+        endDate: i.endDate ? (i.endDate.length === 10 ? i.endDate : `${i.endDate}-01`) : "",
+      }));
+      (await editPortFolio(id as string, data)) as any
+      (await publishPortFolio(id as string)) as any
+    },
     onSuccess: async () => {
       await client.invalidateQueries(["my", "portfolio"] as any);
       navigate.replace("/my");
@@ -120,9 +87,9 @@ export default function WritePortFolio() {
                   <LinkForm />
                   <div className="w-full flex justify-end gap-5 mt-20">
                     <Button type="white" onClick={() => edit()}>
-                      저장
+                      수정
                     </Button>
-                    <Button onClick={mutate}>게시</Button>
+                    <Button onClick={mutate}>수정 및 게시</Button>
                   </div>
                 </Stack>
                 <Sidebar />

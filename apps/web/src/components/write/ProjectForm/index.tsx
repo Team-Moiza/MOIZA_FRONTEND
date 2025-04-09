@@ -1,15 +1,17 @@
 import { Plus, Text } from "@moija/ui";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { FormData } from "../page";
+import { FormData } from "../../../types/FormData";
 import { Item } from "./Item";
 
 export const ProjectForm = () => {
   const { control } = useFormContext<FormData>();
   const fieldMethods = useFieldArray({ control, name: "projects" });
+  const asterisk =
+  " after:ml-1 after:content-['*'] after:text-[#FF3B30] after:font-bold after:text-[16px]";
 
   return (
     <div className="w-[832px] h-fit px-[28px] pt-[24px] pb-[32px] flex flex-col bg-white gap-5 rounded-[12px]">
-      <Text className="text-h2 text-black">프로젝트</Text>
+      <Text className={`text-h2 text-black ${asterisk}`}>프로젝트</Text>
       {fieldMethods.fields.map((field, index) => (
         <Item field={field} method={fieldMethods} index={index} key={field.id} />
       ))}

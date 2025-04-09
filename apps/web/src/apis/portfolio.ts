@@ -1,17 +1,6 @@
 import { instance } from "./instance";
 
-export const addPortfolio = async () => {
-    const data = {
-        title: `레주메 ${new Date().toISOString().split("T")[0]}`,
-        introduce: "",
-        introduction: { introduce: "", url: "" },
-        projects: [],
-        awards: [],
-        qualifications: [],
-        links: [],
-        codes: [],
-    };
-
+export const addPortfolio = async (data: any) => {
     return await instance.post("/portfolios", data);
 };
 

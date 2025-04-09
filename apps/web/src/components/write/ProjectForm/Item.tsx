@@ -1,6 +1,6 @@
 import { ArrowDown, Delete, Input, InputTemplate, Label, List, Plus, Search, Select, Textarea } from "@moija/ui";
 import { Controller, FieldArrayWithId, UseFieldArrayReturn, useFormContext } from "react-hook-form";
-import { FormData } from "../page";
+import { FormData } from "../../../types/FormData";
 
 interface IProp {
   field: FieldArrayWithId<FormData, "projects", "id">;
