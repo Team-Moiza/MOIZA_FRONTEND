@@ -15,12 +15,14 @@ const ProfileBox = ({
   profile,
   school,
   introduce,
+  enrollmentStartDate,
   codes,
   likeCnt,
   company,
 }: Profile) => {
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(Number(likeCnt));
+  const yearSuffix = enrollmentStartDate ? enrollmentStartDate.substring(2) : "??";
 
   useEffect(() => {
     if (!Cookies.get("accessToken")) return;
@@ -75,8 +77,8 @@ const ProfileBox = ({
         <div className="flex flex-col w-[37vw]">
           <div className="text-caption1 text-gray-500">
             {company
-              ? `${company} / ${School[school as unknown as keyof typeof School]}`
-              : School[school as unknown as keyof typeof School]}
+              ? `${company} / ${School[school as unknown as keyof typeof School]} ${yearSuffix}년도 입학`
+              : `${School[school as unknown as keyof typeof School]} ${yearSuffix}년도 입학`}
           </div>
           <div className="text-p2 text-black">
             {Job[job as unknown as keyof typeof Job]} · {name}
