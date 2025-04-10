@@ -1,0 +1,25 @@
+name: Frontend CI
+
+on: [push, pull_request]
+
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 코드 체크아웃
+        uses: actions/checkout@v3
+
+      - name: Node.js 설치
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 패키지 설치
+        run: npm install
+
+      - name: Lint 체크
+        run: npm run lint
+
+      - name: 빌드 테스트
+        run: npm run build
