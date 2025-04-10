@@ -84,7 +84,7 @@ const ProfileBox = ({
           <div className="text-p4 text-gray-500 overflow-hidden whitespace-nowrap text-ellipsis break-all">
             {introduce}
           </div>
-          <div className="flex mt-2 gap-2">
+          <div className="flex flex-wrap mt-2 gap-2">
             {codes?.map((code, index) => (
               <div
                 key={index}
