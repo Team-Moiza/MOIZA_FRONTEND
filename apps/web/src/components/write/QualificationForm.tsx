@@ -13,9 +13,9 @@ export const QualificationForm = () => {
       {fields.map((field, index) => (
         <div className="w-full flex flex-col gap-4" key={field.id}>
           <InputTemplate full>
-            <Label accent>대회명</Label>
+            <Label accent>자격증명</Label>
             <div className="flex justify-between w-full items-center">
-              <Input width={670} placeholder="대회명을 입력하세요" defaultValue={field.name} {...register(`qualifications.${index}.name`, { required: `${index}번 대회 이름` })} />
+              <Input width={670} placeholder="자격증명을 입력하세요" defaultValue={field.name} {...register(`qualifications.${index}.name`, { required: `${index}번 자격증 이름` })} />
               <div className="border-[1px] w-fit flex rounded-[4px]">
                 <button className="w-[32px] h-[32px] flex items-center justify-center border-r-[1px]" type="button" onClick={() => index < fields.length - 1 && swap(index, index + 1)}>
                   <ArrowDown size={24} color={index < fields.length - 1 ? "#787878" : "#BFBFBF"} />
@@ -57,7 +57,7 @@ export const QualificationForm = () => {
         <div className="rounded-full bg-primary-500 flex items-center justify-center w-[26px] h-[26px]">
           <Plus color="#FFFFFF" size={16} />
         </div>
-        <span className="text-p5 text-black">수상 내역 추가</span>
+        <span className="text-p5 text-black">자격증 내역 추가</span>
       </button>
     </div>
   );
