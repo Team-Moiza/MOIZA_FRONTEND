@@ -17,7 +17,7 @@ export const MyPageNav = ({
   setType,
 }: MyPageNavProps) => {
   return (
-    <nav className="w-[216px] py-28 px-6">
+    <nav className="min-w-[180px] py-28 px-6">
       <Stack gap={20}>
         <span
           className={`

@@ -5,7 +5,7 @@ const NoWriteBanner = () => {
     const router = useRouter();
     return (
         <div className="bg-[url('/noWriteBanner.png')] relative bg-cover bg-center overflow-hidden flex items-center justify-center rounded-[20px] min-h-[180px] min-w-[600px]">
-            <div className="absolute w-[500px] gap-[45px] flex items-center h-full">
+            <div className="absolute w-[500px] flex items-center h-full">
                 <div className="text-h5 text-white">
                     <span className="whitespace-nowrap">
                         지금 바로 내 이력서 작성하고,
