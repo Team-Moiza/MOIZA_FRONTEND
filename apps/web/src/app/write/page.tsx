@@ -116,6 +116,18 @@ export default function WritePortFolio() {
           theme: "colored",
           transition: Bounce,
         });
+      } if (error?.response?.status === 400) {
+        toast.error("이력서의 필수 값을 채워 주세요.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
       }
     },
   });

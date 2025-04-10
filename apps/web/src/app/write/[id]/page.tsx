@@ -16,6 +16,7 @@ import { detailPortFolio, editPortFolio, publishPortFolio } from "../../../apis"
 import { useEffect } from "react";
 import { TitleForm } from "../../../components/write/TitleForm";
 import { FormData } from "../../../types/FormData";
+import { toast, Bounce } from "react-toastify";
 
 export default function WritePortFolio() {
   const formMethod = useForm<FormData>();
@@ -41,6 +42,33 @@ export default function WritePortFolio() {
       await client.invalidateQueries(["my", "portfolio"] as any);
       navigate.replace("/my");
     },
+    onError: (error: any) => {
+      if (error?.response?.status === 409) {
+        toast.error("유저 프로필을 먼저 수정해 주세요.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
+      } if (error?.response?.status === 400) {
+        toast.error("이력서의 필수 값을 채워 주세요.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
+      }
+    },
   });
   const { mutate: edit } = useMutation({
     mutationFn: async () => {
@@ -55,6 +83,33 @@ export default function WritePortFolio() {
     onSuccess: () => {
       client.invalidateQueries(["portfolio", "write", id] as any);
       navigate.replace("/my");
+    },
+    onError: (error: any) => {
+      if (error?.response?.status === 409) {
+        toast.error("유저 프로필을 먼저 수정해 주세요.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
+      } if (error?.response?.status === 400) {
+        toast.error("이력서의 필수 값을 채워 주세요.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
+      }
     },
   });
 
