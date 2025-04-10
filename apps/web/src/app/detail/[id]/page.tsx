@@ -108,7 +108,7 @@ const Detail = () => {
                           {project.startDate} ~ {!project.status ? "진행중" : project.endDate}
                         </div>
                       </div>
-                      <div className="text-p3 text-black">{project.description}</div>
+                      <div className="text-p3 text-black whitespace-pre-line">{project.description}</div>
                       {project.link && (
                         <Link href={project.link} className="text-primary-500 text-p3">
                           {project.link}
@@ -125,7 +125,7 @@ const Detail = () => {
                     {index >= 2 && <div className="border-b border-gray-100 my-8" />}
                     <div className="text-h5 text-black">{award.name}</div>
                     <div className="text-gray-500 text-p4 mb-4">{award.date}</div>
-                    <div className="text-black text-p3">{award.description}</div>
+                    <div className="text-black text-p3 whitespace-pre-line">{award.description}</div>
                   </div>
                 ))}
               </Section>
