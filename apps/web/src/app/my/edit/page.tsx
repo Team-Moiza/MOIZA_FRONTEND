@@ -34,17 +34,18 @@ const findKeyByValue = (value: string, target: object) => {
 export default function Page() {
   const [open, setOpen] = useState<null | string>(null);
   const selectRef = useOutsideClickRef<HTMLDivElement>(() => setOpen(null));
-  const { control, register, reset, getValues, handleSubmit } = useForm<FormType>();
+  const { control, register, reset, getValues, handleSubmit, setValue } = useForm<FormType>();
   const { replace } = useRouter();
 
   const { data, refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => (await user()).data,
   });
+
   const { mutate } = useMutation({
     mutationFn: updateUser,
     onSuccess: async () => {
-      toast.success('유저 정보를 수정하였습니다.', {
+      toast.success("유저 정보를 수정하였습니다.", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -60,8 +61,16 @@ export default function Page() {
   });
 
   useEffect(() => {
-    if (data) reset(data);
-  }, [data]);
+    if (data) {
+      reset(data);
+    }
+  }, [data?.email]);
+
+  useEffect(() => {
+    if (data?.profile) {
+      setValue("profile", data.profile);
+    }
+  }, [data?.profile]);
 
   const onSubmit = (value: FormType) => {
     if (!value.introduce) {
@@ -85,7 +94,14 @@ export default function Page() {
             <Stack gap={12}>
               <div className="w-[184px] h-[184px] overflow-hidden rounded-[8px] bg-gray-200">
                 {data?.profile ? (
-                  <Image src={data?.profile} className="object-cover w-[184px] h-[184px]" width={184} height={184} alt="profile" unoptimized />
+                  <Image
+                    src={data.profile}
+                    className="object-cover w-[184px] h-[184px]"
+                    width={184}
+                    height={184}
+                    alt="profile"
+                    unoptimized
+                  />
                 ) : (
                   <Center>
                     <ImageIcon size={38} color="#787878" />
@@ -97,26 +113,23 @@ export default function Page() {
                 <label className="relative">
                   <input
                     id="image"
-                    className="invisible absolute"
+                    className="sr-only"
+                    type="file"
+                    accept="image/*"
                     onChange={({ target }) => {
                       if (target?.files?.[0]) {
                         const formdata = new FormData();
                         formdata.append("file", target.files[0]);
                         instance.patch("/users/picture", formdata).then(() => {
-                          refetch();
+                          refetch(); // 이후 useEffect에서 setValue로 profile만 갱신
                         });
                       }
                     }}
-                    type="file"
-                    accept="image/*"
                   />
-                  <div className="w-[184px] h-[44px] rounded-[8px] bg-primary-500 text-p5 text-white flex justify-center items-center cursor-pointer">이미지 업로드</div>
+                  <div className="w-[184px] h-[44px] rounded-[8px] bg-primary-500 text-p5 text-white flex justify-center items-center cursor-pointer">
+                    이미지 업로드
+                  </div>
                 </label>
-                {/* {data?.image && (
-                  <button type="button" className="text-sm text-red-400" onClick={() => setImage(undefined)}>
-                    이미지 제거
-                  </button>
-                )} */}
                 <Text className="text-caption1 text-gray-400">- 업로드 이미지 최대 크기 10MB</Text>
               </Stack>
             </Stack>
@@ -126,12 +139,25 @@ export default function Page() {
                 <Stack gap={20}>
                   <InputTemplate>
                     <Label accent>이름</Label>
-                    <Input width={824} isBig placeholder="이름을 입력해주세요" defaultValue={getValues("nickname")} {...register("nickname", { required: "이름을 입력해주세요" })} />
+                    <Input
+                      width={824}
+                      isBig
+                      placeholder="이름을 입력해주세요"
+                      defaultValue={getValues("nickname")}
+                      {...register("nickname", { required: "이름을 입력해주세요" })}
+                    />
                   </InputTemplate>
 
                   <InputTemplate>
                     <Label accent>이메일</Label>
-                    <Input type="email" width={824} isBig placeholder="이메일을 입력해주세요" value={getValues("email")} disabled />
+                    <Input
+                      type="email"
+                      width={824}
+                      isBig
+                      placeholder="이메일을 입력해주세요"
+                      value={getValues("email")}
+                      disabled
+                    />
                   </InputTemplate>
 
                   <Flex gap={20}>
@@ -252,9 +278,7 @@ export default function Page() {
                 </Stack>
 
                 <div className="w-full flex justify-end">
-                  <Button submit >
-                    수정
-                  </Button>
+                  <Button submit>수정</Button>
                 </div>
               </Stack>
             </div>
