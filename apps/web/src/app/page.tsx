@@ -15,7 +15,7 @@ const Main = () => {
     const [filteredProfiles, setFilteredProfiles] = useState<Profile[]>([]);
     const [selectedCategory, setSelectedCategory] = useState("전체");
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
+    const itemsPerPage = 8;
 
     const categories = [
         "전체",
@@ -65,8 +65,8 @@ const Main = () => {
             company === "미재직"
                 ? "false"
                 : company === "재직중"
-                    ? "true"
-                    : null;
+                  ? "true"
+                  : null;
 
         const query = new URLSearchParams({
             page: currentPage.toString(),
@@ -122,12 +122,12 @@ const Main = () => {
 
     return (
         <>
-            <div className="w-screen pt-[120px] px-[200px]">
-                <CategoryFilter
-                    categories={categories}
-                    selectedCategory={selectedCategory}
-                    onCategoryChange={handleCategoryChange}
-                />
+            <div className="w-screen pt-[120px] px-[200px] bg-white">
+                    <CategoryFilter
+                        categories={categories}
+                        selectedCategory={selectedCategory}
+                        onCategoryChange={handleCategoryChange}
+                    />
                 <div className="flex gap-5 w-[100%] justify-between">
                     <ProfileListContainer
                         paginatedProfiles={paginatedProfiles}
@@ -136,7 +136,9 @@ const Main = () => {
                         currentPage={currentPage}
                         onPageChange={handlePageChange}
                     />
-                    <ProfileFilter applyFilter={applyFilterFromMain} />
+                    <div className="sticky top-[180px] self-start">
+                        <ProfileFilter applyFilter={applyFilterFromMain} />
+                    </div>
                 </div>
             </div>
             <Footer />
