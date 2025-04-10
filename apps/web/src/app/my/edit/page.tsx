@@ -278,7 +278,7 @@ export default function Page() {
                 </Stack>
 
                 <div className="w-full flex justify-end">
-                  <Button submit>수정</Button>
+                  <Button submit>저장</Button>
                 </div>
               </Stack>
             </div>
