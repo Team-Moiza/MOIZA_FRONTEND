@@ -132,7 +132,7 @@ const Detail = () => {
 
               <Section id="certificates" title="자격증">
                 {rData?.qualifications.map((cert, index) => (
-                  <div key={index}>
+                  <div key={index} className={index < rData?.qualifications.length - 1 ? "pb-3 border-b-[1px]" : ""}>
                     {index >= 2 && <div className="border-b border-gray-100 my-8" />}
                     <div className="text-h5 text-black">{cert.name}</div>
                     <div className="text-gray-500 text-p4">{cert.date}</div>

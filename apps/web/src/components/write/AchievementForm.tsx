@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { FormData } from "../../types/FormData";
 
 export const AchievementForm = () => {
-  const { control, register } = useFormContext<FormData>();
+  const { control, register, setValue, watch } = useFormContext<FormData>();
   const { fields, append, remove, swap } = useFieldArray({ control, name: "awards" });
 
   return (
@@ -47,7 +47,15 @@ export const AchievementForm = () => {
             <div className="w-full flex justify-between">
               <InputTemplate>
                 <Label accent>수상 날짜</Label>
-                <Input width={776} defaultValue={field.date} placeholder="YYYY-MM-DD" {...register(`awards.${index}.date`, { required: `${index}번 수상일` })} />
+                <Input
+                  type="month"
+                  width={776}
+                  placeholder="YYYY.MM"
+                  value={`${watch(`awards.${index}.date`).split("-").slice(0, 2).join("-")}`}
+                  onChange={(e) => {
+                    setValue(`awards.${index}.date`, e.target.value);
+                  }}
+                />
               </InputTemplate>
             </div>
             <InputTemplate>

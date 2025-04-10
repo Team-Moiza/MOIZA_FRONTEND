@@ -1,9 +1,9 @@
 "use client";
 
 interface SectionProps {
-    id: string;
-    title: string;
-    children: React.ReactNode;
+  id: string;
+  title: string;
+  children: React.ReactNode;
 }
 
 const Section = ({ id, title, children }: SectionProps) => {

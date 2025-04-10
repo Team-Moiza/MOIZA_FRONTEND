@@ -90,7 +90,7 @@ export const ProfilePage = ({ setType }: ProfilePageProps) => {
                         name="재학 상태"
                         value={
                             userData?.enrollmentStartDate
-                                ? `${userData?.enrollmentStartDate} ~ ${userData?.enrollmentEndDate}`
+                                ? `${userData?.enrollmentStartDate}년 ~ ${userData?.enrollmentEndDate}년`
                                 : "값을 입력하세요"
                         }
                     >

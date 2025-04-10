@@ -35,11 +35,11 @@ export default function WritePortFolio() {
         startDate: i.startDate.length === 10 ? i.startDate : `${i.startDate}-01`,
         endDate: i.endDate ? (i.endDate.length === 10 ? i.endDate : `${i.endDate}-01`) : "",
       }));
-      (await editPortFolio(id as string, data)) as any
-      (await publishPortFolio(id as string)) as any
+      (await editPortFolio(id as string, data)) as any;
+      (await publishPortFolio(id as string)) as any;
     },
     onSuccess: async () => {
-      toast.success('이력서 수정에 성공하였습니다.', {
+      toast.success("이력서 수정에 성공하였습니다.", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -66,7 +66,8 @@ export default function WritePortFolio() {
           theme: "colored",
           transition: Bounce,
         });
-      } if (error?.response?.status === 400) {
+      }
+      if (error?.response?.status === 400) {
         toast.error("이력서의 필수 값을 채워 주세요.", {
           position: "top-right",
           autoClose: 5000,
@@ -89,10 +90,15 @@ export default function WritePortFolio() {
         startDate: i.startDate.length === 10 ? i.startDate : `${i.startDate}-01`,
         endDate: i.endDate ? (i.endDate.length === 10 ? i.endDate : `${i.endDate}-01`) : "",
       }));
+      data.awards = data.awards.map((i) => ({
+        ...i,
+        date: i.date.length === 10 ? i.date : `${i.date}-01`,
+      }));
+
       return (await editPortFolio(id as string, data)) as any;
     },
     onSuccess: () => {
-      toast.success('이력서 수정에 성공하였습니다.', {
+      toast.success("이력서 수정에 성공하였습니다.", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -119,7 +125,8 @@ export default function WritePortFolio() {
           theme: "colored",
           transition: Bounce,
         });
-      } if (error?.response?.status === 400) {
+      }
+      if (error?.response?.status === 400) {
         toast.error("이력서의 필수 값을 채워 주세요.", {
           position: "top-right",
           autoClose: 5000,

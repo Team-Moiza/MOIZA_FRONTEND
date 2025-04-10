@@ -9,7 +9,7 @@ interface IProp {
 }
 
 export const Item = ({ field, method, index }: IProp) => {
-  const { register, watch, control } = useFormContext<FormData>();
+  const { register, watch, control, getValues } = useFormContext<FormData>();
   const { fields, swap, remove } = method;
 
   return (
@@ -72,7 +72,14 @@ export const Item = ({ field, method, index }: IProp) => {
         </div>
         <InputTemplate>
           <Label>프로젝트 설명</Label>
-          <Textarea width={776} height={176} maxLength={1200} placeholder="자세한 설명을 작성해주세요" {...register(`projects.${index}.description`)} />
+          <Textarea
+            width={776}
+            height={176}
+            maxLength={1200}
+            placeholder="자세한 설명을 작성해주세요"
+            defaultValue={getValues(`projects.${index}.description`)}
+            {...register(`projects.${index}.description`)}
+          />
         </InputTemplate>
         <InputTemplate>
           <Label>추가 링크</Label>
