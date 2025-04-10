@@ -1,4 +1,4 @@
-import { ArrowDown, Delete, Input, InputTemplate, Label, List, Plus, Search, Select, Textarea } from "@moija/ui";
+import { ArrowDown, Delete, Input, InputTemplate, Label, Textarea } from "@moija/ui";
 import { Controller, FieldArrayWithId, UseFieldArrayReturn, useFormContext } from "react-hook-form";
 import { FormData } from "../../../types/FormData";
 
@@ -13,7 +13,8 @@ export const Item = ({ field, method, index }: IProp) => {
   const { fields, swap, remove } = method;
 
   return (
-    <div className="w-full flex flex-col gap-4 py-2">
+    <div className={`w-full flex flex-col gap-4 py-2 ${index !== 0 ? "border-t-[5px] border-gray-100 pt-8 mt-4" : ""}`}>
+
       <div className="flex justify-between items-center w-full">
         <InputTemplate full>
           <Label accent>프로젝트명</Label>
