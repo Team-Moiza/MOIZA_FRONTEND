@@ -83,7 +83,7 @@ const Detail = () => {
                         <div className="flex flex-col gap-[76px]">
                             <Section id="introduction" title="자기소개">
                                 <Stack gap={12}>
-                                    <p className="text-gray-700 leading-relaxed">
+                                    <p className="text-gray-700 leading-relaxed whitespace-pre-line">
                                         {rData?.introduction.introduce}
                                     </p>
                                     {rData?.introduction?.url && (
