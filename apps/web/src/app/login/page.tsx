@@ -19,7 +19,7 @@ const Login = () => {
                     <div className="flex flex-col items-center gap-5">
                         <Logo size={150} />
                         <div className="text-gray-500 text-center text-p4">
-                            로그인하고 소마고생들의 포트폴리오를 구경해보세요!
+                            로그인하고 소마고생들의 이력서를 구경해보세요!
                         </div>
                     </div>
                     <button

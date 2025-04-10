@@ -35,7 +35,7 @@ const ProfileList = ({ paginatedProfiles }: ProfileListProps) => {
                 ))
             ) : userStatus === "PORTFOLIO_PUBLISHED" ? (
                 <div className="w-full py-20 text-center text-gray-500">
-                    아직 등록된 포트폴리오가 없습니다.
+                    아직 등록된 이력서가 없습니다.
                 </div>
             ) : null}
             {userStatus !== "PORTFOLIO_PUBLISHED" && (

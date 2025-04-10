@@ -30,7 +30,7 @@ export const LikedList = () => {
                     </div>
                 ) : (
                     <div className="text-gray-500 text-center py-10">
-                        좋아요한 포트폴리오가 없습니다.
+                        좋아요한 이력서가 없습니다.
                     </div>
                 )}
             </Stack>

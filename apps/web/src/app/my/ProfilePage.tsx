@@ -47,7 +47,7 @@ export const ProfilePage = ({ setType }: ProfilePageProps) => {
                                 title={i.title}
                                 date={i.updatedAt
                                     .split("T")[0]
-                                    .replace("-", ".")}
+                                    .replaceAll("-", ".")}
                                 id={i.id}
                                 checked={i.isPublished}
                                 setType={setType}

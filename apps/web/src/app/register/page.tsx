@@ -97,7 +97,7 @@ const Register = () => {
                             회원가입
                         </div>
                         <div className="text-gray-500 text-center text-p4">
-                            회원가입하고 소마고생들의 포트폴리오를 구경해보세요!
+                            회원가입하고 소마고생들의 이력서를 구경해보세요!
                         </div>
                     </div>
                     <div className="flex flex-col gap-5 w-full">
