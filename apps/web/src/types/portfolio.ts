@@ -7,6 +7,7 @@ export interface Profile {
     job: Job;
     introduce: string;
     profile: string;
+    enrollmentStartDate: string;
     likeCnt: number;
     codes?: { keyword: string }[];
     company: string | null;
