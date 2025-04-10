@@ -18,6 +18,7 @@ export const Header = () => {
   const router = useRouter();
 
   const token = cookies.get("accessToken");
+  console.log(token);
 
   const { data } = useQuery({
     queryKey: ["user"],
@@ -70,13 +71,7 @@ export const Header = () => {
               >
                 <div className="flex items-center gap-3 cursor-pointer">
                   <div className="relative w-[42px] h-[42px] shrink-0">
-                    <Image
-                      src={data.profile}
-                      alt="프로필"
-                      fill
-                      className="object-cover rounded-full w-[42px_!important] h-[42px_!important]"
-                      unoptimized
-                    />
+                    <Image src={data.profile} alt="프로필" fill className="object-cover rounded-full w-[42px_!important] h-[42px_!important]" unoptimized />
                   </div>
                   <div className="flex items-center gap-1.5">
                     <div className="text-p3 text-black">{data.nickname}님</div>

@@ -39,6 +39,17 @@ export default function WritePortFolio() {
       (await publishPortFolio(id as string)) as any
     },
     onSuccess: async () => {
+      toast.success('이력서 수정에 성공하였습니다.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
       await client.invalidateQueries(["my", "portfolio"] as any);
       navigate.replace("/my");
     },
@@ -81,6 +92,17 @@ export default function WritePortFolio() {
       return (await editPortFolio(id as string, data)) as any;
     },
     onSuccess: () => {
+      toast.success('이력서 수정에 성공하였습니다.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
       client.invalidateQueries(["portfolio", "write", id] as any);
       navigate.replace("/my");
     },

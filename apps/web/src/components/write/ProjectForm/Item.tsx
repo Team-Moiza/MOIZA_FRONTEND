@@ -13,7 +13,7 @@ export const Item = ({ field, method, index }: IProp) => {
   const { fields, swap, remove } = method;
 
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4 py-2">
       <div className="flex justify-between items-center w-full">
         <InputTemplate full>
           <Label accent>프로젝트명</Label>
