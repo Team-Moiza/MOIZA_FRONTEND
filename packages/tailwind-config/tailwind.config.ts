@@ -39,7 +39,7 @@ const config: Omit<Config, "content"> = {
 
         p1: ["20px", { lineHeight: "150%", fontWeight: 400 }],
         p2: ["18px", { lineHeight: "150%", fontWeight: 600 }],
-        p3: ["18px", { lineHeight: "150%", fontWeight: 400 }],
+        p3: ["18px", { lineHeight: "170%", fontWeight: 400 }],
         p4: ["16px", { lineHeight: "160%", fontWeight: 500 }],
         p5: ["16px", { lineHeight: "150%", fontWeight: 400 }],
 
