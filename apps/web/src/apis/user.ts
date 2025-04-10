@@ -14,10 +14,10 @@ export const logout = async () => {
 };
 
 export const removeAccount = async () => {
-  return await instance.delete("/users");
+  return await instance.delete("/auth");
 };
 
 export const downloadPdf = async (id: string): Promise<Blob> => {
-  const response = await instance.get(`/users/pdf/${id}`, { responseType: 'blob' });
+  const response = await instance.get(`/users/pdf/${id}`, { responseType: "blob" });
   return response.data;
 };
