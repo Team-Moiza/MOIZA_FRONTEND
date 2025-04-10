@@ -73,10 +73,10 @@ const Detail = () => {
           <NavBar />
           <div className="px-[68px] pt-[68px] pb-[200px]">
             <Profile data={rData} />
-            <div className="flex flex-col gap-[76px]">
+            <div className="flex flex-col gap-[64px]">
               <Section id="introduction" title="자기소개">
                 <Stack gap={12}>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">{rData?.introduction.introduce}</p>
+                  <p className="text-gray-700 text-p3 *:leading-relaxed whitespace-pre-line">{rData?.introduction.introduce}</p>
                   {rData?.introduction?.url && (
                     <Link href={rData?.introduction.url} className="text-primary-500 text-p3">
                       {rData?.introduction.url}
@@ -100,7 +100,7 @@ const Detail = () => {
               <Section id="projects" title="프로젝트">
                 {rData?.projects.map((project, index) => (
                   <div key={index}>
-                    {index >= 2 && <div className="border-b border-gray-100 my-8" />}
+                    {index >= 1 && <div className="border-b border-gray-100 my-8" />}
                     <div className="gap-3 flex flex-col">
                       <div>
                         <div className="text-h5 mb-1">{project.title}</div>
@@ -108,7 +108,7 @@ const Detail = () => {
                           {project.startDate} ~ {!project.status ? "진행중" : project.endDate}
                         </div>
                       </div>
-                      <div className="text-p3 text-black">{project.description}</div>
+                      <div className="text-p3 text-black *:leading-relaxed whitespace-pre-line">{project.description}</div>
                       {project.link && (
                         <Link href={project.link} className="text-primary-500 text-p3">
                           {project.link}
@@ -122,10 +122,10 @@ const Detail = () => {
               <Section id="awards" title="수상 내역">
                 {rData?.awards.map((award, index) => (
                   <div key={index}>
-                    {index >= 2 && <div className="border-b border-gray-100 my-8" />}
+                    {index >= 1 && <div className="border-b border-gray-100 my-8" />}
                     <div className="text-h5 text-black">{award.name}</div>
                     <div className="text-gray-500 text-p4 mb-4">{award.date}</div>
-                    <div className="text-black text-p3">{award.description}</div>
+                    <div className="text-black text-p3 *:leading-relaxed whitespace-pre-line">{award.description}</div>
                   </div>
                 ))}
               </Section>
@@ -164,3 +164,4 @@ const Detail = () => {
 };
 
 export default Detail;
+
