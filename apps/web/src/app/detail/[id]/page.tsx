@@ -99,7 +99,7 @@ const Detail = () => {
 
               <Section id="projects" title="프로젝트">
                 {rData?.projects.map((project, index) => (
-                  <div key={index}>
+                  <div key={index} className={index < rData?.projects.length - 1 ? "pb-3 border-b-[1px]" : ""}>
                     {index >= 2 && <div className="border-b border-gray-100 my-8" />}
                     <div className="gap-3 flex flex-col">
                       <div>
@@ -121,7 +121,7 @@ const Detail = () => {
 
               <Section id="awards" title="수상 내역">
                 {rData?.awards.map((award, index) => (
-                  <div key={index}>
+                  <div key={index} className={index < rData?.awards.length - 1 ? "pb-3 border-b-[1px]" : ""}>
                     {index >= 2 && <div className="border-b border-gray-100 my-8" />}
                     <div className="text-h5 text-black">{award.name}</div>
                     <div className="text-gray-500 text-p4 mb-4">{award.date}</div>
@@ -132,7 +132,7 @@ const Detail = () => {
 
               <Section id="certificates" title="자격증">
                 {rData?.qualifications.map((cert, index) => (
-                  <div key={index}>
+                  <div key={index} className={index < rData?.qualifications.length - 1 ? "pb-3 border-b-[1px]" : ""}>
                     {index >= 2 && <div className="border-b border-gray-100 my-8" />}
                     <div className="text-h5 text-black">{cert.name}</div>
                     <div className="text-gray-500 text-p4">{cert.date}</div>

@@ -1,18 +1,18 @@
 "use client";
 
 interface SectionProps {
-    id: string;
-    title: string;
-    children: React.ReactNode;
+  id: string;
+  title: string;
+  children: React.ReactNode;
 }
 
 const Section = ({ id, title, children }: SectionProps) => {
-    return (
-        <section id={id} className="mb-8">
-            <div className="text-h3 text-black mb-4">{title}</div>
-            {children}
-        </section>
-    );
+  return (
+    <section id={id} className="mb-8 flex flex-col gap-3">
+      <div className="text-h3 text-black mb-4">{title}</div>
+      {children}
+    </section>
+  );
 };
 
 export default Section;
