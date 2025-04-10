@@ -216,29 +216,35 @@ export default function Page() {
                     </InputTemplate>
 
                     <InputTemplate>
-                      <Label accent>재학 시작일</Label>
+                      <Label accent>재학 시작 연도</Label>
                       <Input
                         width={261}
                         isBig
-                        placeholder="재학 시작일"
-                        type="date"
-                        defaultValue={getValues("enrollmentStartDate")}
+                        type="number"
+                        min={1900}
+                        max={2100}
+                        placeholder="예: 2023"
                         {...register("enrollmentStartDate", {
-                          required: "재학 시작일을 입력하세요",
+                          required: "재학 시작 연도를 입력하세요",
+                          onChange: (e) => {
+                            const startYear = parseInt(e.target.value, 10);
+                            if (!isNaN(startYear)) {
+                              setValue("enrollmentEndDate", (startYear + 3).toString());
+                            }
+                          },
                         })}
                       />
                     </InputTemplate>
 
                     <InputTemplate>
-                      <Label accent>재학 종료일</Label>
+                      <Label accent>재학 종료 연도</Label>
                       <Input
-                        type="date"
+                        type="number"
                         width={261}
                         isBig
-                        placeholder="재학 종료일"
-                        defaultValue={getValues("enrollmentEndDate")}
+                        placeholder="예: 2026"
                         {...register("enrollmentEndDate", {
-                          required: "재학 종료일을 입력하세요",
+                          required: "재학 종료 연도를 입력하세요",
                         })}
                       />
                     </InputTemplate>
