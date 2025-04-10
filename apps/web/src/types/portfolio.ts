@@ -3,8 +3,8 @@ import { Job, School } from "../enum/enums";
 export interface Profile {
     id: string;
     name: string;
-    school: School;
-    job: Job;
+    school: string;
+    job: string;
     introduce: string;
     profile: string;
     enrollmentStartDate: string;

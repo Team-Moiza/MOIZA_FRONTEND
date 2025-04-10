@@ -55,7 +55,7 @@ const LogoutMessage = ({ userStatus, id }: LogoutMessageProps) => {
                 break;
             case "LOGGED_IN":
             case "PROFILE_INFO_UPDATED":
-                router.push('/write');
+                router.push("/write");
                 break;
             case "PORTFOLIO_COMPLETED":
                 router.push("/my");
@@ -80,6 +80,7 @@ const LogoutMessage = ({ userStatus, id }: LogoutMessageProps) => {
                         codes={profile.codes}
                         likeCnt={profile.likeCnt}
                         company={profile.company || ""}
+                        enrollmentStartDate={profile.enrollmentStartDate}
                     />
                 ))}
             </div>

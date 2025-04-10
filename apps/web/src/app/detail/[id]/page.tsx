@@ -104,7 +104,7 @@ const Detail = () => {
                                               ({ id, keyword }) => (
                                                   <span
                                                       key={id}
-                                                      className="px-3 py-[6px] bg-white rounded-full text-black text-p5 border border-gray-200"
+                                                      className="px-4 py-2 bg-white rounded-full text-black text-p5 border border-gray-200"
                                                   >
                                                       {keyword}
                                                   </span>
