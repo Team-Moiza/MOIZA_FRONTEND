@@ -36,7 +36,7 @@ export const Header = () => {
         type={type}
         setType={setType}
         refetch={() => {
-          queryClient.invalidateQueries({ queryKey: ["user"] });
+          queryClient.removeQueries({ queryKey: ["user"] });
         }}
       />
       <header className="z-[100] w-[100vw] fixed justify-center bg-white h-[80px] px-[200px] py-[25px] shadow-custom">
