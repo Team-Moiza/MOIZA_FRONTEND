@@ -8,7 +8,7 @@ export const LinkForm = () => {
   const { fields, append, remove } = useFieldArray({ control, name: "links" });
 
   return (
-    <div className="w-[832px] h-fit px-[28px] pt-[24px] pb-[32px] flex flex-col bg-white gap-5 rounded-[12px]">
+    <div id="links" className="w-[832px] h-fit px-[28px] pt-[24px] pb-[32px] flex flex-col bg-white gap-5 rounded-[12px]">
       <Text className="text-h2 text-black">링크</Text>
       {fields.map((fields, index) => (
         <InputTemplate key={fields.id}>
