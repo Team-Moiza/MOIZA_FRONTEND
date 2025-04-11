@@ -25,8 +25,7 @@ export const SkillsetForm = () => {
   " after:ml-1 after:content-['*'] after:text-[#FF3B30] after:font-bold after:text-[16px]";
 
   return (
-    <div className="w-[832px] px-[28px] pt-[24px] pb-[32px] bg-white rounded-[12px]">
-      <div></div>
+    <div id="skills" className="w-[832px] px-[28px] pt-[24px] pb-[32px] bg-white rounded-[12px]">
       <Stack gap={20}>
         <Text className={`text-h2 text-black ${asterisk}`}>기술 스택</Text>
         <div className="relative w-full h-fit">

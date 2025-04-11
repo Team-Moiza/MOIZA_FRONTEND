@@ -20,6 +20,10 @@ const CustomPagination = ({
     currentPage,
     onPageChange,
 }: CustomPaginationProps) => {
+    const handlePageChange = (page: number) => {
+        onPageChange(page);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
     return (
         <div className="mt-20 flex justify-center text-btn">
             <Pagination
@@ -27,7 +31,7 @@ const CustomPagination = ({
                 itemsCountPerPage={itemsPerPage}
                 totalItemsCount={totalItems}
                 pageRangeDisplayed={5}
-                onChange={onPageChange}
+                onChange={handlePageChange}
                 firstPageText={
                         <DoubleLeftArrow />
                 }

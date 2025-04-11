@@ -47,7 +47,6 @@ export const CombinedDialog = ({
     const handleConfirm = () => {
         if (isAccountRemoval && removeAccount) {
             removeAccount();
-            handlePostLogout();
         } else if (isResumeRemoval && removeResume) {
             const resumeId = type.split("_")[1];
             if (resumeId) {

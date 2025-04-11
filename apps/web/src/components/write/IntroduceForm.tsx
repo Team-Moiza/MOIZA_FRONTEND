@@ -6,7 +6,7 @@ export const IntroduceForm = () => {
   const formMethod = useFormContext<FormData>();
 
   return (
-    <div className="w-[832px] h-fit px-[28px] pt-[24px] pb-[32px] flex flex-col bg-white gap-5 rounded-[12px]">
+    <div id="introduction" className="w-[832px] h-fit px-[28px] pt-[24px] pb-[32px] flex flex-col bg-white gap-5 rounded-[12px]">
       <Text className="text-h2 text-black">자기소개</Text>
       <div className="w-full flex flex-col gap-8">
         <InputTemplate>

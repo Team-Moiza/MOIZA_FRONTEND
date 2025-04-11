@@ -13,7 +13,7 @@ interface LogoutMessageProps {
         | "PORTFOLIO_PUBLISHED";
 }
 
-const LogoutMessage = ({ userStatus, id }: LogoutMessageProps) => {
+const LogoutMessage = ({ userStatus }: LogoutMessageProps) => {
     const router = useRouter();
 
     const getMessage = () => {

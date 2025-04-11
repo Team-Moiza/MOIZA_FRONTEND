@@ -18,7 +18,7 @@ export const QualificationForm = () => {
     });
 
     return (
-        <div className="w-[832px] h-fit px-[28px] pt-[24px] pb-[32px] flex flex-col bg-white gap-5 rounded-[12px]">
+        <div id="certificates" className="w-[832px] h-fit px-[28px] pt-[24px] pb-[32px] flex flex-col bg-white gap-5 rounded-[12px]">
             <Text className="text-h2 text-black">자격증</Text>
 
             {fields.map((field, index) => (
