@@ -21,3 +21,7 @@ export const downloadPdf = async (id: string): Promise<Blob> => {
   const response = await instance.get(`/users/pdf/${id}`, { responseType: "blob" });
   return response.data;
 };
+
+export const pinnedUpdate = async (id: string) => {
+  return await instance.patch(`/portfolios/pinned/${id}`);
+};

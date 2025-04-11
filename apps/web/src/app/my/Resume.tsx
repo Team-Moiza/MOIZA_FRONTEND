@@ -1,13 +1,14 @@
 "use client";
 
-import { ActionMenu, Delete, DownloadResume, EditResume, Menu, Stack, Toggle } from "@moija/ui";
+import { ActionMenu, Delete, DownloadResume, EditResume, Menu, Stack, Toggle, Filter } from "@moija/ui";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { publishPortFolio, downloadPdf } from "../../apis";
+import { publishPortFolio, downloadPdf, pinnedUpdate } from "../../apis";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
 import { PdfWaiting } from "./dialog/PdfWaiting";
 import { PdfDownload } from "./dialog/PdfDownload";
+import { toast, Bounce } from "react-toastify";
 
 interface IProp {
   title: string;
@@ -52,6 +53,40 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
     },
   });
 
+  const { mutate: pinned } = useMutation({
+    mutationFn: pinnedUpdate,
+    onMutate: () => {
+    },
+    onSuccess: () => {
+      toast.success('이력서 끌올에 성공하였습니다.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
+    },
+    onError: (error: any) => {
+      if (error?.response?.status === 422) {
+        toast.error("끌올은 하루에 한 번만 가능합니다. 24시간이 지나지 않았습니다.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
+      }
+    },
+  });
+
   return (
     <>
       {isGenerating && !pdfUrl && <PdfWaiting />}
@@ -74,6 +109,11 @@ export const Resume = ({ title, date, checked, id, setType }: IProp) => {
                   icon: <EditResume />,
                   label: "수정",
                   onClick: () => router.push(`/write/${id}`),
+                },
+                {
+                  icon: <Filter />,
+                  label: "이력서 끌올",
+                  onClick: () => pinned(id),
                 },
                 {
                   icon: <Delete />,
