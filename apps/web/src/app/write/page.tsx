@@ -29,6 +29,10 @@ export default function WritePortFolio() {
         startDate: i.startDate.length === 10 ? i.startDate : `${i.startDate}-01`,
         endDate: i.endDate ? (i.endDate.length === 10 ? i.endDate : `${i.endDate}-01`) : "",
       }));
+      data.awards = data.awards.map((i) => ({
+        ...i,
+        date: i.date.length === 10 ? i.date : `${i.date}-01`,
+      }));
       const response = await addPortfolio(data);
       const newId = response.data;
       console.log(newId);
@@ -84,6 +88,10 @@ export default function WritePortFolio() {
         ...i,
         startDate: i.startDate.length === 10 ? i.startDate : `${i.startDate}-01`,
         endDate: i.endDate ? (i.endDate.length === 10 ? i.endDate : `${i.endDate}-01`) : "",
+      }));
+      data.awards = data.awards.map((i) => ({
+        ...i,
+        date: i.date.length === 10 ? i.date : `${i.date}-01`,
       }));
       const response = await addPortfolio(data);
       return response.data;

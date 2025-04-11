@@ -35,6 +35,10 @@ export default function WritePortFolio() {
         startDate: i.startDate.length === 10 ? i.startDate : `${i.startDate}-01`,
         endDate: i.endDate ? (i.endDate.length === 10 ? i.endDate : `${i.endDate}-01`) : "",
       }));
+      data.awards = data.awards.map((i) => ({
+        ...i,
+        date: i.date.length === 10 ? i.date : `${i.date}-01`,
+      }));
       (await editPortFolio(id as string, data)) as any;
       (await publishPortFolio(id as string)) as any;
     },
