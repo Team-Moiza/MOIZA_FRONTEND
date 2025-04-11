@@ -19,7 +19,7 @@ export const AchievementForm = () => {
     });
 
     return (
-        <div className="w-full h-fit px-[28px] pt-[24px] pb-[32px] flex flex-col bg-white gap-5 rounded-[12px]">
+        <div id="awards" className="w-full h-fit px-[28px] pt-[24px] pb-[32px] flex flex-col bg-white gap-5 rounded-[12px]">
             <Text className="text-h2 text-black">수상</Text>
 
             {fields.map((field, index) => (
