@@ -17,6 +17,7 @@ import { AxiosError } from "axios";
 
 const Detail = () => {
     const { id } = useParams();
+    const [isMobile, setIsMobile] = useState(false);
 
     const { data, error, isError } = useQuery({
         queryKey: ["detail", id],
@@ -25,7 +26,6 @@ const Detail = () => {
     });
 
     const rData = data?.data as FormData;
-
     const [liked, setLiked] = useState(false);
     const [likesCount, setLikesCount] = useState(0);
 
@@ -40,6 +40,15 @@ const Detail = () => {
 
         fetchLikeStatus();
     }, [id]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 1024);
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const handleLikeClick = async () => {
         if (!cookies.get("accessToken")) {
@@ -65,10 +74,10 @@ const Detail = () => {
 
     return (
         <div className="relative">
-            <div id="education" className="w-screen pt-[80px] px-[200px]">
+            <div className="w-screen pt-[80px] px-4 sm:px-20 lg:px-[200px]">
                 <button
                     onClick={handleLikeClick}
-                    className="fixed bottom-10 right-60 translate-y-[-50%] size-[54px] flex items-center justify-center rounded-full shadow-[0px_2px_8px_0px_rgba(0,0,0,0.16)]"
+                    className="fixed bottom-10 right-6 lg:right-60 translate-y-[-50%] size-[54px] flex items-center justify-center rounded-full shadow-[0px_2px_8px_0px_rgba(0,0,0,0.16)]"
                 >
                     <Heart
                         size={24}
@@ -78,7 +87,7 @@ const Detail = () => {
                 </button>
                 <div className="border-x border-gray-200">
                     <NavBar />
-                    <div className="px-[68px] pt-[68px] pb-[200px]">
+                    <div className="px-4 sm:px-12 lg:px-[68px] pt-[68px] pb-[200px]">
                         <Profile data={rData} />
                         <div className="flex flex-col gap-[64px]">
                             <Section id="introduction" title="자기소개">
@@ -182,9 +191,9 @@ const Detail = () => {
                                         )}
                                         <div className="text-h5 text-black">
                                             {cert.name}
-                                            <div className="text-p5 text-gray-500">
-                                                {cert.date}
-                                            </div>
+                                        </div>
+                                        <div className="text-p5 text-gray-500">
+                                            {cert.date}
                                         </div>
                                     </div>
                                 ))}

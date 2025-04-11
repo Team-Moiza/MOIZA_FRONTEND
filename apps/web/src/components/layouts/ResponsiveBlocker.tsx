@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { Logo } from "@moija/ui";
 
 const ResponsiveBlocker = ({ children }: { children: React.ReactNode }) => {
@@ -9,7 +8,7 @@ const ResponsiveBlocker = ({ children }: { children: React.ReactNode }) => {
 
     useEffect(() => {
         const checkWidth = () => {
-            setIsBlocked(window.innerWidth < 1024);
+            setIsBlocked(window.innerWidth < 767);
         };
 
         checkWidth();
@@ -26,7 +25,7 @@ const ResponsiveBlocker = ({ children }: { children: React.ReactNode }) => {
                 </h2>
                 <p className="text-p4 text-gray-600 mb-1">
                     <span className="font-semibold text-black">모이자</span>는{" "}
-                    <span className="text-primary-500">1024px 이상</span>{" "}
+                    <span className="text-primary-500">767px 이상</span>{" "}
                     화면에서만 이용할 수 있어요!
                 </p>
                 <p className="text-caption1 text-gray-400 mt-2">

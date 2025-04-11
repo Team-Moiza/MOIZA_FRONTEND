@@ -15,6 +15,7 @@ const Main = () => {
     const [filteredProfiles, setFilteredProfiles] = useState<Profile[]>([]);
     const [selectedCategory, setSelectedCategory] = useState("전체");
     const [currentPage, setCurrentPage] = useState(1);
+    const [isMobile, setIsMobile] = useState(false);
     const itemsPerPage = 8;
 
     const categories = [
@@ -43,6 +44,15 @@ const Main = () => {
         };
         getProfiles();
     }, [currentPage]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 1024);
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const fetchProfiles = async (query: string) => {
         const response = await instance.get(`portfolios?${query}`);
@@ -122,13 +132,14 @@ const Main = () => {
 
     return (
         <>
-            <div className="w-screen pt-[120px] px-[200px] bg-white">
-                    <CategoryFilter
-                        categories={categories}
-                        selectedCategory={selectedCategory}
-                        onCategoryChange={handleCategoryChange}
-                    />
-                <div className="flex gap-5 w-[100%] justify-between">
+            <div className="w-screen pt-[120px] px-4 sm:px-12 lg:px-[200px] bg-white">
+                <CategoryFilter
+                    categories={categories}
+                    selectedCategory={selectedCategory}
+                    onCategoryChange={handleCategoryChange}
+                />
+
+                <div className="flex gap-5 w-full justify-between flex-col lg:flex-row">
                     <ProfileListContainer
                         paginatedProfiles={paginatedProfiles}
                         totalItems={filteredProfiles.length}
@@ -136,9 +147,11 @@ const Main = () => {
                         currentPage={currentPage}
                         onPageChange={handlePageChange}
                     />
-                    <div className="sticky top-[180px] self-start">
-                        <ProfileFilter applyFilter={applyFilterFromMain} />
-                    </div>
+                    {!isMobile && (
+                        <div className="sticky top-[180px] self-start">
+                            <ProfileFilter applyFilter={applyFilterFromMain} />
+                        </div>
+                    )}
                 </div>
             </div>
             <Footer />
