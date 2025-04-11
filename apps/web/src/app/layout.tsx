@@ -2,6 +2,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import { Metadata } from "next";
 import ClientLayout from "./ClientLayout";
+import ResponsiveBlocker from "../components/layouts/ResponsiveBlocker";
 
 const pretendard = localFont({
   src: "../../public/PretendardVariable.woff2",
@@ -25,7 +26,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="kr" className={pretendard.variable}>
-      <ClientLayout>{children}</ClientLayout>
+      <body>
+        <ResponsiveBlocker>
+          <ClientLayout>{children}</ClientLayout>
+        </ResponsiveBlocker>
+      </body>
     </html>
   );
 }
