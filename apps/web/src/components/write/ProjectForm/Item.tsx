@@ -39,8 +39,13 @@ export const Item = ({ field, method, index }: IProp) => {
         <div className="w-full flex justify-between">
           <InputTemplate>
             <Label accent>완료 여부</Label>
-            <input type="checkbox" defaultChecked={field.status} {...register(`projects.${index}.status`)} />
+            <input
+              type="checkbox"
+              defaultChecked={field.status}
+              {...register(`projects.${index}.status`)}
+            />
           </InputTemplate>
+          
           <InputTemplate>
             <Label accent>시작일</Label>
             <Controller
@@ -52,12 +57,13 @@ export const Item = ({ field, method, index }: IProp) => {
                   width={!watch(`projects.${index}.status`) ? 685 : 330}
                   placeholder="YYYY.MM"
                   {...field}
-                  value={`${field.value.split("-").slice(0, 2).join("-")}`}
+                  value={field.value ? `${field.value.split("-").slice(0, 2).join("-")}` : ""}
                   onChange={(e) => field.onChange(e.target.value)}
                 />
               )}
             />
           </InputTemplate>
+
           {watch(`projects.${index}.status`) && (
             <InputTemplate>
               <Label accent>종료일</Label>
@@ -65,7 +71,14 @@ export const Item = ({ field, method, index }: IProp) => {
                 name={`projects.${index}.endDate`}
                 control={control}
                 render={({ field }) => (
-                  <Input type="month" width={330} placeholder="YYYY.MM" {...field} value={`${field.value.split("-").slice(0, 2).join("-")}`} onChange={(e) => field.onChange(e.target.value)} />
+                  <Input
+                    type="month"
+                    width={330}
+                    placeholder="YYYY.MM"
+                    {...field}
+                    value={field.value ? `${field.value.split("-").slice(0, 2).join("-")}` : ""}
+                    onChange={(e) => field.onChange(e.target.value)}
+                  />
                 )}
               />
             </InputTemplate>

@@ -107,7 +107,7 @@ export const ProfilePage = ({ setType }: ProfilePageProps) => {
                         name="개발 직무"
                         value={job[userData?.job as keyof typeof job]}
                     />
-                    <Info name="회사" value={userData?.company} />
+                    <Info name="회사" value={userData?.company ?? undefined} />
                 </Stack>
             </div>
         </div>
