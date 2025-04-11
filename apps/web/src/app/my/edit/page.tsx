@@ -22,7 +22,7 @@ export interface FormType {
   enrollmentStartDate: string;
   enrollmentEndDate: string;
   job: keyof typeof Job;
-  company: string;
+  company: string | null;
   introduce: string;
   profile?: string;
 }
@@ -76,6 +76,9 @@ export default function Page() {
     if (!value.introduce) {
       alert("입력되지 않은 항목이 있습니다.");
       return;
+    }
+    if (value.company === "") {
+      value.company = null;
     }
     delete value.email;
     delete value.profile;
