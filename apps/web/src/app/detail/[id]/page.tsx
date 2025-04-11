@@ -141,13 +141,13 @@ const Detail = () => {
                                                     )}{" "}
                                                     ~{" "}
                                                     {!project.status
-                                                        ? "진행중"
+                                                        ? "ing"
                                                         : project.endDate
-                                                          ? project.endDate.slice(
+                                                            ? project.endDate.slice(
                                                                 0,
                                                                 7
                                                             )
-                                                          : "ing"}
+                                                            : "ing"}
                                                 </div>
                                             </div>
                                             <div className="text-p3 text-black *:leading-relaxed whitespace-pre-line">
