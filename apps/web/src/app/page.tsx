@@ -132,14 +132,14 @@ const Main = () => {
 
     return (
         <>
-            <div className="w-screen pt-[120px] px-4 sm:px-12 lg:px-[200px] bg-white">
+            <div className="w-screen pt-[120px] px-4 sm:px-12 bg-white lg:px-[200px]">
                 <CategoryFilter
                     categories={categories}
                     selectedCategory={selectedCategory}
                     onCategoryChange={handleCategoryChange}
                 />
 
-                <div className="flex gap-5 w-full justify-between flex-col lg:flex-row">
+                <div className="flex lg:gap-5 w-full flex-col lg:flex-row">
                     <ProfileListContainer
                         paginatedProfiles={paginatedProfiles}
                         totalItems={filteredProfiles.length}

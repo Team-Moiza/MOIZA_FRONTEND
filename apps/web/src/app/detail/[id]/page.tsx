@@ -111,12 +111,12 @@ const Detail = () => {
                                     {rData?.codes?.length
                                         ? rData?.codes.map(
                                               ({ id, keyword }) => (
-                                                  <span
-                                                      key={id}
-                                                      className="px-4 py-2 bg-white rounded-full text-black text-p5 border border-gray-200"
-                                                  >
-                                                      {keyword}
-                                                  </span>
+                                                    <span
+                                                        key={id}
+                                                        className="px-4 py-2 bg-white rounded-full text-black text-p5 border border-gray-200"
+                                                    >
+                                                        {keyword}
+                                                    </span>
                                               )
                                           )
                                         : "기술스택 없음"}

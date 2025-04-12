@@ -33,7 +33,7 @@ const CategoryFilter = ({
         <div className="relative overflow-hidden sticky top-[80px] z-10 bg-white pt-4 pb-3">
             <div
                 ref={containerRef}
-                className="overflow-x-auto pb-2 flex gap-2 scrollbar-hide px-4 sm:px-12 lg:px-0"
+                className="overflow-x-auto pb-2 flex gap-2 scrollbar-hide"
                 onScroll={handleScroll}
             >
                 {categories.map((category) => (

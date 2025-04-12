@@ -18,7 +18,7 @@ const ProfileListContainer = ({
     onPageChange,
 }: ProfileListContainerProps) => {
     return (
-        <div className="flex flex-col gap-5 w-[93%]">
+        <div className="flex flex-col gap-5 w-full">
             <ProfileList paginatedProfiles={paginatedProfiles} />
             <CustomPagination
                 totalItems={totalItems}
