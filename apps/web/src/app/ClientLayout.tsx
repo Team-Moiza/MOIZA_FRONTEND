@@ -6,6 +6,7 @@ import { Header } from "../components/layouts/Header";
 import { Provider } from "./Provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import GoogleAnalytics from './GoogleAnalytics';
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
 useEffect(() => {
@@ -13,12 +14,15 @@ useEffect(() => {
 }, []);
 
 return (
-  <body>
+  <div>
     <Provider>
       <Header />
+      {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+      )}
       {children}
       <ToastContainer />
     </Provider>
-  </body>
+  </div>
 );
 }
