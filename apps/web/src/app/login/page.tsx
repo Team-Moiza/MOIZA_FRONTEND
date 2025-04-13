@@ -5,16 +5,12 @@ import { instance } from "../../apis/instance";
 
 const Login = () => {
     const handleGoogleLogin = async () => {
-        try {
-            const res = await instance.get("/auth");
-            window.location.href = res.data;
-        } catch (error) {
-            console.log(error);
-        }
+        const res = await instance.get("/auth");
+        window.location.href = res.data;
     };
     return (
         <div className="w-screen h-screen flex items-center justify-center bg-gray-50">
-            <div className="flex flex-col items-center">
+            <div className="pt-[40px] flex flex-col items-center">
                 <div className="w-[500px] h-[480px] flex flex-col items-center justify-center gap-[50px] bg-white border border-gray-100 rounded-[30px]">
                     <div className="flex flex-col items-center gap-5">
                         <Logo size={150} />
