@@ -12,7 +12,7 @@ import { Center } from "@moija/ui";
 import Cookies from "js-cookie";
 import { CombinedDialog } from "./dialog/CombinedDialog";
 
-export default function MyPage() {
+const MyPage = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [activeTab, setActiveTab] = useState<"profile" | "liked">("profile");
@@ -87,3 +87,5 @@ export default function MyPage() {
         </>
     );
 }
+
+export default MyPage;
