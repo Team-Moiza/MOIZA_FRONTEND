@@ -6,13 +6,13 @@ import { removeAccount, deletePortFolio, myPortFolio } from "../../apis";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { ProfilePage } from "./ProfilePage";
-import { LikedList } from "./like/page";
+import { LikedList } from "./like/like";
 import { MyPageNav } from "./MypageNav";
 import { Center } from "@moija/ui";
 import Cookies from "js-cookie";
 import { CombinedDialog } from "./dialog/CombinedDialog";
 
-export default function MyPage() {
+const MyPage = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [activeTab, setActiveTab] = useState<"profile" | "liked">("profile");
@@ -87,3 +87,5 @@ export default function MyPage() {
         </>
     );
 }
+
+export default MyPage;

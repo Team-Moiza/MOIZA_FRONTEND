@@ -1,7 +1,7 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
   root: true,
-  extends: ['@moija/eslint-config/react-internal.js'],
+  extends: 'next/core-web-vitals',
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.lint.json',
