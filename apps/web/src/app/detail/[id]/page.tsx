@@ -198,12 +198,8 @@ const Detail = () => {
                                             <div className="border-b border-gray-100 my-8" />
                                         )}
                                         <div className="flex flex-row gap-1 text-h5 text-black">
-                                            {cert.name} {" "}
-                                            {cert.score && ( 
-                                                <>
-                                                    · {cert.score}
-                                                </>
-                                            )}
+                                            {cert.name}{" "}
+                                            {cert.score && <>· {cert.score}</>}
                                         </div>
                                         <div className="text-p5 text-gray-400">
                                             {cert.date.replaceAll("-", ".")}
