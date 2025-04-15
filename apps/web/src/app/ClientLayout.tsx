@@ -6,23 +6,33 @@ import { Header } from "../components/layouts/Header";
 import { Provider } from "./Provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import GoogleAnalytics from './GoogleAnalytics';
 
-export default function ClientLayout({ children }: { children: React.ReactNode }) {
-useEffect(() => {
-  forceRefreshIfTokenMissing();
-}, []);
+export default function ClientLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
+    useEffect(() => {
+        forceRefreshIfTokenMissing();
+    }, []);
 
-return (
-  <div>
-    <Provider>
-      <Header />
-      {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
-      )}
-      {children}
-      <ToastContainer />
-    </Provider>
-  </div>
-);
+    return (
+        <div>
+            <Provider>
+                <Header />
+                {children}
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
+                />
+            </Provider>
+        </div>
+    );
 }
