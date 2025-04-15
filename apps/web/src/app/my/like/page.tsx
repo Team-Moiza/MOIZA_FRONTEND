@@ -6,7 +6,7 @@ import ProfileBox from "../../../components/portfolio-list/ProfileBox";
 import { Stack } from "@moija/ui";
 import { Profile } from "../../../types/portfolio";
 
-export const LikedList = () => {
+const LikedList = () => {
     const [likedProfiles, setLikedProfiles] = useState<Profile[]>([]);
 
     useEffect(() => {
@@ -37,3 +37,5 @@ export const LikedList = () => {
         </div>
     );
 };
+
+export default LikedList;
