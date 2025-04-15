@@ -174,12 +174,19 @@ const Detail = () => {
                                         <div className="text-h5 text-black">
                                             {award.name}
                                         </div>
-                                        <div className="text-p5 text-gray-500 mb-4">
-                                            {award.date.slice(0, 7)}
-                                        </div>
-                                        <div className="text-black text-p3 *:leading-relaxed whitespace-pre-line">
-                                            {award.description}
-                                        </div>
+                                        {award.competitionName && (
+                                            <div className="text-p5 text-gray-400">
+                                                {award.competitionName}{" "}
+                                                {award.date
+                                                    .slice(0, 7)
+                                                    .replace("-", ".")}
+                                            </div>
+                                        )}
+                                        {award.description && (
+                                            <div className="text-black text-p3 *:leading-relaxed whitespace-pre-line">
+                                                {award.description}
+                                            </div>
+                                        )}
                                     </div>
                                 ))}
                             </Section>
@@ -190,11 +197,16 @@ const Detail = () => {
                                         {index >= 1 && (
                                             <div className="border-b border-gray-100 my-8" />
                                         )}
-                                        <div className="text-h5 text-black">
-                                            {cert.name}
+                                        <div className="flex flex-row gap-1 text-h5 text-black">
+                                            {cert.name} {" "}
+                                            {cert.score && ( 
+                                                <>
+                                                    · {cert.score}
+                                                </>
+                                            )}
                                         </div>
-                                        <div className="text-p5 text-gray-500">
-                                            {cert.date}
+                                        <div className="text-p5 text-gray-400">
+                                            {cert.date.replaceAll("-", ".")}
                                         </div>
                                     </div>
                                 ))}
