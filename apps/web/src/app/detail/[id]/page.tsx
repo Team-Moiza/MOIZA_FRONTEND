@@ -61,20 +61,19 @@ const Detail = () => {
         setLiked(newLikeState);
         setLikesCount((prev) => (newLikeState ? prev + 1 : prev - 1));
 
-        try {
-            if (newLikeState) {
-                await likeApi.addLike(id as string);
-            } else {
-                await likeApi.removeLike(id as string);
-            }
-        } catch (error) {
-            console.error("좋아요 처리 에러:", error);
+        if (newLikeState) {
+            await likeApi.addLike(id as string);
+        } else {
+            await likeApi.removeLike(id as string);
         }
     };
 
     return (
         <div className="relative">
-            <div className="w-screen pt-[80px] px-4 sm:px-20 lg:px-[200px]">
+            <div
+                className="w-screen pt-[80px] px-4 sm:px-20 lg:px-[200px]"
+                id="education"
+            >
                 <button
                     onClick={handleLikeClick}
                     className="fixed bottom-10 right-6 lg:right-60 translate-y-[-50%] size-[54px] flex items-center justify-center rounded-full shadow-[0px_2px_8px_0px_rgba(0,0,0,0.16)]"
@@ -111,12 +110,12 @@ const Detail = () => {
                                     {rData?.codes?.length
                                         ? rData?.codes.map(
                                               ({ id, keyword }) => (
-                                                    <span
-                                                        key={id}
-                                                        className="px-4 py-2 bg-white rounded-full text-black text-p5 border border-gray-200"
-                                                    >
-                                                        {keyword}
-                                                    </span>
+                                                  <span
+                                                      key={id}
+                                                      className="px-4 py-2 bg-white rounded-full text-black text-p5 border border-gray-200"
+                                                  >
+                                                      {keyword}
+                                                  </span>
                                               )
                                           )
                                         : "기술스택 없음"}
@@ -143,11 +142,11 @@ const Detail = () => {
                                                     {!project.status
                                                         ? "ing"
                                                         : project.endDate
-                                                            ? project.endDate.slice(
+                                                          ? project.endDate.slice(
                                                                 0,
                                                                 7
                                                             )
-                                                            : "ing"}
+                                                          : "ing"}
                                                 </div>
                                             </div>
                                             <div className="text-p3 text-black *:leading-relaxed whitespace-pre-line">
