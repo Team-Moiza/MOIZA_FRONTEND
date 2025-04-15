@@ -22,9 +22,10 @@ export const forceRefreshIfTokenMissing = async () => {
             });
 
             cookies.set("accessToken", data.accessToken, {
+                expires: 7,
                 path: "/",
                 sameSite: "Lax",
-                secure: false,
+                secure: true,
             });
         } catch {
             cookies.remove("accessToken");
@@ -67,11 +68,12 @@ instance.interceptors.response.use(
                 const { data } = await refreshInstance.post("/auth/refresh", {
                     token: refreshToken,
                 });
-
+                
                 cookies.set("accessToken", data.accessToken, {
+                    expires: 7,
                     path: "/",
                     sameSite: "Lax",
-                    secure: false,
+                    secure: true,
                 });
 
                 instance.defaults.headers.common["Authorization"] =
