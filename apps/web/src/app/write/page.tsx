@@ -33,6 +33,16 @@ export default function WritePortFolio() {
         ...i,
         date: i.date.length === 10 ? i.date : `${i.date}-01`,
       }));
+      data.projects = data.projects.map((i) => ({
+        ...i,
+        startDate: i.startDate.replace('.', '-'),
+        endDate: i.endDate.replace('.', '-')
+      }));
+      
+      data.awards = data.awards.map((i) => ({
+        ...i,
+        date: i.date.replace('.', '-')
+      }));
       const response = await addPortfolio(data);
       const newId = response.data;
       console.log(newId);
@@ -92,6 +102,16 @@ export default function WritePortFolio() {
       data.awards = data.awards.map((i) => ({
         ...i,
         date: i.date.length === 10 ? i.date : `${i.date}-01`,
+      }));
+      data.projects = data.projects.map((i) => ({
+        ...i,
+        startDate: i.startDate.replace('.', '-'),
+        endDate: i.endDate.replace('.', '-')
+      }));
+      
+      data.awards = data.awards.map((i) => ({
+        ...i,
+        date: i.date.replace('.', '-')
       }));
       const response = await addPortfolio(data);
       return response.data;
