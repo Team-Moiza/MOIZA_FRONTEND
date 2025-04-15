@@ -6,7 +6,7 @@ import { removeAccount, deletePortFolio, myPortFolio } from "../../apis";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { ProfilePage } from "./ProfilePage";
-import { LikedList } from "./like/page";
+import { LikedList } from "./like/like";
 import { MyPageNav } from "./MypageNav";
 import { Center } from "@moija/ui";
 import Cookies from "js-cookie";
