@@ -37,15 +37,22 @@ const Main = () => {
     ];
 
     useEffect(() => {
-        const getProfiles = async () => {
-            const query = new URLSearchParams({
-                page: (currentPage - 1).toString(),
-                size: itemsPerPage.toString(),
-            }).toString();
-            await fetchProfiles(query);
-        };
-        getProfiles();
-    }, [currentPage]);
+        const query = new URLSearchParams({
+            page: (currentPage - 1).toString(),
+            size: itemsPerPage.toString(),
+        });
+    
+        if (selectedCategory !== "전체") {
+            const jobKey = Object.entries(jobMap).find(
+                ([_, value]) => value === selectedCategory
+            )?.[0];
+    
+            if (jobKey) query.append("job", jobKey);
+        }
+    
+        fetchProfiles(query.toString());
+    }, [currentPage, selectedCategory]);
+    
 
     useEffect(() => {
         const handleResize = () => {
@@ -62,6 +69,7 @@ const Main = () => {
         setProfiles(data);
         setFilteredProfiles(data);
     };
+    
 
     const applyFilterFromMain = ({
         sort,
@@ -116,22 +124,11 @@ const Main = () => {
             setCurrentPage(page);
         }
     };
-
     const handleCategoryChange = (category: string) => {
         setSelectedCategory(category);
-
-        if (category === "전체") {
-            setFilteredProfiles(profiles);
-        } else {
-            const filtered = profiles.filter(
-                (profile) => jobMap[profile.job] === category
-            );
-            setFilteredProfiles(filtered);
-        }
-
         setCurrentPage(1);
     };
-
+    
     return (
         <>
             <div className="w-screen pt-[120px] px-4 sm:px-12 bg-white lg:px-[200px]">
