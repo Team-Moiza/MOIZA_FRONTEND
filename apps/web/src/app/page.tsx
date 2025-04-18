@@ -24,13 +24,15 @@ const Main = () => {
         Job.BACKEND_DEVELOPER,
         Job.UI_UX_DESIGNER,
         Job.IOS_DEVELOPER,
+        Job.APP_DEVELOPER,
         Job.ANDROID_DEVELOPER,
         Job.SECURITY_SPECIALIST,
-        Job.DEVOPS_DEVELOPER,
+        Job.DATA_ENGINEER,
         Job.FULLSTACK_DEVELOPER,
+        Job.PLANNER,
+        Job.DEVOPS_DEVELOPER,
         Job.GAME_DEVELOPER,
         Job.HW_EMBEDDED,
-        Job.PLANNER,
         Job.OTHER,
     ];
 
